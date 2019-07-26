@@ -6,6 +6,10 @@ import { AppComponent } from './app.component';
 
 import { NgwWowModule } from 'ngx-wow';
 
+import { SelectDropDownModule } from 'ngx-select-dropdown';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
+
+
 @NgModule({
   declarations: [
     AppComponent
@@ -13,7 +17,9 @@ import { NgwWowModule } from 'ngx-wow';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgwWowModule
+    NgwWowModule,
+    SelectDropDownModule,
+    SlickCarouselModule
   ],
   providers: [],
   bootstrap: [AppComponent]

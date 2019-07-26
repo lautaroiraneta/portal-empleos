@@ -33,16 +33,20 @@
               "src/css/responsive.css",
               "node_modules/chosen-js/chosen.min.css",
               "src/css/colors/colors.css",
-              "src/css/bootstrap.css"
+              "src/css/bootstrap.css",
+              "./node_modules/ngx-select-dropdown/dist/assets/style.css",
+              "node_modules/slick-carousel/slick/slick.scss",
+              "node_modules/slick-carousel/slick/slick-theme.scss"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "src/js/modernizr.js",
               "src/js/script.js",
-              "node_modules/slick-carousel/slick/slick.js",
               "node_modules/parallax-js/dist/parallax.js",
-              "src/js/select-chosen.js"
+              "src/js/select-chosen.js",
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/slick-carousel/slick/slick.min.js"
             ]
           },
           "configurations": {
@@ -109,14 +113,19 @@
               "src/css/responsive.css",
               "src/css/chosen.css",
               "src/css/colors/colors.css",
-              "src/css/bootstrap.css"
+              "src/css/bootstrap.css",
+              "./node_modules/ngx-select-dropdown/dist/assets/style.css",
+              "node_modules/slick-carousel/slick/slick.scss",
+              "node_modules/slick-carousel/slick/slick-theme.scss"
             ],
             "scripts": [
               "src/js/jquery.min.js",
-              "src/js/script.js",
               "src/js/slick.min.js",
+              "src/js/script.js",
               "src/js/parallax.js",
-              "src/js/select-chosen.js"
+              "src/js/select-chosen.js",
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/slick-carousel/slick/slick.min.js"
             ]
           }
         },

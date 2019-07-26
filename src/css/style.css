@@ -1097,7 +1097,7 @@ label::after {
     float: left;
     width: 100%;
     padding: 9px 0;
-    font-size: 30px;
+    /* font-size: 30px; */
     background-color: #8b91dd; height: 61px;
     border-radius: 8px;
 }
