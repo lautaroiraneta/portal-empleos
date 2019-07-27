@@ -8,11 +8,13 @@ import { NgwWowModule } from 'ngx-wow';
 
 import { SelectDropDownModule } from 'ngx-select-dropdown';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { HeaderComponent } from './header/header.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
