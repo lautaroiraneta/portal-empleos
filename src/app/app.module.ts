@@ -9,12 +9,14 @@ import { NgwWowModule } from 'ngx-wow';
 import { SelectDropDownModule } from 'ngx-select-dropdown';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { HeaderComponent } from './header/header.component';
+import { CrearPerfilComponent } from './crear-perfil/crear-perfil.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    CrearPerfilComponent
   ],
   imports: [
     BrowserModule,
