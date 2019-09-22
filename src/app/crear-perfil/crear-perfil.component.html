@@ -5,192 +5,158 @@
                  <div class="padding-left">
                      <div class="profile-title">
                          <h3>Datos Personales</h3>
-                     </div>
-                     <div class="profile-form-edit">
-                         <form #form="ngForm">
-                             <div class="row">
-                                <div class="col-lg-6">
-                                    <span class="pf-title">Nombres</span>
-                                    <div class="pf-field">
-                                        <input type="text" placeholder="" name="nombres" [(ngModel)]="perfil.nombres" />
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <span class="pf-title">Apellidos</span>
-                                    <div class="pf-field">
-                                        <input type="text" placeholder="" name="apellidos" [(ngModel)]="perfil.apellidos" />
-                                    </div>
-                                </div>
-                                <span class="pf-title" style="padding-left: 15px; margin-top: 0px;">Correo Electrónico</span>
-
-                                <div class="col-lg-8" *ngFor="let email of perfil.emails; let i = index">
-                                    <div class="col-lg-11" style="margin-left: -15px;">
-                                        <div class="pf-field">
-                                            <input type="text" placeholder="" name="email-{{i}}" [(ngModel)]="perfil.emails[i].email" />
-                                        </div>
-                                    </div>
-                                    <div style="padding-top:10px;" *ngIf="perfil.emails.length !== 1">
-                                        <a (click)="eliminarEmail(perfil.emails[i].id)"><i class="la la-trash" style="font-size: 25px;" ></i></a>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4" style="padding-top:10px;">
-                                    <a (click)="agregarEmail()"><i class="la la-plus-circle" style="font-size: 25px;" ></i> Agregar otro E-Mail</a>
-                                </div>
-
-                                <span class="pf-title" style="padding-left: 15px; margin-top: 0px;">Teléfono</span>
-                                <div class="col-lg-8" *ngFor="let telefono of perfil.telefonos; let i = index">
-                                    <div class="col-lg-11" style="margin-left: -15px;">
-                                        <div class="pf-field">
-                                            <input type="text" placeholder="" name="telefono-{{i}}" [(ngModel)]="perfil.telefonos[i].telefono" />
-                                        </div>
-                                    </div>
-                                    <div style="padding-top:10px;" *ngIf="perfil.telefonos.length !== 1">
-                                        <a (click)="eliminarTelefono(perfil.telefonos[i].id)"><i class="la la-trash" style="font-size: 25px;" ></i></a>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4" style="padding-top:10px;">
-                                    <a (click)="agregarTelefono()"><i class="la la-plus-circle" style="font-size: 25px;" ></i> Agregar otro Teléfono</a>
-                                </div>
-                                
-                                <div class="col-lg-6">
-                                    <span class="pf-title" style="margin-top: 15px;">País de Residencia</span>
-                                    <div class="pf-field">
-                                        <select data-placeholder="Seleccione un País de Residencia" class="chosen">
-                                            <option>Argentina</option>
-                                            <option>Brasil</option>
-                                            <option>Bolivia</option>
-                                            <option>Chile</option>
-                                            <option>Colombia</option>
-                                            <option>Ecuador</option>
-                                            <option>Paraguay</option>
-                                            <option>Peru</option>
-                                            <option>Uruguay</option>
-                                            <option>Venezuela</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <span class="pf-title" style="margin-top: 15px;">Provincia de Residencia</span>
-                                    <div class="pf-field">
-                                        <select data-placeholder="Seleccione un País de Residencia" class="chosen">
-                                            <option>Buenos Aires</option>
-                                            <option>Catamarca</option>
-                                            <option>Chaco</option>
-                                            <option>Chubut</option>
-                                            <option>Córdoba</option>
-                                            <option>Corrientes</option>
-                                            <option>Entre Ríos</option>
-                                            <option>Formosa</option>
-                                            <option>Jujuy</option>
-                                            <option>La Pampa</option>
-                                            <option>La Rioja</option>
-                                            <option>Mendoza</option>
-                                            <option>Misiones</option>
-                                            <option>Neuquén</option>
-                                            <option>Río Negro</option>
-                                            <option>Salta</option>
-                                            <option>San Juan</option>
-                                            <option>San Luis</option>
-                                            <option>Santa Cruz</option>
-                                            <option>Santa Fe</option>
-                                            <option>Santiago del Estero</option>
-                                            <option>Tierra del Fuego</option>
-                                            <option>Tucumán</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <span class="pf-title" style="margin-top: 15px;">Zona</span>
-                                    <div class="pf-field">
-                                        <select data-placeholder="Seleccione una Zona" class="chosen">
-                                            <option>Buenos Aires</option>
-                                            <option>Catamarca</option>
-                                            <option>Chaco</option>
-                                            <option>Chubut</option>
-                                            <option>Córdoba</option>
-                                            <option>Corrientes</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <span class="pf-title" style="margin-top: 15px;">Ciudad</span>
-                                    <div class="pf-field">
-                                        <select data-placeholder="Seleccione una Ciudad" class="chosen">
-                                            <option>Buenos Aires</option>
-                                            <option>Catamarca</option>
-                                            <option>Chaco</option>
-                                            <option>Chubut</option>
-                                            <option>Córdoba</option>
-                                            <option>Corrientes</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <span class="pf-title" style="margin-top: 15px;">Localidad</span>
-                                    <div class="pf-field">
-                                        <select data-placeholder="Seleccione una Localidad" class="chosen">
-                                            <option>Buenos Aires</option>
-                                            <option>Catamarca</option>
-                                            <option>Chaco</option>
-                                            <option>Chubut</option>
-                                            <option>Córdoba</option>
-                                            <option>Corrientes</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <span class="pf-title" style="margin-top: 15px;">Fecha de Nacimiento</span>
-                                    <div class="pf-field">
-                                        <input type="text" placeholder="" class="form-control datepicker" />
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <span class="pf-title" style="margin-top: 0px;">Estado Civil</span>
-                                    <div class="pf-field">
-                                        <select data-placeholder="Seleccione un Estado Civil" class="chosen">
-                                            <option>Soltero</option>
-                                            <option>En Pareja</option>
-                                            <option>Casado</option>
-                                            <option>Divorciado</option>
-                                            <option>Viudo</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <span class="pf-title" style="margin-top: 0px;">Nacionalidad</span>
-                                    <div class="pf-field">
-                                        <select data-placeholder="Seleccione una Nacionalidad" class="chosen">
-                                            <option>Argentino/a</option>
-                                            <option>Brasilero/a</option>
-                                            <option>Boliviano/a</option>
-                                            <option>Chileno/a</option>
-                                            <option>Colombiano/a</option>
-                                            <option>Ecuatoriano/a</option>
-                                            <option>Paraguayo/a</option>
-                                            <option>Peruano/a</option>
-                                            <option>Uruguayo/a</option>
-                                            <option>Venezolano/a</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <span class="pf-title" style="margin-top: 15px;">Tipo de Documento</span>
-                                    <div class="pf-field">
-                                        <select data-placeholder="Seleccione una Nacionalidad" class="chosen">
-                                            <option>Seleccione un Tipo de Documento</option>
-                                            <option>Brasilero/a</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <span class="pf-title" style="margin-top: 15px;">Documento de Identidad</span>
-                                    <div class="pf-field">
-                                        <input type="text" placeholder="" />
-                                    </div>
+                    </div>
+                    <form #form="ngForm">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <span class="pf-title">Nombres</span>
+                                <div class="pf-field">
+                                    <input type="text" placeholder="" name="nombres" [(ngModel)]="perfil.nombres" />
                                 </div>
                             </div>
-                         </form>
-                     </div>
+                            <div class="col-lg-6">
+                                <span class="pf-title">Apellidos</span>
+                                <div class="pf-field">
+                                    <input type="text" placeholder="" name="apellidos" [(ngModel)]="perfil.apellidos" />
+                                </div>
+                            </div>
+                            <span class="pf-title" style="padding-left: 15px; margin-top: 0px;">Correo Electrónico</span>
+                    
+                            <div class="col-lg-8" *ngFor="let email of perfil.emails; let i = index">
+                                <div class="col-lg-11" style="margin-left: -15px;">
+                                    <div class="pf-field">
+                                        <input type="text" placeholder="" name="email-{{i}}" [(ngModel)]="perfil.emails[i].email" />
+                                    </div>
+                                </div>
+                                <div style="padding-top:10px;" *ngIf="perfil.emails.length !== 1">
+                                    <a (click)="eliminarEmail(perfil.emails[i].id)"><i class="la la-trash" style="font-size: 25px;"></i></a>
+                                </div>
+                            </div>
+                            <div class="col-lg-4" style="padding-top:10px;">
+                                <a (click)="agregarEmail()"><i class="la la-plus-circle" style="font-size: 25px;"></i> Agregar otro
+                                    E-Mail</a>
+                            </div>
+                    
+                            <span class="pf-title" style="padding-left: 15px; margin-top: 0px;">Teléfono</span>
+                            <div class="col-lg-8" *ngFor="let telefono of perfil.telefonos; let i = index">
+                                <div class="col-lg-11" style="margin-left: -15px;">
+                                    <div class="pf-field">
+                                        <input type="text" placeholder="" name="telefono-{{i}}"
+                                            [(ngModel)]="perfil.telefonos[i].telefono" />
+                                    </div>
+                                </div>
+                                <div style="padding-top:10px;" *ngIf="perfil.telefonos.length !== 1">
+                                    <a (click)="eliminarTelefono(perfil.telefonos[i].id)"><i class="la la-trash"
+                                            style="font-size: 25px;"></i></a>
+                                </div>
+                            </div>
+                            <div class="col-lg-4" style="padding-top:10px;">
+                                <a (click)="agregarTelefono()"><i class="la la-plus-circle" style="font-size: 25px;"></i> Agregar otro
+                                    Teléfono</a>
+                            </div>
+                    
+                            <div class="col-lg-6">
+                                <span class="pf-title" style="margin-top: 15px;">País de Residencia</span>
+                                <select data-placeholder="Seleccione un País de Residencia" class="selectpicker" [(ngModel)]="perfil.paisResidencia"
+                                    name="paisResidencia">
+                                    <option *ngFor="let p of paises" [ngValue]="p.id" [selected]="p.id === perfil.paisResidencia">{{ p.nombre }}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-lg-6">
+                                <span class="pf-title" style="margin-top: 15px;">Provincia de Residencia</span>
+                                <div class="pf-field">
+                                    <select data-placeholder="Seleccione una Provincia de Residencia" class="selectpicker" [(ngModel)]="perfil.provinciaResidencia"
+                                        name="provinciaResidencia">
+                                        <option *ngFor="let pr of provincias" [ngValue]="pr.id" [selected]="pr.id === perfil.provinciaResidencia">{{ pr.nombre }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <span class="pf-title" style="margin-top: 15px;">Zona</span>
+                                <div class="pf-field">
+                                    <select data-placeholder="Seleccione una Zona" class="chosen">
+                                        <option>Buenos Aires</option>
+                                        <option>Catamarca</option>
+                                        <option>Chaco</option>
+                                        <option>Chubut</option>
+                                        <option>Córdoba</option>
+                                        <option>Corrientes</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <span class="pf-title" style="margin-top: 15px;">Ciudad</span>
+                                <div class="pf-field">
+                                    <select data-placeholder="Seleccione una Ciudad" class="chosen">
+                                        <option>Buenos Aires</option>
+                                        <option>Catamarca</option>
+                                        <option>Chaco</option>
+                                        <option>Chubut</option>
+                                        <option>Córdoba</option>
+                                        <option>Corrientes</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <span class="pf-title" style="margin-top: 15px;">Localidad</span>
+                                <div class="pf-field">
+                                    <select data-placeholder="Seleccione una Localidad" class="chosen">
+                                        <option>Buenos Aires</option>
+                                        <option>Catamarca</option>
+                                        <option>Chaco</option>
+                                        <option>Chubut</option>
+                                        <option>Córdoba</option>
+                                        <option>Corrientes</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <span class="pf-title" style="margin-top: 15px;">Fecha de Nacimiento</span>
+                                <div class="pf-field">
+                                    <input type="text" placeholder="Datepicker" class="form-control" bsDatepicker
+                                        [bsConfig]="{dateInputFormat: 'DD/MM/YYYY'}" [(ngModel)]="perfil.fechaNacimiento" name="fechaNacimiento">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <span class="pf-title" style="margin-top: 0px;">Estado Civil</span>
+                                <div class="pf-field">
+                                    <select data-placeholder="Seleccione un Estado Civil" class="selectpicker" [(ngModel)]="perfil.estadoCivil"
+                                        name="estadoCivil">
+                                        <option *ngFor="let ec of estadosCivil" [ngValue]="ec.id" [selected]="ec.id === perfil.estadoCivil">{{ ec.nombre }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <span class="pf-title" style="margin-top: 0px;">Pais Nacionalidad</span>
+                                <div class="pf-field">
+                                    <select data-placeholder="Seleccione un País de Nacionalidad" class="selectpicker" [(ngModel)]="perfil.paisNacionalidad"
+                                        name="paisNacionalidad">
+                                        <option *ngFor="let p of paises" [ngValue]="p.id" [selected]="p.id === perfil.paisNacionalidad">{{ p.nombre }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <span class="pf-title" style="margin-top: 15px;">Tipo de Documento</span>
+                                <div class="pf-field">
+                                    <select data-placeholder="Seleccione un Tipo de Documento" class="selectpicker" [(ngModel)]="perfil.tipoDocumento"
+                                        name="tipoDocumento">
+                                        <option *ngFor="let tp of tiposDocumento" [ngValue]="tp.id" [selected]="tp.id === perfil.tipoDocumento">{{ tp.nombre }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <span class="pf-title" style="margin-top: 15px;">Documento de Identidad</span>
+                                <div class="pf-field">
+                                    <input type="text" placeholder="" [(ngModel)]="perfil.numeroDocumento" name="numeroDocumento" />
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                      <div class="contact-edit">
                          <form>
                              <div class="row">

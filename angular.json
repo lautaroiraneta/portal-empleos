@@ -36,17 +36,19 @@
               "src/css/bootstrap.css",
               "./node_modules/ngx-select-dropdown/dist/assets/style.css",
               "node_modules/slick-carousel/slick/slick.scss",
-              "node_modules/slick-carousel/slick/slick-theme.scss"
+              "node_modules/slick-carousel/slick/slick-theme.scss",
+              "node_modules/bootstrap-select/dist/css/bootstrap-select.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "src/js/modernizr.js",
               "src/js/script.js",
               "node_modules/parallax-js/dist/parallax.js",
               "src/js/select-chosen.js",
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/slick-carousel/slick/slick.min.js"
+              "node_modules/slick-carousel/slick/slick.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+              "node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"
             ]
           },
           "configurations": {
