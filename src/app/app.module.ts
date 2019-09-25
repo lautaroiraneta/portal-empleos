@@ -22,7 +22,8 @@ import { EmpresaComponent } from './empresa/empresa.component';
     HttpClientModule,
     BsDatepickerModule.forRoot(),
     DatepickerModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
   declarations: [
     AppComponent,

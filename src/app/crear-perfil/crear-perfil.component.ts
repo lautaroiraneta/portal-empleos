@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HelperService, Email, Telefono } from '../helper.service';
+import { Observable } from 'rxjs';
+import { DataService } from '../data/data.service';
 
 export interface Perfil {
   nombres: string;
@@ -156,32 +158,19 @@ export class CrearPerfilComponent implements OnInit {
     fechaNacimiento: '01/07/1991'
   };
 
-  estadosCivil = [{
-    id: '1',
-    nombre: 'Soltero',
-  }, {
-    id: '2',
-    nombre: 'En Pareja'
-  }, {
-    id: '3',
-    nombre: 'Casado'
-  }, {
-    id: '4',
-    nombre: 'Divorciado'
-  }, {
-    id: '5',
-    nombre: 'Viudo'
-  }];
+  estadosCivil: Observable<any[]>;
+
 
   tiposDocumento = [{
     id: '1',
     nombre: 'DNI'
   }]
 
-  constructor(private helperService: HelperService) { }
+  constructor(private helperService: HelperService,
+    private dataService: DataService) { }
 
   ngOnInit() {
-    
+    this.estadosCivil = this.dataService.getEstadosCivil();
   }
 
   agregarEmail() {
