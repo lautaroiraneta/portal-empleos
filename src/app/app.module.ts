@@ -12,6 +12,7 @@ import { AppComponent }         from './app.component';
 import { CrearPerfilComponent } from './crear-perfil/crear-perfil.component';
 import { AlumnoComponent } from './alumno/alumno.component';
 import { CarreraComponent } from './carrera/carrera.component';
+import { EmpresaComponent } from './empresa/empresa.component';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { CarreraComponent } from './carrera/carrera.component';
     AppComponent,
     CrearPerfilComponent,
     AlumnoComponent,
-    CarreraComponent
+    CarreraComponent,
+    EmpresaComponent
   ],
   bootstrap: [ AppComponent ]
 })

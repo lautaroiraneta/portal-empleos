@@ -1,0 +1,104 @@
+<div class="block no-padding">
+    <div class="container">
+         <div class="row no-gape">
+             <div class="col-lg-12 column">
+                 <div class="padding-left">
+                     <div class="profile-title">
+                         <h3>Alta de Empresa</h3>
+                     </div>
+                     <div class="profile-form-edit">
+                        <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <span class="pf-title">Nombre de la Empresa</span>
+                                    <div class="pf-field">
+                                        <input type="text" placeholder="" [(ngModel)]="empresa.nombre" name="nombre" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <span class="pf-title">Página Web</span>
+                                    <div class="pf-field">
+                                        <input type="text" placeholder="http://" [(ngModel)]="empresa.paginaWeb" name="paginaWeb" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <span class="pf-title" style="margin-top: 0px;">CUIT</span>
+                                    <div class="pf-field">
+                                        <input type="text" placeholder="xx-xxxxxxxx-x" [(ngModel)]="empresa.cuit" name="cuit" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <span class="pf-title" style="margin-top: 0px;">Domicilio</span>
+                                    <div class="pf-field">
+                                        <input type="text" placeholder="" [(ngModel)]="empresa.domicilio" name="domicilio" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="border-title">Emails Empresa<a (click)="agregarEmail()"><i class="la la-plus"></i>
+                                            Agregar</a></div>
+                                    <div class="pf-field" *ngFor="let email of empresa.emails; let i = index">
+                                        <div class="col-lg-11" style="margin-left: -15px;">
+                                            <div class="pf-field">
+                                                <input type="text" placeholder="" name="email-{{i}}" [(ngModel)]="empresa.emails[i].email" />
+                                            </div>
+                                        </div>
+                                        <div style="padding-top:10px;" *ngIf="empresa.emails.length !== 1">
+                                            <a (click)="eliminarEmail(empresa.emails[i].id)"><i class="la la-trash" style="font-size: 25px;"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="border-title">Teléfonos Empresa<a (click)="agregarTelefono()"><i class="la la-plus"></i>
+                                            Agregar</a></div>
+                                    <div class="pf-field" *ngFor="let telefono of empresa.telefonos; let i = index">
+                                        <div class="col-lg-11" style="margin-left: -15px;">
+                                            <div class="pf-field">
+                                                <input type="text" placeholder="" name="telefono-{{i}}" [(ngModel)]="empresa.telefonos[i].telefono" />
+                                            </div>
+                                        </div>
+                                        <div style="padding-top:10px;" *ngIf="empresa.telefonos.length !== 1">
+                                            <a (click)="eliminarTelefono(empresa.telefonos[i].id)"><i class="la la-trash" style="font-size: 25px;"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="border-title" style="margin-top: 0px; font-size: 25px;">Datos de Contacto<a class="cancel" href="#" title=""></a></div>
+                                    
+                                    <div class="pf-field col-lg-6">
+                                        <p>Nombre</p>
+                                        <input type="text" placeholder="" [(ngModel)]="empresa.contacto.nombre" name="nombreContacto" />
+                                    </div>
+                                    <div class="pf-field col-lg-6">
+                                        <p>Apellido</p>
+                                        <input type="text" placeholder="" [(ngModel)]="empresa.contacto.apellido" name="apellidoContacto"/>
+                                    </div>
+                                    <div class="pf-field col-lg-3">
+                                        <p>Teléfono</p>
+                                        <input type="text" placeholder="" [(ngModel)]="empresa.contacto.telefono" name="telefonoContacto"/>
+                                    </div>
+                                    <div class="pf-field col-lg-3">
+                                        <p>Email</p>
+                                        <input type="text" placeholder="" [(ngModel)]="empresa.contacto.email" name="emailContacto"/>
+                                    </div>
+                                    <div class="pf-field col-lg-3">
+                                        <p>Cargo</p>
+                                        <input type="text" placeholder="" [(ngModel)]="empresa.contacto.cargo" name="cargoContacto"/>
+                                    </div>
+                                    <div class="pf-field col-lg-3">
+                                        <p>Nombre de Usuario</p>
+                                        <input type="text" placeholder="" [(ngModel)]="empresa.contacto.nombreUsuario" name="nombreUsuarioContacto"/>
+                                    </div>
+                                </div>
+                             </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button type="submit">Crear Empresa</button>
+                                </div>
+                            </div>
+                        </form>
+                     </div>
+                 </div>
+            </div>
+         </div>
+    </div>
+</div>

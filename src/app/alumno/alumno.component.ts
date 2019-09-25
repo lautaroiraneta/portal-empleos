@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Email } from '../crear-perfil/crear-perfil.component';
+import { Email } from '../helper.service';
 
 export interface Alumno {
   nombres: string;

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HelperService, Email, Telefono } from '../helper.service';
 
 export interface Perfil {
   nombres: string;
@@ -13,16 +14,6 @@ export interface Perfil {
   tipoDocumento: string;
   numeroDocumento: string;
   fechaNacimiento: string;
-}
-
-export interface Email {
-  id: string
-  email: string;
-}
-
-export interface Telefono {
-  id: string;
-  telefono: string;
 }
 
 @Component({
@@ -187,22 +178,18 @@ export class CrearPerfilComponent implements OnInit {
     nombre: 'DNI'
   }]
 
-  constructor() { }
+  constructor(private helperService: HelperService) { }
 
   ngOnInit() {
     
   }
 
   agregarEmail() {
-    this.perfil.emails.push({ id: (this.perfil.emails[this.perfil.emails.length - 1].id + 1).toString(), email: 'email3@gmail.com'});
+    this.helperService.agregarEmail(this.perfil.emails);
   }
 
   eliminarEmail(id: string) {
-    this.perfil.emails = this.perfil.emails.filter(x => x.id !== id);
-
-    if (this.perfil.emails.length === 0) {
-      this.perfil.emails.push({ id: '1', email: '' });
-    }
+    this.perfil.emails = this.helperService.eliminarEmail(this.perfil.emails, id);
   }
 
   agregarTelefono() {
