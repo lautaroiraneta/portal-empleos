@@ -7,7 +7,7 @@
                          <h3>Datos Personales</h3>
                     </div>
                     <form #form="ngForm">
-                        <div class="row">
+                        <div class="row" *ngIf="mostrarPrimeraParte">
                             <div class="col-lg-6">
                                 <span class="pf-title">Nombres</span>
                                 <div class="pf-field">
@@ -156,12 +156,15 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row" *ngIf="!mostrarPrimeraParte">
+                            Hi!
+                        </div>
                     </form>
                      <div class="contact-edit">
                          <form>
                              <div class="row">
                                 <div class="col-lg-12">
-                                    <button type="submit"><a href="perfil alumno 2.html" title="">Siguiente</a></button>
+                                    <button type="submit" (click)="mostrarPrimeraParte = !mostrarPrimeraParte">Siguiente</button>
                                 </div>
                              </div>
                          </form>

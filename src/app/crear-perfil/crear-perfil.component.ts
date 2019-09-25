@@ -31,6 +31,8 @@ export interface Telefono {
   styleUrls: ['./crear-perfil.component.css']
 })
 export class CrearPerfilComponent implements OnInit {
+  mostrarPrimeraParte: boolean = true;
+  
   paises = [{
     id: 'ARG',
     nombre: 'Argentina'

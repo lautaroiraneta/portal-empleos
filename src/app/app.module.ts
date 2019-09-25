@@ -10,6 +10,8 @@ import { AppRoutingModule }     from './app-routing.module';
 
 import { AppComponent }         from './app.component';
 import { CrearPerfilComponent } from './crear-perfil/crear-perfil.component';
+import { AlumnoComponent } from './alumno/alumno.component';
+import { CarreraComponent } from './carrera/carrera.component';
 
 @NgModule({
   imports: [
@@ -23,7 +25,9 @@ import { CrearPerfilComponent } from './crear-perfil/crear-perfil.component';
   ],
   declarations: [
     AppComponent,
-    CrearPerfilComponent
+    CrearPerfilComponent,
+    AlumnoComponent,
+    CarreraComponent
   ],
   bootstrap: [ AppComponent ]
 })

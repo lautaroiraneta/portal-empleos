@@ -1,0 +1,40 @@
+<div class="block no-padding">
+    <div class="container">
+         <div class="row no-gape">
+             <div class="col-lg-12 column">
+                 <div class="padding-left">
+                     <div class="profile-title">
+                         <h3>Alta de Alumno</h3>
+                     </div>
+                     <div class="profile-form-edit">
+                        <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <span class="pf-title">Nombre de la Carrera</span>
+                                    <div class="pf-field">
+                                        <input type="text" placeholder="" [(ngModel)]="carrera.nombre" name="nombre" required #nombreField="ngModel"
+                                            id="nombre" [class.field-error]="form.submitted && nombreField.invalid" />
+                                        <div [hidden]="!form.submitted || nombreField.valid" class="alert alert-danger" style="margin-top: 54px;">
+                                            Ingrese un Nombre de Carrera
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <span class="pf-title">Código</span>
+                                    <div class="pf-field">
+                                        <input type="text" placeholder="" [(ngModel)]="carrera.codigo" name="codigo" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button type="submit">Crear Carrera</button>
+                                </div>
+                            </div>
+                        </form>
+                     </div>
+                 </div>
+            </div>
+         </div>
+    </div>
+</div>
