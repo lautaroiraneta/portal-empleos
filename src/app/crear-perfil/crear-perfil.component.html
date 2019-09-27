@@ -124,7 +124,7 @@
                                 <div class="pf-field">
                                     <select data-placeholder="Seleccione un Estado Civil" class="selectpicker" [(ngModel)]="perfil.estadoCivil"
                                         name="estadoCivil">
-                                        <option *ngFor="let ec of estadosCivil | async" [ngValue]="ec.id" [selected]="ec.id === perfil.estadoCivil">{{ ec.nombre }}
+                                        <option *ngFor="let ec of estadosCivil | async" [(ngValue)]="ec.id" [selected]="ec.id === perfil.estadoCivil">{{ ec.nombre }}
                                         </option>
                                     </select>
                                 </div>
@@ -134,7 +134,7 @@
                                 <div class="pf-field">
                                     <select data-placeholder="Seleccione un País de Nacionalidad" class="selectpicker" [(ngModel)]="perfil.paisNacionalidad"
                                         name="paisNacionalidad">
-                                        <option *ngFor="let p of paises" [ngValue]="p.id" [selected]="p.id === perfil.paisNacionalidad">{{ p.nombre }}
+                                        <option *ngFor="let p of paises" [(ngValue)]="p.id" [selected]="p.id === perfil.paisNacionalidad">{{ p.nombre }}
                                         </option>
                                     </select>
                                 </div>

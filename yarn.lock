@@ -5066,6 +5066,13 @@ neo-async@^2.5.0, neo-async@^2.6.0, neo-async@^2.6.1:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.1.tgz#ac27ada66167fa8849a6addd837f6b189ad2081c"
   integrity sha512-iyam8fBuCUpWeKPGpaNMetEocMt364qkCsfL9JuhjXX6dRnguRVOfk2GZaDpPjcOKiiXCPINZC1GczQ7iTq3Zw==
 
+ng-multiselect-dropdown@^0.2.5:
+  version "0.2.5"
+  resolved "https://registry.yarnpkg.com/ng-multiselect-dropdown/-/ng-multiselect-dropdown-0.2.5.tgz#f7df212103c845dc075578b12f3b5501b127f79d"
+  integrity sha512-LoKh6DlXmu5AqHdCm17N5tDNAFL/KqihrNULomNn+HX9JNWPvL6BxCLFNyZ1bPL7bTl7Re8mawRMbMWwuP/OCw==
+  dependencies:
+    tslib "^1.9.0"
+
 ngx-bootstrap@^5.1.2:
   version "5.1.2"
   resolved "https://registry.yarnpkg.com/ngx-bootstrap/-/ngx-bootstrap-5.1.2.tgz#0d5777ce3ba548f3d922cb23f6c640ea09191b4c"

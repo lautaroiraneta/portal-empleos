@@ -25,6 +25,7 @@
     "bootstrap-select": "^1.13.11",
     "chosen-js": "^1.8.7",
     "jquery": "^3.4.1",
+    "ng-multiselect-dropdown": "^0.2.5",
     "ngx-bootstrap": "^5.1.2",
     "ngx-select-dropdown": "^1.0.1",
     "ngx-slick-carousel": "^0.4.4",
