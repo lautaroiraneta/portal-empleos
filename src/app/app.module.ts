@@ -17,6 +17,7 @@ import { CarreraComponent } from './carrera/carrera.component';
 import { EmpresaComponent } from './empresa/empresa.component';
 import { MateriaComponent } from './materia/materia.component';
 import { NoticiaComponent } from './noticia/noticia.component';
+import { SubtareaComponent } from './subtarea/subtarea.component';
 
 @NgModule({
   imports: [
@@ -38,7 +39,8 @@ import { NoticiaComponent } from './noticia/noticia.component';
     CarreraComponent,
     EmpresaComponent,
     MateriaComponent,
-    NoticiaComponent
+    NoticiaComponent,
+    SubtareaComponent
   ],
   bootstrap: [ AppComponent ]
 })

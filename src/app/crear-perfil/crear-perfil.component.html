@@ -115,12 +115,9 @@
                             <div class="col-lg-6">
                                 <span class="pf-title" style="margin-top: 15px;">Fecha de Nacimiento</span>
                                 <div class="pf-field">
-                                        <input class="input-box" placeholder="Click to select a date" angular-mydatepicker name="mydate"
-                                            (click)="dp.toggleCalendar()" [(ngModel)]="perfil.fechaNacimiento" name="fechaNacimiento" [options]="myDpOptions"
-                                            #dp="angular-mydatepicker"/>
-                                    <!-- <input type="text" placeholder="Datepicker" bsDatepicker
-                                        [bsConfig]="{dateInputFormat: 'DD/MM/YYYY'}" [(ngModel)]="perfil.fechaNacimiento" name="fechaNacimiento">
-                                    <i class="la la-calendar"></i> -->
+                                    <input class="input-box" placeholder="Click to select a date" angular-mydatepicker
+                                        (click)="dp.toggleCalendar()" [(ngModel)]="perfil.fechaNacimiento" name="fechaNacimiento"
+                                        [options]="myDpOptions" #dp="angular-mydatepicker" />
                                 </div>
                             </div>
                             <div class="col-lg-6">

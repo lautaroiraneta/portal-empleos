@@ -1,0 +1,53 @@
+<div class="block no-padding">
+    <div class="container">
+        <div class="row no-gape">
+            <div class="col-lg-12 column">
+                <div class="padding-left">
+                    <div class="profile-title">
+                        <h3>Agregar Noticia a Micrositio</h3>
+                    </div>
+                    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <span class="pf-title">Nombre de la Subtarea</span>
+                                <div class="pf-field">
+                                    <input type="text" placeholder="" [(ngModel)]="subtarea.nombre" name="nombre" />
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <span class="pf-title" style="margin-top: 0px">Descripción de la Subtarea</span>
+                                <div class="pf-field">
+                                    <textarea [(ngModel)]="subtarea.descripcion" name="descripcion"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <span class="pf-title" style="margin-top: 0px">Usuario Responsable</span>
+                                <div class="dropdown-field">
+                                    <select data-placeholder="Seleccione un Usuario Responsable" class="selectpicker" [(ngModel)]="subtarea.usuarioResponsable.id"
+                                        name="usuarioResponsable" (change)="onUsuarioResponsableChange()">
+                                        <option *ngFor="let u of usuarios" [ngValue]="u.id" [selected]="u.id === subtarea.usuarioResponsable.id">{{ u.nombre }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <span class="pf-title" style="margin-top: 0px">Fecha Finalización</span>
+                                <div class="pf-field">
+                                    <input class="input-box" placeholder="Click to select a date" angular-mydatepicker
+                                        (click)="dp.toggleCalendar()" [(ngModel)]="subtarea.fechaFinalizacion" name="fechaFinalizacion"
+                                        [options]="myDpOptions" #dp="angular-mydatepicker" />
+                                    <i class="la la-calendar"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <button type="submit" class="boton-submit">Crear Subtarea</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { IAngularMyDpOptions } from 'angular-mydatepicker';
 
 @Component({
   selector: 'app-noticia',
@@ -11,8 +12,16 @@ export class NoticiaComponent implements OnInit {
     titulo: 'Título',
     cuerpo: 'hola hoahoahoahoahoahoohaohaoaohoahoaohoahoaohohaoaoh',
     fecha: '02/02/2019',
-    imagen: ''
+    imagen: undefined
   }
+
+  myDpOptions: IAngularMyDpOptions = {
+    dateRange: false,
+    dateFormat: 'dd/mm/yyyy',
+    dayLabels: { su: 'Dom', mo: 'Lun', tu: 'Mar', we: 'Mie', th: 'Jue', fr: 'Vie', sa: 'Sab' },
+    monthLabels: { 1: 'Ene', 2: 'Feb', 3: 'Mar', 4: 'Abr', 5: 'May', 6: 'Jun', 7: 'Jul', 8: 'Ago', 9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dic' }
+    // other options are here...
+  };
 
   constructor() { }
 
@@ -21,6 +30,15 @@ export class NoticiaComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     console.log('in onSubmit: ', form);
+    console.log('noticia: ' + JSON.stringify(this.noticia));
     
+  }
+
+  handleFileInput(files: FileList) {
+    console.log('files: ' + files);
+    if (files.item(0)) {
+      this.noticia.imagen = files.item(0).name;
+    }
+    console.log(this.noticia.imagen);
   }
 }

@@ -1,55 +1,58 @@
 <div class="block no-padding">
     <div class="container">
-         <div class="row no-gape">
-             <div class="col-lg-12 column">
-                 <div class="padding-left">
-                     <div class="profile-title">
+        <div class="row no-gape">
+            <div class="col-lg-12 column">
+                <div class="padding-left">
+                    <div class="profile-title">
                         <h3>Agregar Noticia a Micrositio</h3>
-                     </div>
-                     <div class="profile-form-edit">
-                        <form #form="ngForm" (ngSubmit)="onSubmit(form)">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <span class="pf-title">Título de la Noticia</span>
-                                    <div class="pf-field">
-                                        <input type="text" placeholder="" [(ngModel)]="noticia.titulo" name="titulo" />
-                                    </div>
+                    </div>
+                    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <span class="pf-title">Título de la Noticia</span>
+                                <div class="pf-field">
+                                    <input type="text" placeholder="" [(ngModel)]="noticia.titulo" name="titulo" />
                                 </div>
-                                <div class="col-lg-12">
-                                    <span class="pf-title" style="margin-top: 0px;">Cuerpo de la Noticia</span>
-                                    <div class="pf-field">
-                                        <textarea [(ngModel)]="noticia.cuerpo" name="cuerpo"></textarea>
-                                    </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <span class="pf-title" style="margin-top: 0px;">Cuerpo de la Noticia</span>
+                                <div class="pf-field">
+                                    <textarea [(ngModel)]="noticia.cuerpo" name="cuerpo"></textarea>
                                 </div>
-                            
-                                <div class="col-lg-6">
-                                    <span class="pf-title">Fecha de la Noticia</span>
-                                    <div class="pf-field">
-                                        <input placeholder="24/08/2019" type="text" class="datepicker">
-                                        <i class="la la-calendar"></i>
-                                    </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <span class="pf-title">Fecha de la Noticia</span>
+                                <div class="pf-field">
+                                    <input class="input-box" placeholder="Click to select a date" angular-mydatepicker
+                                        (click)="dp.toggleCalendar()" [(ngModel)]="noticia.fecha" name="fecha"
+                                        [options]="myDpOptions" #dp="angular-mydatepicker" />
+                                    <i class="la la-calendar"></i>
                                 </div>
-                                <div class="col-lg-6">
-                                    <span class="pf-title">Imagen de Noticia</span>
-                                    <div class="upload-portfolio">
-                                        <div class="uploadbox">
-                                            <label for="file-upload" class="custom-file-upload">
-                                                <i class="la la-cloud-upload"></i> <span>Subir Imagen</span>
-                                            </label>
-                                            <input id="file-upload" type="file" style="display: none;" />
-                                        </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <span class="pf-title">Imagen de Noticia</span>
+                                <div class="upload-portfolio">
+                                    <div class="uploadbox">
+                                        <label for="file-upload" class="custom-file-upload">
+                                            <i class="la la-cloud-upload"></i> <span>Subir Imagen</span>
+                                        </label>
+                                        <input id="file-upload" type="file" style="display: none;" (change)="handleFileInput($event.target.files)" />
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <button type="submit">Crear Noticia</button>
-                                </div>
+                            <div class="col-lg-3">
+                                <span class="pf-title">Archivos subidos</span>
+                                {{ noticia.imagen | json }}
                             </div>
-                        </form>
-                     </div>
-                 </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <button type="submit" class="boton-submit">Crear Noticia</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
-         </div>
+        </div>
     </div>
 </div>

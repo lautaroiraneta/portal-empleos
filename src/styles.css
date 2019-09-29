@@ -1,2 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
 @import '../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css';
+
+.boton-submit {
+    float: right;
+    background: #ffffff;
+    border: 2px solid #fb236a;
+    color: #202020;
+    font-family: Open Sans;
+    font-size: 15px;
+    padding: 11px 40px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.boton-submit:hover {
+    background: #fb236a; 
+    color: #ffffff;
+}

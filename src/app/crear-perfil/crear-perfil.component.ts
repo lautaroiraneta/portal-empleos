@@ -110,7 +110,7 @@ export class CrearPerfilComponent implements OnInit {
   ngOnInit() {
     this.estadosCivil = this.dataService.getEstadosCivil();
 
-    this.perfil.fechaNacimiento = {isRange: false, singleDate: {jsDate: new Date()}};
+    this.perfil.fechaNacimiento = { isRange: false, singleDate: { jsDate: new Date() } };
   }
 
   agregarEmail() {
