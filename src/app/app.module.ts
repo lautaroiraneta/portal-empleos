@@ -6,6 +6,7 @@ import { HttpClientModule }    from '@angular/common/http';
 import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { AngularMyDatePickerModule } from 'angular-mydatepicker';
 
 import { AppRoutingModule }     from './app-routing.module';
 
@@ -15,6 +16,7 @@ import { AlumnoComponent } from './alumno/alumno.component';
 import { CarreraComponent } from './carrera/carrera.component';
 import { EmpresaComponent } from './empresa/empresa.component';
 import { MateriaComponent } from './materia/materia.component';
+import { NoticiaComponent } from './noticia/noticia.component';
 
 @NgModule({
   imports: [
@@ -26,7 +28,8 @@ import { MateriaComponent } from './materia/materia.component';
     DatepickerModule.forRoot(),
     BrowserAnimationsModule,
     HttpClientModule,
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+    AngularMyDatePickerModule
   ],
   declarations: [
     AppComponent,
@@ -34,7 +37,8 @@ import { MateriaComponent } from './materia/materia.component';
     AlumnoComponent,
     CarreraComponent,
     EmpresaComponent,
-    MateriaComponent
+    MateriaComponent,
+    NoticiaComponent
   ],
   bootstrap: [ AppComponent ]
 })

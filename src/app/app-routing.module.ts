@@ -6,6 +6,7 @@ import { AlumnoComponent } from './alumno/alumno.component';
 import { CarreraComponent } from './carrera/carrera.component';
 import { EmpresaComponent } from './empresa/empresa.component';
 import { MateriaComponent } from './materia/materia.component';
+import { NoticiaComponent } from './noticia/noticia.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/crear-perfil', pathMatch: 'full' },
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: 'carrera', component: CarreraComponent },
   { path: 'crear-perfil', component: CrearPerfilComponent },
   { path: 'empresa', component: EmpresaComponent },
-  { path: 'materia', component: MateriaComponent }
+  { path: 'materia', component: MateriaComponent },
+  { path: 'noticia', component: NoticiaComponent }
 ];
 
 @NgModule({
