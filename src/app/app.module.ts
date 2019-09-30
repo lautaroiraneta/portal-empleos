@@ -18,6 +18,7 @@ import { EmpresaComponent } from './empresa/empresa.component';
 import { MateriaComponent } from './materia/materia.component';
 import { NoticiaComponent } from './noticia/noticia.component';
 import { SubtareaComponent } from './subtarea/subtarea.component';
+import { TareaComponent } from './tarea/tarea.component';
 
 @NgModule({
   imports: [
@@ -40,7 +41,8 @@ import { SubtareaComponent } from './subtarea/subtarea.component';
     EmpresaComponent,
     MateriaComponent,
     NoticiaComponent,
-    SubtareaComponent
+    SubtareaComponent,
+    TareaComponent
   ],
   bootstrap: [ AppComponent ]
 })

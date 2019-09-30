@@ -8,6 +8,7 @@ import { EmpresaComponent } from './empresa/empresa.component';
 import { MateriaComponent } from './materia/materia.component';
 import { NoticiaComponent } from './noticia/noticia.component';
 import { SubtareaComponent } from './subtarea/subtarea.component';
+import { TareaComponent } from './tarea/tarea.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/crear-perfil', pathMatch: 'full' },
@@ -17,7 +18,8 @@ const routes: Routes = [
   { path: 'empresa', component: EmpresaComponent },
   { path: 'materia', component: MateriaComponent },
   { path: 'noticia', component: NoticiaComponent },
-  { path: 'subtarea', component: SubtareaComponent }
+  { path: 'subtarea', component: SubtareaComponent },
+  { path: 'tarea', component: TareaComponent }
 ];
 
 @NgModule({
