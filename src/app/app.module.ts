@@ -19,6 +19,8 @@ import { MateriaComponent } from './materia/materia.component';
 import { NoticiaComponent } from './noticia/noticia.component';
 import { SubtareaComponent } from './subtarea/subtarea.component';
 import { TareaComponent } from './tarea/tarea.component';
+import { TareaDefectoComponent } from './tarea-defecto/tarea-defecto.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
@@ -31,7 +33,8 @@ import { TareaComponent } from './tarea/tarea.component';
     BrowserAnimationsModule,
     HttpClientModule,
     NgMultiSelectDropDownModule.forRoot(),
-    AngularMyDatePickerModule
+    AngularMyDatePickerModule,
+    NgbModule
   ],
   declarations: [
     AppComponent,
@@ -42,7 +45,8 @@ import { TareaComponent } from './tarea/tarea.component';
     MateriaComponent,
     NoticiaComponent,
     SubtareaComponent,
-    TareaComponent
+    TareaComponent,
+    TareaDefectoComponent
   ],
   bootstrap: [ AppComponent ]
 })

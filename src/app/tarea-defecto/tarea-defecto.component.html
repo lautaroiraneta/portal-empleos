@@ -1,0 +1,45 @@
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="pf-field">
+                <input type="text" placeholder="Nombre de la Tarea" />
+            </div>
+            <div class="dropdown-field">
+                <select data-placeholder="Please Select Specialism" class="chosen">
+                    <option>Rol del Responsable de la Tarea</option>
+                </select>
+            </div>
+            <div class="pf-field">
+                Tareas Predecesoras
+                <ul class="tags">
+                    <li class="addedTag">Tarea Pred 1<span onclick="$(this).parent().remove();"
+                            class="tagRemove">x</span><input type="hidden" name="tags[]" value="Web Design"></li>
+                    <li class="tagAdd taglist">
+                        <input type="text" id="search-field">
+                    </li>
+                </ul>
+            </div>
+            <div class="pf-field">
+                Tareas Sucesoras
+                <ul class="tags">
+                    <li class="addedTag">Tarea Sucesora 1<span onclick="$(this).parent().remove();"
+                            class="tagRemove">x</span><input type="hidden" name="tags[]" value="Web Design"></li>
+                    <li class="tagAdd taglist">
+                        <input type="text" id="search-field">
+                    </li>
+                </ul>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Crear Tarea</button>
+    </div>
+</ng-template>
+
+<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button>

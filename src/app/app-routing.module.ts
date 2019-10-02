@@ -9,6 +9,7 @@ import { MateriaComponent } from './materia/materia.component';
 import { NoticiaComponent } from './noticia/noticia.component';
 import { SubtareaComponent } from './subtarea/subtarea.component';
 import { TareaComponent } from './tarea/tarea.component';
+import { TareaDefectoComponent } from './tarea-defecto/tarea-defecto.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/crear-perfil', pathMatch: 'full' },
@@ -19,7 +20,8 @@ const routes: Routes = [
   { path: 'materia', component: MateriaComponent },
   { path: 'noticia', component: NoticiaComponent },
   { path: 'subtarea', component: SubtareaComponent },
-  { path: 'tarea', component: TareaComponent }
+  { path: 'tarea', component: TareaComponent },
+  { path: 'tarea-defecto', component: TareaDefectoComponent }
 ];
 
 @NgModule({
