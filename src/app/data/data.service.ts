@@ -11,23 +11,15 @@ export class DataService {
   constructor(private http: HttpClient) { }
   
   getEstadosCivil(): Observable<any[]> {
-    return of([{
-      id: '1',
-      nombre: 'Soltero',
-    }, {
-      id: '2',
-      nombre: 'En Pareja'
-    }, {
-      id: '3',
-      nombre: 'Casado'
-    }, {
-      id: '4',
-      nombre: 'Divorciado'
-    }, {
-      id: '5',
-      nombre: 'Viudo'
-    }]);
+    return of([
+      { id: '1', nombre: 'Soltero' },
+      { id: '2', nombre: 'En Pareja' },
+      { id: '3', nombre: 'Casado' },
+      { id: '4', nombre: 'Divorciado' },
+      { id: '5', nombre: 'Viudo' }
+    ]);
   }
+
 
   postAlumno(carrera: Carrera): Observable<any> {
     return this.http.post('https://putsreq.com/FOaQArpd1uZoM1UJruRW', carrera);

@@ -4,17 +4,18 @@ import { HelperService, Email, Telefono } from '../helper.service';
 import { Observable } from 'rxjs';
 import { DataService } from '../data/data.service';
 import { IAngularMyDpOptions, IMyDateModel } from 'angular-mydatepicker';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 export interface Perfil {
   nombres: string;
   apellidos: string;
   emails: Email[];
   telefonos: Telefono[];
-  paisResidencia: string;
-  provinciaResidencia: string;
-  estadoCivil: string;
-  paisNacionalidad: string;
-  tipoDocumento: string;
+  paisResidencia: any;
+  provinciaResidencia: any;
+  estadoCivil: any;
+  paisNacionalidad: any;
+  tipoDocumento: any;
   numeroDocumento: string;
   fechaNacimiento: IMyDateModel;
 }
@@ -86,21 +87,38 @@ export class CrearPerfilComponent implements OnInit {
       { id: '1', telefono: '1234567' }, 
       { id: '2', telefono: '578786' }
     ],
-    paisResidencia: 'ARG',
-    provinciaResidencia: 'BUE',
-    estadoCivil: '1',
-    paisNacionalidad: 'ARG',
-    tipoDocumento: '1',
+    paisResidencia: [
+      { id: 'ARG', nombre: 'Argentina' }
+    ],
+    provinciaResidencia: [
+      { id: 'BUE', nombre: 'Buenos Aires' }
+    ],
+    estadoCivil: [
+      { id: '2', nombre: 'En Pareja' }
+    ],
+    paisNacionalidad: [{ id: 'ARG', nombre: 'Argentina' }],
+    tipoDocumento:  [
+      { id: '1', nombre: 'DNI'}
+    ],
     numeroDocumento: '35.941.589',
     fechaNacimiento: null
   };
 
   estadosCivil: Observable<any[]>;
 
-  tiposDocumento = [{
-    id: '1',
-    nombre: 'DNI'
-  }]
+  tiposDocumento = [
+    { id: '1', nombre: 'DNI'}
+  ];
+  
+  dropdownSettingsSingle: IDropdownSettings = {
+    singleSelection: true,
+    closeDropDownOnSelection: true,
+    idField: 'id',
+    textField: 'nombre',
+    enableCheckAll: false,
+    itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
 
   constructor(
     private helperService: HelperService,

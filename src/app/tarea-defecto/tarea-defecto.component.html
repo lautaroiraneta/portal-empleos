@@ -1,6 +1,6 @@
 <ng-template #content let-modal>
     <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+        <h3>Agregar Tarea</h3>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -8,38 +8,33 @@
     <div class="modal-body">
         <form>
             <div class="pf-field">
-                <input type="text" placeholder="Nombre de la Tarea" />
+                <input type="text" placeholder="Nombre de la Tarea" [(ngModel)]="tarea.nombre" name="nombre" />
             </div>
             <div class="dropdown-field">
-                <select data-placeholder="Please Select Specialism" class="chosen">
-                    <option>Rol del Responsable de la Tarea</option>
-                </select>
+                <ng-multiselect-dropdown [placeholder]="'Rol del Responsable de la Tarea'" [data]="roles"
+                    [(ngModel)]="tarea.rolResponsable" name="rolResposable" [settings]="dropdownSettingsSingle"
+                    (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                </ng-multiselect-dropdown>
             </div>
             <div class="pf-field">
                 Tareas Predecesoras
-                <ul class="tags">
-                    <li class="addedTag">Tarea Pred 1<span onclick="$(this).parent().remove();"
-                            class="tagRemove">x</span><input type="hidden" name="tags[]" value="Web Design"></li>
-                    <li class="tagAdd taglist">
-                        <input type="text" id="search-field">
-                    </li>
-                </ul>
+                <ng-multiselect-dropdown [placeholder]="'Seleccione Tareas Predecesoras'" [data]="tareas"
+                    [(ngModel)]="tarea.tareasPredecesoras" name="tareasPredecesoras" [settings]="dropdownSettingsMultiple"
+                    (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                </ng-multiselect-dropdown>
             </div>
-            <div class="pf-field">
+            <div class="pf-field" style="margin-top: 22px;">
                 Tareas Sucesoras
-                <ul class="tags">
-                    <li class="addedTag">Tarea Sucesora 1<span onclick="$(this).parent().remove();"
-                            class="tagRemove">x</span><input type="hidden" name="tags[]" value="Web Design"></li>
-                    <li class="tagAdd taglist">
-                        <input type="text" id="search-field">
-                    </li>
-                </ul>
+                <ng-multiselect-dropdown [placeholder]="'Seleccione Tareas Sucesoras'" [data]="tareas"
+                    [(ngModel)]="tarea.tareasSucesoras" name="tareasSucesoras" [settings]="dropdownSettingsMultiple"
+                    (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                </ng-multiselect-dropdown>
             </div>
         </form>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Crear Tarea</button>
+        <button type="button" class="btn btn-outline-dark" (click)="save()">Crear Tarea</button>
     </div>
 </ng-template>
 
-<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button>
+<h2 class="add-idioma" style="padding-left: 27px;"><a (click)="open(content)"><i class="la la-plus-circle"></i></a></h2>

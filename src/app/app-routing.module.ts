@@ -10,9 +10,11 @@ import { NoticiaComponent } from './noticia/noticia.component';
 import { SubtareaComponent } from './subtarea/subtarea.component';
 import { TareaComponent } from './tarea/tarea.component';
 import { TareaDefectoComponent } from './tarea-defecto/tarea-defecto.component';
+import { AgregarConocimientosComponent } from './agregar-conocimientos/agregar-conocimientos.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/crear-perfil', pathMatch: 'full' },
+  { path: 'agregar-conocimientos-a-mi-perfil', component: AgregarConocimientosComponent },
   { path: 'alumno', component: AlumnoComponent },
   { path: 'carrera', component: CarreraComponent },
   { path: 'crear-perfil', component: CrearPerfilComponent },

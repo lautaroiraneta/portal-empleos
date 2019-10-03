@@ -1,0 +1,79 @@
+<div class="manage-jobs-sec">
+    <br />
+    <h2 style="padding-left: 27px;">Agregar Conocimientos a mi Perfil</h2>
+    <table>
+        <thead>
+            <tr>
+                <td style="color: purple;"><h4>Conocimiento</h4></td>
+                <td style="color: purple;"><h4>Acción</h4></td>
+            </tr>
+        </thead>
+       <tbody>
+           <tr *ngFor="let c of conocimientos; let i = index">
+               <td>
+                   <div class="table-list-title">
+                       <h3>{{ c.nombre }}</h3>
+                   </div>
+               </td>
+               <td>
+                   <ul class="action_job">
+                           <li><span>Agregar</span><a href="#" title=""><i class="la la-plus-circle"
+                               style="font-size: 36px; color: green;"></i></a></li>
+                   </ul>
+               </td>
+           </tr>
+           <!-- <tr>
+               <td>
+                   <div class="table-list-title">
+                       <h3>Java</h3>
+                   </div>
+               </td>
+               <td>
+                   <ul class="action_job">
+                           <li><span>Agregar</span><a href="#" title=""><i class="la la-plus-circle"
+                               style="font-size: 36px; color: green;"></i></a></li>
+                   </ul>
+               </td>
+           </tr>
+           <tr>
+               <td>
+                   <div class="table-list-title">
+                       <h3>Java</h3>
+                   </div>
+               </td>
+               <td>
+                   <ul class="action_job">
+                           <li><span>Agregar</span><a href="#" title=""><i class="la la-plus-circle"
+                               style="font-size: 36px; color: green;"></i></a></li>
+                   </ul>
+               </td>
+           </tr>
+           <tr>
+               <td>
+                   <div class="table-list-title">
+                       <h3>Java</h3>
+                   </div>
+               </td>
+               <td>
+                   <ul class="action_job">
+                           <li><span>Agregar</span><a href="#" title=""><i class="la la-plus-circle"
+                               style="font-size: 36px; color: green;"></i></a></li>
+                   </ul>
+               </td>
+           </tr>
+           <tr>
+               <td>
+                   <div class="table-list-title">
+                       <h3>Java</h3>
+                   </div>
+               </td>
+               <td>
+                   <ul class="action_job">
+                       <li><span>Agregar</span><a href="#" title=""><i class="la la-plus-circle"
+                                   style="font-size: 36px; color: green;"></i></a></li>
+                   </ul>
+               </td>
+           </tr> -->
+       </tbody>
+    </table>
+</div>
