@@ -11,6 +11,7 @@ import { SubtareaComponent } from './subtarea/subtarea.component';
 import { TareaComponent } from './tarea/tarea.component';
 import { TareaDefectoComponent } from './tarea-defecto/tarea-defecto.component';
 import { AgregarConocimientosComponent } from './agregar-conocimientos/agregar-conocimientos.component';
+import { EquipoComponent } from './equipo/equipo.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/crear-perfil', pathMatch: 'full' },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'carrera', component: CarreraComponent },
   { path: 'crear-perfil', component: CrearPerfilComponent },
   { path: 'empresa', component: EmpresaComponent },
+  { path: 'equipo', component: EquipoComponent },
   { path: 'materia', component: MateriaComponent },
   { path: 'noticia', component: NoticiaComponent },
   { path: 'subtarea', component: SubtareaComponent },

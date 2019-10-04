@@ -1,0 +1,47 @@
+<div class="block no-padding">
+    <div class="container">
+        <div class="row no-gape">
+            <div class="col-lg-12 column">
+                <div class="padding-left">
+                    <div class="profile-title">
+                        <h3>Crear / Modificar Equipo</h3>
+                    </div>
+                    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <span class="pf-title">Nombre del equipo</span>
+                                <div class="pf-field">
+                                    <input type="text" placeholder="" [(ngModel)]="equipo.nombre" name="nombre" />
+                                </div>
+                            </div>
+                            
+                            <div class="col-lg-12">
+                                <span class="pf-title" style="margin-top: 0px;">Usuarios</span>
+                                <div class="pf-field">
+                                    <ng-multiselect-dropdown [placeholder]="'Seleccione Usuarios'" [data]="usuarios"
+                                        [(ngModel)]="equipo.usuarios" name="usuarios" [settings]="dropdownSettings"
+                                        (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                                    </ng-multiselect-dropdown>
+                               </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <span class="pf-title">Funciones</span>
+                                <div class="pf-field">
+                                   <ng-multiselect-dropdown [placeholder]="'Seleccione Funciones'" [data]="funciones"
+                                        [(ngModel)]="equipo.funciones" name="funciones" [settings]="dropdownSettings"
+                                        (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                                    </ng-multiselect-dropdown>
+                               </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <button type="submit" class="boton-submit">Guardar Equipo</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -22,6 +22,7 @@ import { TareaComponent } from './tarea/tarea.component';
 import { TareaDefectoComponent } from './tarea-defecto/tarea-defecto.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AgregarConocimientosComponent } from './agregar-conocimientos/agregar-conocimientos.component';
+import { EquipoComponent } from './equipo/equipo.component';
 
 @NgModule({
   imports: [
@@ -48,7 +49,8 @@ import { AgregarConocimientosComponent } from './agregar-conocimientos/agregar-c
     SubtareaComponent,
     TareaComponent,
     TareaDefectoComponent,
-    AgregarConocimientosComponent
+    AgregarConocimientosComponent,
+    EquipoComponent
   ],
   bootstrap: [ AppComponent ]
 })

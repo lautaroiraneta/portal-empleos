@@ -59,10 +59,10 @@ export class TareaComponent implements OnInit {
   ngOnInit() {
   }
 
-  
   onItemSelect(item: any) {
     console.log(item);
   }
+  
   onSelectAll(items: any) {
     console.log(items);
   }
