@@ -13,6 +13,7 @@ import { TareaDefectoComponent } from './tarea-defecto/tarea-defecto.component';
 import { AgregarConocimientosComponent } from './agregar-conocimientos/agregar-conocimientos.component';
 import { EquipoComponent } from './equipo/equipo.component';
 import { MicrositioComponent } from './micrositio/micrositio.component';
+import { PreferenciasComponent } from './preferencias/preferencias.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/crear-perfil', pathMatch: 'full' },
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'materia', component: MateriaComponent },
   { path: 'micrositio', component: MicrositioComponent },
   { path: 'noticia', component: NoticiaComponent },
+  { path: 'preferencias', component: PreferenciasComponent },
   { path: 'subtarea', component: SubtareaComponent },
   { path: 'tarea', component: TareaComponent },
   { path: 'tarea-defecto', component: TareaDefectoComponent }

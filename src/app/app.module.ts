@@ -24,6 +24,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AgregarConocimientosComponent } from './agregar-conocimientos/agregar-conocimientos.component';
 import { EquipoComponent } from './equipo/equipo.component';
 import { MicrositioComponent } from './micrositio/micrositio.component';
+import { PreferenciasComponent } from './preferencias/preferencias.component';
 
 @NgModule({
   imports: [
@@ -52,7 +53,8 @@ import { MicrositioComponent } from './micrositio/micrositio.component';
     TareaDefectoComponent,
     AgregarConocimientosComponent,
     EquipoComponent,
-    MicrositioComponent
+    MicrositioComponent,
+    PreferenciasComponent
   ],
   bootstrap: [ AppComponent ]
 })

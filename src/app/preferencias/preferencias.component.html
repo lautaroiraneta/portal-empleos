@@ -1,0 +1,201 @@
+<div class="block no-padding">
+    <div class="container">
+        <div class="row no-gape">
+            <div class="col-lg-12 column">
+                <div class="padding-left">
+                    <div class="profile-title">
+                        <h3 *ngIf="numeroPaso === 1">Preferencias</h3>
+                        <h3 *ngIf="numeroPaso !== 1">Preferencia: {{ preferencia.nombre }}</h3>
+                    </div>
+                    <div class="steps-sec">
+                       
+                        <div class="step" [class.active]="numeroPaso === 1" style="margin-bottom: 0px; margin-top: 20px;">
+                            <p><i class="la la-info"></i></p>
+                            <span>Carga</span>
+                        </div>
+                        <div class="step" [class.active]="numeroPaso === 2" style="margin-bottom: 0px; margin-top: 20px;">
+                            <p><i class="la la-list-ul"></i></p>
+                            <span>Validación</span>
+                        </div>
+                        <div class="step" [class.active]="numeroPaso === 3" style="margin-bottom: 0px; margin-top: 20px;">
+                            <p><i class="la la-check-circle"></i></p>
+                            <span>¡Listo!</span>
+                        </div>
+                    </div>
+                    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+                        <div class="row" *ngIf="numeroPaso === 1">
+                            <div class="col-lg-12">
+                                <span class="pf-title">Nombre de la Preferencia</span>
+                                <div class="pf-field">
+                                    <input type="text" placeholder="" [(ngModel)]="preferencia.nombre" name="nombre" />
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <span class="pf-title" style="margin-top: 0px;">Puestos de Trabajo</span>
+                                <div class="pf-field">
+                                    <ng-multiselect-dropdown [placeholder]="'Seleccione Puestos de Trabajo'"
+                                        [data]="puestosTrabajo" [(ngModel)]="preferencia.puestosTrabajo"
+                                        name="puestosTrabajo" [settings]="dropdownSettings"
+                                        (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                                    </ng-multiselect-dropdown>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <span class="pf-title">Sueldo Bruto Pretendido</span>
+                                <div class="pf-field">
+                                    <input type="text" placeholder="$" [(ngModel)]="preferencia.sueldoPretendido"
+                                        name="sueldoPretendido" (change)="concatenarSignoPesos()" />
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <span class="pf-title" style="margin-top: 0px;">Tipos de Empleo</span>
+                                <div class="pf-field">
+                                    <ng-multiselect-dropdown [placeholder]="'Seleccione Tipos de Empleo'" [data]="tiposEmpleo"
+                                        [(ngModel)]="preferencia.tiposEmpleo" name="tiposEmpleo" [settings]="dropdownSettingsNoSearch"
+                                        (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                                    </ng-multiselect-dropdown>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <span class="pf-title">Turno</span>
+                                <div class="pf-field">
+                                    <ng-multiselect-dropdown [placeholder]="'Seleccione Turnos'" [data]="turnos"
+                                        [(ngModel)]="preferencia.turnos" name="turno" [settings]="dropdownSettingsNoSearch"
+                                        (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                                    </ng-multiselect-dropdown>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <span class="pf-title">Lugares</span>
+                                <div class="pf-field">
+                                    <ng-multiselect-dropdown [placeholder]="'Seleccione Lugares'" [data]="lugares"
+                                        [(ngModel)]="preferencia.lugares" name="lugares" [settings]="dropdownSettings"
+                                        (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                                    </ng-multiselect-dropdown>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="numeroPaso === 2">
+                            <div class="manage-jobs-sec">                      
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <td style="color: purple;">
+                                                <h4>Requisito</h4>
+                                            </td>
+                                            <td style="color: purple;">
+                                                <h4>Valor</h4>
+                                            </td>
+                                            <td style="color: purple;">
+                                                <h4>¿Es Excluyente?</h4>
+                                            </td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngIf="preferencia.puestosTrabajo.length > 0">
+                                            <td>
+                                                <div class="table-list-title">
+                                                    <h3>Puesto</h3>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="table-list-title">
+                                                    <h3>{{ mostrarValores(preferencia.puestosTrabajo) }}</h3>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <p class="remember-label" style="padding-left: 80px;">
+                                                    <input type="checkbox" [(ngModel)]="preferencia.puestosTrabajoExcluyente" name="puestosTrabajoExcluyente"
+                                                        id="puestosTrabajoExcluyente"><label for="puestosTrabajoExcluyente"></label>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr *ngIf="preferencia.sueldoPretendido !== undefined && preferencia.sueldoPretendido !== null && preferencia.sueldoPretendido !== ''">
+                                            <td>
+                                                <div class="table-list-title">
+                                                    <h3>Sueldo</h3>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="table-list-title">
+                                                    <h3>{{ preferencia.sueldoPretendido }}</h3>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <p class="remember-label" style="padding-left: 80px;">
+                                                    <input type="checkbox" [(ngModel)]="preferencia.sueldoPretendidoExcluyente" name="sueldoPretendidoExcluyente"
+                                                        id="sueldoPretendidoExcluyente"><label for="sueldoPretendidoExcluyente"></label>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr *ngIf="preferencia.tiposEmpleo.length > 0">
+                                            <td>
+                                                <div class="table-list-title">
+                                                    <h3>Tipo de Empleo</h3>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="table-list-title">
+                                                    <h3>{{ mostrarValores(preferencia.tiposEmpleo) }}</h3>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <p class="remember-label" style="padding-left: 80px;">
+                                                    <input type="checkbox" [(ngModel)]="preferencia.tiposEmpleoExcluyente" name="tiposEmpleoExcluyente"
+                                                        id="tiposEmpleoExcluyente"><label for="tiposEmpleoExcluyente"></label>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr *ngIf="preferencia.turnos.length > 0">
+                                            <td>
+                                                <div class="table-list-title">
+                                                    <h3>Turno</h3>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="table-list-title">
+                                                    <h3>{{ mostrarValores(preferencia.turnos) }}</h3>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <p class="remember-label" style="padding-left: 80px;">
+                                                    <input type="checkbox" [(ngModel)]="preferencia.turnosExcluyente" name="turnosExcluyente"
+                                                        id="turnosExcluyente"><label for="turnosExcluyente"></label>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr *ngIf="preferencia.lugares.length > 0">
+                                            <td>
+                                                <div class="table-list-title">
+                                                    <h3>Lugares</h3>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="table-list-title">
+                                                    <h3>{{ mostrarValores(preferencia.lugares) }}</h3>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <p class="remember-label" style="padding-left: 80px;">
+                                                    <input type="checkbox" [(ngModel)]="preferencia.lugaresExcluyente" name="lugaresExcluyente"
+                                                        id="lugaresExcluyente"><label for="lugaresExcluyente"></label>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12" style="margin-top: 20px;">
+                                <button class="boton-submit" (click)="numeroPaso = 2" *ngIf="numeroPaso === 1">Siguiente</button>
+                                <button type="submit" class="boton-submit" (click)="numeroPaso = 3" *ngIf="numeroPaso === 2">Crear Preferencia</button>
+                                <button class="boton-submit pull-left" (click)="numeroPaso = 1" *ngIf="numeroPaso === 2">Atrás</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
