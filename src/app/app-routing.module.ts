@@ -12,6 +12,7 @@ import { TareaComponent } from './tarea/tarea.component';
 import { TareaDefectoComponent } from './tarea-defecto/tarea-defecto.component';
 import { AgregarConocimientosComponent } from './agregar-conocimientos/agregar-conocimientos.component';
 import { EquipoComponent } from './equipo/equipo.component';
+import { MicrositioComponent } from './micrositio/micrositio.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/crear-perfil', pathMatch: 'full' },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'empresa', component: EmpresaComponent },
   { path: 'equipo', component: EquipoComponent },
   { path: 'materia', component: MateriaComponent },
+  { path: 'micrositio', component: MicrositioComponent },
   { path: 'noticia', component: NoticiaComponent },
   { path: 'subtarea', component: SubtareaComponent },
   { path: 'tarea', component: TareaComponent },

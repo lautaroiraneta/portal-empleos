@@ -1,0 +1,108 @@
+<div class="block no-padding">
+    <div class="container">
+        <div class="row no-gape">
+            <div class="col-lg-12 column">
+                <div class="padding-left">
+                    <div class="profile-title">
+                        <h3>Alta de Micrositio</h3>
+                    </div>
+                    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <span class="pf-title">Imagen de Perfil</span>
+                                <div class="upload-portfolio">
+                                    <div class="uploadbox">
+                                        <label for="file-upload" class="custom-file-upload">
+                                            <i class="la la-cloud-upload"></i> <span>Cargar imagen de perfil</span>
+                                        </label>
+                                        <input id="file-upload" type="file" style="display: none;" />
+                                    </div>
+                            
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <span class="pf-title">Imagen de Encabezado</span>
+                                <div class="upload-portfolio">
+                                    <div class="uploadbox">
+                                        <label for="file-upload" class="custom-file-upload">
+                                            <i class="la la-cloud-upload"></i> <span>Cargar imagen de encabezado</span>
+                                        </label>
+                                        <input id="file-upload" type="file" style="display: none;" />
+                                    </div>
+                            
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <span class="pf-title">Descripción de la Empresa</span>
+                                <div class="pf-field">
+                                    <textarea [(ngModel)]="micrositio.descripcion" name="descripcion"></textarea>
+                                </div>
+                            </div>
+                            <span class="pf-title">
+                                <h4>Redes sociales</h4>
+                            </span>
+                            <div class="col-lg-6">
+                                <div class="pf-field">
+                                    <input type="text" placeholder="Usuario en Twitter" [(ngModel)]="micrositio.twitter.usuario" name="usuarioTwitter" />
+                                    <i class="fa fa-twitter"></i>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <p></p>
+                                <p class="remember-label">
+                                    <input type="checkbox" id="mostrarFeedTwitter" [(ngModel)]="micrositio.twitter.mostrarFeed" name="mostrarFeedTwitter"><label for="mostrarFeedTwitter">Mostrar feed</label>
+                                </p>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="pf-field">
+                                    <input type="text" placeholder="Usuario en Facebook" [(ngModel)]="micrositio.facebook.usuario" name="usuarioFacebook" />
+                                    <i class="fa fa-facebook"></i>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <p></p>
+                                <p class="remember-label">
+                                    <input type="checkbox" id="mostrarFeedFacebook" [(ngModel)]="micrositio.facebook.mostrarFeed" name="mostrarFeedFacebook"><label for="mostrarFeedFacebook">Mostrar feed</label>
+                                </p>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="pf-field">
+                                    <input type="text" placeholder="Usuario en Instagram" [(ngModel)]="micrositio.instagram.usuario" name="usuarioInstagram" />
+                                    <i class="fa fa-instagram"></i>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <p></p>
+                                <p class="remember-label">
+                                </p>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="pf-field">
+                                    <input type="text" placeholder="Usuario en LinkedIn" [(ngModel)]="micrositio.linkedIn.usuario" name="usuarioLinkedin" />
+                                    <i class="fa fa-linkedin"></i>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <p></p>
+                                <p class="remember-label">
+                                </p>
+                            </div>
+                            <div class="col-lg-6">
+                                <span class="pf-title" style="margin-top: 0px;">Sitio Web</span>
+                                <div class="pf-field">
+                                    <input type="text" placeholder="www." [(ngModel)]="micrositio.sitioWeb" name="sitioWeb" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <button type="submit" class="boton-submit">Crear Micrositio</button>
+                                <button type="submit" class="boton-submit" style="margin-right: 20px;">Vista Previa</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
