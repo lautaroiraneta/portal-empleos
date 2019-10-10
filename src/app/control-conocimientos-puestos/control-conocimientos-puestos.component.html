@@ -1,0 +1,139 @@
+<div class="row">
+    <aside class="col-lg-3 column border-right">
+        <div class="widget">
+            <div class="search_widget_job">
+                <div class="field_w_search">
+                    <input type="text" placeholder="Nombre del Conocimiento/Puesto" [(ngModel)]="filtroNombre" name="filtroNombre" (keyup)="actualizarItems()" />
+                    <i class="la la-search"></i>
+                </div>
+            </div>
+        </div>
+        <div class="widget">
+            <h3 class="sb-title closed" (click)="isCollapsedTipoDeRegistro = !isCollapsedTipoDeRegistro">Tipo de Registro</h3>
+            <div class="specialism_widget" [ngbCollapse]="isCollapsedTipoDeRegistro">
+                <div class="simple-checkbox">
+                    <p><input type="checkbox" [(ngModel)]="mostrarConocimientos" name="mostrarConocimientos"
+                            id="mostrarConocimientos" (change)="actualizarItems()"><label for="mostrarConocimientos">Conocimiento</label></p>
+                    <p><input type="checkbox" [(ngModel)]="mostrarPuestos" name="mostrarPuestos" id="mostrarPuestos" (change)="actualizarItems()"><label
+                            for="mostrarPuestos">Puesto de Trabajo</label>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="widget">
+            <h3 class="sb-title closed" (click)="isCollapsedEstado = !isCollapsedEstado">Estado</h3>
+            <div class="specialism_widget" [ngbCollapse]="isCollapsedEstado">
+                <div class="simple-checkbox">
+                    <p><input type="checkbox" [(ngModel)]="mostrarValidos" name="mostrarValidos" id="mostrarValidos" (change)="actualizarItems()"><label for="mostrarValidos">Válido</label></p>
+                    <p><input type="checkbox" [(ngModel)]="mostrarInvalidos" name="mostrarInvalidos" id="mostrarInvalidos" (change)="actualizarItems()"><label for="mostrarInvalidos">Inválido</label>
+                    <p><input type="checkbox" [(ngModel)]="mostrarPendientes" name="mostrarPendientes" id="mostrarPendientes" (change)="actualizarItems()"><label for="mostrarPendientes">Pendiente de Validar</label></p>
+                </div>
+            </div>
+        </div>
+        <div class="widget">
+            <h3 class="sb-title closed" (click)="isCollapsedFechaDeCarga = !isCollapsedFechaDeCarga">Fecha de carga</h3>
+            <div class="posted_widget" [ngbCollapse]="isCollapsedFechaDeCarga">
+                <input type="radio" name="choose" id="wwqe"><label for="wwqe">Últimas 24 horas</label><br />
+                <input type="radio" name="choose" id="erewr"><label for="erewr">Últimos 7 días</label><br />
+                <input type="radio" name="choose" id="qwe"><label for="qwe">Últimos 14 días</label><br />
+                <input type="radio" name="choose" id="wqe"><label for="wqe">Últimos 30 días</label><br />
+                <input type="radio" name="choose" id="qweqw"><label class="nm" for="qweqw">Todos</label><br />
+            </div>
+        </div>
+        <div class="widget">
+            <h3 class="sb-title closed" (click)="isCollapsedUltimaModificacion = !isCollapsedUltimaModificacion">Última modificación</h3>
+            <div class="posted_widget" [ngbCollapse]="isCollapsedUltimaModificacion">
+                <input type="radio" name="choose" id="wwqe"><label for="wwqe">Últimas 24 horas</label><br />
+                <input type="radio" name="choose" id="erewr"><label for="erewr">Últimos 7 días</label><br />
+                <input type="radio" name="choose" id="qwe"><label for="qwe">Últimos 14 días</label><br />
+                <input type="radio" name="choose" id="wqe"><label for="wqe">Últimos 30 días</label><br />
+                <input type="radio" name="choose" id="qweqw"><label class="nm" for="qweqw">Todos</label><br />
+            </div>
+        </div>
+    </aside>
+    <div class="col-lg-9 column">
+        <div class="padding-left">
+            <div class="manage-jobs-sec">
+                <br />
+                <h2 style="padding-left: 27px;">Control de Conocimientos y Puestos de Trabajo</h2>
+                <h2 style="padding-left: 27px; font-size: 20px; padding-top: 35px; color: green;"><a
+                        class="add-exp-laboral">
+                        <li class="la la-plus-circle"></li> Agregar Conocimiento
+                    </a> <a class="add-idioma">
+                        <li class="la la-plus-circle" style="padding-left: 120px;"></li> Agregar Puesto de trabajo
+                    </a></h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <td style="color: purple;">
+                                <h4>Nombre</h4>
+                            </td>
+                            <td style="color: purple;">
+                                <h4>Tipo</h4>
+                            </td>
+                            <td style="color: purple;">
+                                <h4>Estado</h4>
+                            </td>
+                            <td style="color: purple;">
+                                <h4>Fecha de carga</h4>
+                            </td>
+                            <td style="color: purple;">
+                                <h4>Última modificación</h4>
+                            </td>
+                            <td style="padding-left: 25px; color: purple;">
+                                <h4>Acción</h4>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let c of items; let i = index">
+                            <td>
+                                <div class="table-list-title">
+                                    <h3>{{ c.nombre }}</h3>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="table-list-title">
+                                    <h3>{{ getTipoNombre(c.tipo) }}</h3>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="table-list-title">
+                                    <h3>{{ getEstadoNombre(c.estado) }}</h3>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="table-list-title">
+                                    <h3>{{ c.fechaCarga }}</h3>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="table-list-title">
+                                    <h3>{{ c.ultimaModificacion }}</h3>
+                                </div>
+                            </td>
+                            <td>
+                                <ul class="action_job">
+                                    <li *ngIf="c.estado === 'p' || c.estado === 'i'">
+                                        <span>Validar</span>
+                                        <a title="" (click)="c.estado = 'v'">
+                                            <i class="la la-thumbs-up" style="font-size: 36px; color: green;">
+                                            </i>
+                                        </a>
+                                    </li>
+                                    <li *ngIf="c.estado === 'p' || c.estado === 'v'">
+                                        <span>Invalidar</span>
+                                        <a title="" (click)="c.estado = 'i'">
+                                            <i class="la la-thumbs-down" style="font-size: 36px; color: red;">
+                                            </i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

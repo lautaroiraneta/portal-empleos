@@ -14,12 +14,14 @@ import { AgregarConocimientosComponent } from './agregar-conocimientos/agregar-c
 import { EquipoComponent } from './equipo/equipo.component';
 import { MicrositioComponent } from './micrositio/micrositio.component';
 import { PreferenciasComponent } from './preferencias/preferencias.component';
+import { ControlConocimientosPuestosComponent } from './control-conocimientos-puestos/control-conocimientos-puestos.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/crear-perfil', pathMatch: 'full' },
   { path: 'agregar-conocimientos-a-mi-perfil', component: AgregarConocimientosComponent },
   { path: 'alumno', component: AlumnoComponent },
   { path: 'carrera', component: CarreraComponent },
+  { path: 'control-conocimientos-puestos', component: ControlConocimientosPuestosComponent },
   { path: 'crear-perfil', component: CrearPerfilComponent },
   { path: 'empresa', component: EmpresaComponent },
   { path: 'equipo', component: EquipoComponent },

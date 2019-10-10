@@ -25,6 +25,7 @@ import { AgregarConocimientosComponent } from './agregar-conocimientos/agregar-c
 import { EquipoComponent } from './equipo/equipo.component';
 import { MicrositioComponent } from './micrositio/micrositio.component';
 import { PreferenciasComponent } from './preferencias/preferencias.component';
+import { ControlConocimientosPuestosComponent } from './control-conocimientos-puestos/control-conocimientos-puestos.component';
 
 @NgModule({
   imports: [
@@ -39,7 +40,7 @@ import { PreferenciasComponent } from './preferencias/preferencias.component';
     NgMultiSelectDropDownModule.forRoot(),
     AngularMyDatePickerModule,
     NgbModule
-  ],
+    ],
   declarations: [
     AppComponent,
     CrearPerfilComponent,
@@ -54,7 +55,8 @@ import { PreferenciasComponent } from './preferencias/preferencias.component';
     AgregarConocimientosComponent,
     EquipoComponent,
     MicrositioComponent,
-    PreferenciasComponent
+    PreferenciasComponent,
+    ControlConocimientosPuestosComponent
   ],
   bootstrap: [ AppComponent ]
 })
