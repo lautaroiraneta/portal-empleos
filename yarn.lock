@@ -921,6 +921,11 @@
   dependencies:
     "@types/sizzle" "*"
 
+"@types/luxon@^1.11.1":
+  version "1.15.2"
+  resolved "https://registry.yarnpkg.com/@types/luxon/-/luxon-1.15.2.tgz#528f11f7d6dc08cec0445d4bea8065a5bb6989b2"
+  integrity sha512-zHPoyVrLvNaiMRYdhmh88Rn489ZgAgbc6iLxR5Yi0VCNfeNYHcszbhJV2vDHLNrVGy35BPtWBRn4OP2F9BBvFw==
+
 "@types/minimatch@*":
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-3.0.3.tgz#3dca0e3f33b200fc7d1139c0cd96c1268cadfd9d"
@@ -4731,6 +4736,11 @@ lru-cache@^5.1.1:
   dependencies:
     yallist "^3.0.2"
 
+luxon@^1.11.3:
+  version "1.19.3"
+  resolved "https://registry.yarnpkg.com/luxon/-/luxon-1.19.3.tgz#86c04a1395529b4386ae235a8fe16d0a82a0695b"
+  integrity sha512-YwTDjGRQC0QC9Iya2g2eKZfgEFqRId4ZoLHORQcfTMB/5xrTx427V7ZPjQJ1vzvhA2vJfG2bh1Kv8V8IFMWCUA==
+
 magic-string@0.25.3, magic-string@^0.25.0:
   version "0.25.3"
   resolved "https://registry.yarnpkg.com/magic-string/-/magic-string-0.25.3.tgz#34b8d2a2c7fec9d9bdf9929a3fd81d271ef35be9"
@@ -5084,6 +5094,15 @@ ngx-bootstrap@^5.1.2:
   version "5.1.2"
   resolved "https://registry.yarnpkg.com/ngx-bootstrap/-/ngx-bootstrap-5.1.2.tgz#0d5777ce3ba548f3d922cb23f6c640ea09191b4c"
   integrity sha512-L9flZCGEf+/G0sOZXs3WJ2tp7SW6/7soQbAnpFmlvFURcSKv9p2/aiH/VbG47Ra50e5i6q3ereKEo7IpGEQwVQ==
+
+ngx-material-timepicker@^5.2.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/ngx-material-timepicker/-/ngx-material-timepicker-5.2.0.tgz#2f1335417ae2383cd6861f08048ce270602be2e3"
+  integrity sha512-vIvy0jmzPFyBFZ+k5Yws8HfC9zv4EXZeMy7dKCI7YlQfLWEyyhTjoGvkAJGDehJ0Gc+YDEz7Fp28VnSK7ye7eg==
+  dependencies:
+    "@types/luxon" "^1.11.1"
+    luxon "^1.11.3"
+    tslib "^1.9.0"
 
 ngx-select-dropdown@^1.0.1:
   version "1.1.0"

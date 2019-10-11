@@ -15,9 +15,11 @@ import { EquipoComponent } from './equipo/equipo.component';
 import { MicrositioComponent } from './micrositio/micrositio.component';
 import { PreferenciasComponent } from './preferencias/preferencias.component';
 import { ControlConocimientosPuestosComponent } from './control-conocimientos-puestos/control-conocimientos-puestos.component';
+import { AcuerdoIndividualComponent } from './acuerdo-individual/acuerdo-individual.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/crear-perfil', pathMatch: 'full' },
+  { path: 'acuerdo-individual', component: AcuerdoIndividualComponent },
   { path: 'agregar-conocimientos-a-mi-perfil', component: AgregarConocimientosComponent },
   { path: 'alumno', component: AlumnoComponent },
   { path: 'carrera', component: CarreraComponent },

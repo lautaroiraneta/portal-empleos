@@ -1,0 +1,206 @@
+<div class="block no-padding">
+    <div class="container">
+        <div class="row no-gape">
+            <div class="col-lg-12 column">
+                <div class="padding-left">
+                    <div class="profile-title">
+                        <h3>Crear Acuerdo Individual</h3>
+                    </div>
+                    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <span class="pf-title">Alumno</span>
+                                <div class="pf-field">
+                                    {{ acuerdo.alumno.nombre }}
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <span class="pf-title">Empresa</span>
+                                <div class="pf-field">
+                                    {{ acuerdo.empresa.nombre }}
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <span class="pf-title">Nombre del Acuerdo Individual</span>
+                                <div class="pf-field">
+                                    <input type="text" placeholder="" [(ngModel)]="acuerdo.nombre" name="nombre" />
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <span class="pf-title" style="margin-top: 0px">Docente Guía</span>
+                                <div class="dropdown-field">
+                                    <ng-multiselect-dropdown [placeholder]="'Seleccione un Docente Guía'"
+                                        [data]="docentes" [(ngModel)]="acuerdo.docenteGuia" name="docenteGuia"
+                                        [settings]="dropdownSettingsSingle" (onSelect)="onItemSelect($event)"
+                                        (onSelectAll)="onSelectAll($event)">
+                                    </ng-multiselect-dropdown>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <span class="pf-title" style="margin-top: 0px">Tutor</span>
+                                <div class="dropdown-field">
+                                    <ng-multiselect-dropdown [placeholder]="'Seleccione un Docente Guía'"
+                                        [data]="tutores" [(ngModel)]="acuerdo.tutor" name="tutor"
+                                        [settings]="dropdownSettingsSingle" (onSelect)="onItemSelect($event)"
+                                        (onSelectAll)="onSelectAll($event)">
+                                    </ng-multiselect-dropdown>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <span class="pf-title" style="margin-top: 0px">Duración (en meses)</span>
+                                <div class="pf-field">
+                                    <input type="text" placeholder="" [(ngModel)]="acuerdo.duracion" name="duracion" />
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <span class="pf-title">Horarios</span>
+                            </div>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Dia</th>
+                                        <th>Entrada</th>
+                                        <th>Salida</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Lunes</td>
+                                        <td>
+                                            <input [ngxTimepicker]="pickerentradalunes"
+                                                [(ngModel)]="acuerdo.horarios.lunes.entrada" name="lunesentrada">
+                                            <ngx-material-timepicker #pickerentradalunes></ngx-material-timepicker>
+                                        </td>
+                                        <td>
+                                            <input [ngxTimepicker]="pickersalidalunes"
+                                                [(ngModel)]="acuerdo.horarios.lunes.salida" name="lunessalida">
+                                            <ngx-material-timepicker #pickersalidalunes></ngx-material-timepicker>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Martes</td>
+                                        <td>
+                                            <input [ngxTimepicker]="pickerentradamartes"
+                                                [(ngModel)]="acuerdo.horarios.martes.entrada" name="martesentrada">
+                                            <ngx-material-timepicker #pickerentradamartes></ngx-material-timepicker>
+                                        </td>
+                                        <td>
+                                            <input [ngxTimepicker]="pickersalidamartes"
+                                                [(ngModel)]="acuerdo.horarios.martes.salida" name="martessalida">
+                                            <ngx-material-timepicker #pickersalidamartes></ngx-material-timepicker>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Miércoles</td>
+                                        <td>
+                                            <input [ngxTimepicker]="pickerentradamiercoles"
+                                                [(ngModel)]="acuerdo.horarios.miercoles.entrada"
+                                                name="miercolesentrada">
+                                            <ngx-material-timepicker #pickerentradamiercoles></ngx-material-timepicker>
+                                        </td>
+                                        <td>
+                                            <input [ngxTimepicker]="pickersalidamiercoles"
+                                                [(ngModel)]="acuerdo.horarios.miercoles.salida" name="miercolessalida">
+                                            <ngx-material-timepicker #pickersalidamiercoles></ngx-material-timepicker>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jueves</td>
+                                        <td>
+                                            <input [ngxTimepicker]="pickerentradajueves"
+                                                [(ngModel)]="acuerdo.horarios.jueves.entrada" name="juevesentrada">
+                                            <ngx-material-timepicker #pickerentradajueves></ngx-material-timepicker>
+                                        </td>
+                                        <td>
+                                            <input [ngxTimepicker]="pickersalidajueves"
+                                                [(ngModel)]="acuerdo.horarios.jueves.salida" name="juevessalida">
+                                            <ngx-material-timepicker #pickersalidajueves></ngx-material-timepicker>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Viernes</td>
+                                        <td>
+                                            <input [ngxTimepicker]="pickerentradaviernes"
+                                                [(ngModel)]="acuerdo.horarios.viernes.entrada" name="viernesentrada">
+                                            <ngx-material-timepicker #pickerentradaviernes></ngx-material-timepicker>
+                                        </td>
+                                        <td>
+                                            <input [ngxTimepicker]="pickersalidaviernes"
+                                                [(ngModel)]="acuerdo.horarios.viernes.salida" name="viernessalida">
+                                            <ngx-material-timepicker #pickersalidaviernes></ngx-material-timepicker>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sábado</td>
+                                        <td>
+                                            <input [ngxTimepicker]="pickerentradasabado"
+                                                [(ngModel)]="acuerdo.horarios.sabado.entrada" name="sabadoentrada">
+                                            <ngx-material-timepicker #pickerentradasabado></ngx-material-timepicker>
+                                        </td>
+                                        <td>
+                                            <input [ngxTimepicker]="pickersalidasabado"
+                                                [(ngModel)]="acuerdo.horarios.sabado.salida" name="sabadosalida">
+                                            <ngx-material-timepicker #pickersalidasabado></ngx-material-timepicker>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Domingo</td>
+                                        <td>
+                                            <input [ngxTimepicker]="pickerentradadomingo"
+                                                [(ngModel)]="acuerdo.horarios.domingo.entrada" name="domingoentrada">
+                                            <ngx-material-timepicker #pickerentradadomingo></ngx-material-timepicker>
+                                        </td>
+                                        <td>
+                                            <input [ngxTimepicker]="pickersalidadomingo"
+                                                [(ngModel)]="acuerdo.horarios.domingo.salida" name="domingosalida">
+                                            <ngx-material-timepicker #pickersalidadomingo></ngx-material-timepicker>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div class="col-lg-6">
+                                <span class="pf-title">Tareas a realizar por el pasante</span>
+                                <div class="pf-field" *ngFor="let t of acuerdo.tareas; let i = index">
+                                    <input type="text" placeholder="Ingrese el nombre de la tarea" [(ngModel)]="acuerdo.tareas[i]" name="tarea-{{i}}" />
+                                </div>
+                            </div>
+                            <div class="col-lg-6" style="margin-top: 75px;">
+                                <a (click)="agregarTarea()"><i class="la la-plus-circle" style="font-size: 20px;"></i>
+                                    Agregar nueva tarea</a>
+                            </div>
+                            <div class="col-lg-6">
+                                <span class="pf-title">Subir Plan de Pasantías</span>
+                                <div class="upload-portfolio">
+                                    <div class="uploadbox">
+                                        <label for="file-upload" class="custom-file-upload">
+                                            <i class="la la-cloud-upload"></i> <span>Subir Archivo</span>
+                                        </label>
+                                        <input id="file-upload" type="file" style="display: none;" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <span class="pf-title">Subir Acuerdo Individual</span>
+                                <div class="upload-portfolio">
+                                    <div class="uploadbox">
+                                        <label for="file-upload" class="custom-file-upload">
+                                            <i class="la la-cloud-upload"></i> <span>Subir Archivo</span>
+                                        </label>
+                                        <input id="file-upload" type="file" style="display: none;" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <button type="submit" class="boton-submit">Crear Acuerdo Individual</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

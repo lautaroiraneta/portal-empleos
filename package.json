@@ -28,6 +28,7 @@
     "jquery": "^3.4.1",
     "ng-multiselect-dropdown": "^0.2.5",
     "ngx-bootstrap": "^5.1.2",
+    "ngx-material-timepicker": "^5.2.0",
     "ngx-select-dropdown": "^1.0.1",
     "ngx-slick-carousel": "^0.4.4",
     "ngx-wow": "^2.0.1",

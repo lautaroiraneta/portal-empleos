@@ -7,6 +7,7 @@ import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { AngularMyDatePickerModule } from 'angular-mydatepicker';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
 import { AppRoutingModule }     from './app-routing.module';
 
@@ -26,6 +27,7 @@ import { EquipoComponent } from './equipo/equipo.component';
 import { MicrositioComponent } from './micrositio/micrositio.component';
 import { PreferenciasComponent } from './preferencias/preferencias.component';
 import { ControlConocimientosPuestosComponent } from './control-conocimientos-puestos/control-conocimientos-puestos.component';
+import { AcuerdoIndividualComponent } from './acuerdo-individual/acuerdo-individual.component';
 
 @NgModule({
   imports: [
@@ -39,8 +41,9 @@ import { ControlConocimientosPuestosComponent } from './control-conocimientos-pu
     HttpClientModule,
     NgMultiSelectDropDownModule.forRoot(),
     AngularMyDatePickerModule,
-    NgbModule
-    ],
+    NgbModule,
+    NgxMaterialTimepickerModule
+  ],
   declarations: [
     AppComponent,
     CrearPerfilComponent,
@@ -56,7 +59,8 @@ import { ControlConocimientosPuestosComponent } from './control-conocimientos-pu
     EquipoComponent,
     MicrositioComponent,
     PreferenciasComponent,
-    ControlConocimientosPuestosComponent
+    ControlConocimientosPuestosComponent,
+    AcuerdoIndividualComponent
   ],
   bootstrap: [ AppComponent ]
 })
