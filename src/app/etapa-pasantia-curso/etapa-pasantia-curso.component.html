@@ -1,0 +1,60 @@
+<div class="block no-padding">
+    <div class="container">
+        <div class="row no-gape">
+            <div class="col-lg-12 column">
+                <div class="padding-left">
+                    <div class="profile-title">
+                        <h3>Crear Etapa de Pasantía en Curso</h3>
+                    </div>
+                    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <span class="pf-title">Alumno</span>
+                                <div class="pf-field">
+                                    {{ etapa.alumno }}
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <span class="pf-title">Empresa</span>
+                                <div class="pf-field">
+                                    {{ etapa.empresa }}
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <span class="pf-title">Fecha de Inicio de la Pasantía</span>
+                                <div class="pf-field">
+                                    <input class="input-box" placeholder="Seleccione un Inicio de Pasantia" angular-mydatepicker
+                                        (click)="dp.toggleCalendar()" [(ngModel)]="etapa.inicioPasantia" name="inicioPasantia"
+                                        [options]="myDpOptions" #dp="angular-mydatepicker" />
+                                    <i class="la la-calendar"></i>
+                                </div>
+                            </div>
+                        
+                            <div class="col-lg-6">
+                                <span class="pf-title">Periodicidad (en días) de los informes periódicos del Pasante</span>
+                                <div class="pf-field">
+                                    <input type="number" placeholder="" [(ngModel)]="etapa.periodicidadInformes" name="periodicidadInformes" />
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <span class="pf-title">Periodicidad de pago de gastos administrativos</span>
+                                <div class="dropdown-field">
+                                    <ng-multiselect-dropdown [placeholder]="'Seleccione una periodicidad'"
+                                        [data]="periodicidades" [(ngModel)]="etapa.periodicidadPago" name="facultad"
+                                        [settings]="dropdownSettingsSingle" (onSelect)="onItemSelect($event)"
+                                        (onSelectAll)="onSelectAll($event)">
+                                    </ng-multiselect-dropdown>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <button type="submit" class="boton-submit">Iniciar Pasantía</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

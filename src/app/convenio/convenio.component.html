@@ -1,0 +1,123 @@
+<div class="block no-padding">
+    <div class="container">
+        <div class="row no-gape">
+            <div class="col-lg-12 column">
+                <div class="padding-left">
+                    <div class="profile-title">
+                        <h3>Crear Convenio</h3>
+                    </div>
+                    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <span class="pf-title">Empresa</span>
+                                <div class="pf-field">
+                                    {{ convenio.empresa }}
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <span class="pf-title">Nombre del Convenio</span>
+                                <div class="pf-field">
+                                    <input type="text" placeholder="" [(ngModel)]="convenio.nombre" name="nombre" />
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <span class="pf-title" style="margin-top: 0px;">Facultad</span>
+                            </div>
+                            <div class="col-lg-9">
+                                <div class="dropdown-field">
+                                    <ng-multiselect-dropdown [placeholder]="'Seleccione una Facultad'"
+                                        [data]="facultades" [(ngModel)]="convenio.facultad" name="facultad"
+                                        [settings]="dropdownSettingsSingle" (onSelect)="onItemSelect($event)"
+                                        (onSelectAll)="onSelectAll($event)">
+                                    </ng-multiselect-dropdown>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <p class="remember-label" style="padding-top: 10px;">
+                                    <input type="checkbox" [(ngModel)]="convenio.generarParaUniversidad" name="generarParaUniversidad"
+                                        id="generarParaUniversidad"><label for="generarParaUniversidad">Generar para Universidad</label>
+                                </p>
+                            </div>
+                            <div class="col-lg-3">
+                                <span class="pf-title" style="margin-top: 0px;">Duración Mínima (en meses)</span>
+                                <div class="pf-field">
+                                    <input type="number" placeholder="" min="0" max="12" [(ngModel)]="convenio.duracionMinima" name="duracionMinima" />
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <span class="pf-title" style="margin-top: 0px;">Duración Máxima (en meses)</span>
+                                <div class="pf-field">
+                                    <input type="number" placeholder="" min="0" max="12" [(ngModel)]="convenio.duracionMaxima" name="duracionMaxima" />
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <span class="pf-title" style="margin-top: 0px;">Plazo de renovación</span>
+                                <div class="pf-field">
+                                    <input type="number" placeholder="" [(ngModel)]="convenio.plazoRenovacion" name="plazoRenovacion" />
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <span class="pf-title" style="margin-top: 0px;">Cantidad máxima de horas</span>
+                                <div class="pf-field">
+                                    <input type="number" placeholder="" [(ngModel)]="convenio.cantidadHoras" name="cantidadHoras" />
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <span class="pf-title" style="margin-top: 0px;">Inicio Vigencia</span>
+                                <div class="pf-field">
+                                    <input class="input-box" placeholder="Seleccione un Inicio de Vigencia" angular-mydatepicker
+                                        (click)="dp.toggleCalendar()" [(ngModel)]="convenio.inicioVigencia" name="inicioVigencia"
+                                        [options]="myDpOptions" #dp="angular-mydatepicker" />
+                                    <i class="la la-calendar"></i>
+                                </div>
+                            </div>
+                            <div class="col-lg-3" style="margin-top: 0px;">
+                                <span class="pf-title" style="margin-top: 0px;">Fin de Vigencia</span>
+                                <div class="pf-field">
+                                    <input class="input-box" placeholder="Seleccione un Fin de Vigencia" angular-mydatepicker
+                                        (click)="dp.toggleCalendar()" [(ngModel)]="convenio.finVigencia" name="finVigencia"
+                                        [options]="myDpOptions" #dp="angular-mydatepicker" />
+                                    <i class="la la-calendar"></i>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <p class="remember-label" style="padding-top: 50px; margin-top: 0px;">
+                                    <input type="checkbox" [(ngModel)]="convenio.renovacionAutomatica" name="renovacionAutomatica"
+                                        id="renovacionAutomatica"><label for="renovacionAutomatica">Renovación Automática</label>
+                                </p>
+                            </div>
+                            <div class="col-lg-3" *ngIf="convenio.renovacionAutomatica">
+                                <span class="pf-title" style="margin-top: 0px;">Plazo de extensión</span>
+                                <div class="pf-field">
+                                    <input type="number" placeholder="" [(ngModel)]="convenio.plazoExtension" name="plazoExtension" />
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <span class="pf-title" style="margin-top: 0px;">Cantidad máxima de pasantes</span>
+                                <div class="pf-field">
+                                    <input type="number" placeholder="" [(ngModel)]="convenio.cantidadPasantes" name="cantidadPasantes" />
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <span class="pf-title" style="margin-top: 0px;">Subir texto de convenio</span>
+                                <div class="upload-portfolio">
+                                    <div class="uploadbox">
+                                        <label for="file-upload" class="custom-file-upload">
+                                            <i class="la la-cloud-upload"></i> <span>Subir Archivo</span>
+                                        </label>
+                                        <input id="file-upload" type="file" style="display: none;" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <button type="submit" class="boton-submit">Crear Convenio</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

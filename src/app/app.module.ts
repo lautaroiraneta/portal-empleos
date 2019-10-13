@@ -28,6 +28,9 @@ import { MicrositioComponent } from './micrositio/micrositio.component';
 import { PreferenciasComponent } from './preferencias/preferencias.component';
 import { ControlConocimientosPuestosComponent } from './control-conocimientos-puestos/control-conocimientos-puestos.component';
 import { AcuerdoIndividualComponent } from './acuerdo-individual/acuerdo-individual.component';
+import { ConvenioComponent } from './convenio/convenio.component';
+import { EtapaDefinicionConvenioComponent } from './etapa-definicion-convenio/etapa-definicion-convenio.component';
+import { EtapaPasantiaCursoComponent } from './etapa-pasantia-curso/etapa-pasantia-curso.component';
 
 @NgModule({
   imports: [
@@ -60,7 +63,10 @@ import { AcuerdoIndividualComponent } from './acuerdo-individual/acuerdo-individ
     MicrositioComponent,
     PreferenciasComponent,
     ControlConocimientosPuestosComponent,
-    AcuerdoIndividualComponent
+    AcuerdoIndividualComponent,
+    ConvenioComponent,
+    EtapaDefinicionConvenioComponent,
+    EtapaPasantiaCursoComponent
   ],
   bootstrap: [ AppComponent ]
 })

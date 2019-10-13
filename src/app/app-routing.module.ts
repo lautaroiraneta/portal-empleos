@@ -16,6 +16,9 @@ import { MicrositioComponent } from './micrositio/micrositio.component';
 import { PreferenciasComponent } from './preferencias/preferencias.component';
 import { ControlConocimientosPuestosComponent } from './control-conocimientos-puestos/control-conocimientos-puestos.component';
 import { AcuerdoIndividualComponent } from './acuerdo-individual/acuerdo-individual.component';
+import { ConvenioComponent } from './convenio/convenio.component';
+import { EtapaDefinicionConvenioComponent } from './etapa-definicion-convenio/etapa-definicion-convenio.component';
+import { EtapaPasantiaCursoComponent } from './etapa-pasantia-curso/etapa-pasantia-curso.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/crear-perfil', pathMatch: 'full' },
@@ -24,8 +27,11 @@ const routes: Routes = [
   { path: 'alumno', component: AlumnoComponent },
   { path: 'carrera', component: CarreraComponent },
   { path: 'control-conocimientos-puestos', component: ControlConocimientosPuestosComponent },
+  { path: 'convenio', component: ConvenioComponent },
   { path: 'crear-perfil', component: CrearPerfilComponent },
   { path: 'empresa', component: EmpresaComponent },
+  { path: 'etapa-definicion-convenio', component: EtapaDefinicionConvenioComponent },
+  { path: 'etapa-pasantia-curso', component: EtapaPasantiaCursoComponent },
   { path: 'equipo', component: EquipoComponent },
   { path: 'materia', component: MateriaComponent },
   { path: 'micrositio', component: MicrositioComponent },
