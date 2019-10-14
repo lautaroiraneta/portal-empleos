@@ -11,7 +11,7 @@ export class NoticiaComponent implements OnInit {
   noticia = {
     titulo: 'Título',
     cuerpo: 'hola hoahoahoahoahoahoohaohaoaohoahoaohoahoaohohaoaoh',
-    fecha: '02/02/2019',
+    fecha: { isRange: false, singleDate: { jsDate: new Date(2019, 1, 3) } },
     imagen: undefined
   }
 
