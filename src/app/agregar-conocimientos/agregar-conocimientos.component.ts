@@ -11,7 +11,7 @@ export class AgregarConocimientosComponent implements OnInit {
     { id: '2', nombre: '.NET' },
     { id: '3', nombre: 'Hibernate' },
     { id: '4', nombre: 'WebServices' }
-  ]
+  ];
 
   constructor() { }
 

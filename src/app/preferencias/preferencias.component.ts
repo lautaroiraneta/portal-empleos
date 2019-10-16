@@ -43,13 +43,6 @@ export class PreferenciasComponent implements OnInit {
     { id: 'n', nombre: 'Noche' }
   ];
 
-  lugares = [
-    { id: '1', nombre: 'CABA' },
-    { id: '2', nombre: 'GBA Sur' },
-    { id: '3', nombre: 'GBA Norte' },
-    { id: '4', nombre: 'GBA Oeste' }
-  ]
-
   dropdownSettings: IDropdownSettings = {
     singleSelection: false,
     idField: 'id',

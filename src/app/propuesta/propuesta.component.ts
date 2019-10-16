@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { NgForm } from '@angular/forms';
-import { HelperService } from '../helper.service';
+import { HelperService, ExperienciaLaboral, Conocimiento } from '../helper.service';
 import { IAngularMyDpOptions } from 'angular-mydatepicker';
 
 @Component({
@@ -10,6 +10,23 @@ import { IAngularMyDpOptions } from 'angular-mydatepicker';
   styleUrls: ['./propuesta.component.css']
 })
 export class PropuestaComponent implements OnInit {
+
+  experienciaLaboral: ExperienciaLaboral[] = [{
+    puesto: [{ id: '1', nombre: 'Puesto 1 ' }],
+    anosExperiencia: '2'
+  },
+  {
+    puesto: [{ id: '1', nombre: 'Puesto 1 ' }],
+    anosExperiencia: '4'
+  }];
+
+  conocimiento: Conocimiento[] = [
+    {
+      conocimiento: [{ id: '2', nombre: '.NET' }],
+      anosExperiencia: '2'
+    }
+  ];
+
   propuesta = {
     titulo: 'Titulo de la Propuesta',
     puestos: [
@@ -32,7 +49,24 @@ export class PropuestaComponent implements OnInit {
     ],
     beneficios: 'Home Office, Snacks, Fruta, Medialunas los Viernes',
     fechaFinalizacion: { isRange: false, singleDate: { jsDate: new Date(2019, 1, 3) } },
-    descripcion: 'AGREGAR RICH TEXT'
+    descripcion: 'AGREGAR RICH TEXT',
+    preferencias: {
+      edadMinima: 20,
+      edadMaxima: 25,
+      lugarResidencia: [
+        { id: '1', nombre: 'Capital Federal' },
+        { id: '2', nombre: 'GBA Sur' }
+      ],
+      disponibilidadReubicacion: true,
+      habilidadesPersonales: 'Proactivo, etc.',
+      cantidadMateriasAprobadas: 20,
+      porcentajeCarreraCompletada: 80,
+      promedioMinimo: 7.50,
+      anoCarrera: 4,
+      experienciaLaboral: this.experienciaLaboral,
+      conocimientos: this.conocimiento,
+      conocimientosExtra: []
+    }
   };
 
   dropdownSettings: IDropdownSettings;
@@ -44,7 +78,9 @@ export class PropuestaComponent implements OnInit {
   turnos: any;
   myDpOptions: IAngularMyDpOptions;
   numeroPaso: number;
-
+  conocimientos: any;
+  conocimientosExtra: any;
+  
   constructor(private helperService: HelperService) { }
 
   ngOnInit() {
@@ -57,6 +93,8 @@ export class PropuestaComponent implements OnInit {
     this.turnos = this.helperService.turnos;
     this.myDpOptions = this.helperService.myDpOptions;
     this.numeroPaso = 1;
+    this.conocimientos = this.helperService.conocimientos;
+    this.conocimientosExtra = this.helperService.conocimientosExtra;
   }
 
   onSubmit(form: NgForm) {
@@ -70,5 +108,23 @@ export class PropuestaComponent implements OnInit {
   
   onSelectAll(items: any) {
     console.log(items);
+  }
+
+  agregarExperienciaLaboral() {
+    let experienciaLaboral: ExperienciaLaboral = {
+      puesto: [],
+      anosExperiencia: ''
+    };
+
+    this.propuesta.preferencias.experienciaLaboral.push(experienciaLaboral);
+  }
+
+  agregarConocimiento() {
+    let conocimiento: Conocimiento = {
+      conocimiento: [],
+      anosExperiencia: ''
+    };
+
+    this.propuesta.preferencias.conocimientos.push(conocimiento);
   }
 }
