@@ -32,6 +32,7 @@ import { ConvenioComponent } from './convenio/convenio.component';
 import { EtapaDefinicionConvenioComponent } from './etapa-definicion-convenio/etapa-definicion-convenio.component';
 import { EtapaPasantiaCursoComponent } from './etapa-pasantia-curso/etapa-pasantia-curso.component';
 import { PropuestaComponent } from './propuesta/propuesta.component';
+import { EquipoListComponent } from './equipo-list/equipo-list.component';
 
 @NgModule({
   imports: [
@@ -68,7 +69,8 @@ import { PropuestaComponent } from './propuesta/propuesta.component';
     ConvenioComponent,
     EtapaDefinicionConvenioComponent,
     EtapaPasantiaCursoComponent,
-    PropuestaComponent
+    PropuestaComponent,
+    EquipoListComponent
   ],
   bootstrap: [ AppComponent ]
 })

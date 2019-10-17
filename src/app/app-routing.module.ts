@@ -20,6 +20,7 @@ import { ConvenioComponent } from './convenio/convenio.component';
 import { EtapaDefinicionConvenioComponent } from './etapa-definicion-convenio/etapa-definicion-convenio.component';
 import { EtapaPasantiaCursoComponent } from './etapa-pasantia-curso/etapa-pasantia-curso.component';
 import { PropuestaComponent } from './propuesta/propuesta.component';
+import { EquipoListComponent } from './equipo-list/equipo-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/crear-perfil', pathMatch: 'full' },
@@ -34,6 +35,7 @@ const routes: Routes = [
   { path: 'etapa-definicion-convenio', component: EtapaDefinicionConvenioComponent },
   { path: 'etapa-pasantia-curso', component: EtapaPasantiaCursoComponent },
   { path: 'equipo', component: EquipoComponent },
+  { path: 'equipo-list', component: EquipoListComponent },
   { path: 'materia', component: MateriaComponent },
   { path: 'micrositio', component: MicrositioComponent },
   { path: 'noticia', component: NoticiaComponent },
