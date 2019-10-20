@@ -34,6 +34,7 @@ import { EtapaPasantiaCursoComponent } from './etapa-pasantia-curso/etapa-pasant
 import { PropuestaComponent } from './propuesta/propuesta.component';
 import { EquipoListComponent } from './equipo-list/equipo-list.component';
 import { PreferenciasListComponent } from './preferencias-list/preferencias-list.component';
+import { AlumnoListComponent } from './alumno-list/alumno-list.component';
 
 @NgModule({
   imports: [
@@ -72,7 +73,8 @@ import { PreferenciasListComponent } from './preferencias-list/preferencias-list
     EtapaPasantiaCursoComponent,
     PropuestaComponent,
     EquipoListComponent,
-    PreferenciasListComponent
+    PreferenciasListComponent,
+    AlumnoListComponent
   ],
   bootstrap: [ AppComponent ]
 })

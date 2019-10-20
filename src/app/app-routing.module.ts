@@ -22,12 +22,14 @@ import { EtapaPasantiaCursoComponent } from './etapa-pasantia-curso/etapa-pasant
 import { PropuestaComponent } from './propuesta/propuesta.component';
 import { EquipoListComponent } from './equipo-list/equipo-list.component';
 import { PreferenciasListComponent } from './preferencias-list/preferencias-list.component';
+import { AlumnoListComponent } from './alumno-list/alumno-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/crear-perfil', pathMatch: 'full' },
   { path: 'acuerdo-individual', component: AcuerdoIndividualComponent },
   { path: 'agregar-conocimientos-a-mi-perfil', component: AgregarConocimientosComponent },
   { path: 'alumno', component: AlumnoComponent },
+  { path: 'alumno-list', component: AlumnoListComponent },
   { path: 'carrera', component: CarreraComponent },
   { path: 'control-conocimientos-puestos', component: ControlConocimientosPuestosComponent },
   { path: 'convenio', component: ConvenioComponent },
