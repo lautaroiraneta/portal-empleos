@@ -23,6 +23,7 @@ import { PropuestaComponent } from './propuesta/propuesta.component';
 import { EquipoListComponent } from './equipo-list/equipo-list.component';
 import { PreferenciasListComponent } from './preferencias-list/preferencias-list.component';
 import { AlumnoListComponent } from './alumno-list/alumno-list.component';
+import { ConvenioListComponent } from './convenio-list/convenio-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/crear-perfil', pathMatch: 'full' },
@@ -33,6 +34,7 @@ const routes: Routes = [
   { path: 'carrera', component: CarreraComponent },
   { path: 'control-conocimientos-puestos', component: ControlConocimientosPuestosComponent },
   { path: 'convenio', component: ConvenioComponent },
+  { path: 'convenio-list', component: ConvenioListComponent },
   { path: 'crear-perfil', component: CrearPerfilComponent },
   { path: 'empresa', component: EmpresaComponent },
   { path: 'etapa-definicion-convenio', component: EtapaDefinicionConvenioComponent },
@@ -48,6 +50,7 @@ const routes: Routes = [
   { path: 'subtarea', component: SubtareaComponent },
   { path: 'tarea', component: TareaComponent },
   { path: 'tarea-defecto', component: TareaDefectoComponent }
+  // { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({

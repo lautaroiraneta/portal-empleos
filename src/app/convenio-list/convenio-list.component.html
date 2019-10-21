@@ -1,0 +1,87 @@
+<div class="col-lg-12 column">
+    <div class="padding-left">
+        <div class="manage-jobs-sec">
+            <br />
+            <h2 style="padding-left: 27px;">Listado de Convenios</h2>
+            <form #form="ngForm">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <span class="pf-title">Empresa</span>
+                        <div class="dropdown-field">
+                            <ng-multiselect-dropdown [placeholder]="'Seleccione Empresa'" [data]="empresas"
+                                [(ngModel)]="filtroEmpresa" name="filtroEmpresa" [settings]="dropdownSettingsSingle"
+                                (onSelect)="actualizarItems($event)" (onDeSelect)="items = convenios;" (onSelectAll)="onSelectAll($event)">
+                            </ng-multiselect-dropdown>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <span class="pf-title">Estado de la Etapa</span>
+                        <div class="pf-field">
+                            <ng-multiselect-dropdown [placeholder]="'Seleccione Estado'" [data]="estados"
+                                [(ngModel)]="filtroEstado" name="filtroEstado" [settings]="dropdownSettingsSingle"
+                                (onSelect)="actualizarItemsByEstado($event)" (onDeSelect)="items = convenios;" (onSelectAll)="onSelectAll($event)">
+                            </ng-multiselect-dropdown>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <span class="pf-title">Fecha desde</span>
+                        <div class="pf-field">
+                            <input type="text" placeholder="" class="form-control datepicker" />
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <span class="pf-title">Fecha hasta</span>
+                        <div class="pf-field">
+                            <input type="text" placeholder="" class="form-control datepicker" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <table>
+                <thead>
+                    <tr>
+                        <td style="color: purple;">
+                            <h4>Fecha de Inicio</h4>
+                        </td>
+                        <td style="color: purple;">
+                            <h4>Empresa</h4>
+                        </td>
+                        <td style="color: purple;">
+                            <h4>Estado de Etapa</h4>
+                        </td>
+                        <td style="color: purple;">
+                            <h4></h4>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let c of items">
+                        <td>
+                            <div class="table-list-title">
+                                <h3>{{ c.fecha }}</h3>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="table-list-title">
+                                <h3><a href="#" title="" style="color: red; font-size: 22px;">{{ c.empresa.nombre }}</a></h3>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="table-list-title">
+                                <h3>{{ c.estadoEtapa.nombre }}</h3>
+                            </div>
+                        </td>
+                        <td>
+                            <ul class="action_job">
+                                <li><span>Ir a Etapa</span><a href="#" title=""
+                                        style="font-size: 20px; color: green;"><i class="la la-chevron-circle-right"
+                                            style="font-size: 20px; color: green;"></i> Ir a Etapa</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

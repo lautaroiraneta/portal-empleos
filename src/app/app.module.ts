@@ -35,6 +35,7 @@ import { PropuestaComponent } from './propuesta/propuesta.component';
 import { EquipoListComponent } from './equipo-list/equipo-list.component';
 import { PreferenciasListComponent } from './preferencias-list/preferencias-list.component';
 import { AlumnoListComponent } from './alumno-list/alumno-list.component';
+import { ConvenioListComponent } from './convenio-list/convenio-list.component';
 
 @NgModule({
   imports: [
@@ -74,7 +75,8 @@ import { AlumnoListComponent } from './alumno-list/alumno-list.component';
     PropuestaComponent,
     EquipoListComponent,
     PreferenciasListComponent,
-    AlumnoListComponent
+    AlumnoListComponent,
+    ConvenioListComponent
   ],
   bootstrap: [ AppComponent ]
 })
