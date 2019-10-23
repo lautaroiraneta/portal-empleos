@@ -37,6 +37,7 @@ import { PreferenciasListComponent } from './preferencias-list/preferencias-list
 import { AlumnoListComponent } from './alumno-list/alumno-list.component';
 import { ConvenioListComponent } from './convenio-list/convenio-list.component';
 import { EtapaCierrePasantiaListComponent } from './etapa-cierre-pasantia-list/etapa-cierre-pasantia-list.component';
+import { EtapaIngresoAlumnoListComponent } from './etapa-ingreso-alumno-list/etapa-ingreso-alumno-list.component';
 
 @NgModule({
   imports: [
@@ -78,7 +79,8 @@ import { EtapaCierrePasantiaListComponent } from './etapa-cierre-pasantia-list/e
     PreferenciasListComponent,
     AlumnoListComponent,
     ConvenioListComponent,
-    EtapaCierrePasantiaListComponent
+    EtapaCierrePasantiaListComponent,
+    EtapaIngresoAlumnoListComponent
   ],
   bootstrap: [ AppComponent ]
 })

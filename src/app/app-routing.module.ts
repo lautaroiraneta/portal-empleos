@@ -25,6 +25,7 @@ import { PreferenciasListComponent } from './preferencias-list/preferencias-list
 import { AlumnoListComponent } from './alumno-list/alumno-list.component';
 import { ConvenioListComponent } from './convenio-list/convenio-list.component';
 import { EtapaCierrePasantiaListComponent } from './etapa-cierre-pasantia-list/etapa-cierre-pasantia-list.component';
+import { EtapaIngresoAlumnoListComponent } from './etapa-ingreso-alumno-list/etapa-ingreso-alumno-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/crear-perfil', pathMatch: 'full' },
@@ -41,6 +42,7 @@ const routes: Routes = [
   { path: 'etapa-definicion-convenio', component: EtapaDefinicionConvenioComponent },
   { path: 'etapa-pasantia-curso', component: EtapaPasantiaCursoComponent },
   { path: 'etapa-cierre-pasantia-list', component: EtapaCierrePasantiaListComponent },
+  { path: 'etapa-ingreso-alumno-list', component: EtapaIngresoAlumnoListComponent },
   { path: 'equipo', component: EquipoComponent },
   { path: 'equipo-list', component: EquipoListComponent },
   { path: 'materia', component: MateriaComponent },
