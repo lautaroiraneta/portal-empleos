@@ -38,6 +38,7 @@ import { AlumnoListComponent } from './alumno-list/alumno-list.component';
 import { ConvenioListComponent } from './convenio-list/convenio-list.component';
 import { EtapaCierrePasantiaListComponent } from './etapa-cierre-pasantia-list/etapa-cierre-pasantia-list.component';
 import { EtapaIngresoAlumnoListComponent } from './etapa-ingreso-alumno-list/etapa-ingreso-alumno-list.component';
+import { EmpresaListComponent } from './empresa-list/empresa-list.component';
 
 @NgModule({
   imports: [
@@ -80,7 +81,8 @@ import { EtapaIngresoAlumnoListComponent } from './etapa-ingreso-alumno-list/eta
     AlumnoListComponent,
     ConvenioListComponent,
     EtapaCierrePasantiaListComponent,
-    EtapaIngresoAlumnoListComponent
+    EtapaIngresoAlumnoListComponent,
+    EmpresaListComponent
   ],
   bootstrap: [ AppComponent ]
 })
