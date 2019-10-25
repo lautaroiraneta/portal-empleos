@@ -1,0 +1,53 @@
+<div class="col-lg-12 column">
+    <div class="padding-left">
+        <div class="manage-jobs-sec">
+            <br />
+            <h2 style="padding-left: 27px;">Listado de Preferencias</h2>
+            <h2 style="padding-left: 27px; font-size: 20px; padding-top: 35px; color: green;"><a
+                    class="add-exp-laboral" [routerLink]="['/preferencias']">
+                    <li class="la la-plus-circle" style="display: inline-block;"></li> Agregar Preferencias
+                </a></h2>
+            <table>
+                <thead>
+                    <tr>
+                        <td style="color: purple;">
+                            <h4>Nombre</h4>
+                        </td>
+                        <td style="color: purple;">
+                            <h4>Activo</h4>
+                        </td>
+                        <td style="color: purple; padding-left: 25px;">
+                            <h4>Acción</h4>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let p of preferencias">
+                        <td>
+                            <div class="table-list-title">
+                                <h3>{{ p.nombre }}</h3>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="table-list-title">
+                                <h3><i class="la la-check" style="font-size: 35px;" *ngIf="p.activo"></i></h3>
+                            </div>
+                        </td>
+                        <td>
+                            <ul class="action_job">
+                                <li><span>Editar</span><a title=""><i class="la la-pencil"
+                                            style="font-size: 36px; color:black;"></i></a></li>
+                                <li *ngIf="!p.activo" (click)="activar(p)"><span>Activar</span><a title=""><i class="la la-thumbs-up"
+                                            style="font-size: 36px; color: black;"></i></a></li>
+                                <li *ngIf="p.activo" (click)="desactivar()"><span>Desactivar</span><a title=""><i class="la la-thumbs-down"
+                                            style="font-size: 36px; color: black;"></i></a></li>
+                                <li (click)="eliminar(p)"><span>Eliminar</span><a title=""><i class="la la-trash"
+                                            style="font-size: 36px; color: black;"></i></a></li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

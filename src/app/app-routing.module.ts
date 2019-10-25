@@ -27,11 +27,13 @@ import { ConvenioListComponent } from './convenio-list/convenio-list.component';
 import { EtapaCierrePasantiaListComponent } from './etapa-cierre-pasantia-list/etapa-cierre-pasantia-list.component';
 import { EtapaIngresoAlumnoListComponent } from './etapa-ingreso-alumno-list/etapa-ingreso-alumno-list.component';
 import { EmpresaListComponent } from './empresa-list/empresa-list.component';
+import { PreferenciasListComponent } from './preferencias-list/preferencias-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/crear-perfil', pathMatch: 'full' },
   { path: 'acuerdo-individual', component: AcuerdoIndividualComponent },
   { path: 'agregar-conocimientos-a-mi-perfil', component: AgregarConocimientosComponent },
+  { path: 'alertas-list', component: AlertasListComponent },
   { path: 'alumno', component: AlumnoComponent },
   { path: 'alumno-list', component: AlumnoListComponent },
   { path: 'carrera', component: CarreraComponent },
@@ -51,7 +53,7 @@ const routes: Routes = [
   { path: 'micrositio', component: MicrositioComponent },
   { path: 'noticia', component: NoticiaComponent },
   { path: 'preferencias', component: PreferenciasComponent },
-  { path: 'alertas-list', component: AlertasListComponent },
+  { path: 'preferencias-list', component: PreferenciasListComponent },
   { path: 'propuesta', component: PropuestaComponent },
   { path: 'subtarea', component: SubtareaComponent },
   { path: 'tarea', component: TareaComponent },
