@@ -21,7 +21,7 @@ import { EtapaDefinicionConvenioComponent } from './etapa-definicion-convenio/et
 import { EtapaPasantiaCursoComponent } from './etapa-pasantia-curso/etapa-pasantia-curso.component';
 import { PropuestaComponent } from './propuesta/propuesta.component';
 import { EquipoListComponent } from './equipo-list/equipo-list.component';
-import { PreferenciasListComponent } from './preferencias-list/preferencias-list.component';
+import { AlertasListComponent } from './alertas-list/alertas-list.component';
 import { AlumnoListComponent } from './alumno-list/alumno-list.component';
 import { ConvenioListComponent } from './convenio-list/convenio-list.component';
 import { EtapaCierrePasantiaListComponent } from './etapa-cierre-pasantia-list/etapa-cierre-pasantia-list.component';
@@ -51,7 +51,7 @@ const routes: Routes = [
   { path: 'micrositio', component: MicrositioComponent },
   { path: 'noticia', component: NoticiaComponent },
   { path: 'preferencias', component: PreferenciasComponent },
-  { path: 'preferencias-list', component: PreferenciasListComponent },
+  { path: 'alertas-list', component: AlertasListComponent },
   { path: 'propuesta', component: PropuestaComponent },
   { path: 'subtarea', component: SubtareaComponent },
   { path: 'tarea', component: TareaComponent },

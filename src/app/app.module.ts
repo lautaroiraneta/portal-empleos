@@ -33,7 +33,7 @@ import { EtapaDefinicionConvenioComponent } from './etapa-definicion-convenio/et
 import { EtapaPasantiaCursoComponent } from './etapa-pasantia-curso/etapa-pasantia-curso.component';
 import { PropuestaComponent } from './propuesta/propuesta.component';
 import { EquipoListComponent } from './equipo-list/equipo-list.component';
-import { PreferenciasListComponent } from './preferencias-list/preferencias-list.component';
+import { AlertasListComponent } from './alertas-list/alertas-list.component';
 import { AlumnoListComponent } from './alumno-list/alumno-list.component';
 import { ConvenioListComponent } from './convenio-list/convenio-list.component';
 import { EtapaCierrePasantiaListComponent } from './etapa-cierre-pasantia-list/etapa-cierre-pasantia-list.component';
@@ -77,7 +77,7 @@ import { EmpresaListComponent } from './empresa-list/empresa-list.component';
     EtapaPasantiaCursoComponent,
     PropuestaComponent,
     EquipoListComponent,
-    PreferenciasListComponent,
+    AlertasListComponent,
     AlumnoListComponent,
     ConvenioListComponent,
     EtapaCierrePasantiaListComponent,
