@@ -28,6 +28,7 @@ import { EtapaCierrePasantiaListComponent } from './etapa-cierre-pasantia-list/e
 import { EtapaIngresoAlumnoListComponent } from './etapa-ingreso-alumno-list/etapa-ingreso-alumno-list.component';
 import { EmpresaListComponent } from './empresa-list/empresa-list.component';
 import { PreferenciasListComponent } from './preferencias-list/preferencias-list.component';
+import { PropuestaListComponent } from './propuesta-list/propuesta-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/crear-perfil', pathMatch: 'full' },
@@ -55,6 +56,7 @@ const routes: Routes = [
   { path: 'preferencias', component: PreferenciasComponent },
   { path: 'preferencias-list', component: PreferenciasListComponent },
   { path: 'propuesta', component: PropuestaComponent },
+  { path: 'propuesta-list', component: PropuestaListComponent },
   { path: 'subtarea', component: SubtareaComponent },
   { path: 'tarea', component: TareaComponent },
   { path: 'tarea-defecto', component: TareaDefectoComponent }

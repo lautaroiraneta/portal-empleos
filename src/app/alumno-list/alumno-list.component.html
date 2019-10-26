@@ -113,7 +113,7 @@
                     <div class="emply-resume-sec">
                         <div class="emply-resume-list" *ngFor="let alumno of items">
                             <div class="emply-resume-thumb">
-                                <img src="{{alumno.fotoPerfil}}" alt="" />
+                                <img [src]="alumno.fotoPerfil" alt="" />
                             </div>
                             <div class="emply-resume-info">
                                 <h3><a href="#" title="">{{ alumno.nombre }}</a></h3>
