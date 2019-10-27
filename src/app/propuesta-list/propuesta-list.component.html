@@ -9,17 +9,15 @@
                         <i class="la la-search"></i>
                     </div>
                 </div>
-                <div class="widget border">
+                <div class="widget">
                     <h3 class="sb-title closed" (click)="isCollapsedCarrera = !isCollapsedCarrera">Carrera</h3>
                     <div class="specialism_widget" [ngbCollapse]="isCollapsedCarrera">
-                        <div class="field_w_search">
-                            <input type="text" placeholder="Buscar Carrera" />
-                        </div>
-                        <div class="simple-checkbox scrollbar">
-                            <p *ngFor="let c of carreras; let i = index;">
-                                <input type="checkbox" name="smplechk-{{i}}" id="22-{{i}}" (change)="actualizarFiltroCarreras(c)">
-                                <label for="22-{{i}}">{{ c.nombre }}</label>
-                            </p>
+                        <ng-multiselect-dropdown [placeholder]="'Seleccione Carreras'" [data]="carreras"
+                            [settings]="dropdownSettings" [(ngModel)]="carrerasFiltro" name="carrerasFiltro" (change)="actualizarItemsCarrera()">
+                        </ng-multiselect-dropdown>
+                        <div style="display: flex; flex-direction: column;">
+                            <span *ngIf="carrerasFiltro.length > 0"><strong>Carreras Seleccionadas:</strong></span>
+                            <span *ngFor="let cf of carrerasFiltro">{{ cf.nombre }} <a><i class="la la-times" (click)="eliminarCarreraFiltro(cf)"></i></a></span>
                         </div>
                     </div>
                 </div>

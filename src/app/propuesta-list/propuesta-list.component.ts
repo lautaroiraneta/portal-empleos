@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { HelperService } from '../helper.service';
 
 @Component({
   selector: 'app-propuesta-list',
@@ -73,20 +75,21 @@ export class PropuestaListComponent implements OnInit {
   isCollapsedCarrera: boolean = true;
   carreras: any = [];
   carrerasFiltro: any = [];
+  dropdownSettings: IDropdownSettings;
 
-  constructor() { }
+  constructor(private helperService: HelperService) { }
 
   ngOnInit() {
     this.items = this.propuestas;
     this.obtenerCarreras();
+    this.dropdownSettings = this.helperService.dropdownSettings;
+    this.dropdownSettings.itemsShowLimit = 0;
   }
 
   actualizarItems() {
     this.items = this.propuestas.filter(x => {
       return (
-        ((this.filtroTitulo !== '' || this.filtroTitulo !== undefined) && x.nombre.toLowerCase().includes(this.filtroTitulo.toLowerCase()))
-        &&
-        (this.carrerasFiltro.length > 0 && x.carreras.some(this.carrerasFiltro))
+        (this.filtroTitulo !== '' || this.filtroTitulo !== undefined) && x.nombre.toLowerCase().includes(this.filtroTitulo.toLowerCase())
       )
     });
   }
@@ -110,18 +113,19 @@ export class PropuestaListComponent implements OnInit {
     console.log(this.carreras);
   }
 
-  actualizarFiltroCarreras(carrera: any) {
-    var index = this.carrerasFiltro.findIndex(x => x.id === carrera.id);
-    if (index < 0) {
-      this.carrerasFiltro.push(carrera);
-    } else {
-      this.carrerasFiltro = this.carrerasFiltro.filter(x => x.id !== carrera.id);
-    }
+  eliminarCarreraFiltro(carrera: any) {
+    this.carrerasFiltro = this.carrerasFiltro.filter(x => x.id !== carrera.id);
+  }
 
-    this.items = this.propuestas.filter(x => {
-      return x.carreras.filter(x => this.carrerasFiltro.includes(x)).length > 0 && this.carrerasFiltro.length > 0
-    })
-
-    console.log(this.carrerasFiltro);
+  actualizarItemsCarrera() {
+    this.items.forEach(x => {
+      x.carreras.forEach(y => {
+        this.carrerasFiltro.forEach(z => {
+          if (y.id === z.id) {
+            
+          } 
+        });
+      });
+    });
   }
 }
