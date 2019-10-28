@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { DataService } from '../data/data.service';
 import { IAngularMyDpOptions, IMyDateModel } from 'angular-mydatepicker';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 export interface Perfil {
   nombres: string;
@@ -18,6 +19,11 @@ export interface Perfil {
   tipoDocumento: any;
   numeroDocumento: string;
   fechaNacimiento: IMyDateModel;
+  redesSociales: any;
+  fotoPerfil: any;
+  objetivoLaboral: any;
+  interesesPersonales: any;
+  experienciaLaboral: any;
 }
 
 @Component({
@@ -26,7 +32,7 @@ export interface Perfil {
   styleUrls: ['./crear-perfil.component.css']
 })
 export class CrearPerfilComponent implements OnInit {
-  mostrarPrimeraParte: boolean = true;
+  paso: number = 1;
 
   myDpOptions: IAngularMyDpOptions = {
     dateRange: false,
@@ -101,7 +107,48 @@ export class CrearPerfilComponent implements OnInit {
       { id: '1', nombre: 'DNI'}
     ],
     numeroDocumento: '35.941.589',
-    fechaNacimiento: null
+    fechaNacimiento: null,
+    fotoPerfil: null,
+    redesSociales: {
+      twitter: '@__lauta',
+      mostrarFeedTwitter: true,
+      facebook: 'lautaroiraneta',
+      mostrarFeedFacebook: true,
+      instagram: 'lautaaa',
+      mostrarFeedInstagram: true,
+      linkedIn: 'Lautaro Irañeta',
+      mostrarFeedLinkedIn: true,
+    },
+    objetivoLaboral: 'Hacer poco y ganar mucho. AGREGAR RICH TEXT!!!!!!',
+    interesesPersonales: 'Spurs, Mets y Raiders papá',
+    experienciaLaboral: [{
+      id: '1',
+      empresa: {
+        id: 'google',
+        nombre: 'Google'
+      },
+      puesto: 'Software Engineer',
+      fechaDesde: '10/2013',
+      fechaHasta: '10/2014'
+    }, {
+      id: '2',
+      empresa: {
+        id: 'jpmorgan',
+        nombre: 'JP Morgan'
+      },
+      puesto: 'Senior Software Engineer',
+      fechaDesde: '11/2014',
+      fechaHasta: '11/2016'
+    }, {
+      id: '3',
+      empresa: {
+        id: 'mercadolibre',
+        nombre: 'MercadoLibre'
+      },
+      puesto: 'Technical Leader',
+      fechaDesde: '12/2016',
+      fechaHasta: 'Actualidad'
+    }]
   };
 
   estadosCivil: Observable<any[]>;
@@ -120,9 +167,33 @@ export class CrearPerfilComponent implements OnInit {
     allowSearchFilter: true
   };
 
+  closeResult: string;
+
+  experienciaLaboral = {
+    empresa: 'Una Empresa',
+    puestoLaboral: [{
+      id: '2',
+      nombre: 'Analista'
+    }],
+    fechaDesde: null,
+    fechaHasta: null,
+    actualmenteTrabajando: true,
+    descripcion: 'aasdasdasd',
+    conocimientosAdquiridos: 'SQL - .NET - Apache'
+  };
+  
+  puestosLaborales = [{
+    id: '1',
+    nombre: 'Software Engineer'
+  }, {
+    id: '2',
+    nombre: 'Analista'
+  }]
+
   constructor(
     private helperService: HelperService,
-    private dataService: DataService
+    private dataService: DataService,
+    private modalService: NgbModal
     ) { }
 
   ngOnInit() {
@@ -145,5 +216,23 @@ export class CrearPerfilComponent implements OnInit {
 
   eliminarTelefono(id: string) {
     this.perfil.telefonos = this.helperService.eliminarTelefono(this.perfil.telefonos, id);
+  }
+
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
   }
 }
