@@ -3,13 +3,14 @@
         <div class="row no-gape">
             <div class="col-lg-9 column">
                 <div class="padding-left">
-                    <div class="profile-title">
-                        <h3 *ngIf="paso === 1">Datos Personales</h3>
-                        <h3 *ngIf="paso === 2">Datos Adicionales</h3>
-                        <h3 *ngIf="paso === 3">Experiencias Laborales</h3>
+                    <div class="profile-title" [ngSwitch]="paso">
+                        <h3 *ngSwitchCase="1">Datos Personales</h3>
+                        <h3 *ngSwitchCase="2">Datos Adicionales</h3>
+                        <h3 *ngSwitchCase="3">Experiencias Laborales</h3>
+                        <h3 *ngSwitchCase="4">Experencias Educativas</h3>
                     </div>
-                    <form #form="ngForm">
-                        <div class="row" *ngIf="paso === 1">
+                    <form #form="ngForm" [ngSwitch]="paso">
+                        <div class="row" *ngSwitchCase="1">
                             <div class="col-lg-6">
                                 <span class="pf-title">Nombres</span>
                                 <div class="pf-field">
@@ -24,7 +25,6 @@
                             </div>
                             <span class="pf-title" style="padding-left: 15px; margin-top: 0px;">Correo
                                 Electrónico</span>
-
                             <div class="col-lg-8" *ngFor="let email of perfil.emails; let i = index">
                                 <div class="col-lg-11" style="margin-left: -15px;">
                                     <div class="pf-field">
@@ -165,7 +165,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row" *ngIf="paso === 2">
+                        <div class="row" *ngSwitchCase="2">
                             <div class="col-lg-12">
                                 <span class="pf-title">Foto de Perfil</span>
                                 <div class="upload-portfolio">
@@ -258,7 +258,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row" *ngIf="paso === 3">
+                        <div class="row" *ngSwitchCase="3">
                             <div class="manage-jobs-sec">
                                 <table>
                                     <thead>
@@ -319,6 +319,72 @@
                                             class="la la-plus-circle"></i> Agregar Experiencia Laboral</a></h2>
                             </div>
                         </div>
+                        <div class="row" *ngSwitchCase="4">
+                            <div class="manage-jobs-sec">
+                                <h2 style="padding-left: 27px; font-size: 20px; padding-top: 35px; color: green;"><a
+                                        class="add-exp-laboral" (click)="open(content2)">
+                                        <li class="la la-plus-circle" style="display: inline-block;"></li> Agregar
+                                        Experiencia Educativa
+                                    </a></h2>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <td style="color: purple;">
+                                                <h4>Institución</h4>
+                                            </td>
+                                            <td style="color: purple;">
+                                                <h4>Tipo</h4>
+                                            </td>
+                                            <td style="color: purple;">
+                                                <h4>Estado</h4>
+                                            </td>
+                                            <td style="color: purple;">
+                                                <h4>Fechas</h4>
+                                            </td>
+                                            <td style="color: purple;">
+                                                <h4>Acción</h4>
+                                            </td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let ee of perfil.experienciaEducativa">
+                                            <td>
+                                                <div class="table-list-title">
+                                                    <h3>{{ ee.institucion }}</h3>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="table-list-title">
+                                                    <h3>{{ ee.tipo }}</h3>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="table-list-title">
+                                                    <h3>{{ ee.estado }}</h3>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="table-list-title">
+                                                    <h3>{{ ee.fechaInicio }} - {{ ee.fechaFin }}</h3>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <ul class="action_job">
+                                                    <li><span>Editar</span><a href="#" title=""
+                                                            style="font-size: 20px; color:black;"><i
+                                                                class="la la-pencil" style="font-size: 30px;"></i></a>
+                                                    </li>
+                                                    <li><span>Eliminar</span><a href="#" title=""
+                                                            style="font-size: 20px; color:black;"><i class="la la-trash"
+                                                                style="font-size: 30px;"></i></a>
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                         <div class="contact-edit">
                             <div class="row">
                                 <div class="col-lg-12">
@@ -337,52 +403,115 @@
 
 <ng-template #content let-modal>
     <div class="modal-header">
-        <h3>Agregar Tarea</h3>
+        <h3>Agregar Experiencia Laboral</h3>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-body">
         <form #form2="ngForm">
-			<div class="pf-field">
-                <input type="text" placeholder="Nombre de la Empresa" [(ngModel)]="experienciaLaboral.empresa" name="nombreEmpresa" />
+            <div class="pf-field">
+                <input type="text" placeholder="Nombre de la Empresa" [(ngModel)]="experienciaLaboral.empresa"
+                    name="nombreEmpresa" />
             </div>
             <ng-multiselect-dropdown [placeholder]="'Seleccione un Puesto Laboral'" [data]="puestosLaborales"
                 [(ngModel)]="experienciaLaboral.puestoLaboral" name="experienciaLaboralPuestoLaboral"
-                [settings]="dropdownSettingsSingle" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                [settings]="dropdownSettingsSingle" (onSelect)="onItemSelect($event)"
+                (onSelectAll)="onSelectAll($event)">
             </ng-multiselect-dropdown>
-			<div class="pf-field" style="margin-top: 25px;">
+            <div class="pf-field" style="margin-top: 25px;">
                 <input class="input-box" placeholder="Fecha desde" angular-mydatepicker (click)="dpp.toggleCalendar()"
-                    [(ngModel)]="experienciaLaboral.fechaDesde" name="experienciaLaboralFechaDesde" [options]="myDpOptions"
-                    #dpp="angular-mydatepicker" />
-                    <i class="la la-calendar"></i>
-			</div>
-            <div class="pf-field">
-                <input class="input-box" placeholder="Fecha hasta" angular-mydatepicker (click)="dppp.toggleCalendar()"
-                    [(ngModel)]="experienciaLaboral.fechaHasta" name="experienciaLaboralFechaHasta" [options]="myDpOptions"
-                    #dppp="angular-mydatepicker" />
+                    [(ngModel)]="experienciaLaboral.fechaDesde" name="experienciaLaboralFechaDesde"
+                    [options]="myDpOptions" #dpp="angular-mydatepicker" />
                 <i class="la la-calendar"></i>
             </div>
-			<div class="">
-				<p class="remember-label">
-                    <input type="checkbox" name="experienciaLaboralActualmenteTrabajando" id="experienciaLaboralActualmenteTrabajando"
+            <div class="pf-field">
+                <input class="input-box" placeholder="Fecha hasta" angular-mydatepicker (click)="dppp.toggleCalendar()"
+                    [(ngModel)]="experienciaLaboral.fechaHasta" name="experienciaLaboralFechaHasta"
+                    [options]="myDpOptions" #dppp="angular-mydatepicker" />
+                <i class="la la-calendar"></i>
+            </div>
+            <div class="">
+                <p class="remember-label">
+                    <input type="checkbox" name="experienciaLaboralActualmenteTrabajando"
+                        id="experienciaLaboralActualmenteTrabajando"
                         [(ngModel)]="experienciaLaboral.actualmenteTrabajando"><label
                         for="experienciaLaboralActualmenteTrabajando">Actualmente trabajando</label>
-				</p>
-			</div>
-
-				<span class="pf-title">Conocimientos Adquiridos</span>
-				<div class="pf-field">
-                    <input type="text" placeholder="Nombre de la Empresa" [(ngModel)]="experienciaLaboral.conocimientosAdquiridos"
-                        name="experienciaLaboralconocimientosAdquiridos" />
-				</div>
-
-			<div class="pf-field">
-				<textarea placeholder="Descripción del trabajo" [(ngModel)]="experienciaLaboral.descripcion" name="descripcion"></textarea>
-			</div>
-		</form>
+                </p>
+            </div>
+            <span class="pf-title">Conocimientos Adquiridos</span>
+            <div class="pf-field">
+                <input type="text" placeholder="Nombre de la Empresa"
+                    [(ngModel)]="experienciaLaboral.conocimientosAdquiridos"
+                    name="experienciaLaboralconocimientosAdquiridos" />
+            </div>
+            <div class="pf-field">
+                <textarea placeholder="Descripción del trabajo" [(ngModel)]="experienciaLaboral.descripcion"
+                    name="descripcion"></textarea>
+            </div>
+        </form>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-outline-dark" (click)="save()">Crear Experiencia Laboral</button>
+    </div>
+</ng-template>
+
+<ng-template #content2 let-modal>
+    <div class="modal-header">
+        <h3>Agregar Experiencia Educativa</h3>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form #form3="ngForm">
+            <div class="pf-field">
+                <input type="text" placeholder="Nombre de la Institucion" [(ngModel)]="experienciaEducativa.institucion"
+                    name="experienciaEducativaInstitucion" />
+            </div>
+            <div class="pf-field">
+                <input type="text" placeholder="Nombre del Título" [(ngModel)]="experienciaEducativa.titulo"
+                    name="experienciaEducativaTitulo" />
+            </div>
+            <ng-multiselect-dropdown [placeholder]="'Seleccione un tipo de educacion'"
+                [data]="experienciasEducativasTipos" [(ngModel)]="experienciaEducativa.tipo"
+                name="experienciaEducativaTipo" [settings]="dropdownSettingsSingle" (onSelect)="onItemSelect($event)"
+                (onSelectAll)="onSelectAll($event)">
+            </ng-multiselect-dropdown>
+            <div style="margin-top: 25px;">
+
+                <ng-multiselect-dropdown [placeholder]="'Seleccione un estado'" [data]="estados"
+                    [(ngModel)]="experienciaEducativa.estado" name="experienciaEducativaEstado"
+                    [settings]="dropdownSettingsSingle" (onSelect)="onItemSelect($event)"
+                    (onSelectAll)="onSelectAll($event)">
+                </ng-multiselect-dropdown>
+            </div>
+            <div class="pf-field" style="margin-top: 25px;">
+                <input class="input-box" placeholder="Fecha desde" angular-mydatepicker (click)="dpp.toggleCalendar()"
+                    [(ngModel)]="experienciaEducativa.fechaDesde" name="experienciaEducativaFechaDesde"
+                    [options]="myDpOptions" #dpp="angular-mydatepicker" />
+                <i class="la la-calendar"></i>
+            </div>
+            <div class="pf-field">
+                <input class="input-box" placeholder="Fecha hasta" angular-mydatepicker (click)="dppp.toggleCalendar()"
+                    [(ngModel)]="experienciaEducativa.fechaHasta" name="experienciaEducativaFechaHasta"
+                    [options]="myDpOptions" #dppp="angular-mydatepicker" />
+                <i class="la la-calendar"></i>
+            </div>
+            <div class="">
+                <p class="remember-label">
+                    <input type="checkbox" name="experienciaEducativaAlPresente" id="experienciaEducativaAlPresente"
+                        [(ngModel)]="experienciaEducativa.alPresente"><label for="experienciaEducativaAlPresente">Al
+                        Presente</label>
+                </p>
+            </div>
+            <div class="pf-field">
+                <textarea placeholder="Comentarios" [(ngModel)]="experienciaEducativa.comentarios"
+                    name="comentarios"></textarea>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="save()">Crear Experiencia Educativa</button>
     </div>
 </ng-template>

@@ -24,6 +24,7 @@ export interface Perfil {
   objetivoLaboral: any;
   interesesPersonales: any;
   experienciaLaboral: any;
+  experienciaEducativa: any;
 }
 
 @Component({
@@ -148,6 +149,21 @@ export class CrearPerfilComponent implements OnInit {
       puesto: 'Technical Leader',
       fechaDesde: '12/2016',
       fechaHasta: 'Actualidad'
+    }],
+    experienciaEducativa: [{
+      id: '1',
+      institucion: 'UADE',
+      tipo: 'Universitario',
+      estado: 'En Curso',
+      fechaInicio: '03/2010',
+      fechaFin: 'Presente'
+    }, {
+      id: '2',
+      institucion: 'EET N°7 "José Hernández"',
+      tipo: 'Secundario',
+      estado: 'Completo',
+      fechaInicio: '03/2006',
+      fechaFin: '12/2009'
     }]
   };
 
@@ -182,6 +198,45 @@ export class CrearPerfilComponent implements OnInit {
     conocimientosAdquiridos: 'SQL - .NET - Apache'
   };
   
+  experienciasEducativasTipos = [{
+    id: 'primario',
+    nombre: 'Primario'
+  }, {
+    id: 'sec',
+    nombre: 'Secundario'
+  }, {
+    id: 'ter',
+    nombre: 'Terciario'
+  }, {
+    id: 'uni',
+    nombre: 'Universitario'
+  }];
+
+  estados = [{
+    id: 'com',
+    nombre: 'Completo'
+  }, {
+    id: 'enc',
+    nombre: 'En Curso'
+  }];
+
+  experienciaEducativa = {
+    institucion: 'Institución 1',
+    titulo: 'Titulo',
+    tipo: [{
+      id: 'primario',
+      nombre: 'Primario'
+    }],
+    estado: [{
+      id: 'enc',
+      nombre: 'En Curso'
+    }],
+    fechaDesde: null,
+    fechaHasta: null,
+    alPresente: true,
+    comentarios: '123 un pasito para adelante '
+  };
+
   puestosLaborales = [{
     id: '1',
     nombre: 'Software Engineer'
@@ -194,7 +249,7 @@ export class CrearPerfilComponent implements OnInit {
     private helperService: HelperService,
     private dataService: DataService,
     private modalService: NgbModal
-    ) { }
+  ) { }
 
   ngOnInit() {
     this.estadosCivil = this.dataService.getEstadosCivil();
