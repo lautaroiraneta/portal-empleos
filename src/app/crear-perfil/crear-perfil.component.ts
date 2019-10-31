@@ -25,6 +25,7 @@ export interface Perfil {
   interesesPersonales: any;
   experienciaLaboral: any;
   experienciaEducativa: any;
+  idiomas: any;
 }
 
 @Component({
@@ -164,8 +165,47 @@ export class CrearPerfilComponent implements OnInit {
       estado: 'Completo',
       fechaInicio: '03/2006',
       fechaFin: '12/2009'
+    }],
+    idiomas: [{
+      idioma: 'Inglés',
+      nivelOral: {
+        id: 'int',
+        nombre: 'Intermedio'
+      },
+      nivelEscrito: {
+        id: 'bas',
+        nombre: 'Básico'
+      }
     }]
   };
+
+  idiomas = [
+    { id: 'chi', nombre: 'Chino' },
+    { id: 'esp', nombre: 'Español' }, 
+    { id: 'fra', nombre: 'Francés' },   
+    { id: 'ing', nombre: 'Inglés' },
+    { id: 'jap', nombre: 'Japonés' },
+    { id: 'por', nombre: 'Portugués' }
+  ];
+
+  niveles = [
+    { id: 'bas', nombre: 'Básico' },
+    { id: 'int', nombre: 'Intermedio' },
+    { id: 'ava', nombre: 'Avanzado' }
+  ]
+
+  idioma = {
+    idioma: [
+      { id: 'ing', nombre: 'Inglés' }
+    ],
+    nivelOral: [
+      { id: 'int', nombre: 'Intermedio' }
+    ],
+    nivelEscrito: [
+      { id: 'bas', nombre: 'Básico' }
+    ],
+    comentarios: 'comentarios'
+  }
 
   estadosCivil: Observable<any[]>;
 
