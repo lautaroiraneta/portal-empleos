@@ -12,27 +12,27 @@
                     </div>
                     <div class="steps-sec" style="padding: 0px;">
                         <div class="step-perfil" [class.active]="paso === 1" style="margin-bottom: 0px; margin-top: 20px;">
-                            <p><i class="la la-user"></i></p>
+                            <p (click)="paso = 1"><i class="la la-user"></i></p>
                             <span>Datos Personales</span>
                         </div>
                         <div class="step-perfil" [class.active]="paso === 2" style="margin-bottom: 0px; margin-top: 20px;">
-                            <p><i class="la la-info"></i></p>
+                            <p (click)="paso = 2"><i class="la la-info"></i></p>
                             <span>Datos Adicionales</span>
                         </div>
                         <div class="step-perfil" [class.active]="paso === 3" style="margin-bottom: 0px; margin-top: 20px;">
-                            <p><i class="la la-briefcase"></i></p>
+                            <p (click)="paso = 3"><i class="la la-briefcase"></i></p>
                             <span>Experiencias Laborales</span>
                         </div>
                         <div class="step-perfil" [class.active]="paso === 4" style="margin-bottom: 0px; margin-top: 20px;">
-                            <p><i class="la la-graduation-cap"></i></p>
+                            <p (click)="paso = 4"><i class="la la-graduation-cap"></i></p>
                             <span>Experiencia Educativa</span>
                         </div>
                         <div class="step-perfil" [class.active]="paso === 5" style="margin-bottom: 0px; margin-top: 20px;">
-                            <p><i class="la la-book"></i></p>
+                            <p (click)="paso = 5"><i class="la la-book"></i></p>
                             <span>Idiomas</span>
                         </div>
                         <div class="step-perfil" [class.active]="paso === 6" style="margin-bottom: 0px; margin-top: 20px;">
-                            <p><i class="la la-check-circle"></i></p>
+                            <p (click)="paso = 6"><i class="la la-check-circle"></i></p>
                             <span>¡Listo!</span>
                         </div>
                     </div>

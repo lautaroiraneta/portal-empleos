@@ -15,6 +15,7 @@ export interface Perfil {
   paisResidencia: any;
   provinciaResidencia: any;
   estadoCivil: any;
+  descripcion?: any;
   paisNacionalidad: any;
   tipoDocumento: any;
   numeroDocumento: string;

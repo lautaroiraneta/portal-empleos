@@ -41,6 +41,7 @@ import { EtapaIngresoAlumnoListComponent } from './etapa-ingreso-alumno-list/eta
 import { EmpresaListComponent } from './empresa-list/empresa-list.component';
 import { PreferenciasListComponent } from './preferencias-list/preferencias-list.component';
 import { PropuestaListComponent } from './propuesta-list/propuesta-list.component';
+import { PerfilComponent } from './perfil/perfil.component';
 
 @NgModule({
   imports: [
@@ -86,7 +87,8 @@ import { PropuestaListComponent } from './propuesta-list/propuesta-list.componen
     EtapaIngresoAlumnoListComponent,
     EmpresaListComponent,
     PreferenciasListComponent,
-    PropuestaListComponent
+    PropuestaListComponent,
+    PerfilComponent
   ],
   bootstrap: [ AppComponent ]
 })
