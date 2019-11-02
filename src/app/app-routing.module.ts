@@ -30,6 +30,7 @@ import { EmpresaListComponent } from './empresa-list/empresa-list.component';
 import { PreferenciasListComponent } from './preferencias-list/preferencias-list.component';
 import { PropuestaListComponent } from './propuesta-list/propuesta-list.component';
 import { PerfilComponent } from './perfil/perfil.component';
+import { MicrositioEmpresaComponent } from './micrositio-empresa/micrositio-empresa.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/crear-perfil', pathMatch: 'full' },
@@ -53,6 +54,7 @@ const routes: Routes = [
   { path: 'equipo-list', component: EquipoListComponent },
   { path: 'materia', component: MateriaComponent },
   { path: 'micrositio', component: MicrositioComponent },
+  { path: 'micrositio-empresa', component: MicrositioEmpresaComponent },
   { path: 'noticia', component: NoticiaComponent },
   { path: 'perfil', component: PerfilComponent },
   { path: 'preferencias', component: PreferenciasComponent },
