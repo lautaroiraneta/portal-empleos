@@ -31,6 +31,7 @@ import { PreferenciasListComponent } from './preferencias-list/preferencias-list
 import { PropuestaListComponent } from './propuesta-list/propuesta-list.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { MicrositioEmpresaComponent } from './micrositio-empresa/micrositio-empresa.component';
+import { PropuestaViewComponent } from './propuesta-view/propuesta-view.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/crear-perfil', pathMatch: 'full' },
@@ -61,6 +62,7 @@ const routes: Routes = [
   { path: 'preferencias-list', component: PreferenciasListComponent },
   { path: 'propuesta', component: PropuestaComponent },
   { path: 'propuesta-list', component: PropuestaListComponent },
+  { path: 'propuesta-view', component: PropuestaViewComponent },
   { path: 'subtarea', component: SubtareaComponent },
   { path: 'tarea', component: TareaComponent },
   { path: 'tarea-defecto', component: TareaDefectoComponent }
