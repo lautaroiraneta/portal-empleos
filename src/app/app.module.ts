@@ -44,6 +44,7 @@ import { PropuestaListComponent } from './propuesta-list/propuesta-list.componen
 import { PerfilComponent } from './perfil/perfil.component';
 import { MicrositioEmpresaComponent } from './micrositio-empresa/micrositio-empresa.component';
 import { PropuestaViewComponent } from './propuesta-view/propuesta-view.component';
+import { TareaDefectoListComponent } from './tarea-defecto-list/tarea-defecto-list.component';
 
 @NgModule({
   imports: [
@@ -92,7 +93,8 @@ import { PropuestaViewComponent } from './propuesta-view/propuesta-view.componen
     PropuestaListComponent,
     PerfilComponent,
     MicrositioEmpresaComponent,
-    PropuestaViewComponent
+    PropuestaViewComponent,
+    TareaDefectoListComponent
   ],
   bootstrap: [ AppComponent ]
 })

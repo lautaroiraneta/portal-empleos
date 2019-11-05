@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Email } from '../helper.service';
+import { ActivatedRoute } from '@angular/router';
+import { AlumnoService } from './alumno-service/alumno.service';
 
 export interface Alumno {
   nombres: string;
@@ -17,22 +19,17 @@ export interface Alumno {
 })
 
 export class AlumnoComponent implements OnInit {
-  alumno: Alumno = {
-    nombres: 'Lautaro',
-    apellidos: 'Irañeta',
-    libretaUniversitaria: '1018944',
-    email: {
-      email: 'lautaroiraneta@gmail.com',
-      id: '1'
-    },
-    tipoDocumento: 'DNI',
-    numeroDocumento: '35.941.589',
-    nombreUsuario: 'lautaro.iraneta'
-  }
+  alumno: any;
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private alumnoService: AlumnoService) { }
 
   ngOnInit() {
+    var id = this.route.snapshot.params['id'];
+    if (id !== 'new') {
+      this.alumno = this.alumnoService.getById(id);
+    }
   }
 
 }

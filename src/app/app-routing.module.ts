@@ -32,13 +32,14 @@ import { PropuestaListComponent } from './propuesta-list/propuesta-list.componen
 import { PerfilComponent } from './perfil/perfil.component';
 import { MicrositioEmpresaComponent } from './micrositio-empresa/micrositio-empresa.component';
 import { PropuestaViewComponent } from './propuesta-view/propuesta-view.component';
+import { TareaDefectoListComponent } from './tarea-defecto-list/tarea-defecto-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/crear-perfil', pathMatch: 'full' },
   { path: 'acuerdo-individual', component: AcuerdoIndividualComponent },
   { path: 'agregar-conocimientos-a-mi-perfil', component: AgregarConocimientosComponent },
   { path: 'alertas-list', component: AlertasListComponent },
-  { path: 'alumno', component: AlumnoComponent },
+  { path: 'alumno/:id', component: AlumnoComponent },
   { path: 'alumno-list', component: AlumnoListComponent },
   { path: 'carrera', component: CarreraComponent },
   { path: 'control-conocimientos-puestos', component: ControlConocimientosPuestosComponent },
@@ -65,7 +66,9 @@ const routes: Routes = [
   { path: 'propuesta-view', component: PropuestaViewComponent },
   { path: 'subtarea', component: SubtareaComponent },
   { path: 'tarea', component: TareaComponent },
-  { path: 'tarea-defecto', component: TareaDefectoComponent }
+  { path: 'tarea-defecto', component: TareaDefectoComponent },
+  { path: 'tarea-defecto-list', component: TareaDefectoListComponent }
+
   // { path: '**', component: PageNotFoundComponent }
 ];
 
