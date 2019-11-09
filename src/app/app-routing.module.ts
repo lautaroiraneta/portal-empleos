@@ -34,15 +34,16 @@ import { MicrositioEmpresaComponent } from './micrositio-empresa/micrositio-empr
 import { PropuestaViewComponent } from './propuesta-view/propuesta-view.component';
 import { TareaDefectoListComponent } from './tarea-defecto-list/tarea-defecto-list.component';
 import { AprobacionUsuarioComponent } from './aprobacion-usuario/aprobacion-usuario.component';
+import { GestionUsuarioComponent } from './gestion-usuario/gestion-usuario.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/crear-perfil', pathMatch: 'full' },
   { path: 'acuerdo-individual', component: AcuerdoIndividualComponent },
-  { path: 'aprobacion-usuario', component: AprobacionUsuarioComponent },
   { path: 'agregar-conocimientos-a-mi-perfil', component: AgregarConocimientosComponent },
   { path: 'alertas-list', component: AlertasListComponent },
   { path: 'alumno/:id', component: AlumnoComponent },
   { path: 'alumno-list', component: AlumnoListComponent },
+  { path: 'aprobacion-usuario', component: AprobacionUsuarioComponent },
   { path: 'carrera', component: CarreraComponent },
   { path: 'control-conocimientos-puestos', component: ControlConocimientosPuestosComponent },
   { path: 'convenio', component: ConvenioComponent },
@@ -56,6 +57,7 @@ const routes: Routes = [
   { path: 'etapa-ingreso-alumno-list', component: EtapaIngresoAlumnoListComponent },
   { path: 'equipo', component: EquipoComponent },
   { path: 'equipo-list', component: EquipoListComponent },
+  { path: 'gestion-usuario', component: GestionUsuarioComponent },
   { path: 'materia', component: MateriaComponent },
   { path: 'micrositio', component: MicrositioComponent },
   { path: 'micrositio-empresa', component: MicrositioEmpresaComponent },
