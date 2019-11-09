@@ -33,10 +33,12 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { MicrositioEmpresaComponent } from './micrositio-empresa/micrositio-empresa.component';
 import { PropuestaViewComponent } from './propuesta-view/propuesta-view.component';
 import { TareaDefectoListComponent } from './tarea-defecto-list/tarea-defecto-list.component';
+import { AprobacionUsuarioComponent } from './aprobacion-usuario/aprobacion-usuario.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/crear-perfil', pathMatch: 'full' },
   { path: 'acuerdo-individual', component: AcuerdoIndividualComponent },
+  { path: 'aprobacion-usuario', component: AprobacionUsuarioComponent },
   { path: 'agregar-conocimientos-a-mi-perfil', component: AgregarConocimientosComponent },
   { path: 'alertas-list', component: AlertasListComponent },
   { path: 'alumno/:id', component: AlumnoComponent },

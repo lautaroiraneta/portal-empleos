@@ -1,0 +1,48 @@
+<div class="padding-left">
+    <div class="manage-jobs-sec">
+       <br />
+       <h2 style="padding-left: 27px;">Aprobación de Usuarios</h2>
+       <!-- <h2 style="padding-left: 27px; font-size: 20px; padding-top: 35px; color: green;"><a class="add-exp-laboral"><li class="la la-plus-circle"></li> Agregar Conocimiento</a> <a class="add-idioma"><li class="la la-plus-circle" style="padding-left: 120px;"></li> Agregar Puesto de trabajo</a></h2> -->
+        <table>
+            <thead>
+                <tr>
+                   <td style="color: purple;"><h4>Nombre</h4></td>
+                   <td style="color: purple;"><h4>Tipo</h4></td>
+                   <td style="color: purple;"><h4>Fecha de Ingreso</h4></td>
+                    <td style="padding-left: 25px; color: purple;"><h4>Acción</h4></td>
+                </tr>
+            </thead>
+           <tbody>
+               <tr *ngFor="let u of usuarios">
+                   <td>
+                       <div class="table-list-title">
+                           <h3 style="color: #fb236a;
+                               font-family: Open Sans;
+                               font-size: 16px;
+                               text-decoration: underline;
+                               line-height: 30px;">{{ u.nombre }}</h3>
+                       </div>
+                   </td>
+                   <td>
+                       <div class="table-list-title">
+                           <h3>{{ u.tipo }}</h3>
+                       </div>
+                   </td>
+                   <td>
+                       <div class="table-list-title">
+                           <h3>{{ u.fechaIngreso }}</h3>
+                       </div>
+                   </td>
+                   <td>
+                       <ul class="action_job">
+                           <li><span>Validar</span><a href="#" title=""><i class="la la-thumbs-up"
+                                       style="font-size: 36px; color: green;"></i></a></li>
+                           <li><span>Invalidar</span><a href="#" title=""><i class="la la-thumbs-down"
+                                       style="font-size: 36px; color: red;"></i></a></li>
+                       </ul>
+                   </td>
+               </tr>
+           </tbody>
+        </table>
+    </div>
+</div>
