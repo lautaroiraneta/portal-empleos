@@ -35,6 +35,7 @@ import { PropuestaViewComponent } from './propuesta-view/propuesta-view.componen
 import { TareaDefectoListComponent } from './tarea-defecto-list/tarea-defecto-list.component';
 import { AprobacionUsuarioComponent } from './aprobacion-usuario/aprobacion-usuario.component';
 import { GestionUsuarioComponent } from './gestion-usuario/gestion-usuario.component';
+import { TareaViewComponent } from './tarea-view/tarea-view.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/crear-perfil', pathMatch: 'full' },
@@ -71,7 +72,9 @@ const routes: Routes = [
   { path: 'subtarea', component: SubtareaComponent },
   { path: 'tarea', component: TareaComponent },
   { path: 'tarea-defecto', component: TareaDefectoComponent },
-  { path: 'tarea-defecto-list', component: TareaDefectoListComponent }
+  { path: 'tarea-defecto-list', component: TareaDefectoListComponent },
+  { path: 'tarea-view', component: TareaViewComponent }
+
 
   // { path: '**', component: PageNotFoundComponent }
 ];

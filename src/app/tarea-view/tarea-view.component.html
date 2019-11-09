@@ -1,0 +1,97 @@
+<div class="block">
+    <div class="container">
+        <div class="row">
+             <div class="col-lg-12 column">
+                 <div class="job-single-sec style3">
+                     <div class="job-head-wide">
+                         <div class="row">
+                             <div class="col-lg-8">
+                                 <div class="job-single-head3">
+                                    <div class="job-single-info3">
+                                        <h3>{{ tarea.nombre }} <a><i class="la la-pencil"></i></a></h3>
+                                    </div>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                     <div class="job-wide-devider">
+                         <div class="row">
+                             <div class="col-lg-8 column">		
+                                <div class="job-details">
+                                    <h3>Descripción <a><i class="la la-pencil"></i></a></h3>
+                                    <p>{{ tarea.descripcion }}</p>
+                                    <div class="pull-left">
+                                        <h3>Subtareas</h3>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a><h3><i class="la la-plus-circle"></i> Agregar Subtarea</h3></a>
+                                    </div>
+                                    <li *ngFor="let s of tarea.subtareas"><a style="color: blue;">{{ s.nombre }} - Estado: {{ s.estado }}</a></li>
+                                </div>
+                                <div class="recent-jobs">
+                                    <h3>Archivos Adjuntos ({{ tarea.archivosAdjuntos.length }})</h3>
+                                    <div class="job-list-modern">
+                                        <div class="job-listings-sec no-border">
+                                            <div class="job-listing wtabs">
+                                                <div class="job-title-sec" *ngFor="let aa of tarea.archivosAdjuntos">
+                                                    <div class="c-logo"> <a><img style="max-width: 50%;"
+                                                                src="https://lh3.googleusercontent.com/oUukRV8x9WR5J68u9pAxzbDoesBqT3lvdsEip-c0RnsNnO9f-qcqmddWzl6AFuYDMbA"
+                                                                alt="" /> </a></div>
+                                                    <h3><a [href]="aa.link" title="" style="padding-left: 20px;">{{ aa.nombre }}</a></h3>
+                                                    <div class="job-lctn" style="padding-left: 20px;">{{ aa.descripcion }}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                 <div class="recent-jobs">
+                                     <h3>Comentarios ({{ tarea.comentarios.length }})</h3>
+                                     <div class="job-list-modern">
+                                         <div class="job-listings-sec no-border">
+                                            <div class="job-listing wtabs" *ngFor="let c of tarea.comentarios">
+                                                <div class="job-title-sec">
+                                                    <div class="c-logo"> <img [src]="c.foto" alt="" /> </div>
+                                                    <h3><a href="#" title="" style="padding-left: 20px;">{{ c.nombre }}</a></h3>
+                                                    <div class="job-lctn" style="padding-left: 20px;">{{ c.mensaje }}</div>
+                                                </div>
+                                                <div class="job-style-bx">
+                                                    <i>{{ c.fecha }}</i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="col-lg-4 column">
+                                <div class="pull-right"><a><i class="la la-pencil" style="font-size: 20px; padding-top: 20px;"></i></a></div>
+                                 <div class="job-overview" style="margin-top: 0px;">
+                                    <ul>
+                                        <li style="float:left;">
+                                            <div class="pull-left">
+                                                <h3 style="font-size: 20px;"><strong>Estado</strong></h3><i class="la la-caret-right"
+                                                    style="padding-top: 10px;"></i><span
+                                                    style="display:inline; font-size: 20px; color: green;"><strong>{{ tarea.estado }}</strong></span>
+                                            </div>
+                                        </li>
+                                        <li><h3>Responsable</h3><i class="la la-user"></i><span>{{ tarea.responsable }}</span></li>
+                                        <li><h3>Fecha de Finalización</h3><i class="la la-calendar"></i><span>{{ tarea.fechaFinalizacion }}</span></li>
+                                         <li><h3>Tareas que habilita</h3><span><i class="la la-tasks"></i><a style="color: blue" *ngFor="let a of tarea.tareasHabilita">- {{ a.nombre }}</a></span><span><a style="color: blue">- Firma de Convenio (Empresa)</a></span></li>
+                                        <li><h3>Tareas predecesoras</h3><span><i class="la la-tasks"></i><a style="color: blue">- Revisión de Documento</a></span></li>
+                                        <li><h3>Alertas</h3><span><i class="la la-bell"></i><a style="color: blue">- Cada 3 días. <strong>Editar | Eliminar</strong> </a></span></li>
+                                     </ul>
+                                 </div><!-- Job Overview -->
+                                 <div class="quick-form-job">
+                                     <h3>Agregar Comentario</h3>
+                                     <form>
+                                         <textarea placeholder="Ingrese un comentario"></textarea>
+                                         <button class="submit">Enviar</button>
+                                     </form>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+        </div>
+    </div>
+</div>
