@@ -48,6 +48,7 @@ import { TareaDefectoListComponent } from './tarea-defecto-list/tarea-defecto-li
 import { AprobacionUsuarioComponent } from './aprobacion-usuario/aprobacion-usuario.component';
 import { GestionUsuarioComponent } from './gestion-usuario/gestion-usuario.component';
 import { TareaViewComponent } from './tarea-view/tarea-view.component';
+import { AdvertenciaListComponent } from './advertencia-list/advertencia-list.component';
 
 @NgModule({
   imports: [
@@ -100,7 +101,8 @@ import { TareaViewComponent } from './tarea-view/tarea-view.component';
     TareaDefectoListComponent,
     AprobacionUsuarioComponent,
     GestionUsuarioComponent,
-    TareaViewComponent
+    TareaViewComponent,
+    AdvertenciaListComponent
   ],
   bootstrap: [ AppComponent ]
 })

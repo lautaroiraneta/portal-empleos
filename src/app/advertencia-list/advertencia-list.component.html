@@ -1,0 +1,78 @@
+<div class="block no-padding">
+    <div class="container">
+         <div class="row no-gape">
+            <aside class="col-lg-3 column border-right">
+                <div class="widget">
+                    <div class="search_widget_job">
+                        <div class="field_w_search">
+                            <input type="text" placeholder="Nombre del Conocimiento/Puesto" [(ngModel)]="filtroNombre" name="filtroNombre" (keyup)="actualizarItems()" />
+                            <i class="la la-search"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget">
+                    <h3 class="sb-title closed" (click)="isCollapsedTipo = !isCollapsedTipo">Tipo de Registro</h3>
+                    <div class="specialism_widget" [ngbCollapse]="isCollapsedTipo">
+                        <div class="simple-checkbox">
+                            <p><input type="checkbox" name="smplechk" id="22"><label for="22">Conocimiento</label></p>
+                            <p><input type="checkbox" name="smplechk" id="23"><label for="23">Puesto de Trabajo</label>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget">
+                    <h3 class="sb-title closed" (click)="isCollapsedFechaInvalidacion = !isCollapsedFechaInvalidacion">Fecha de Invalidación</h3>
+                    <div class="posted_widget" [ngbCollapse]="isCollapsedFechaInvalidacion">
+                        <input type="radio" name="choose" id="wwqe"><label for="wwqe">Últimas 24 horas</label><br />
+                        <input type="radio" name="choose" id="erewr"><label for="erewr">Últimos 7 días</label><br />
+                        <input type="radio" name="choose" id="qwe"><label for="qwe">Últimos 14 días</label><br />
+                        <input type="radio" name="choose" id="wqe"><label for="wqe">Últimos 30 días</label><br />
+                        <input type="radio" name="choose" id="qweqw"><label class="nm" for="qweqw">Todos</label><br />
+                    </div>
+                </div>
+            </aside>
+             <div class="col-lg-9 column">
+                 <div class="padding-left">
+                     <div class="manage-jobs-sec">
+                        <br />
+                        <h2 style="padding-left: 27px;">Visualización de Advertencias</h2>
+                         <table>
+                             <thead>
+                                 <tr>
+                                    <td style="color: purple;"><h4>Nombre</h4></td>
+                                    <td style="color: purple; margin-left: 10px;"><h4>Tipo</h4></td>
+                                     <td style="color: purple;"><h4>Fecha de Invalidación</h4></td>
+                                     <td style="padding-left: 25px; color: purple;"><h4>Razón de Invalidación</h4></td>
+                                 </tr>
+                             </thead>
+                            <tbody>
+                                <tr *ngFor="let a of items">
+                                    <td>
+                                        <div class="table-list-title">
+                                            <h3>{{ a.nombre }}</h3>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="table-list-title">
+                                            <h3>{{ a.tipo }}</h3>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="table-list-title">
+                                            <h3 style="margin-left: 70px;">{{ a.fechaInvalidacion }}</h3>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="table-list-title">
+                                            <h3>{{ a.razon }}</h3>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                         </table>
+                     </div>
+                 </div>
+            </div>
+         </div>
+    </div>
+</div>

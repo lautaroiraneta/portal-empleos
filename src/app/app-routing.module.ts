@@ -36,10 +36,12 @@ import { TareaDefectoListComponent } from './tarea-defecto-list/tarea-defecto-li
 import { AprobacionUsuarioComponent } from './aprobacion-usuario/aprobacion-usuario.component';
 import { GestionUsuarioComponent } from './gestion-usuario/gestion-usuario.component';
 import { TareaViewComponent } from './tarea-view/tarea-view.component';
+import { AdvertenciaListComponent } from './advertencia-list/advertencia-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/crear-perfil', pathMatch: 'full' },
   { path: 'acuerdo-individual', component: AcuerdoIndividualComponent },
+  { path: 'advertencia-list', component: AdvertenciaListComponent },
   { path: 'agregar-conocimientos-a-mi-perfil', component: AgregarConocimientosComponent },
   { path: 'alertas-list', component: AlertasListComponent },
   { path: 'alumno/:id', component: AlumnoComponent },
