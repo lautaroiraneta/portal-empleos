@@ -60,7 +60,6 @@ import { ConocimientoListComponent } from './conocimiento-list/conocimiento-list
     BsDatepickerModule.forRoot(),
     DatepickerModule.forRoot(),
     BrowserAnimationsModule,
-    HttpClientModule,
     NgMultiSelectDropDownModule.forRoot(),
     AngularMyDatePickerModule,
     NgbModule,

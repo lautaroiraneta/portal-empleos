@@ -33,8 +33,8 @@ export class AcuerdoIndividualComponent implements OnInit {
       domingo: { entrada: '11:00 AM', salida: '05:00 PM'}, 
     },
     tareas: [
-      'Tarea 1',
-      'Tarea 2'
+      { valor: 'Tarea 1' },
+      { valor: 'Tarea 2' }
     ]
   };
 
@@ -81,6 +81,6 @@ export class AcuerdoIndividualComponent implements OnInit {
   }
 
   agregarTarea() {
-    this.acuerdo.tareas.push('');
+    this.acuerdo.tareas.push( { valor: '' });
   }
 }

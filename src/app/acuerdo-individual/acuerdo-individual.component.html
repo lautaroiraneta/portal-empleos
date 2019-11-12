@@ -163,7 +163,7 @@
                             <div class="col-lg-6">
                                 <span class="pf-title">Tareas a realizar por el pasante</span>
                                 <div class="pf-field" *ngFor="let t of acuerdo.tareas; let i = index">
-                                    <input type="text" placeholder="Ingrese el nombre de la tarea" [(ngModel)]="acuerdo.tareas[i]" name="tarea-{{i}}" />
+                                    <input type="text" placeholder="Ingrese el nombre de la tarea" [(ngModel)]="acuerdo.tareas[i].valor" name="tarea-{{i}}" />
                                 </div>
                             </div>
                             <div class="col-lg-6" style="margin-top: 75px;">

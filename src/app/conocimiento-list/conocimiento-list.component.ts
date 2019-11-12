@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-conocimiento-list',
@@ -12,9 +13,13 @@ export class ConocimientoListComponent implements OnInit {
     { id: '3', nombre: 'Analista Comercial', tipo: 'Puesto de Trabajo', ultimaModificacion: '25/10/2018', aparicionesEnPropuestas: 2, aparicionesEnPerfiles: 5 }
   ];
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
+    this.http.get('https://localhost:44374/WeatherForecast')
+      .subscribe(x => {
+        console.log(x);
+      });
   }
 
 }
