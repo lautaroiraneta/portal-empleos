@@ -37,6 +37,7 @@ import { AprobacionUsuarioComponent } from './aprobacion-usuario/aprobacion-usua
 import { GestionUsuarioComponent } from './gestion-usuario/gestion-usuario.component';
 import { TareaViewComponent } from './tarea-view/tarea-view.component';
 import { AdvertenciaListComponent } from './advertencia-list/advertencia-list.component';
+import { ConocimientoListComponent } from './conocimiento-list/conocimiento-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/crear-perfil', pathMatch: 'full' },
@@ -48,6 +49,7 @@ const routes: Routes = [
   { path: 'alumno-list', component: AlumnoListComponent },
   { path: 'aprobacion-usuario', component: AprobacionUsuarioComponent },
   { path: 'carrera', component: CarreraComponent },
+  { path: 'conocimiento-list', component: ConocimientoListComponent },
   { path: 'control-conocimientos-puestos', component: ControlConocimientosPuestosComponent },
   { path: 'convenio', component: ConvenioComponent },
   { path: 'convenio-list', component: ConvenioListComponent },

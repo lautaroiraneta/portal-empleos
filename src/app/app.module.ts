@@ -49,6 +49,7 @@ import { AprobacionUsuarioComponent } from './aprobacion-usuario/aprobacion-usua
 import { GestionUsuarioComponent } from './gestion-usuario/gestion-usuario.component';
 import { TareaViewComponent } from './tarea-view/tarea-view.component';
 import { AdvertenciaListComponent } from './advertencia-list/advertencia-list.component';
+import { ConocimientoListComponent } from './conocimiento-list/conocimiento-list.component';
 
 @NgModule({
   imports: [
@@ -102,7 +103,8 @@ import { AdvertenciaListComponent } from './advertencia-list/advertencia-list.co
     AprobacionUsuarioComponent,
     GestionUsuarioComponent,
     TareaViewComponent,
-    AdvertenciaListComponent
+    AdvertenciaListComponent,
+    ConocimientoListComponent
   ],
   bootstrap: [ AppComponent ]
 })

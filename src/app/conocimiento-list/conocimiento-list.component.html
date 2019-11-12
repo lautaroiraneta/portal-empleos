@@ -1,0 +1,53 @@
+<div class="padding-left">
+    <div class="manage-jobs-sec">
+       <br />
+       <h2 style="padding-left: 27px;">Visualización de Conocimientos y Puestos de Trabajo</h2>
+        <table>
+            <thead>
+                <tr>
+                   <td style="color: purple;"><h4>Nombre</h4></td>
+                   <td style="color: purple; margin-left: 10px;"><h4>Tipo</h4></td>
+                    <td style="color: purple;"><h4>Última modificación</h4></td>
+                   <td style="color: purple;"><h4>Apariciones en Propuestas</h4></td>
+                   <td style="color: purple;"><h4>Apariciones en Perfiles</h4></td>
+                    <td style="padding-left: 25px; color: purple;"><h4>Agregar a Perfil</h4></td>
+                </tr>
+            </thead>
+           <tbody>
+               <tr *ngFor="let c of conocimientos">
+                   <td>
+                       <div class="table-list-title">
+                           <h3>{{ c.nombre }}</h3>
+                       </div>
+                   </td>
+                   <td>
+                       <div class="table-list-title">
+                           <h3>{{ c.tipo }}</h3>
+                       </div>
+                   </td>
+                   <td>
+                       <div class="table-list-title">
+                           <h3 style="margin-left: 10px;">{{ c.ultimaModificacion }}</h3>
+                       </div>
+                   </td>
+                   <td>
+                       <div class="table-list-title">
+                           <h3>{{ c.aparicionesEnPropuestas }}</h3>
+                       </div>
+                   </td>
+                   <td>
+                       <div class="table-list-title">
+                           <h3>{{ c.aparicionesEnPerfiles }}</h3>
+                       </div>
+                   </td>
+                   <td>
+                       <ul class="action_job">
+                           <li><span>Agregar</span><a href="#" title=""><i class="la la-plus-circle"
+                                       style="font-size: 36px; color: green;"></i></a></li>
+                       </ul>
+                   </td>
+               </tr>
+           </tbody>
+        </table>
+    </div>
+</div>
