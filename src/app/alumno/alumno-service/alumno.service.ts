@@ -73,7 +73,7 @@ export class AlumnoService {
     return this.alumnos;
   }
 
-  getById(id: string) {
+  getById(id: string): any {
     return this.alumnos.filter(x => x.id === id)[0];
   }
 }

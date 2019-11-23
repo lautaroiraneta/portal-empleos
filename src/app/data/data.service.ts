@@ -22,7 +22,7 @@ export class DataService {
 
 
   postAlumno(carrera: Carrera): Observable<any> {
-    return this.http.post('https://putsreq.com/FOaQArpd1uZoM1UJruRW', carrera);
+    return this.http.post('https://localhost:44374/WeatherForecast', carrera);
     //return of(carrera);
   }
 }

@@ -1,14 +1,14 @@
 <div class="block no-padding">
     <div class="container">
-         <div class="row no-gape">
-             <div class="col-lg-12 column">
-                 <div class="padding-left">
-                     <div class="profile-title">
-                         <h3>Alta de Alumno</h3>
-                     </div>
-                     <div class="profile-form-edit">
-                         <form>
-                             <div class="row">
+        <div class="row no-gape">
+            <div class="col-lg-12 column">
+                <div class="padding-left">
+                    <div class="profile-title">
+                        <h3>Alta de Alumno</h3>
+                    </div>
+                    <div class="profile-form-edit">
+                        <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+                            <div class="row">
                                 <div class="col-lg-6">
                                     <span class="pf-title">Nombre</span>
                                     <div class="pf-field">
@@ -18,13 +18,15 @@
                                 <div class="col-lg-6">
                                     <span class="pf-title">Apellido</span>
                                     <div class="pf-field">
-                                        <input type="text" placeholder="" [(ngModel)]="alumno.apellidos" name="apellidos" />
+                                        <input type="text" placeholder="" [(ngModel)]="alumno.apellidos"
+                                            name="apellidos" />
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <span class="pf-title" style="margin-top: 0px;">Libreta Universitaria</span>
                                     <div class="pf-field">
-                                        <input type="text" placeholder="" [(ngModel)]="alumno.libretaUniversitaria" name="libretaUniversitaria" />
+                                        <input type="text" placeholder="" [(ngModel)]="alumno.libretaUniversitaria"
+                                            name="libretaUniversitaria" />
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
@@ -36,35 +38,34 @@
                                 <div class="col-lg-6">
                                     <span class="pf-title" style="margin-top: 0px;">Tipo de Documento</span>
                                     <div class="pf-field">
-                                        <input type="text" placeholder="DNI" [(ngModel)]="alumno.documento.tipo" name="tipoDocumento" />
+                                        <input type="text" placeholder="DNI" [(ngModel)]="alumno.tipoDocumento"
+                                            name="tipoDocumento" />
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <span class="pf-title" style="margin-top: 0px;">Documento</span>
                                     <div class="pf-field">
-                                        <input type="text" placeholder="xx.xxx.xxx" [(ngModel)]="alumno.documento.numero" name="numeroDocumento" />
+                                        <input type="text" placeholder="xx.xxx.xxx" [(ngModel)]="alumno.numeroDocumento"
+                                            name="numeroDocumento" />
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <span class="pf-title" style="margin-top: 0px;">Nombre de usuario</span>
                                     <div class="pf-field">
-                                        <input type="text" placeholder="" [(ngModel)]="alumno.nombreUsuario" name="nombreUsuario" />
+                                        <input type="text" placeholder="" [(ngModel)]="alumno.nombreUsuario"
+                                            name="nombreUsuario" />
                                     </div>
-                                </div>	
-                            </div>
-                         </form>
-                     </div>
-                     <div class="contact-edit">
-                         <form>
-                             <div class="row">
-                                <div class="col-lg-12">
-                                    <button type="submit"><a href="" title="">Crear Alumno</a></button>
                                 </div>
-                             </div>
-                         </form>
-                     </div>
-                 </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button type="submit">Crear Alumno</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>                    
+                </div>
             </div>
-         </div>
+        </div>
     </div>
 </div>

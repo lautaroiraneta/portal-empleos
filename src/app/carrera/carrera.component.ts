@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { DataService } from '../data/data.service';
+import { HttpClient } from '@angular/common/http';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-export interface Carrera {
+export class Carrera {
   nombre: string;
   codigo: string;
 }
@@ -13,21 +14,27 @@ export interface Carrera {
   styleUrls: ['./carrera.component.css']
 })
 export class CarreraComponent implements OnInit {
-  carrera = {
-    nombre: 'Carrera',
-    codigo: 'Código'
+  carrera: Carrera = {
+    nombre: undefined,
+    codigo: undefined
   }
 
-  constructor(private dataService: DataService) { }
+  constructor(private http: HttpClient, private modalService: NgbModal) { }
 
   ngOnInit() {
   }
 
   onSubmit(form: NgForm) {
     console.log('in onSubmit: ', form.valid);
-    this.dataService.postAlumno(this.carrera).subscribe(
-      result => console.log('success: ', result),
-      error => console.log('error: ', error)
-    );
+    const data = new Carrera();
+    data.nombre = this.carrera.nombre;
+    data.codigo = this.carrera.codigo;
+
+    this.http.post('https://localhost:44374/Carrera', data)
+      .subscribe(x => {
+        alert('Carrera Creada!');
+        this.carrera.nombre = undefined;
+        this.carrera.codigo = undefined;
+      });
   }
 }

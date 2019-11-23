@@ -50,6 +50,7 @@ import { GestionUsuarioComponent } from './gestion-usuario/gestion-usuario.compo
 import { TareaViewComponent } from './tarea-view/tarea-view.component';
 import { AdvertenciaListComponent } from './advertencia-list/advertencia-list.component';
 import { ConocimientoListComponent } from './conocimiento-list/conocimiento-list.component';
+import { ConfirmacionComponent } from './confirmacion/confirmacion.component';
 
 @NgModule({
   imports: [
@@ -103,7 +104,8 @@ import { ConocimientoListComponent } from './conocimiento-list/conocimiento-list
     GestionUsuarioComponent,
     TareaViewComponent,
     AdvertenciaListComponent,
-    ConocimientoListComponent
+    ConocimientoListComponent,
+    ConfirmacionComponent
   ],
   bootstrap: [ AppComponent ]
 })
