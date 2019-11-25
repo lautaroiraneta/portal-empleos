@@ -18,13 +18,13 @@
                                 <div class="col-lg-6">
                                     <span class="pf-title">Página Web</span>
                                     <div class="pf-field">
-                                        <input type="text" placeholder="http://" [(ngModel)]="empresa.paginaWeb" name="paginaWeb" />
+                                        <input type="text" placeholder="http://" [(ngModel)]="empresa.sitioWeb" name="paginaWeb" />
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <span class="pf-title" style="margin-top: 0px;">CUIT</span>
                                     <div class="pf-field">
-                                        <input type="text" placeholder="xx-xxxxxxxx-x" [(ngModel)]="empresa.cuit" name="cuit" />
+                                        <input type="text" placeholder="xx-xxxxxxxx-x" [(ngModel)]="empresa.cuit" name="cuit" maxlength="13" />
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
@@ -39,7 +39,7 @@
                                     <div class="pf-field" *ngFor="let email of empresa.emails; let i = index">
                                         <div class="col-lg-11" style="margin-left: -15px;">
                                             <div class="pf-field">
-                                                <input type="text" placeholder="" name="email-{{i}}" [(ngModel)]="empresa.emails[i].email" />
+                                                <input type="text" placeholder="" name="email-{{i}}" [(ngModel)]="empresa.emails[i].valor" />
                                             </div>
                                         </div>
                                         <div style="padding-top:10px;" *ngIf="empresa.emails.length !== 1">
@@ -53,7 +53,7 @@
                                     <div class="pf-field" *ngFor="let telefono of empresa.telefonos; let i = index">
                                         <div class="col-lg-11" style="margin-left: -15px;">
                                             <div class="pf-field">
-                                                <input type="text" placeholder="" name="telefono-{{i}}" [(ngModel)]="empresa.telefonos[i].telefono" />
+                                                <input type="text" placeholder="" name="telefono-{{i}}" [(ngModel)]="empresa.telefonos[i].valor" />
                                             </div>
                                         </div>
                                         <div style="padding-top:10px;" *ngIf="empresa.telefonos.length !== 1">
@@ -66,27 +66,27 @@
                                     
                                     <div class="pf-field col-lg-6">
                                         <p>Nombre</p>
-                                        <input type="text" placeholder="" [(ngModel)]="empresa.contacto.nombre" name="nombreContacto" />
+                                        <input type="text" placeholder="" [(ngModel)]="empresa.contactoNombre" name="nombreContacto" />
                                     </div>
                                     <div class="pf-field col-lg-6">
                                         <p>Apellido</p>
-                                        <input type="text" placeholder="" [(ngModel)]="empresa.contacto.apellido" name="apellidoContacto"/>
+                                        <input type="text" placeholder="" [(ngModel)]="empresa.contactoApellido" name="apellidoContacto"/>
                                     </div>
                                     <div class="pf-field col-lg-3">
                                         <p>Teléfono</p>
-                                        <input type="text" placeholder="" [(ngModel)]="empresa.contacto.telefono" name="telefonoContacto"/>
+                                        <input type="text" placeholder="" [(ngModel)]="empresa.contactoTelefono" name="telefonoContacto"/>
                                     </div>
                                     <div class="pf-field col-lg-3">
                                         <p>Email</p>
-                                        <input type="text" placeholder="" [(ngModel)]="empresa.contacto.email" name="emailContacto"/>
+                                        <input type="text" placeholder="" [(ngModel)]="empresa.contactoEmail" name="emailContacto"/>
                                     </div>
                                     <div class="pf-field col-lg-3">
                                         <p>Cargo</p>
-                                        <input type="text" placeholder="" [(ngModel)]="empresa.contacto.cargo" name="cargoContacto"/>
+                                        <input type="text" placeholder="" [(ngModel)]="empresa.contactoCargo" name="cargoContacto"/>
                                     </div>
                                     <div class="pf-field col-lg-3">
                                         <p>Nombre de Usuario</p>
-                                        <input type="text" placeholder="" [(ngModel)]="empresa.contacto.nombreUsuario" name="nombreUsuarioContacto"/>
+                                        <input type="text" placeholder="" [(ngModel)]="empresa.contactoNombreUsuario" name="nombreUsuarioContacto"/>
                                     </div>
                                 </div>
                              </div>

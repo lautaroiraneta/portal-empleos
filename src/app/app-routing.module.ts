@@ -54,7 +54,7 @@ const routes: Routes = [
   { path: 'convenio', component: ConvenioComponent },
   { path: 'convenio-list', component: ConvenioListComponent },
   { path: 'crear-perfil', component: CrearPerfilComponent },
-  { path: 'empresa', component: EmpresaComponent },
+  { path: 'empresa/:id', component: EmpresaComponent },
   { path: 'empresa-list', component: EmpresaListComponent },
   { path: 'etapa-definicion-convenio', component: EtapaDefinicionConvenioComponent },
   { path: 'etapa-pasantia-curso', component: EtapaPasantiaCursoComponent },

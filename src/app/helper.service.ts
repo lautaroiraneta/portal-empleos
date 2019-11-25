@@ -1,16 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { IAngularMyDpOptions } from 'angular-mydatepicker';
-
-export interface Email {
-  id: string
-  email: string;
-}
-
-export interface Telefono {
-  id: string;
-  telefono: string;
-}
+import { IdValor } from './empresa/empresa.component';
 
 export interface ExperienciaLaboral {
   puesto: IdNombre[],
@@ -109,29 +100,29 @@ export class HelperService {
     { id: '4', nombre: 'Agile' }
   ];
 
-  agregarEmail(list: Email[]) {
-    list.push({ id: (list[list.length - 1].id + 1).toString(), email: 'email3@gmail.com'});
+  agregarEmail(list: IdValor[]) {
+    list.push({ id: 'new', valor: ''});
   }
 
-  agregarTelefono(list: Telefono[]) {
-    list.push({ id: (list[list.length - 1].id + 1).toString(), telefono: '994949'});
+  agregarTelefono(list: IdValor[]) {
+    list.push({ id: 'new', valor: ''});
   }
 
-  eliminarEmail(list: Email[], id: string): Email[] {
+  eliminarEmail(list: IdValor[], id: string): IdValor[] {
     list = list.filter(x => x.id !== id);
 
     if (list.length === 0) {
-      list.push({ id: '1', email: '' });
+      list.push({ id: 'new', valor: '' });
     }
 
     return list;
   }
 
-  eliminarTelefono(list: Telefono[], id: string): Telefono[] {
+  eliminarTelefono(list: IdValor[], id: string): IdValor[] {
     list = list.filter(x => x.id !== id);
 
     if (list.length === 0) {
-      list.push({ id: '1', telefono: '' });
+      list.push({ id: 'new', valor: '' });
     }
 
     return list;

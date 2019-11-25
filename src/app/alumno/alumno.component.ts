@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Email } from '../helper.service';
 import { ActivatedRoute } from '@angular/router';
 import { AlumnoService } from './alumno-service/alumno.service';
 import { NgForm } from '@angular/forms';
