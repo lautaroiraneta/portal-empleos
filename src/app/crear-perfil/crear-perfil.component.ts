@@ -1,32 +1,58 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HelperService, Email, Telefono } from '../helper.service';
+import { FormsModule, NgForm } from '@angular/forms';
+import { HelperService } from '../helper.service';
 import { Observable } from 'rxjs';
 import { DataService } from '../data/data.service';
 import { IAngularMyDpOptions, IMyDateModel } from 'angular-mydatepicker';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { IdValor } from '../empresa/empresa.component';
+import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 
-export interface Perfil {
-  nombres: string;
-  apellidos: string;
-  emails: Email[];
-  telefonos: Telefono[];
-  paisResidencia: any;
-  provinciaResidencia: any;
-  estadoCivil: any;
-  descripcion?: any;
-  paisNacionalidad: any;
-  tipoDocumento: any;
-  numeroDocumento: string;
+export class Perfil {
+  nombre: string;
+  apellido: string;
+  emails: IdValor[] = [];
+  telefonos: IdValor[] = [];
+  paisResidencia: IdValor[];
+  provinciaResidencia: IdValor[];
+  estadoCivil: IdValor[];
+  paisNacionalidad: IdValor[];
+  tipoDocumento: string;
+  documento: string;
   fechaNacimiento: IMyDateModel;
-  redesSociales: any;
+  fechaNacimientoDT: Date;
+  redesSociales: any = new RedesSociales();
   fotoPerfil: any;
-  objetivoLaboral: any;
-  interesesPersonales: any;
-  experienciaLaboral: any;
+  objetivoLaboral: string;
+  interesesPersonales: string;
+  experienciaLaboral: ExperienciaLaboral[];
   experienciaEducativa: any;
   idiomas: any;
+}
+
+export class ExperienciaLaboral {
+  empresa: string;
+  puesto: IdValor[];
+  fechaDesde: IMyDateModel;
+  fechaDesdeDT: Date;
+  fechaHasta: IMyDateModel;
+  fechaHastaDT: Date;
+  actualmenteTrabajando: boolean;
+  descripcion: string;
+  conocimientosAdquiridos: any;
+}
+
+export class RedesSociales {
+  twitter: string;
+  mostrarFeedTwitter: boolean;
+  facebook: string;
+  mostrarFeedFacebook: boolean;
+  instagram: string;
+  mostrarFeedInstagram: boolean;
+  linkedIn: string;
+  mostrarFeedLinkedIn: boolean;
 }
 
 @Component({
@@ -36,6 +62,8 @@ export interface Perfil {
 })
 export class CrearPerfilComponent implements OnInit {
   paso: number = 1;
+  mostrarWell: boolean = false;
+  newPuesto: string;
 
   myDpOptions: IAngularMyDpOptions = {
     dateRange: false,
@@ -44,141 +72,11 @@ export class CrearPerfilComponent implements OnInit {
     monthLabels: { 1: 'Ene', 2: 'Feb', 3: 'Mar', 4: 'Abr', 5: 'May', 6: 'Jun', 7: 'Jul', 8: 'Ago', 9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dic' }
     // other options are here...
   };
-  
-  paises = [
-    { id: 'ARG', nombre: 'Argentina' }, 
-    { id: 'BOL', nombre: 'Bolivia' }, 
-    { id: 'BRA', nombre: 'Brasil' }, 
-    { id: 'CHI', nombre: 'Chile' }, 
-    { id: 'COL', nombre: 'Colombia' }, 
-    { id: 'ECU', nombre: 'Ecuador' }, 
-    { id: 'PAR', nombre: 'Paraguay' }, 
-    { id: 'PER', nombre: 'Perú' }, 
-    { id: 'URU', nombre: 'Uruguay' }, 
-    { id: 'VEN', nombre: 'Venezuela' }, 
-    { id: 'OTRO', nombre: 'Otro' }
-  ];
+ 
+  paises: IdValor[];
+  provincias: IdValor[];
 
-  provincias = [
-    { id: 'BUE', nombre: 'Buenos Aires' }, 
-    { id: 'CAT', nombre: 'Catamarca' },
-    { id: 'CHA', nombre: 'Chaco' }, 
-    { id: 'CHU', nombre: 'Chubut' }, 
-    { id: 'CBA', nombre: 'Córdoba' }, 
-    { id: 'COR', nombre: 'Corrientes' }, 
-    { id: 'ENR', nombre: 'Entre Ríos' }, 
-    { id: 'FOR', nombre: 'Formosa' }, 
-    { id: 'JUJ', nombre: 'Jujuy' }, 
-    { id: 'LAP', nombre: 'La Pampa' }, 
-    { id: 'LAR', nombre: 'La Rioja' }, 
-    { id: 'MEN', nombre: 'Mendoza' }, 
-    { id: 'MIS', nombre: 'Misiones' }, 
-    { id: 'NEU', nombre: 'Neuquen' },
-    { id: 'RIO', nombre: 'Río Negro' }, 
-    { id: 'SAL', nombre: 'Salta' }, 
-    { id: 'SAJ', nombre: 'San Juan' }, 
-    { id: 'SAL', nombre: 'San Luis' }, 
-    { id: 'SAC', nombre: 'Santa Cruz' }, 
-    { id: 'SAF', nombre: 'Santa Fe' }, 
-    { id: 'SDE', nombre: 'Santiago del Estero' }, 
-    { id: 'TDF', nombre: 'Tierra del Fuego' }, 
-    { id: 'TUC', nombre: 'Tucumán' }
-  ];
-
-  perfil : Perfil = {
-    nombres: 'Nombres',
-    apellidos: 'Apellidos',
-    emails: [
-      { id: '1', email: 'email1@gmail.com' }, 
-      { id: '2', email: 'email2@gmail.com' }
-    ],
-    telefonos: [
-      { id: '1', telefono: '1234567' }, 
-      { id: '2', telefono: '578786' }
-    ],
-    paisResidencia: [
-      { id: 'ARG', nombre: 'Argentina' }
-    ],
-    provinciaResidencia: [
-      { id: 'BUE', nombre: 'Buenos Aires' }
-    ],
-    estadoCivil: [
-      { id: '2', nombre: 'En Pareja' }
-    ],
-    paisNacionalidad: [{ id: 'ARG', nombre: 'Argentina' }],
-    tipoDocumento:  [
-      { id: '1', nombre: 'DNI'}
-    ],
-    numeroDocumento: '35.941.589',
-    fechaNacimiento: null,
-    fotoPerfil: null,
-    redesSociales: {
-      twitter: '@__lauta',
-      mostrarFeedTwitter: true,
-      facebook: 'lautaroiraneta',
-      mostrarFeedFacebook: true,
-      instagram: 'lautaaa',
-      mostrarFeedInstagram: true,
-      linkedIn: 'Lautaro Irañeta',
-      mostrarFeedLinkedIn: true,
-    },
-    objetivoLaboral: 'Hacer poco y ganar mucho. AGREGAR RICH TEXT!!!!!!',
-    interesesPersonales: 'Spurs, Mets y Raiders papá',
-    experienciaLaboral: [{
-      id: '1',
-      empresa: {
-        id: 'google',
-        nombre: 'Google'
-      },
-      puesto: 'Software Engineer',
-      fechaDesde: '10/2013',
-      fechaHasta: '10/2014'
-    }, {
-      id: '2',
-      empresa: {
-        id: 'jpmorgan',
-        nombre: 'JP Morgan'
-      },
-      puesto: 'Senior Software Engineer',
-      fechaDesde: '11/2014',
-      fechaHasta: '11/2016'
-    }, {
-      id: '3',
-      empresa: {
-        id: 'mercadolibre',
-        nombre: 'MercadoLibre'
-      },
-      puesto: 'Technical Leader',
-      fechaDesde: '12/2016',
-      fechaHasta: 'Actualidad'
-    }],
-    experienciaEducativa: [{
-      id: '1',
-      institucion: 'UADE',
-      tipo: 'Universitario',
-      estado: 'En Curso',
-      fechaInicio: '03/2010',
-      fechaFin: 'Presente'
-    }, {
-      id: '2',
-      institucion: 'EET N°7 "José Hernández"',
-      tipo: 'Secundario',
-      estado: 'Completo',
-      fechaInicio: '03/2006',
-      fechaFin: '12/2009'
-    }],
-    idiomas: [{
-      idioma: 'Inglés',
-      nivelOral: {
-        id: 'int',
-        nombre: 'Intermedio'
-      },
-      nivelEscrito: {
-        id: 'bas',
-        nombre: 'Básico'
-      }
-    }]
-  };
+  perfil: Perfil;
 
   idiomas = [
     { id: 'chi', nombre: 'Chino' },
@@ -208,8 +106,6 @@ export class CrearPerfilComponent implements OnInit {
     comentarios: 'comentarios'
   }
 
-  estadosCivil: Observable<any[]>;
-
   tiposDocumento = [
     { id: '1', nombre: 'DNI'}
   ];
@@ -218,7 +114,7 @@ export class CrearPerfilComponent implements OnInit {
     singleSelection: true,
     closeDropDownOnSelection: true,
     idField: 'id',
-    textField: 'nombre',
+    textField: 'valor',
     enableCheckAll: false,
     itemsShowLimit: 3,
     allowSearchFilter: true
@@ -226,18 +122,7 @@ export class CrearPerfilComponent implements OnInit {
 
   closeResult: string;
 
-  experienciaLaboral = {
-    empresa: 'Una Empresa',
-    puestoLaboral: [{
-      id: '2',
-      nombre: 'Analista'
-    }],
-    fechaDesde: null,
-    fechaHasta: null,
-    actualmenteTrabajando: true,
-    descripcion: 'aasdasdasd',
-    conocimientosAdquiridos: 'SQL - .NET - Apache'
-  };
+  experienciaLaboral: ExperienciaLaboral;
   
   experienciasEducativasTipos = [{
     id: 'primario',
@@ -284,16 +169,40 @@ export class CrearPerfilComponent implements OnInit {
   }, {
     id: '2',
     nombre: 'Analista'
-  }]
+  }];
+
+  estadosCivil = [{ id: '1', valor: 'Soltero' },
+    { id: '2', valor: 'En Pareja' },
+    { id: '3', valor: 'Casado' },
+    { id: '4', valor: 'Divorciado' },
+    { id: '5', valor: 'Viudo' }];
 
   constructor(
     private helperService: HelperService,
     private dataService: DataService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private http: HttpClient,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    this.estadosCivil = this.dataService.getEstadosCivil();
+    var id = this.route.snapshot.params['id'];
+    if (id !== 'new') {
+      // this.alumno = this.alumnoService.getById(id);
+    } else {
+      this.perfil = new Perfil();
+      this.perfil.emails.push({ id: 'new', valor: '' });
+      this.perfil.telefonos.push({ id: 'new', valor: '' });
+      this.perfil.experienciaLaboral = [];
+    }
+
+    this.dataService.getPaises().subscribe(x => {
+      this.paises = x;
+    });
+
+    this.dataService.getProvincias().subscribe(x => {
+      this.provincias = x;
+    });
 
     this.perfil.fechaNacimiento = { isRange: false, singleDate: { jsDate: new Date() } };
   }
@@ -314,12 +223,19 @@ export class CrearPerfilComponent implements OnInit {
     this.perfil.telefonos = this.helperService.eliminarTelefono(this.perfil.telefonos, id);
   }
 
-  open(content) {
+  openExperienciaLaboral(content) {
+    this.experienciaLaboral = new ExperienciaLaboral();
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
+  }
+
+  saveExperienciaLaboral() {
+    this.perfil.experienciaLaboral.push(this.experienciaLaboral);
+    console.log(this.perfil);
+    this.modalService.dismissAll();
   }
 
   private getDismissReason(reason: any): string {
@@ -329,6 +245,43 @@ export class CrearPerfilComponent implements OnInit {
       return 'by clicking on a backdrop';
     } else {
       return  `with: ${reason}`;
+    }
+  }
+
+  onItemSelect(item: any) {
+    console.log(item);
+  }
+  
+  onSelectAll(items: any) {
+    console.log(items);
+  }
+
+  guardarNewPuesto() {
+    console.log(this.newPuesto);
+  }
+
+  onSubmit(form: NgForm) {
+    if (this.paso === 6) {
+      let data = new Perfil();
+      data.nombre = this.perfil.nombre;
+      data.apellido = this.perfil.apellido;
+      data.paisResidencia = this.perfil.paisResidencia;
+      data.emails = this.perfil.emails;
+      data.telefonos = this.perfil.telefonos;
+      data.provinciaResidencia = this.perfil.provinciaResidencia;
+      data.fechaNacimientoDT = this.perfil.fechaNacimiento.singleDate.date ?
+        new Date(this.perfil.fechaNacimiento.singleDate.date.year, this.perfil.fechaNacimiento.singleDate.date.month - 1, this.perfil.fechaNacimiento.singleDate.date.day) : new Date();
+      data.estadoCivil = this.perfil.estadoCivil;
+      data.paisNacionalidad = this.perfil.paisNacionalidad;
+      data.tipoDocumento = this.perfil.tipoDocumento;
+      data.documento = this.perfil.documento;
+      data.redesSociales = this.perfil.redesSociales;
+      data.objetivoLaboral = this.perfil.objetivoLaboral;
+      data.interesesPersonales = this.perfil.interesesPersonales;
+
+      this.http.post('https://localhost:44374/Perfil', data).subscribe(x => {
+        alert('Perfil Creado!');
+      });
     }
   }
 }

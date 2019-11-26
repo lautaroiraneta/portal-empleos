@@ -36,18 +36,18 @@
                             <span>¡Listo!</span>
                         </div>
                     </div>
-                    <form #form="ngForm" [ngSwitch]="paso">
+                    <form #form="ngForm" [ngSwitch]="paso" (ngSubmit)="onSubmit(form)">
                         <div class="row" *ngSwitchCase="1">
                             <div class="col-lg-6">
                                 <span class="pf-title">Nombres</span>
                                 <div class="pf-field">
-                                    <input type="text" placeholder="" name="nombres" [(ngModel)]="perfil.nombres" />
+                                    <input type="text" placeholder="" name="nombres" [(ngModel)]="perfil.nombre" />
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <span class="pf-title">Apellidos</span>
                                 <div class="pf-field">
-                                    <input type="text" placeholder="" name="apellidos" [(ngModel)]="perfil.apellidos" />
+                                    <input type="text" placeholder="" name="apellidos" [(ngModel)]="perfil.apellido" />
                                 </div>
                             </div>
                             <span class="pf-title" style="padding-left: 15px; margin-top: 0px;">Correo
@@ -56,7 +56,7 @@
                                 <div class="col-lg-11" style="margin-left: -15px;">
                                     <div class="pf-field">
                                         <input type="text" placeholder="" name="email-{{i}}"
-                                            [(ngModel)]="perfil.emails[i].email" />
+                                            [(ngModel)]="perfil.emails[i].valor" />
                                     </div>
                                 </div>
                                 <div style="padding-top:10px;" *ngIf="perfil.emails.length !== 1">
@@ -75,7 +75,7 @@
                                 <div class="col-lg-11" style="margin-left: -15px;">
                                     <div class="pf-field">
                                         <input type="text" placeholder="" name="telefono-{{i}}"
-                                            [(ngModel)]="perfil.telefonos[i].telefono" />
+                                            [(ngModel)]="perfil.telefonos[i].valor" />
                                     </div>
                                 </div>
                                 <div style="padding-top:10px;" *ngIf="perfil.telefonos.length !== 1">
@@ -158,7 +158,7 @@
                                 <span class="pf-title" style="margin-top: 0px;">Estado Civil</span>
                                 <div class="pf-field">
                                     <ng-multiselect-dropdown [placeholder]="'Seleccione un Estado Civil'"
-                                        [data]="estadosCivil | async" [(ngModel)]="perfil.estadoCivil"
+                                        [data]="estadosCivil" [(ngModel)]="perfil.estadoCivil"
                                         name="estadoCivil" [settings]="dropdownSettingsSingle"
                                         (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
                                     </ng-multiselect-dropdown>
@@ -177,17 +177,14 @@
                             <div class="col-lg-6">
                                 <span class="pf-title" style="margin-top: 15px;">Tipo de Documento</span>
                                 <div class="pf-field">
-                                    <ng-multiselect-dropdown [placeholder]="'Seleccione un Tipo de Documento'"
-                                        [data]="tiposDocumento" [(ngModel)]="perfil.tipoDocumento" name="tipoDocumento"
-                                        [settings]="dropdownSettingsSingle" (onSelect)="onItemSelect($event)"
-                                        (onSelectAll)="onSelectAll($event)">
-                                    </ng-multiselect-dropdown>
+                                    <input type="text" placeholder="" [(ngModel)]="perfil.tipoDocumento"
+                                        name="tipoDocumento" />
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <span class="pf-title" style="margin-top: 15px;">Documento de Identidad</span>
                                 <div class="pf-field">
-                                    <input type="text" placeholder="" [(ngModel)]="perfil.numeroDocumento"
+                                    <input type="text" placeholder="" [(ngModel)]="perfil.documento"
                                         name="numeroDocumento" />
                                 </div>
                             </div>
@@ -210,7 +207,7 @@
                             <div class="col-lg-6">
                                 <div class="pf-field">
                                     <input type="text" placeholder="Usuario en Twitter"
-                                        [(ngModel)]="perfil.redesSociales.twitter" name="usuarioTwitter" />
+                                        [(ngModel)]="perfil.redesSociales.usuarioTwitter" name="usuarioTwitter" />
                                     <i class="fa fa-twitter"></i>
                                 </div>
                             </div>
@@ -226,7 +223,7 @@
                             <div class="col-lg-6">
                                 <div class="pf-field">
                                     <input type="text" placeholder="Usuario en Facebook"
-                                        [(ngModel)]="perfil.redesSociales.facebook" name="usuarioFacebook" />
+                                        [(ngModel)]="perfil.redesSociales.usuarioFacebook" name="usuarioFacebook" />
                                     <i class="fa fa-facebook"></i>
                                 </div>
                             </div>
@@ -242,7 +239,7 @@
                             <div class="col-lg-6">
                                 <div class="pf-field">
                                     <input type="text" placeholder="Usuario en Instagram"
-                                        [(ngModel)]="perfil.redesSociales.instagram" name="usuarioInstagram" />
+                                        [(ngModel)]="perfil.redesSociales.usuarioInstagram" name="usuarioInstagram" />
                                     <i class="fa fa-instagram"></i>
                                 </div>
                             </div>
@@ -258,7 +255,7 @@
                             <div class="col-lg-6">
                                 <div class="pf-field">
                                     <input type="text" placeholder="Usuario en LinkedIn"
-                                        [(ngModel)]="perfil.redesSociales.linkedIn" name="usuarioLinkedIn" />
+                                        [(ngModel)]="perfil.redesSociales.usuarioLinkedIn" name="usuarioLinkedIn" />
                                     <i class="fa fa-linkedin"></i>
                                 </div>
                             </div>
@@ -287,7 +284,8 @@
                         </div>
                         <div class="row" *ngSwitchCase="3">
                             <div class="manage-jobs-sec">
-                                <table>
+                                <br>
+                                <table *ngIf="perfil.experienciaLaboral.length > 0">
                                     <thead>
                                         <tr>
                                             <th style="color: purple;">
@@ -309,22 +307,23 @@
                                         <tr *ngFor="let el of perfil.experienciaLaboral">
                                             <td>
                                                 <div class="table-list-title">
-                                                    <h3>{{ el.empresa.nombre }}</h3>
+                                                    <h3>{{ el.empresa }}</h3>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="table-list-title">
-                                                    <h3>{{ el.puesto }}</h3>
+                                                    <h3>{{ el.puesto?.valor }}</h3>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="table-list-title">
-                                                    <h3>{{ el.fechaDesde }}</h3>
+                                                    <h3>{{ el.fechaDesde.singleDate.date.month }}/{{ el.fechaDesde.singleDate.date.year }}</h3>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="table-list-title">
-                                                    <h3>{{ el.fechaHasta }}</h3>
+                                                    <h3 *ngIf="!el.actualmenteTrabajando">{{ el.fechaHasta.singleDate.date.month }}/{{ el.fechaHasta.singleDate.date.year }}</h3>
+                                                    <h3 *ngIf="el.actualmenteTrabajando">Presente</h3>
                                                 </div>
                                             </td>
                                             <td>
@@ -342,7 +341,7 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                                <h2 class="add-exp-laboral" style="padding-left: 27px;"><a (click)="open(content)"><i
+                                <h2 class="add-exp-laboral" style="padding-left: 27px;"><a (click)="openExperienciaLaboral(content)"><i
                                             class="la la-plus-circle"></i> Agregar Experiencia Laboral</a></h2>
                             </div>
                         </div>
@@ -481,13 +480,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="contact-edit">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <button class="boton-submit" (click)="paso = paso + 1">Siguiente</button>
-                                    <button class="boton-submit pull-left" (click)="-paso = paso - 1"
-                                        *ngIf="paso > 1">Atrás</button>
-                                </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <button class="boton-submit" (click)="paso = paso + 1" *ngIf="paso !== 6">Siguiente</button>
+                                <button class="boton-submit pull-left" (click)="-paso = paso - 1" *ngIf="paso > 1">Atrás</button>
+                                <button type="submit" class="boton-submit" *ngIf="paso === 6">Crear Alumno</button>
                             </div>
                         </div>
                     </form>
@@ -505,26 +502,35 @@
         </button>
     </div>
     <div class="modal-body">
-        <form #form2="ngForm">
+        <form #form2="ngForm" (ngSubmit)="onSubmit(form2)">
             <div class="pf-field">
+                <span class="pf-title">Empresa</span>
                 <input type="text" placeholder="Nombre de la Empresa" [(ngModel)]="experienciaLaboral.empresa"
-                    name="nombreEmpresa" />
+                    name="experienciaLaboralEmpresa" />
             </div>
-            <ng-multiselect-dropdown [placeholder]="'Seleccione un Puesto Laboral'" [data]="puestosLaborales"
-                [(ngModel)]="experienciaLaboral.puestoLaboral" name="experienciaLaboralPuestoLaboral"
-                [settings]="dropdownSettingsSingle" (onSelect)="onItemSelect($event)"
-                (onSelectAll)="onSelectAll($event)">
-            </ng-multiselect-dropdown>
+            <div class="pf-field">
+                <ng-multiselect-dropdown [placeholder]="'Seleccione un Puesto Laboral'" [data]="puestosLaborales"
+                    [(ngModel)]="experienciaLaboral.puestoLaboral" name="experienciaLaboralPuestoLaboral"
+                    [settings]="dropdownSettingsSingle" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                </ng-multiselect-dropdown>
+                <a (click)="mostrarWell = !mostrarWell;"><i class="la la-plus-circle"></i> Agregar nuevo Puesto Laboral</a>
+            </div>
+            <div class="pf-field" *ngIf="mostrarWell" style="background-color:lightgrey; padding-top: 20px; border: 2px solid grey;">
+                <input type="text" placeholder="Nombre del Puesto" [(ngModel)]="newPuesto"
+                        name="newPuestoStr" />
+                <button (click)="guardarNewPuesto()" class="boton-submit pull-right"><strong>Guardar Puesto</strong></button>
+            
+            </div>
             <div class="pf-field" style="margin-top: 25px;">
                 <input class="input-box" placeholder="Fecha desde" angular-mydatepicker (click)="dpp.toggleCalendar()"
-                    [(ngModel)]="experienciaLaboral.fechaDesde" name="experienciaLaboralFechaDesde"
-                    [options]="myDpOptions" #dpp="angular-mydatepicker" />
+                    [(ngModel)]="experienciaLaboral.fechaDesde" name="experienciaLaboralFechaDesde" [options]="myDpOptions"
+                    #dpp="angular-mydatepicker" />
                 <i class="la la-calendar"></i>
             </div>
-            <div class="pf-field">
+            <div class="pf-field" *ngIf="!experienciaLaboral.actualmenteTrabajando">
                 <input class="input-box" placeholder="Fecha hasta" angular-mydatepicker (click)="dppp.toggleCalendar()"
-                    [(ngModel)]="experienciaLaboral.fechaHasta" name="experienciaLaboralFechaHasta"
-                    [options]="myDpOptions" #dppp="angular-mydatepicker" />
+                    [(ngModel)]="experienciaLaboral.fechaHasta" name="experienciaLaboralFechaHasta" [options]="myDpOptions"
+                    #dppp="angular-mydatepicker" />
                 <i class="la la-calendar"></i>
             </div>
             <div class="">
@@ -537,8 +543,7 @@
             </div>
             <span class="pf-title">Conocimientos Adquiridos</span>
             <div class="pf-field">
-                <input type="text" placeholder="Nombre de la Empresa"
-                    [(ngModel)]="experienciaLaboral.conocimientosAdquiridos"
+                <input type="text" placeholder="Nombre de la Empresa" [(ngModel)]="experienciaLaboral.conocimientosAdquiridos"
                     name="experienciaLaboralconocimientosAdquiridos" />
             </div>
             <div class="pf-field">
@@ -548,7 +553,7 @@
         </form>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="save()">Crear Experiencia Laboral</button>
+        <button type="button" class="btn btn-outline-dark" (click)="saveExperienciaLaboral()">Crear Experiencia Laboral</button>
     </div>
 </ng-template>
 

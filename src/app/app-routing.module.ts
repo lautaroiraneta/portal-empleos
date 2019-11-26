@@ -40,7 +40,7 @@ import { AdvertenciaListComponent } from './advertencia-list/advertencia-list.co
 import { ConocimientoListComponent } from './conocimiento-list/conocimiento-list.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/crear-perfil', pathMatch: 'full' },
+  { path: '', redirectTo: '/crear-perfil/new', pathMatch: 'full' },
   { path: 'acuerdo-individual', component: AcuerdoIndividualComponent },
   { path: 'advertencia-list', component: AdvertenciaListComponent },
   { path: 'agregar-conocimientos-a-mi-perfil', component: AgregarConocimientosComponent },
@@ -53,7 +53,7 @@ const routes: Routes = [
   { path: 'control-conocimientos-puestos', component: ControlConocimientosPuestosComponent },
   { path: 'convenio', component: ConvenioComponent },
   { path: 'convenio-list', component: ConvenioListComponent },
-  { path: 'crear-perfil', component: CrearPerfilComponent },
+  { path: 'crear-perfil/:id', component: CrearPerfilComponent },
   { path: 'empresa/:id', component: EmpresaComponent },
   { path: 'empresa-list', component: EmpresaListComponent },
   { path: 'etapa-definicion-convenio', component: EtapaDefinicionConvenioComponent },

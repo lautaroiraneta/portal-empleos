@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { HelperService } from '../helper.service';
 import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import { Alumno } from '../alumno/alumno.component';
 import { HttpClient } from '@angular/common/http';
 
 export class Empresa {
