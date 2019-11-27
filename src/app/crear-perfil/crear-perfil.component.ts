@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule, NgForm } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { HelperService } from '../helper.service';
-import { Observable } from 'rxjs';
 import { DataService } from '../data/data.service';
 import { IAngularMyDpOptions, IMyDateModel } from 'angular-mydatepicker';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
@@ -32,16 +31,28 @@ export class Perfil {
   idiomas: any;
 }
 
+export class Puesto {
+  id: string;
+  nombre: string;
+  estado: string;
+}
+
+export class Conocimiento {
+  id: string;
+  nombre: string;
+  estado: string;
+}
+
 export class ExperienciaLaboral {
   empresa: string;
-  puesto: IdValor[];
-  fechaDesde: IMyDateModel;
+  puesto: Puesto[];
+  fechaDesde: IMyDateModel = { isRange: false, singleDate: { jsDate: new Date() } };;
   fechaDesdeDT: Date;
-  fechaHasta: IMyDateModel;
+  fechaHasta: IMyDateModel = { isRange: false, singleDate: { jsDate: new Date() } };;
   fechaHastaDT: Date;
   actualmenteTrabajando: boolean;
   descripcion: string;
-  conocimientosAdquiridos: any;
+  conocimientos: Conocimiento[];
 }
 
 export class RedesSociales {
@@ -63,7 +74,9 @@ export class RedesSociales {
 export class CrearPerfilComponent implements OnInit {
   paso: number = 1;
   mostrarWell: boolean = false;
+  mostrarWellConocimiento: boolean = false;
   newPuesto: string;
+  newConocimiento: string;
 
   myDpOptions: IAngularMyDpOptions = {
     dateRange: false,
@@ -75,6 +88,8 @@ export class CrearPerfilComponent implements OnInit {
  
   paises: IdValor[];
   provincias: IdValor[];
+  puestosLaborales: Puesto[];
+  conocimientos: Conocimiento[];
 
   perfil: Perfil;
 
@@ -120,6 +135,26 @@ export class CrearPerfilComponent implements OnInit {
     allowSearchFilter: true
   };
 
+  dropdownSettingsPL: IDropdownSettings = {
+    singleSelection: true,
+    closeDropDownOnSelection: true,
+    idField: 'id',
+    textField: 'nombre',
+    enableCheckAll: false,
+    itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
+
+  dropdownSettingsConocimientos: IDropdownSettings = {
+    singleSelection: false,
+    closeDropDownOnSelection: false,
+    idField: 'id',
+    textField: 'nombre',
+    enableCheckAll: false,
+    itemsShowLimit: 5,
+    allowSearchFilter: true
+  };
+
   closeResult: string;
 
   experienciaLaboral: ExperienciaLaboral;
@@ -162,14 +197,6 @@ export class CrearPerfilComponent implements OnInit {
     alPresente: true,
     comentarios: '123 un pasito para adelante '
   };
-
-  puestosLaborales = [{
-    id: '1',
-    nombre: 'Software Engineer'
-  }, {
-    id: '2',
-    nombre: 'Analista'
-  }];
 
   estadosCivil = [{ id: '1', valor: 'Soltero' },
     { id: '2', valor: 'En Pareja' },
@@ -224,15 +251,27 @@ export class CrearPerfilComponent implements OnInit {
   }
 
   openExperienciaLaboral(content) {
+    this.dataService.getPuestos().subscribe(x => {
+      this.puestosLaborales = x;
+    });
+    this.dataService.getConocimientos().subscribe(x => {
+      this.conocimientos = x;
+    });
+
     this.experienciaLaboral = new ExperienciaLaboral();
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
+    
   }
 
   saveExperienciaLaboral() {
+    this.experienciaLaboral.fechaDesdeDT = this.experienciaLaboral.fechaDesde.singleDate.date ?
+      new Date(this.experienciaLaboral.fechaDesde.singleDate.date.year, this.experienciaLaboral.fechaDesde.singleDate.date.month - 1, this.experienciaLaboral.fechaDesde.singleDate.date.day) : new Date();
+      this.experienciaLaboral.fechaHastaDT = this.experienciaLaboral.fechaHasta.singleDate.date ?
+      new Date(this.experienciaLaboral.fechaHasta.singleDate.date.year, this.experienciaLaboral.fechaHasta.singleDate.date.month - 1, this.experienciaLaboral.fechaDesde.singleDate.date.day) : new Date();
     this.perfil.experienciaLaboral.push(this.experienciaLaboral);
     console.log(this.perfil);
     this.modalService.dismissAll();
@@ -257,7 +296,33 @@ export class CrearPerfilComponent implements OnInit {
   }
 
   guardarNewPuesto() {
-    console.log(this.newPuesto);
+    let data = new Puesto();
+    data.nombre = this.newPuesto;
+    if (this.newPuesto !== "" && this.newPuesto !== undefined) {
+      this.http.post('https://localhost:44374/Puesto', data).subscribe(x => {
+        this.newPuesto = '';
+        this.mostrarWell = false;
+        this.dataService.getPuestos().subscribe(x => {
+          this.puestosLaborales = x;
+        });
+        alert('Puesto Agregado!');
+      });
+    }
+  }
+
+  guardarNewConocimiento() {
+    let data = new Conocimiento();
+    data.nombre = this.newConocimiento;
+    if (this.newConocimiento !== "" && this.newConocimiento !== undefined) {
+      this.http.post('https://localhost:44374/Conocimiento', data).subscribe(x => {
+        this.newConocimiento = '';
+        this.mostrarWellConocimiento = false;
+        this.dataService.getConocimientos().subscribe(x => {
+          this.conocimientos = x;
+        });
+        alert('Conocimiento Agregado!');
+      });
+    }
   }
 
   onSubmit(form: NgForm) {
@@ -278,6 +343,7 @@ export class CrearPerfilComponent implements OnInit {
       data.redesSociales = this.perfil.redesSociales;
       data.objetivoLaboral = this.perfil.objetivoLaboral;
       data.interesesPersonales = this.perfil.interesesPersonales;
+      data.experienciaLaboral = this.perfil.experienciaLaboral;
 
       this.http.post('https://localhost:44374/Perfil', data).subscribe(x => {
         alert('Perfil Creado!');

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { of, Observable, Subscribable } from 'rxjs';
+import { Observable, Subscribable } from 'rxjs';
 import { Carrera } from '../carrera/carrera.component';
 import { HttpClient } from '@angular/common/http';
 import { IdValor } from '../empresa/empresa.component';
-import { switchMap } from 'rxjs/operators'
+import { Puesto, Conocimiento } from '../crear-perfil/crear-perfil.component';
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +22,13 @@ export class DataService {
 
   getProvincias(): Subscribable<IdValor[]>{
     return this.http.get<IdValor[]>('https://localhost:44374/Provincia');
+  }
+
+  getPuestos(): Subscribable<Puesto[]>{
+    return this.http.get<Puesto[]>('https://localhost:44374/Puesto');
+  }
+
+  getConocimientos(): Subscribable<Conocimiento[]>{
+    return this.http.get<Conocimiento[]>('https://localhost:44374/Conocimiento');
   }
 }

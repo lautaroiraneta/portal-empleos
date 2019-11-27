@@ -317,12 +317,12 @@
                                             </td>
                                             <td>
                                                 <div class="table-list-title">
-                                                    <h3>{{ el.fechaDesde.singleDate.date.month }}/{{ el.fechaDesde.singleDate.date.year }}</h3>
+                                                    <h3>{{ el.fechaDesde.singleDate.date?.month }}/{{ el.fechaDesde.singleDate.date?.year }}</h3>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="table-list-title">
-                                                    <h3 *ngIf="!el.actualmenteTrabajando">{{ el.fechaHasta.singleDate.date.month }}/{{ el.fechaHasta.singleDate.date.year }}</h3>
+                                                    <h3 *ngIf="!el.actualmenteTrabajando">{{ el.fechaHasta.singleDate.date?.month }}/{{ el.fechaHasta.singleDate.date?.year }}</h3>
                                                     <h3 *ngIf="el.actualmenteTrabajando">Presente</h3>
                                                 </div>
                                             </td>
@@ -508,18 +508,18 @@
                 <input type="text" placeholder="Nombre de la Empresa" [(ngModel)]="experienciaLaboral.empresa"
                     name="experienciaLaboralEmpresa" />
             </div>
+            <span class="pf-title">Puesto</span>
             <div class="pf-field">
                 <ng-multiselect-dropdown [placeholder]="'Seleccione un Puesto Laboral'" [data]="puestosLaborales"
                     [(ngModel)]="experienciaLaboral.puestoLaboral" name="experienciaLaboralPuestoLaboral"
-                    [settings]="dropdownSettingsSingle" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                    [settings]="dropdownSettingsPL" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
                 </ng-multiselect-dropdown>
-                <a (click)="mostrarWell = !mostrarWell;"><i class="la la-plus-circle"></i> Agregar nuevo Puesto Laboral</a>
+                <a (click)="mostrarWell = !mostrarWell;" style="font-size: 12px;"><i class="la la-plus-circle"></i> Agregar nuevo Puesto Laboral</a>
             </div>
             <div class="pf-field" *ngIf="mostrarWell" style="background-color:lightgrey; padding-top: 20px; border: 2px solid grey;">
                 <input type="text" placeholder="Nombre del Puesto" [(ngModel)]="newPuesto"
                         name="newPuestoStr" />
-                <button (click)="guardarNewPuesto()" class="boton-submit pull-right"><strong>Guardar Puesto</strong></button>
-            
+                <button (click)="guardarNewPuesto()" class="boton-submit pull-right"><strong>Guardar Puesto</strong></button>  
             </div>
             <div class="pf-field" style="margin-top: 25px;">
                 <input class="input-box" placeholder="Fecha desde" angular-mydatepicker (click)="dpp.toggleCalendar()"
@@ -542,12 +542,21 @@
                 </p>
             </div>
             <span class="pf-title">Conocimientos Adquiridos</span>
-            <div class="pf-field">
-                <input type="text" placeholder="Nombre de la Empresa" [(ngModel)]="experienciaLaboral.conocimientosAdquiridos"
-                    name="experienciaLaboralconocimientosAdquiridos" />
+            <div class="pf-field" >
+                <ng-multiselect-dropdown [placeholder]="'Seleccione Conocimientos Adquiridos'" [data]="conocimientos"
+                    [(ngModel)]="experienciaLaboral.conocimientos" name="experienciaLaboralConocimientos"
+                    [settings]="dropdownSettingsConocimientos" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                </ng-multiselect-dropdown>
+                <a style="font-size: 12px;" (click)="mostrarWellConocimiento = !mostrarWellConocimiento;"><i class="la la-plus-circle"></i> Agregar nuevo Conocimiento</a>
             </div>
+            <div class="pf-field" *ngIf="mostrarWellConocimiento" style="background-color:lightgrey; padding-top: 20px; border: 2px solid grey;">
+                <input type="text" placeholder="Nombre del Conocimiento" [(ngModel)]="newConocimiento"
+                        name="newConocimientoStr" />
+                <button (click)="guardarNewConocimiento()" class="boton-submit pull-right"><strong>Guardar Conocimiento</strong></button>  
+            </div>
+            <span class="pf-title">Descripción del Trabajo</span>
             <div class="pf-field">
-                <textarea placeholder="Descripción del trabajo" [(ngModel)]="experienciaLaboral.descripcion"
+                <textarea placeholder="" [(ngModel)]="experienciaLaboral.descripcion"
                     name="descripcion"></textarea>
             </div>
         </form>
