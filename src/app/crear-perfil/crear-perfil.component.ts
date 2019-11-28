@@ -27,8 +27,13 @@ export class Perfil {
   objetivoLaboral: string;
   interesesPersonales: string;
   experienciaLaboral: ExperienciaLaboral[];
-  experienciaEducativa: any;
-  idiomas: any;
+  experienciaEducativa: ExperienciaEducativa[];
+  idioma: Idioma[];
+  carrera: IdValor[];
+  porcentajeMateriasAprobadas: number;
+  cantidadMateriasAprobadas: number;
+  promedio: number;
+  anioCursada: number;
 }
 
 export class Puesto {
@@ -53,6 +58,26 @@ export class ExperienciaLaboral {
   actualmenteTrabajando: boolean;
   descripcion: string;
   conocimientos: Conocimiento[];
+}
+
+export class ExperienciaEducativa {
+  institucion: string;
+  titulo: string;
+  tipoEstudio: IdValor[];
+  estado: IdValor[];
+  fechaDesde: IMyDateModel = { isRange: false, singleDate: { jsDate: new Date() } };;
+  fechaDesdeDT: Date;
+  fechaHasta: IMyDateModel = { isRange: false, singleDate: { jsDate: new Date() } };;
+  fechaHastaDT: Date;
+  actualmenteEstudiando: boolean;
+  comentarios: string;
+}
+
+export class Idioma {
+  nombreIdioma: IdValor[];
+  nivelOral: IdValor[];
+  nivelEscrito: IdValor[];
+  comentarios: string;
 }
 
 export class RedesSociales {
@@ -88,38 +113,19 @@ export class CrearPerfilComponent implements OnInit {
  
   paises: IdValor[];
   provincias: IdValor[];
+  carreras: IdValor[];
   puestosLaborales: Puesto[];
   conocimientos: Conocimiento[];
-
   perfil: Perfil;
-
-  idiomas = [
-    { id: 'chi', nombre: 'Chino' },
-    { id: 'esp', nombre: 'Español' }, 
-    { id: 'fra', nombre: 'Francés' },   
-    { id: 'ing', nombre: 'Inglés' },
-    { id: 'jap', nombre: 'Japonés' },
-    { id: 'por', nombre: 'Portugués' }
-  ];
+  idiomas: IdValor[];
 
   niveles = [
-    { id: 'bas', nombre: 'Básico' },
-    { id: 'int', nombre: 'Intermedio' },
-    { id: 'ava', nombre: 'Avanzado' }
+    { id: 'bas', valor: 'Básico' },
+    { id: 'int', valor: 'Intermedio' },
+    { id: 'ava', valor: 'Avanzado' }
   ]
 
-  idioma = {
-    idioma: [
-      { id: 'ing', nombre: 'Inglés' }
-    ],
-    nivelOral: [
-      { id: 'int', nombre: 'Intermedio' }
-    ],
-    nivelEscrito: [
-      { id: 'bas', nombre: 'Básico' }
-    ],
-    comentarios: 'comentarios'
-  }
+  idioma: Idioma;
 
   tiposDocumento = [
     { id: '1', nombre: 'DNI'}
@@ -159,44 +165,19 @@ export class CrearPerfilComponent implements OnInit {
 
   experienciaLaboral: ExperienciaLaboral;
   
-  experienciasEducativasTipos = [{
-    id: 'primario',
-    nombre: 'Primario'
-  }, {
-    id: 'sec',
-    nombre: 'Secundario'
-  }, {
-    id: 'ter',
-    nombre: 'Terciario'
-  }, {
-    id: 'uni',
-    nombre: 'Universitario'
-  }];
+  experienciasEducativasTipos = [
+    { id: 'pri', valor: 'Primario' },
+    { id: 'sec', valor: 'Secundario' },
+    { id: 'ter', valor: 'Terciario' },
+    { id: 'uni', valor: 'Universitario' }
+  ];
 
-  estados = [{
-    id: 'com',
-    nombre: 'Completo'
-  }, {
-    id: 'enc',
-    nombre: 'En Curso'
-  }];
+  estados = [
+    { id: 'com', valor: 'Completo' },
+    { id: 'enc', valor: 'En Curso' }
+  ];
 
-  experienciaEducativa = {
-    institucion: 'Institución 1',
-    titulo: 'Titulo',
-    tipo: [{
-      id: 'primario',
-      nombre: 'Primario'
-    }],
-    estado: [{
-      id: 'enc',
-      nombre: 'En Curso'
-    }],
-    fechaDesde: null,
-    fechaHasta: null,
-    alPresente: true,
-    comentarios: '123 un pasito para adelante '
-  };
+  experienciaEducativa: ExperienciaEducativa;
 
   estadosCivil = [{ id: '1', valor: 'Soltero' },
     { id: '2', valor: 'En Pareja' },
@@ -221,6 +202,8 @@ export class CrearPerfilComponent implements OnInit {
       this.perfil.emails.push({ id: 'new', valor: '' });
       this.perfil.telefonos.push({ id: 'new', valor: '' });
       this.perfil.experienciaLaboral = [];
+      this.perfil.experienciaEducativa = [];
+      this.perfil.idioma = [];
     }
 
     this.dataService.getPaises().subscribe(x => {
@@ -229,6 +212,10 @@ export class CrearPerfilComponent implements OnInit {
 
     this.dataService.getProvincias().subscribe(x => {
       this.provincias = x;
+    });
+
+    this.dataService.getCarreras().subscribe(x => {
+      this.carreras = x;
     });
 
     this.perfil.fechaNacimiento = { isRange: false, singleDate: { jsDate: new Date() } };
@@ -254,6 +241,7 @@ export class CrearPerfilComponent implements OnInit {
     this.dataService.getPuestos().subscribe(x => {
       this.puestosLaborales = x;
     });
+
     this.dataService.getConocimientos().subscribe(x => {
       this.conocimientos = x;
     });
@@ -264,7 +252,36 @@ export class CrearPerfilComponent implements OnInit {
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
-    
+  }
+
+  openExperienciaEducativa(content) {
+    this.experienciaEducativa = new ExperienciaEducativa();
+
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  openIdioma(content) {
+    this.idioma = new Idioma();
+
+    this.dataService.getIdiomas().subscribe(x => {
+      this.idiomas = x;
+    });
+
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  saveIdioma() {
+    this.perfil.idioma.push(this.idioma);
+    this.modalService.dismissAll();
+    console.log(this.perfil);
   }
 
   saveExperienciaLaboral() {
@@ -273,6 +290,15 @@ export class CrearPerfilComponent implements OnInit {
       this.experienciaLaboral.fechaHastaDT = this.experienciaLaboral.fechaHasta.singleDate.date ?
       new Date(this.experienciaLaboral.fechaHasta.singleDate.date.year, this.experienciaLaboral.fechaHasta.singleDate.date.month - 1, this.experienciaLaboral.fechaDesde.singleDate.date.day) : new Date();
     this.perfil.experienciaLaboral.push(this.experienciaLaboral);
+    this.modalService.dismissAll();
+  }
+
+  saveExperienciaEducativa() {
+    this.experienciaEducativa.fechaDesdeDT = this.experienciaEducativa.fechaDesde.singleDate.date ?
+      new Date(this.experienciaEducativa.fechaDesde.singleDate.date.year, this.experienciaEducativa.fechaDesde.singleDate.date.month - 1, this.experienciaEducativa.fechaDesde.singleDate.date.day) : new Date();
+      this.experienciaEducativa.fechaHastaDT = this.experienciaEducativa.fechaHasta.singleDate.date ?
+      new Date(this.experienciaEducativa.fechaHasta.singleDate.date.year, this.experienciaEducativa.fechaHasta.singleDate.date.month - 1, this.experienciaEducativa.fechaDesde.singleDate.date.day) : new Date();
+    this.perfil.experienciaEducativa.push(this.experienciaEducativa);
     console.log(this.perfil);
     this.modalService.dismissAll();
   }
@@ -344,6 +370,15 @@ export class CrearPerfilComponent implements OnInit {
       data.objetivoLaboral = this.perfil.objetivoLaboral;
       data.interesesPersonales = this.perfil.interesesPersonales;
       data.experienciaLaboral = this.perfil.experienciaLaboral;
+      data.experienciaEducativa = this.perfil.experienciaEducativa;
+      data.idioma = this.perfil.idioma;
+      data.porcentajeMateriasAprobadas = this.perfil.porcentajeMateriasAprobadas;
+      data.cantidadMateriasAprobadas = this.perfil.cantidadMateriasAprobadas;
+      data.promedio = this.perfil.promedio;
+      data.anioCursada = this.perfil.anioCursada;
+      data.carrera = this.perfil.carrera;
+
+      console.log(data);
 
       this.http.post('https://localhost:44374/Perfil', data).subscribe(x => {
         alert('Perfil Creado!');

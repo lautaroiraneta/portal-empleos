@@ -202,7 +202,7 @@
                                 </div>
                             </div>
                             <span class="pf-title">
-                                <h4>Redes sociales</h4>
+                                <h4>Redes Sociales</h4>
                             </span>
                             <div class="col-lg-6">
                                 <div class="pf-field">
@@ -281,6 +281,38 @@
                                         name="interesesPersonales" />
                                 </div>
                             </div>
+                            <h4>Universidad</h4>
+                            <div class="col-lg-12">
+                                <span class="pf-title" style="margin-top: 30px;">Carrera</span>
+                                <ng-multiselect-dropdown [placeholder]="'Seleccione una Carrera'" [data]="carreras"
+                                    [(ngModel)]="perfil.carrera" name="carrera" [settings]="dropdownSettingsSingle"
+                                    (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                                </ng-multiselect-dropdown>
+                            </div>
+                            <div class="col-lg-6">
+                                <span class="pf-title" style="margin-top: 20px;">Porcentaje Materias Aprobadas</span>
+                                <div class="pf-field">
+                                    <input type="number" placeholder="" [(ngModel)]="perfil.porcentajeMateriasAprobadas" name="porcentajeMateriasAprobadas" min="0" max="100" />
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <span class="pf-title" style="margin-top: 20px;">Cantidad Materias Aprobadas</span>
+                                <div class="pf-field">
+                                    <input type="number" placeholder="" [(ngModel)]="perfil.cantidadMateriasAprobadas" name="cantidadMateriasAprobadas" min="0" />
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <span class="pf-title" style="margin-top: 0px;">Promedio</span>
+                                <div class="pf-field">
+                                    <input type="number" placeholder="" [(ngModel)]="perfil.promedio" name="promedio" min="0" max="10" />
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <span class="pf-title" style="margin-top: 0px;">Año Cursada</span>
+                                <div class="pf-field">
+                                    <input type="number" placeholder="" [(ngModel)]="perfil.anioCursada" name="anioCursada" min="0" />
+                                </div>
+                            </div>
                         </div>
                         <div class="row" *ngSwitchCase="3">
                             <div class="manage-jobs-sec">
@@ -348,11 +380,11 @@
                         <div class="row" *ngSwitchCase="4">
                             <div class="manage-jobs-sec">
                                 <h2 style="padding-left: 27px; font-size: 20px; padding-top: 35px; color: green;"><a
-                                        class="add-exp-laboral" (click)="open(content2)">
+                                        class="add-exp-laboral" (click)="openExperienciaEducativa(content2)">
                                         <li class="la la-plus-circle" style="display: inline-block;"></li> Agregar
                                         Experiencia Educativa
                                     </a></h2>
-                                <table>
+                                <table *ngIf="perfil.experienciaEducativa.length > 0">
                                     <thead>
                                         <tr>
                                             <td style="color: purple;">
@@ -381,17 +413,17 @@
                                             </td>
                                             <td>
                                                 <div class="table-list-title">
-                                                    <h3>{{ ee.tipo }}</h3>
+                                                    <h3>{{ ee.tipoEstudio[0].valor }}</h3>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="table-list-title">
-                                                    <h3>{{ ee.estado }}</h3>
+                                                    <h3>{{ ee.estado[0].valor }}</h3>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="table-list-title">
-                                                    <h3>{{ ee.fechaInicio }} - {{ ee.fechaFin }}</h3>
+                                                    <h3>{{ ee.fechaDesde.singleDate.date?.month }}/{{ ee.fechaDesde.singleDate.date?.year }} - {{ ee.fechaHasta.singleDate.date?.month }}/{{ ee.fechaHasta.singleDate.date?.year }}</h3>
                                                 </div>
                                             </td>
                                             <td>
@@ -413,7 +445,7 @@
                         </div>
                         <div class="row" *ngSwitchCase="5">
                             <div class="manage-jobs-sec">
-                                <table>
+                                <table *ngIf="perfil.idioma.length > 0">
                                     <thead>
                                         <tr>
                                             <td style="color: purple;">
@@ -429,20 +461,20 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let i of perfil.idiomas">
+                                        <tr *ngFor="let i of perfil.idioma">
                                             <td>
                                                 <div class="table-list-title">
-                                                    <h3>{{ i.idioma }}</h3>
+                                                    <h3>{{ i.nombreIdioma[0].valor }}</h3>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="table-list-title">
-                                                    <h3>{{ i.nivelOral.nombre }}</h3>
+                                                    <h3>{{ i.nivelOral[0].valor }}</h3>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="table-list-title">
-                                                    <h3>{{ i.nivelEscrito.nombre }}</h3>
+                                                    <h3>{{ i.nivelEscrito[0].valor }}</h3>
                                                 </div>
                                             </td>
                                             <td>
@@ -460,7 +492,7 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                                <h2 class="add-idioma" style="padding-left: 27px; font-size: 26px;"><a (click)="open(content3)"><i
+                                <h2 class="add-idioma" style="padding-left: 27px; font-size: 26px;"><a (click)="openIdioma(content3)"><i
                                             class="la la-plus-circle"></i> Agregar Idioma</a></h2>
                                 <hr>
                                 <h2 class="add-idioma" style="padding-left: 27px; font-size: 25px; margin-top: 45px;">
@@ -508,7 +540,7 @@
                 <input type="text" placeholder="Nombre de la Empresa" [(ngModel)]="experienciaLaboral.empresa"
                     name="experienciaLaboralEmpresa" />
             </div>
-            <span class="pf-title">Puesto</span>
+            <span class="pf-title" style="margin-top: 10px!important;">Puesto</span>
             <div class="pf-field">
                 <ng-multiselect-dropdown [placeholder]="'Seleccione un Puesto Laboral'" [data]="puestosLaborales"
                     [(ngModel)]="experienciaLaboral.puestoLaboral" name="experienciaLaboralPuestoLaboral"
@@ -521,12 +553,14 @@
                         name="newPuestoStr" />
                 <button (click)="guardarNewPuesto()" class="boton-submit pull-right"><strong>Guardar Puesto</strong></button>  
             </div>
-            <div class="pf-field" style="margin-top: 25px;">
+            <span class="pf-title" style="margin-top: 20px!important;">Fecha desde</span>
+            <div class="pf-field">
                 <input class="input-box" placeholder="Fecha desde" angular-mydatepicker (click)="dpp.toggleCalendar()"
                     [(ngModel)]="experienciaLaboral.fechaDesde" name="experienciaLaboralFechaDesde" [options]="myDpOptions"
                     #dpp="angular-mydatepicker" />
                 <i class="la la-calendar"></i>
             </div>
+            <span class="pf-title" style="margin-top: 5px!important;">Fecha hasta</span>
             <div class="pf-field" *ngIf="!experienciaLaboral.actualmenteTrabajando">
                 <input class="input-box" placeholder="Fecha hasta" angular-mydatepicker (click)="dppp.toggleCalendar()"
                     [(ngModel)]="experienciaLaboral.fechaHasta" name="experienciaLaboralFechaHasta" [options]="myDpOptions"
@@ -542,7 +576,7 @@
                 </p>
             </div>
             <span class="pf-title">Conocimientos Adquiridos</span>
-            <div class="pf-field" >
+            <div class="pf-field">
                 <ng-multiselect-dropdown [placeholder]="'Seleccione Conocimientos Adquiridos'" [data]="conocimientos"
                     [(ngModel)]="experienciaLaboral.conocimientos" name="experienciaLaboralConocimientos"
                     [settings]="dropdownSettingsConocimientos" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
@@ -583,12 +617,15 @@
                 <input type="text" placeholder="Nombre del Título" [(ngModel)]="experienciaEducativa.titulo"
                     name="experienciaEducativaTitulo" />
             </div>
-            <ng-multiselect-dropdown [placeholder]="'Seleccione un tipo de educacion'"
-                [data]="experienciasEducativasTipos" [(ngModel)]="experienciaEducativa.tipo"
-                name="experienciaEducativaTipo" [settings]="dropdownSettingsSingle" (onSelect)="onItemSelect($event)"
-                (onSelectAll)="onSelectAll($event)">
-            </ng-multiselect-dropdown>
-            <div style="margin-top: 25px;">
+            <span class="pf-title" style="margin-top: 0px!important;">Tipo</span>
+            <div class="pf-field">
+                <ng-multiselect-dropdown [placeholder]="'Seleccione un tipo de educacion'" [data]="experienciasEducativasTipos"
+                    [(ngModel)]="experienciaEducativa.tipoEstudio" name="experienciaEducativaTipo" [settings]="dropdownSettingsSingle"
+                    (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                </ng-multiselect-dropdown>
+            </div>
+            <span class="pf-title" style="margin-top: 15px !important;">Estado</span>
+            <div class="pf-field">
                 <ng-multiselect-dropdown [placeholder]="'Seleccione un estado'" [data]="estados"
                     [(ngModel)]="experienciaEducativa.estado" name="experienciaEducativaEstado"
                     [settings]="dropdownSettingsSingle" (onSelect)="onItemSelect($event)"
@@ -604,13 +641,13 @@
             <div class="pf-field">
                 <input class="input-box" placeholder="Fecha hasta" angular-mydatepicker (click)="dppp.toggleCalendar()"
                     [(ngModel)]="experienciaEducativa.fechaHasta" name="experienciaEducativaFechaHasta"
-                    [options]="myDpOptions" #dppp="angular-mydatepicker" />
+                    [options]="myDpOptions" #dppp="angular-mydatepicker" *ngIf="!experienciaEducativa.actualmenteEstudiando" />
                 <i class="la la-calendar"></i>
             </div>
             <div class="">
                 <p class="remember-label">
                     <input type="checkbox" name="experienciaEducativaAlPresente" id="experienciaEducativaAlPresente"
-                        [(ngModel)]="experienciaEducativa.alPresente"><label for="experienciaEducativaAlPresente">Al
+                        [(ngModel)]="experienciaEducativa.actualmenteEstudiando"><label for="experienciaEducativaAlPresente">Al
                         Presente</label>
                 </p>
             </div>
@@ -621,7 +658,7 @@
         </form>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="save()">Crear Experiencia Educativa</button>
+        <button type="button" class="btn btn-outline-dark" (click)="saveExperienciaEducativa()">Crear Experiencia Educativa</button>
     </div>
 </ng-template>
 
@@ -636,7 +673,7 @@
         <form #form4="ngForm">
             Idioma
             <ng-multiselect-dropdown [placeholder]="'Idioma'"
-                [data]="idiomas" [(ngModel)]="idioma.idioma"
+                [data]="idiomas" [(ngModel)]="idioma.nombreIdioma"
                 name="idioma-idioma" [settings]="dropdownSettingsSingle" (onSelect)="onItemSelect($event)"
                 (onSelectAll)="onSelectAll($event)">
             </ng-multiselect-dropdown>
@@ -663,6 +700,6 @@
         </form>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="save()">Agregar Idioma</button>
+        <button type="button" class="btn btn-outline-dark" (click)="saveIdioma()">Agregar Idioma</button>
     </div>
 </ng-template>

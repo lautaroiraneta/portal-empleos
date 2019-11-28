@@ -31,4 +31,12 @@ export class DataService {
   getConocimientos(): Subscribable<Conocimiento[]>{
     return this.http.get<Conocimiento[]>('https://localhost:44374/Conocimiento');
   }
+
+  getIdiomas(): Subscribable<IdValor[]>{
+    return this.http.get<IdValor[]>('https://localhost:44374/Idioma');
+  }
+
+  getCarreras(): Subscribable<IdValor[]>{
+    return this.http.get<IdValor[]>('https://localhost:44374/Carrera');
+  }
 }
