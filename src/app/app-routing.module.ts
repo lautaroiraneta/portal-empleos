@@ -5,7 +5,6 @@ import { CrearPerfilComponent } from './crear-perfil/crear-perfil.component';
 import { AlumnoComponent } from './alumno/alumno.component';
 import { CarreraComponent } from './carrera/carrera.component';
 import { EmpresaComponent } from './empresa/empresa.component';
-import { MateriaComponent } from './materia/materia.component';
 import { NoticiaComponent } from './noticia/noticia.component';
 import { SubtareaComponent } from './subtarea/subtarea.component';
 import { TareaComponent } from './tarea/tarea.component';
@@ -65,7 +64,6 @@ const routes: Routes = [
   { path: 'equipo-list', component: EquipoListComponent },
   { path: 'gestion-usuario', component: GestionUsuarioComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'materia', component: MateriaComponent },
   { path: 'micrositio', component: MicrositioComponent },
   { path: 'micrositio-empresa', component: MicrositioEmpresaComponent },
   { path: 'noticia', component: NoticiaComponent },

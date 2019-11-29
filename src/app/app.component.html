@@ -14,12 +14,11 @@
 						<li class="menu-item-has-children">
 							<a href="#" title="">Páginas 1 </a>
 							<ul>
-								<li><a [routerLink]="['/crear-perfil']">Crear Perfil</a></li>
+								<li *ngIf="usuario !== undefined"><a [routerLink]="['/crear-perfil']">Crear Perfil</a></li>
 								<li><a [routerLink]="['/alumno', 'new']" title="">Alta Alumno</a></li>
 								<li><a [routerLink]="['/alumno-list']" title="">Listado de Alumnos</a></li>
 								<li><a [routerLink]="['/carrera']" title="">Crear Carrera</a></li>
 								<li><a [routerLink]="['/empresa', 'new']" title="">Crear Empresa</a></li>
-								<li><a [routerLink]="['/materia']" title="">Alta de Materia</a></li>
 								<li><a [routerLink]="['/noticia']" title="">Agregar Noticia</a></li>	
 							</ul>
 						</li>

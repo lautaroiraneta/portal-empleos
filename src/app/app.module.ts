@@ -16,7 +16,6 @@ import { CrearPerfilComponent } from './crear-perfil/crear-perfil.component';
 import { AlumnoComponent } from './alumno/alumno.component';
 import { CarreraComponent } from './carrera/carrera.component';
 import { EmpresaComponent } from './empresa/empresa.component';
-import { MateriaComponent } from './materia/materia.component';
 import { NoticiaComponent } from './noticia/noticia.component';
 import { SubtareaComponent } from './subtarea/subtarea.component';
 import { TareaComponent } from './tarea/tarea.component';
@@ -73,7 +72,6 @@ import { LoginComponent } from './login/login.component';
     AlumnoComponent,
     CarreraComponent,
     EmpresaComponent,
-    MateriaComponent,
     NoticiaComponent,
     SubtareaComponent,
     TareaComponent,
