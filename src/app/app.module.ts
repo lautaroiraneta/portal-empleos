@@ -51,6 +51,7 @@ import { TareaViewComponent } from './tarea-view/tarea-view.component';
 import { AdvertenciaListComponent } from './advertencia-list/advertencia-list.component';
 import { ConocimientoListComponent } from './conocimiento-list/conocimiento-list.component';
 import { ConfirmacionComponent } from './confirmacion/confirmacion.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   imports: [
@@ -105,7 +106,8 @@ import { ConfirmacionComponent } from './confirmacion/confirmacion.component';
     TareaViewComponent,
     AdvertenciaListComponent,
     ConocimientoListComponent,
-    ConfirmacionComponent
+    ConfirmacionComponent,
+    LoginComponent
   ],
   bootstrap: [ AppComponent ]
 })

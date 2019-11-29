@@ -208,7 +208,7 @@
                                 <div class="pf-field">
                                     <input type="text" placeholder="Usuario en Twitter"
                                         [(ngModel)]="perfil.redesSociales.usuarioTwitter" name="usuarioTwitter" />
-                                    <i class="fa fa-twitter"></i>
+                                    <i class="la la-twitter"></i>
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -224,7 +224,7 @@
                                 <div class="pf-field">
                                     <input type="text" placeholder="Usuario en Facebook"
                                         [(ngModel)]="perfil.redesSociales.usuarioFacebook" name="usuarioFacebook" />
-                                    <i class="fa fa-facebook"></i>
+                                    <i class="la la-facebook"></i>
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -240,7 +240,7 @@
                                 <div class="pf-field">
                                     <input type="text" placeholder="Usuario en Instagram"
                                         [(ngModel)]="perfil.redesSociales.usuarioInstagram" name="usuarioInstagram" />
-                                    <i class="fa fa-instagram"></i>
+                                    <i class="la la-instagram"></i>
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -256,7 +256,7 @@
                                 <div class="pf-field">
                                     <input type="text" placeholder="Usuario en LinkedIn"
                                         [(ngModel)]="perfil.redesSociales.usuarioLinkedIn" name="usuarioLinkedIn" />
-                                    <i class="fa fa-linkedin"></i>
+                                    <i class="la la-linkedin"></i>
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -642,7 +642,7 @@
                 <input class="input-box" placeholder="Fecha hasta" angular-mydatepicker (click)="dppp.toggleCalendar()"
                     [(ngModel)]="experienciaEducativa.fechaHasta" name="experienciaEducativaFechaHasta"
                     [options]="myDpOptions" #dppp="angular-mydatepicker" *ngIf="!experienciaEducativa.actualmenteEstudiando" />
-                <i class="la la-calendar"></i>
+                <i class="la la-calendar" *ngIf="!experienciaEducativa.actualmenteEstudiando"></i>
             </div>
             <div class="">
                 <p class="remember-label">

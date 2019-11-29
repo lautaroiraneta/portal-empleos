@@ -38,9 +38,10 @@ import { GestionUsuarioComponent } from './gestion-usuario/gestion-usuario.compo
 import { TareaViewComponent } from './tarea-view/tarea-view.component';
 import { AdvertenciaListComponent } from './advertencia-list/advertencia-list.component';
 import { ConocimientoListComponent } from './conocimiento-list/conocimiento-list.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/crear-perfil/new', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'acuerdo-individual', component: AcuerdoIndividualComponent },
   { path: 'advertencia-list', component: AdvertenciaListComponent },
   { path: 'agregar-conocimientos-a-mi-perfil', component: AgregarConocimientosComponent },
@@ -53,7 +54,7 @@ const routes: Routes = [
   { path: 'control-conocimientos-puestos', component: ControlConocimientosPuestosComponent },
   { path: 'convenio', component: ConvenioComponent },
   { path: 'convenio-list', component: ConvenioListComponent },
-  { path: 'crear-perfil/:id', component: CrearPerfilComponent },
+  { path: 'crear-perfil', component: CrearPerfilComponent },
   { path: 'empresa/:id', component: EmpresaComponent },
   { path: 'empresa-list', component: EmpresaListComponent },
   { path: 'etapa-definicion-convenio', component: EtapaDefinicionConvenioComponent },
@@ -63,6 +64,7 @@ const routes: Routes = [
   { path: 'equipo', component: EquipoComponent },
   { path: 'equipo-list', component: EquipoListComponent },
   { path: 'gestion-usuario', component: GestionUsuarioComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'materia', component: MateriaComponent },
   { path: 'micrositio', component: MicrositioComponent },
   { path: 'micrositio-empresa', component: MicrositioEmpresaComponent },

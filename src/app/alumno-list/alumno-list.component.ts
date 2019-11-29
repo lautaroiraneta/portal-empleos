@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AlumnoService } from '../alumno/alumno-service/alumno.service';
+import { HttpClient } from '@angular/common/http';
+import { Perfil } from '../crear-perfil/crear-perfil.component';
+import { DataService } from '../data/data.service';
 
 @Component({
   selector: 'app-alumno-list',
@@ -17,24 +19,27 @@ export class AlumnoListComponent implements OnInit {
 
   items: any = null;
 
-  alumnos: any;
+  alumnos: Perfil[];
 
-  constructor(private alumnoService: AlumnoService) { }
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
-    this.alumnos = this.alumnoService.getAlumnos();
+    this.dataService.getPerfiles().subscribe(x => {
+      this.alumnos = x;
+    });
+
     this.items = this.alumnos;
   }
 
   actualizarItems() {
-    console.log(this.filtroNombre);
-    this.items = this.alumnos.filter(x => {
-      return (
-        x.nombre.toLowerCase().includes(this.filtroNombre.toLowerCase()) && (this.filtroNombre !== '' || this.filtroNombre !== undefined)
-        &&
-        (x.lugar.toLowerCase().includes(this.filtroLugar.toLowerCase()) && (this.filtroLugar !== '' || this.filtroLugar !== undefined))
-      )
-    });
+    // console.log(this.filtroNombre);
+    // this.items = this.alumnos.filter(x => {
+    //   return (
+    //     x.nombre.toLowerCase().includes(this.filtroNombre.toLowerCase()) && (this.filtroNombre !== '' || this.filtroNombre !== undefined)
+    //     &&
+    //     (x.lugar.toLowerCase().includes(this.filtroLugar.toLowerCase()) && (this.filtroLugar !== '' || this.filtroLugar !== undefined))
+    //   )
+    // });
 
     // this.items = this.conocimientos.filter(x => {
     //   return ((x.tipo === 'c' && this.mostrarConocimientos) || (x.tipo === 'p' && this.mostrarPuestos)) 

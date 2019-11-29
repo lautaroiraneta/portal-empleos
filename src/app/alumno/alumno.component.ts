@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AlumnoService } from './alumno-service/alumno.service';
 import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { AppComponent } from '../app.component';
 
 export class Alumno {
+  id: string;
   nombres: string;
   apellidos: string;
   libretaUniversitaria: string;
@@ -25,8 +26,8 @@ export class AlumnoComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private alumnoService: AlumnoService,
-    private http: HttpClient) { }
+    private http: HttpClient,
+    private appComponent: AppComponent) { }
 
   ngOnInit() {
     var id = this.route.snapshot.params['id'];
@@ -48,8 +49,10 @@ export class AlumnoComponent implements OnInit {
     data.tipoDocumento = this.alumno.tipoDocumento;
 
     this.http.post('https://localhost:44374/Alumno', data)
-      .subscribe(x => {
+      .subscribe((x: Alumno) => {
         alert('Alumno Creado!');
+        localStorage.setItem('usuario', JSON.stringify(x.id));
+        this.appComponent.iniciarUsuario(x);
       });
   }
 }

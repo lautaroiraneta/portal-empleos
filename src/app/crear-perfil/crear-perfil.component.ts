@@ -26,6 +26,7 @@ export class Perfil {
   fotoPerfil: any;
   objetivoLaboral: string;
   interesesPersonales: string;
+  alumno: string;
   experienciaLaboral: ExperienciaLaboral[];
   experienciaEducativa: ExperienciaEducativa[];
   idioma: Idioma[];
@@ -194,8 +195,9 @@ export class CrearPerfilComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    var id = this.route.snapshot.params['id'];
-    if (id !== 'new') {
+    var usuario = JSON.parse(localStorage.getItem('usuario'));
+    console.log(usuario);
+    if (usuario === undefined) {
       // this.alumno = this.alumnoService.getById(id);
     } else {
       this.perfil = new Perfil();
@@ -204,6 +206,7 @@ export class CrearPerfilComponent implements OnInit {
       this.perfil.experienciaLaboral = [];
       this.perfil.experienciaEducativa = [];
       this.perfil.idioma = [];
+      this.perfil.alumno = usuario;
     }
 
     this.dataService.getPaises().subscribe(x => {
@@ -369,6 +372,7 @@ export class CrearPerfilComponent implements OnInit {
       data.redesSociales = this.perfil.redesSociales;
       data.objetivoLaboral = this.perfil.objetivoLaboral;
       data.interesesPersonales = this.perfil.interesesPersonales;
+      data.alumno = this.perfil.alumno;
       data.experienciaLaboral = this.perfil.experienciaLaboral;
       data.experienciaEducativa = this.perfil.experienciaEducativa;
       data.idioma = this.perfil.idioma;
