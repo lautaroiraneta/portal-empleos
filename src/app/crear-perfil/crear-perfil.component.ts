@@ -22,7 +22,7 @@ export class Perfil {
   documento: string;
   fechaNacimiento: IMyDateModel;
   fechaNacimientoDT: Date;
-  redesSociales: any = new RedesSociales();
+  redesSociales: RedesSociales = new RedesSociales();
   fotoPerfil: any;
   objetivoLaboral: string;
   interesesPersonales: string;
@@ -82,13 +82,13 @@ export class Idioma {
 }
 
 export class RedesSociales {
-  twitter: string;
+  usuarioTwitter: string;
   mostrarFeedTwitter: boolean;
-  facebook: string;
+  usuarioFacebook: string;
   mostrarFeedFacebook: boolean;
-  instagram: string;
+  usuarioInstagram: string;
   mostrarFeedInstagram: boolean;
-  linkedIn: string;
+  usuarioLinkedIn: string;
   mostrarFeedLinkedIn: boolean;
 }
 
