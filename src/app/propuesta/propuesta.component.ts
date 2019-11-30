@@ -3,6 +3,17 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { NgForm } from '@angular/forms';
 import { HelperService, ExperienciaLaboral, Conocimiento } from '../helper.service';
 import { IAngularMyDpOptions } from 'angular-mydatepicker';
+import { Puesto } from '../crear-perfil/crear-perfil.component';
+import { DataService } from '../data/data.service';
+import { HttpClient } from '@angular/common/http';
+import { IdValor } from '../empresa/empresa.component';
+
+export class Propuesta {
+  titulo: string;
+  puestosCarac: Puesto[];
+  carreras: IdValor[];
+  carrerasAfines: boolean;
+}
 
 @Component({
   selector: 'app-propuesta',
@@ -10,6 +21,28 @@ import { IAngularMyDpOptions } from 'angular-mydatepicker';
   styleUrls: ['./propuesta.component.css']
 })
 export class PropuestaComponent implements OnInit {
+  puestosLaborales: Puesto[] = [];
+  mostrarWell: boolean = false;
+  newPuesto: string;
+  carreras: IdValor[] = [];
+
+  dropdownSettings: IDropdownSettings = {
+    singleSelection: false,
+    idField: 'id',
+    textField: 'nombre',
+    enableCheckAll: false,
+    itemsShowLimit: 6,
+    allowSearchFilter: true
+  };
+
+  dropdownSettingsIdValor: IDropdownSettings = {
+    singleSelection: false,
+    idField: 'id',
+    textField: 'valor',
+    enableCheckAll: false,
+    itemsShowLimit: 6,
+    allowSearchFilter: true
+  };
 
   experienciaLaboral: ExperienciaLaboral[] = [{
     puesto: [{ id: '1', nombre: 'Puesto 1 ' }],
@@ -27,52 +60,10 @@ export class PropuestaComponent implements OnInit {
     }
   ];
 
-  propuesta = {
-    titulo: 'Titulo de la Propuesta',
-    puestos: [
-      { id: '3', nombre: 'Puesto 3' }
-    ],
-    carreras: [
-      { id: '3', nombre: 'Traductor Público' },
-      { id: '4', nombre: 'Abogacía' }
-    ],
-    carrerasAfines: true,
-    lugar: [
-      { id: '1', nombre: 'Capital Federal' }
-    ],
-    sueldoBruto: '$ 10000',
-    tipoEmpleo: [
-      { id: 'full', nombre: 'Full-Time' }
-    ],
-    turno: [
-      { id: 'm', nombre: 'Mañana' }
-    ],
-    beneficios: 'Home Office, Snacks, Fruta, Medialunas los Viernes',
-    fechaFinalizacion: { isRange: false, singleDate: { jsDate: new Date(2019, 1, 3) } },
-    descripcion: 'AGREGAR RICH TEXT',
-    preferencias: {
-      edadMinima: 20,
-      edadMaxima: 25,
-      lugarResidencia: [
-        { id: '1', nombre: 'Capital Federal' },
-        { id: '2', nombre: 'GBA Sur' }
-      ],
-      disponibilidadReubicacion: true,
-      habilidadesPersonales: 'Proactivo, etc.',
-      cantidadMateriasAprobadas: 20,
-      porcentajeCarreraCompletada: 80,
-      promedioMinimo: 7.50,
-      anoCarrera: 4,
-      experienciaLaboral: this.experienciaLaboral,
-      conocimientos: this.conocimiento,
-      conocimientosExtra: []
-    }
-  };
+  propuesta: Propuesta;
 
-  dropdownSettings: IDropdownSettings;
   dropdownSettingsSingle: IDropdownSettings;
   puestos: any;
-  carreras: any;
   lugares: any;
   tiposEmpleo: any;
   turnos: any;
@@ -80,14 +71,20 @@ export class PropuestaComponent implements OnInit {
   numeroPaso: number;
   conocimientos: any;
   conocimientosExtra: any;
-  
-  constructor(private helperService: HelperService) { }
+
+  constructor(private helperService: HelperService, private dataService: DataService, private http: HttpClient) { }
 
   ngOnInit() {
-    this.dropdownSettings = this.helperService.dropdownSettings;
+    this.propuesta = new Propuesta();
     this.dropdownSettingsSingle = this.helperService.dropdownSettingsSingle;
-    this.puestos = this.helperService.puestos;
-    this.carreras = this.helperService.carreras;
+    this.dataService.getPuestos().subscribe(x => {
+      this.puestosLaborales = x;
+    });
+
+    this.dataService.getCarreras().subscribe(x => {
+      this.carreras = x;
+    });
+
     this.lugares = this.helperService.lugares;
     this.tiposEmpleo = this.helperService.tiposEmpleo;
     this.turnos = this.helperService.turnos;
@@ -97,15 +94,10 @@ export class PropuestaComponent implements OnInit {
     this.conocimientosExtra = this.helperService.conocimientosExtra;
   }
 
-  onSubmit(form: NgForm) {
-    console.log('form ' + JSON.stringify(form.form.value));
-    console.log('propuesta: ' + JSON.stringify(this.propuesta));
-  }
-
   onItemSelect(item: any) {
     console.log(item);
   }
-  
+
   onSelectAll(items: any) {
     console.log(items);
   }
@@ -116,7 +108,6 @@ export class PropuestaComponent implements OnInit {
       anosExperiencia: ''
     };
 
-    this.propuesta.preferencias.experienciaLaboral.push(experienciaLaboral);
   }
 
   agregarConocimiento() {
@@ -125,6 +116,36 @@ export class PropuestaComponent implements OnInit {
       anosExperiencia: ''
     };
 
-    this.propuesta.preferencias.conocimientos.push(conocimiento);
+  }
+
+  onSubmit(form: NgForm) {
+    if (this.numeroPaso === 2) {
+      let data = new Propuesta();
+      data.titulo = this.propuesta.titulo;
+      data.puestosCarac = this.propuesta.puestosCarac;
+      data.carreras = this.propuesta.carreras;
+      data.carrerasAfines = this.propuesta.carrerasAfines;
+      
+      console.log(data);
+
+      this.http.post('https://localhost:44374/Propuesta', data).subscribe(x => {
+        alert('Propuesta Creada!');
+      });
+    }
+  }
+
+  guardarNewPuesto() {
+    let data = new Puesto();
+    data.nombre = this.newPuesto;
+    if (this.newPuesto !== "" && this.newPuesto !== undefined) {
+      this.http.post('https://localhost:44374/Puesto', data).subscribe(x => {
+        this.newPuesto = '';
+        this.mostrarWell = false;
+        this.dataService.getPuestos().subscribe(x => {
+          this.puestosLaborales = x;
+        });
+        alert('Puesto Agregado!');
+      });
+    }
   }
 }

@@ -29,76 +29,91 @@
                                 </div>
                             </div>
                             <div class="col-lg-12">
-                               <span class="pf-title" style="margin-top: 0px;">Puestos</span>
-                               <div class="pf-field">
-                                    <ng-multiselect-dropdown [placeholder]="'Seleccione Puestos'" [data]="puestos"
-                                        [(ngModel)]="propuesta.puestos" name="puestos" [settings]="dropdownSettings"
-                                        (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                                <span class="pf-title" style="margin-top: 0px;">Puestos</span>
+                                <div class="pf-field">
+                                    <ng-multiselect-dropdown [placeholder]="'Seleccione Puestos'"
+                                        [data]="puestosLaborales" [(ngModel)]="propuesta.puestosCarac" name="puestos"
+                                        [settings]="dropdownSettings" (onSelect)="onItemSelect($event)"
+                                        (onSelectAll)="onSelectAll($event)">
                                     </ng-multiselect-dropdown>
-                              </div>
-                           </div>
-                           <div class="col-lg-12">
-                               <span class="pf-title">Carreras</span>
-                               <div class="pf-field">
-                                   <ng-multiselect-dropdown [placeholder]="'Seleccione Carreras'" [data]="carreras"
-                                        [(ngModel)]="propuesta.carreras" name="carreras" [settings]="dropdownSettings"
+                                    <a (click)="mostrarWell = !mostrarWell;" style="font-size: 12px;"><i
+                                            class="la la-plus-circle"></i> Agregar nuevo Puesto Laboral</a>
+                                </div>
+                                <div class="pf-field" *ngIf="mostrarWell"
+                                    style="background-color:lightgrey; padding-top: 20px; border: 2px solid grey;">
+                                    <input type="text" placeholder="Nombre del Puesto" [(ngModel)]="newPuesto"
+                                        name="newPuestoStr" />
+                                    <button (click)="guardarNewPuesto()" class="boton-submit pull-right"><strong>Guardar
+                                            Puesto</strong></button>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <span class="pf-title">Carreras</span>
+                                <div class="pf-field">
+                                    <ng-multiselect-dropdown [placeholder]="'Seleccione Carreras'" [data]="carreras"
+                                        [(ngModel)]="propuesta.carreras" name="carreras" [settings]="dropdownSettingsIdValor"
                                         (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
                                     </ng-multiselect-dropdown>
                                     <p class="remember-label">
-                                        <input type="checkbox" [(ngModel)]="propuesta.carrerasAfines" name="carrerasAfines" id="carrerasAfines"><label
+                                        <input type="checkbox" [(ngModel)]="propuesta.carrerasAfines"
+                                            name="carrerasAfines" id="carrerasAfines"><label
                                             for="carrerasAfines">Carreras Afines</label>
                                     </p>
-                              </div>
-                           </div>
-                           <div class="col-lg-6">
-                               <span class="pf-title" style="margin-top: 15px;">Lugar de Trabajo</span>
-                               <div class="pf-field">
-                                    <ng-multiselect-dropdown [placeholder]="'Seleccione Lugar'" [data]="lugares" [(ngModel)]="propuesta.lugar"
-                                        name="lugares" [settings]="dropdownSettingsSingle" (onSelect)="onItemSelect($event)"
-                                        (onSelectAll)="onSelectAll($event)">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <span class="pf-title" style="margin-top: 15px;">Lugar de Trabajo</span>
+                                <div class="pf-field">
+                                    <ng-multiselect-dropdown [placeholder]="'Seleccione Lugar'" [data]="lugares"
+                                        [(ngModel)]="propuesta.lugar" name="lugares" [settings]="dropdownSettingsSingle"
+                                        (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
                                     </ng-multiselect-dropdown>
-                               </div>
-                           </div>
+                                </div>
+                            </div>
 
-                           <div class="col-lg-6">
-                               <span class="pf-title" style="margin-top: 15px;"> Sueldo Bruto</span>
-                               <div class="pf-field">
-                                   <input type="text" placeholder="$" [(ngModel)]="propuesta.sueldoBruto" name="sueldoBruto" />
-                               </div>
-                           </div>
-                           <div class="col-lg-6">
-                               <span class="pf-title" style="margin-top: 0px;">Tipo de Empleo</span>
-                               <div class="pf-field">
-                                    <ng-multiselect-dropdown [placeholder]="'Seleccione un Tipo de Empleo'" [data]="tiposEmpleo" [(ngModel)]="propuesta.tipoEmpleo"
-                                        name="tipoEmpleo" [settings]="dropdownSettingsSingle" (onSelect)="onItemSelect($event)"
+                            <div class="col-lg-6">
+                                <span class="pf-title" style="margin-top: 15px;"> Sueldo Bruto</span>
+                                <div class="pf-field">
+                                    <input type="text" placeholder="$" [(ngModel)]="propuesta.sueldoBruto"
+                                        name="sueldoBruto" />
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <span class="pf-title" style="margin-top: 0px;">Tipo de Empleo</span>
+                                <div class="pf-field">
+                                    <ng-multiselect-dropdown [placeholder]="'Seleccione un Tipo de Empleo'"
+                                        [data]="tiposEmpleo" [(ngModel)]="propuesta.tipoEmpleo" name="tipoEmpleo"
+                                        [settings]="dropdownSettingsSingle" (onSelect)="onItemSelect($event)"
                                         (onSelectAll)="onSelectAll($event)">
                                     </ng-multiselect-dropdown>
-                               </div>
-                           </div>
-                           <div class="col-lg-6">
-                               <span class="pf-title" style="margin-top: 0px;">Turno</span>
-                               <div class="pf-field">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <span class="pf-title" style="margin-top: 0px;">Turno</span>
+                                <div class="pf-field">
                                     <ng-multiselect-dropdown [placeholder]="'Seleccione un Turno'" [data]="turnos"
                                         [(ngModel)]="propuesta.turno" name="turno" [settings]="dropdownSettingsSingle"
                                         (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
                                     </ng-multiselect-dropdown>
-                               </div>
-                           </div>
-                           <div class="col-lg-6">
-                               <span class="pf-title">Beneficios</span>
-                               <div class="pf-field">
-                                   <input type="text" placeholder="" [(ngModel)]="propuesta.beneficios" name="beneficios" />
-                               </div>
-                           </div>
-                           <div class="col-lg-6">
-                               <span class="pf-title">Fecha Finalización</span>
-                               <div class="pf-field">
-                                    <input class="input-box" placeholder="Seleccione un Inicio de Pasantia" angular-mydatepicker
-                                        (click)="dp.toggleCalendar()" [(ngModel)]="propuesta.fechaFinalizacion" name="fechaFinalizacion" [options]="myDpOptions"
-                                        #dp="angular-mydatepicker" />
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <span class="pf-title">Beneficios</span>
+                                <div class="pf-field">
+                                    <input type="text" placeholder="" [(ngModel)]="propuesta.beneficios"
+                                        name="beneficios" />
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <span class="pf-title">Fecha Finalización</span>
+                                <div class="pf-field">
+                                    <input class="input-box" placeholder="Seleccione un Inicio de Pasantia"
+                                        angular-mydatepicker (click)="dp.toggleCalendar()"
+                                        [(ngModel)]="propuesta.fechaFinalizacion" name="fechaFinalizacion"
+                                        [options]="myDpOptions" #dp="angular-mydatepicker" />
                                     <i class="la la-calendar"></i>
-                               </div>
-                           </div>
+                                </div>
+                            </div>
                             <div class="col-lg-12">
                                 <span class="pf-title" style="margin-top: 0px;">Descripción</span>
                                 <div class="pf-field">
@@ -110,105 +125,114 @@
                             <div class="col-lg-3">
                                 <span class="pf-title">Edad Mínima</span>
                                 <div class="pf-field">
-                                    <input type="number" name="edadMinima" [(ngModel)]="propuesta.preferencias.edadMinima" placeholder="" min="18" />
+                                    <input type="number" name="edadMinima"
+                                        [(ngModel)]="propuesta.preferencias.edadMinima" placeholder="" min="18" />
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <span class="pf-title">Edad Máxima</span>
                                 <div class="pf-field">
-                                    <input type="number" placeholder="" [(ngModel)]="propuesta.preferencias.edadMaxima" name="edadMaxima" min="18" />
+                                    <input type="number" placeholder="" [(ngModel)]="propuesta.preferencias.edadMaxima"
+                                        name="edadMaxima" min="18" />
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <span class="pf-title">Lugar de Residencia</span>
                                 <div class="pf-field">
                                     <ng-multiselect-dropdown [placeholder]="'Seleccione Lugar'" [data]="lugares"
-                                        [(ngModel)]="propuesta.preferencias.lugarResidencia" name="lugarResidencia" [settings]="dropdownSettings"
-                                        (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                                        [(ngModel)]="propuesta.preferencias.lugarResidencia" name="lugarResidencia"
+                                        [settings]="dropdownSettings" (onSelect)="onItemSelect($event)"
+                                        (onSelectAll)="onSelectAll($event)">
                                     </ng-multiselect-dropdown>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <p class="remember-label">
-                                    <input type="checkbox" name="disponibilidadReubicacion" id="disponibilidadReubicacion" [(ngModel)]="propuesta.preferencias.disponibilidadReubicacion" ><label for="disponibilidadReubicacion">Disponibilidad de reubicación</label>
+                                    <input type="checkbox" name="disponibilidadReubicacion"
+                                        id="disponibilidadReubicacion"
+                                        [(ngModel)]="propuesta.preferencias.disponibilidadReubicacion"><label
+                                        for="disponibilidadReubicacion">Disponibilidad de reubicación</label>
                                 </p>
                             </div>
                             <div class="col-lg-12">
                                 <span class="pf-title">Habilidades personales</span>
                                 <div class="pf-field">
                                     <div class="pf-field">
-                                        <input type="text" placeholder="" [(ngModel)]="propuesta.preferencias.habilidadesPersonales" name="habilidadesPersonales" />
+                                        <input type="text" placeholder=""
+                                            [(ngModel)]="propuesta.preferencias.habilidadesPersonales"
+                                            name="habilidadesPersonales" />
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <span class="pf-title" style="margin-top: 0px;">Cantidad Materias Aprobadas</span>
                                 <div class="pf-field">
-                                    <input type="number" placeholder="" [(ngModel)]="propuesta.preferencias.cantidadMateriasAprobadas"
+                                    <input type="number" placeholder=""
+                                        [(ngModel)]="propuesta.preferencias.cantidadMateriasAprobadas"
                                         name="cantidadMateriasAprobadas" />
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <span class="pf-title" style="margin-top: 0px;">% Carrera Completada</span>
                                 <div class="pf-field">
-                                    <input type="number" placeholder="" min="0" max="100" [(ngModel)]="propuesta.preferencias.porcentajeCarreraCompletada"
+                                    <input type="number" placeholder="" min="0" max="100"
+                                        [(ngModel)]="propuesta.preferencias.porcentajeCarreraCompletada"
                                         name="porcentajeCarreraCompletada" />
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <span class="pf-title" style="margin-top: 0px;">Promedio Mínimo</span>
                                 <div class="pf-field">
-                                    <input type="number" placeholder="" min="0" max="10" [(ngModel)]="propuesta.preferencias.promedioMinimo"
-                                        name="promedioMinimo" />
+                                    <input type="number" placeholder="" min="0" max="10"
+                                        [(ngModel)]="propuesta.preferencias.promedioMinimo" name="promedioMinimo" />
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <span class="pf-title" style="margin-top: 0px;">Año de Carrera</span>
                                 <div class="pf-field">
-                                    <input type="number" placeholder="" min="0" max="10" [(ngModel)]="propuesta.preferencias.anoCarrera"
-                                        name="anoCarrera" />
+                                    <input type="number" placeholder="" min="0" max="10"
+                                        [(ngModel)]="propuesta.preferencias.anoCarrera" name="anoCarrera" />
                                 </div>
                             </div>
                             <div class="col-lg-12">
-                                <div class="border-title" style="margin-top: 10px;">Experiencia laboral<a (click)="agregarExperienciaLaboral()"><i
-                                            class="la la-plus"></i>
+                                <div class="border-title" style="margin-top: 10px;">Experiencia laboral<a
+                                        (click)="agregarExperienciaLaboral()"><i class="la la-plus"></i>
                                         Agregar</a>
                                 </div>
                             </div>
                         </div>
-                        <div class="row" *ngFor="let p of propuesta.preferencias.experienciaLaboral; let i = index;">                     
+                        <div class="row" *ngFor="let p of propuesta.preferencias?.experienciaLaboral; let i = index;">
                             <div class="col-lg-6" *ngIf="numeroPaso === 2">
                                 <p *ngIf="i === 0">Puesto</p>
                                 <div class="dropdown-field">
                                     <ng-multiselect-dropdown [placeholder]="'Seleccione un Puesto'" [data]="puestos"
-                                        [(ngModel)]="p.puesto" name="puestos-{{i}}"
-                                        [settings]="dropdownSettingsSingle" (onSelect)="onItemSelect($event)"
-                                        (onSelectAll)="onSelectAll($event)">
+                                        [(ngModel)]="p.puesto" name="puestos-{{i}}" [settings]="dropdownSettingsSingle"
+                                        (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
                                     </ng-multiselect-dropdown>
                                 </div>
                             </div>
                             <div class="col-lg-6" *ngIf="numeroPaso === 2">
                                 <p *ngIf="i === 0">Años de experiencia</p>
                                 <div class="pf-field">
-                                    <input type="number" placeholder="" min="0" max="99"
-                                        [(ngModel)]="p.anosExperiencia" name="anosExperiencia-{{i}}" />
+                                    <input type="number" placeholder="" min="0" max="99" [(ngModel)]="p.anosExperiencia"
+                                        name="anosExperiencia-{{i}}" />
                                 </div>
                             </div>
                         </div>
                         <div class="row" *ngIf="numeroPaso === 2">
                             <div class="col-lg-12">
-                                <div class="border-title" style="margin-top: 10px;">Conocimientos<a (click)="agregarConocimiento()"><i
-                                            class="la la-plus"></i>
+                                <div class="border-title" style="margin-top: 10px;">Conocimientos<a
+                                        (click)="agregarConocimiento()"><i class="la la-plus"></i>
                                         Agregar</a>
                                 </div>
                             </div>
                         </div>
-                        <div class="row" *ngFor="let c of propuesta.preferencias.conocimientos; let i = index;">
+                        <div class="row" *ngFor="let c of propuesta.preferencias?.conocimientos; let i = index;">
                             <div class="col-lg-6" *ngIf="numeroPaso === 2">
                                 <p *ngIf="i === 0">Conocimiento</p>
                                 <div class="dropdown-field">
-                                    <ng-multiselect-dropdown [placeholder]="'Seleccione un Conocimiento'" [data]="conocimientos"
-                                        [(ngModel)]="c.conocimiento" name="conocimiento-{{i}}"
+                                    <ng-multiselect-dropdown [placeholder]="'Seleccione un Conocimiento'"
+                                        [data]="conocimientos" [(ngModel)]="c.conocimiento" name="conocimiento-{{i}}"
                                         [settings]="dropdownSettingsSingle" (onSelect)="onItemSelect($event)"
                                         (onSelectAll)="onSelectAll($event)">
                                     </ng-multiselect-dropdown>
@@ -224,22 +248,28 @@
                         </div>
                         <div class="row" *ngIf="numeroPaso === 2">
                             <div class="col-lg-12">
-                                <span class="pf-title" style="margin-top: 0px;">Conocimientos obtenidos fuera de la experiencia laboral
+                                <span class="pf-title" style="margin-top: 0px;">Conocimientos obtenidos fuera de la
+                                    experiencia laboral
                                 </span>
                                 <div class="pf-field">
-                                    <ng-multiselect-dropdown [placeholder]="'Seleccione Conocimientos obtenidos fuera de la experiencia laboral'" [data]="conocimientosExtra"
-                                        [(ngModel)]="propuesta.preferencias.conocimientosExtra" name="conocimientosExtra"
-                                        [settings]="dropdownSettings" (onSelect)="onItemSelect($event)"
-                                        (onSelectAll)="onSelectAll($event)">
+                                    <ng-multiselect-dropdown
+                                        [placeholder]="'Seleccione Conocimientos obtenidos fuera de la experiencia laboral'"
+                                        [data]="conocimientosExtra"
+                                        [(ngModel)]="propuesta.preferencias.conocimientosExtra"
+                                        name="conocimientosExtra" [settings]="dropdownSettings"
+                                        (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
                                     </ng-multiselect-dropdown>
                                 </div>
                             </div>
                         </div>
                         <div class="row" style="padding-top:30px;">
                             <div class="col-lg-12">
-                                <button class="boton-submit" (click)="numeroPaso = 2" *ngIf="numeroPaso === 1">Siguiente</button>
-                                <button type="submit" class="boton-submit" *ngIf="numeroPaso === 2">Crear Propuesta</button>
-                                <button class="boton-submit pull-left" (click)="numeroPaso = 1" *ngIf="numeroPaso === 2">Atrás</button>
+                                <button class="boton-submit" (click)="numeroPaso = 2"
+                                    *ngIf="numeroPaso === 1">Siguiente</button>
+                                <button type="submit" class="boton-submit" *ngIf="numeroPaso === 2">Crear
+                                    Propuesta</button>
+                                <button class="boton-submit pull-left" (click)="numeroPaso = 1"
+                                    *ngIf="numeroPaso === 2">Atrás</button>
                             </div>
                         </div>
                     </form>

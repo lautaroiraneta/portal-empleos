@@ -44,14 +44,6 @@ export class HelperService {
     allowSearchFilter: true
   };
 
-  puestos = [
-    { id: '1', nombre: 'Puesto 1' },
-    { id: '2', nombre: 'Puesto 2' },
-    { id: '3', nombre: 'Puesto 3' },
-    { id: '4', nombre: 'Puesto 4' },
-    { id: '5', nombre: 'Puesto 5' },
-  ];
-
   carreras = [
     { id: '1', nombre: 'Ingeniería en Informática' },
     { id: '2', nombre: 'Licenciatura en Informática' },
