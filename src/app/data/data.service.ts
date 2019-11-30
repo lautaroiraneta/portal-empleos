@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Subscribable } from 'rxjs';
 import { Carrera } from '../carrera/carrera.component';
 import { HttpClient } from '@angular/common/http';
-import { IdValor } from '../empresa/empresa.component';
+import { IdValor, Empresa } from '../empresa/empresa.component';
 import { Puesto, Conocimiento, Perfil } from '../crear-perfil/crear-perfil.component';
 
 @Injectable({
@@ -41,6 +41,10 @@ export class DataService {
   }
 
   getPerfiles(): Subscribable<Perfil[]> {
-    return this.http.get<Perfil[]>('http://localhost:44374/Perfil')
+    return this.http.get<Perfil[]>('https://localhost:44374/Perfil')
+  }
+
+  getEmpresas(): Subscribable<IdValor[]> {
+    return this.http.get<IdValor[]>('https://localhost:44374/Empresa')
   }
 }
