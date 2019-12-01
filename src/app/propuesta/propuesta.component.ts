@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { NgForm } from '@angular/forms';
 import { HelperService, ExperienciaLaboral, Conocimiento } from '../helper.service';
-import { IAngularMyDpOptions } from 'angular-mydatepicker';
+import { IAngularMyDpOptions, IMyDateModel } from 'angular-mydatepicker';
 import { Puesto } from '../crear-perfil/crear-perfil.component';
 import { DataService } from '../data/data.service';
 import { HttpClient } from '@angular/common/http';
@@ -13,6 +13,18 @@ export class Propuesta {
   puestosCarac: Puesto[];
   carreras: IdValor[];
   carrerasAfines: boolean;
+  pais: IdValor[];
+  provincia: IdValor[];
+  zona: IdValor[];
+  ciudad: IdValor[];
+  localidad: IdValor[];
+  sueldoBruto: number;
+  tipoEmpleo: IdValor[];
+  turno: IdValor[];
+  beneficios: string;
+  descripcion: string;
+  fechaFinalizacion: IMyDateModel;
+  fechaFinalizacionDT: Date;
 }
 
 @Component({
@@ -26,7 +38,7 @@ export class PropuestaComponent implements OnInit {
   newPuesto: string;
   carreras: IdValor[] = [];
 
-  dropdownSettings: IDropdownSettings = {
+  dropdownSettingsPuesto: IDropdownSettings = {
     singleSelection: false,
     idField: 'id',
     textField: 'nombre',
@@ -42,6 +54,16 @@ export class PropuestaComponent implements OnInit {
     enableCheckAll: false,
     itemsShowLimit: 6,
     allowSearchFilter: true
+  };
+
+  dropdownSettingsSingle: IDropdownSettings = {
+    singleSelection: true,
+    idField: 'id',
+    textField: 'valor',
+    enableCheckAll: false,
+    itemsShowLimit: 6,
+    allowSearchFilter: true,
+    closeDropDownOnSelection: true
   };
 
   experienciaLaboral: ExperienciaLaboral[] = [{
@@ -61,8 +83,12 @@ export class PropuestaComponent implements OnInit {
   ];
 
   propuesta: Propuesta;
+  paises: IdValor[];
+  provincias: IdValor[];
+  zonas: IdValor[];
+  ciudades: IdValor[];
+  localidades: IdValor[];
 
-  dropdownSettingsSingle: IDropdownSettings;
   puestos: any;
   lugares: any;
   tiposEmpleo: any;
@@ -76,13 +102,24 @@ export class PropuestaComponent implements OnInit {
 
   ngOnInit() {
     this.propuesta = new Propuesta();
-    this.dropdownSettingsSingle = this.helperService.dropdownSettingsSingle;
     this.dataService.getPuestos().subscribe(x => {
       this.puestosLaborales = x;
     });
 
     this.dataService.getCarreras().subscribe(x => {
       this.carreras = x;
+    });
+
+    this.dataService.getPaises().subscribe(x => {
+      this.paises = x;
+    });
+
+    this.dataService.getProvincias().subscribe(x => {
+      this.provincias = x;
+    });
+
+    this.dataService.getZonas().subscribe(x => {
+      this.zonas = x;
     });
 
     this.lugares = this.helperService.lugares;
@@ -92,6 +129,7 @@ export class PropuestaComponent implements OnInit {
     this.numeroPaso = 1;
     this.conocimientos = this.helperService.conocimientos;
     this.conocimientosExtra = this.helperService.conocimientosExtra;
+    this.propuesta.fechaFinalizacion = { isRange: false, singleDate: { jsDate: new Date() } };
   }
 
   onItemSelect(item: any) {
@@ -125,6 +163,18 @@ export class PropuestaComponent implements OnInit {
       data.puestosCarac = this.propuesta.puestosCarac;
       data.carreras = this.propuesta.carreras;
       data.carrerasAfines = this.propuesta.carrerasAfines;
+      data.pais = this.propuesta.pais;
+      data.provincia = this.propuesta.provincia;
+      data.zona = this.propuesta.zona;
+      data.ciudad = this.propuesta.ciudad;
+      data.localidad = this.propuesta.localidad;
+      data.sueldoBruto = this.propuesta.sueldoBruto;
+      data.tipoEmpleo = this.propuesta.tipoEmpleo;
+      data.turno = this.propuesta.turno;
+      data.beneficios = this.propuesta.beneficios;
+      data.descripcion = this.propuesta.descripcion;
+      data.fechaFinalizacionDT = this.propuesta.fechaFinalizacion.singleDate.date ?
+        new Date(this.propuesta.fechaFinalizacion.singleDate.date.year, this.propuesta.fechaFinalizacion.singleDate.date.month - 1, this.propuesta.fechaFinalizacion.singleDate.date.day) : new Date();
       
       console.log(data);
 
@@ -147,5 +197,17 @@ export class PropuestaComponent implements OnInit {
         alert('Puesto Agregado!');
       });
     }
+  }
+
+  onItemSelectZona(item: any) {
+    this.dataService.getCiudades(this.propuesta.provincia[0].id, item.id).subscribe(x => {
+      this.ciudades = x;
+    });
+  }
+
+  onItemSelectCiudad(item: any) {
+    this.dataService.getLocalidades(item.id).subscribe(x => {
+      this.localidades = x;
+    });
   }
 }

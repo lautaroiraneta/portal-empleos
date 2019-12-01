@@ -59,15 +59,15 @@ export class HelperService {
   ];
 
   tiposEmpleo = [
-    { id: 'full', nombre: 'Full-Time' },
-    { id: 'part', nombre: 'Part-Time' },
-    { id: 'pasantia', nombre: 'Pasantía' }
+    { id: 'full', valor: 'Full-Time' },
+    { id: 'part', valor: 'Part-Time' },
+    { id: 'pasantia', valor: 'Pasantía' }
   ];
 
   turnos = [
-    { id: 'm', nombre: 'Mañana' },
-    { id: 't', nombre: 'Tarde' },
-    { id: 'n', nombre: 'Noche' }
+    { id: 'm', valor: 'Mañana' },
+    { id: 't', valor: 'Tarde' },
+    { id: 'n', valor: 'Noche' }
   ];
 
   myDpOptions: IAngularMyDpOptions = {
