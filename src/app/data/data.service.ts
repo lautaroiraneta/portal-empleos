@@ -47,4 +47,16 @@ export class DataService {
   getEmpresas(): Subscribable<IdValor[]> {
     return this.http.get<IdValor[]>('https://localhost:44374/Empresa')
   }
+
+  getZonas(): Subscribable<IdValor[]> {
+    return this.http.get<IdValor[]>('https://localhost:44374/Zona')
+  }
+
+  getCiudades(provincia: string, zona: string): Subscribable<IdValor[]> {
+    return this.http.get<IdValor[]>('https://localhost:44374/Ciudad?prov=' + provincia + '&zona=' + zona);
+  }
+
+  getLocalidades(ciudad: string): Subscribable<IdValor[]> {
+    return this.http.get<IdValor[]>('https://localhost:44374/Localidad?ciudad=' + ciudad);
+  }
 }

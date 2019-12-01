@@ -15,6 +15,9 @@ export class Perfil {
   emails: IdValor[] = [];
   telefonos: IdValor[] = [];
   paisResidencia: IdValor[];
+  zona: IdValor[];
+  ciudad: IdValor[];
+  localidad: IdValor[];
   provinciaResidencia: IdValor[];
   estadoCivil: IdValor[];
   paisNacionalidad: IdValor[];
@@ -30,6 +33,7 @@ export class Perfil {
   experienciaLaboral: ExperienciaLaboral[];
   experienciaEducativa: ExperienciaEducativa[];
   idioma: Idioma[];
+  otrosConocimientos: IdValor[];
   carrera: IdValor[];
   porcentajeMateriasAprobadas: number;
   cantidadMateriasAprobadas: number;
@@ -113,6 +117,9 @@ export class CrearPerfilComponent implements OnInit {
   };
  
   paises: IdValor[];
+  zonas: IdValor[];
+  ciudades: IdValor[];
+  localidades: IdValor[];
   provincias: IdValor[];
   carreras: IdValor[];
   puestosLaborales: Puesto[];
@@ -213,12 +220,20 @@ export class CrearPerfilComponent implements OnInit {
       this.paises = x;
     });
 
+    this.dataService.getZonas().subscribe(x => {
+      this.zonas = x;
+    });
+
     this.dataService.getProvincias().subscribe(x => {
       this.provincias = x;
     });
 
     this.dataService.getCarreras().subscribe(x => {
       this.carreras = x;
+    });
+
+    this.dataService.getConocimientos().subscribe(x => {
+      this.conocimientos = x;
     });
 
     this.perfil.fechaNacimiento = { isRange: false, singleDate: { jsDate: new Date() } };
@@ -324,6 +339,18 @@ export class CrearPerfilComponent implements OnInit {
     console.log(items);
   }
 
+  onItemSelectZona(item: any) {
+    this.dataService.getCiudades(this.perfil.provinciaResidencia[0].id, item.id).subscribe(x => {
+      this.ciudades = x;
+    });
+  }
+
+  onItemSelectCiudad(item: any) {
+    this.dataService.getLocalidades(item.id).subscribe(x => {
+      this.localidades = x;
+    });
+  }
+
   guardarNewPuesto() {
     let data = new Puesto();
     data.nombre = this.newPuesto;
@@ -360,6 +387,9 @@ export class CrearPerfilComponent implements OnInit {
       data.nombre = this.perfil.nombre;
       data.apellido = this.perfil.apellido;
       data.paisResidencia = this.perfil.paisResidencia;
+      data.zona = this.perfil.zona;
+      data.ciudad = this.perfil.ciudad;
+      data.localidad = this.perfil.localidad;
       data.emails = this.perfil.emails;
       data.telefonos = this.perfil.telefonos;
       data.provinciaResidencia = this.perfil.provinciaResidencia;
@@ -376,6 +406,7 @@ export class CrearPerfilComponent implements OnInit {
       data.experienciaLaboral = this.perfil.experienciaLaboral;
       data.experienciaEducativa = this.perfil.experienciaEducativa;
       data.idioma = this.perfil.idioma;
+      data.otrosConocimientos = this.perfil.otrosConocimientos;
       data.porcentajeMateriasAprobadas = this.perfil.porcentajeMateriasAprobadas;
       data.cantidadMateriasAprobadas = this.perfil.cantidadMateriasAprobadas;
       data.promedio = this.perfil.promedio;

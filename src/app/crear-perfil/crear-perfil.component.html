@@ -107,43 +107,33 @@
                                     </ng-multiselect-dropdown>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <span class="pf-title" style="margin-top: 15px;">Zona</span>
+                            <div class="col-lg-6" *ngIf="perfil.provinciaResidencia?.length > 0 && perfil.provinciaResidencia[0].id === '2'">
+                                <span class="pf-title" style="margin-top: 15px;" >Zona</span>
                                 <div class="pf-field">
-                                    <select data-placeholder="Seleccione una Zona" class="chosen">
-                                        <option>Buenos Aires</option>
-                                        <option>Catamarca</option>
-                                        <option>Chaco</option>
-                                        <option>Chubut</option>
-                                        <option>Córdoba</option>
-                                        <option>Corrientes</option>
-                                    </select>
+                                    <ng-multiselect-dropdown [placeholder]="'Seleccione una zona'"
+                                        [data]="zonas" [(ngModel)]="perfil.zona"
+                                        name="zona" [settings]="dropdownSettingsSingle"
+                                        (onSelect)="onItemSelectZona($event)" (onSelectAll)="onSelectAll($event)">
+                                    </ng-multiselect-dropdown>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-6" *ngIf="perfil.zona?.length > 0">
                                 <span class="pf-title" style="margin-top: 15px;">Ciudad</span>
                                 <div class="pf-field">
-                                    <select data-placeholder="Seleccione una Ciudad" class="chosen">
-                                        <option>Buenos Aires</option>
-                                        <option>Catamarca</option>
-                                        <option>Chaco</option>
-                                        <option>Chubut</option>
-                                        <option>Córdoba</option>
-                                        <option>Corrientes</option>
-                                    </select>
+                                    <ng-multiselect-dropdown [placeholder]="'Seleccione una ciudad'"
+                                        [data]="ciudades" [(ngModel)]="perfil.ciudad"
+                                        name="ciudad" [settings]="dropdownSettingsSingle"
+                                        (onSelect)="onItemSelectCiudad($event)" (onSelectAll)="onSelectAll($event)">
+                                    </ng-multiselect-dropdown>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-6" *ngIf="perfil.ciudad?.length > 0">
                                 <span class="pf-title" style="margin-top: 15px;">Localidad</span>
                                 <div class="pf-field">
-                                    <select data-placeholder="Seleccione una Localidad" class="chosen">
-                                        <option>Buenos Aires</option>
-                                        <option>Catamarca</option>
-                                        <option>Chaco</option>
-                                        <option>Chubut</option>
-                                        <option>Córdoba</option>
-                                        <option>Corrientes</option>
-                                    </select>
+                                    <ng-multiselect-dropdown [placeholder]="'Seleccione una localidad'" [data]="localidades" [(ngModel)]="perfil.localidad"
+                                        name="localidad" [settings]="dropdownSettingsSingle" (onSelect)="onItemSelect($event)"
+                                        (onSelectAll)="onSelectAll($event)">
+                                    </ng-multiselect-dropdown>
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -496,19 +486,21 @@
                                             class="la la-plus-circle"></i> Agregar Idioma</a></h2>
                                 <hr>
                                 <h2 class="add-idioma" style="padding-left: 27px; font-size: 25px; margin-top: 45px;">
-                                    <a> Agregá otros conocimientos que tengas: </a></h2>
+                                <a> Agregá otros conocimientos que tengas: </a></h2>
                                 <div class="pf-field" style="padding-left: 20px;">
-                                    <ul class="tags">
-                                        <li class="addedTag">SQL<span onclick="$(this).parent().remove();"
-                                                class="tagRemove">x</span><input type="hidden" name="tags[]"
-                                                value="Web Deisgn"></li>
-                                        <li class="addedTag">Java<span onclick="$(this).parent().remove();"
-                                                class="tagRemove">x</span><input type="hidden" name="tags[]"
-                                                value="Web Deisgn"></li>
-                                        <li class="tagAdd taglist">
-                                            <input type="text" id="search-field">
-                                        </li>
-                                    </ul>
+                                    <ng-multiselect-dropdown [placeholder]="'Seleccione Conocimientos'" [data]="conocimientos"
+                                        [(ngModel)]="perfil.otrosConocimientos" name="otrosConocimientos"
+                                        [settings]="dropdownSettingsConocimientos" (onSelect)="onItemSelect($event)"
+                                        (onSelectAll)="onSelectAll($event)">
+                                    </ng-multiselect-dropdown>
+                                    <a style="font-size: 12px;" (click)="mostrarWellConocimiento = !mostrarWellConocimiento;"><i
+                                            class="la la-plus-circle"></i> Agregar nuevo Conocimiento</a>
+                                </div>
+                                <div class="pf-field" *ngIf="mostrarWellConocimiento"
+                                    style="background-color:lightgrey; padding-top: 20px; border: 2px solid grey;">
+                                    <input type="text" placeholder="Nombre del Conocimiento" [(ngModel)]="newConocimiento" name="newConocimientoStr" />
+                                    <button (click)="guardarNewConocimiento()" class="boton-submit pull-right"><strong>Guardar
+                                            Conocimiento</strong></button>
                                 </div>
                             </div>
                         </div>
