@@ -8,11 +8,6 @@ export interface ExperienciaLaboral {
   anosExperiencia: string
 };
 
-export interface Conocimiento {
-  conocimiento: IdNombre[],
-  anosExperiencia: string
-};
-
 export interface IdNombre {
   id: string;
   nombre: string;
@@ -77,20 +72,6 @@ export class HelperService {
     monthLabels: { 1: 'Ene', 2: 'Feb', 3: 'Mar', 4: 'Abr', 5: 'May', 6: 'Jun', 7: 'Jul', 8: 'Ago', 9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dic' }
     // other options are here...
   };
-
-  conocimientos = [
-    { id: '1', nombre: 'Java' },
-    { id: '2', nombre: '.NET' },
-    { id: '3', nombre: 'Hibernate' },
-    { id: '4', nombre: 'WebServices' }
-  ];
-
-  conocimientosExtra = [
-    { id: '1', nombre: 'Proactivo' },
-    { id: '2', nombre: 'Buen Compañero' },
-    { id: '3', nombre: 'Alegre' },
-    { id: '4', nombre: 'Agile' }
-  ];
 
   agregarEmail(list: IdValor[]) {
     list.push({ id: 'new', valor: ''});

@@ -6,16 +6,20 @@
                     <div class="profile-title">
                         <h3>Crear Propuesta</h3>
                         <div class="steps-sec">
-                            <div class="step" [class.active]="numeroPaso === 1">
-                                <p><i class="la la-info"></i></p>
+                            <div class="step-perfil" [class.active]="numeroPaso === 1">
+                                <p (click)="numeroPaso = 1"><i class="la la-info"></i></p>
                                 <span>Características</span>
                             </div>
-                            <div class="step" [class.active]="numeroPaso === 2">
-                                <p><i class="la la-list-ul"></i></p>
+                            <div class="step-perfil" [class.active]="numeroPaso === 2">
+                                <p (click)="numeroPaso = 2"><i class="la la-list-ul"></i></p>
                                 <span>Requisitos</span>
                             </div>
-                            <div class="step">
-                                <p><i class="la  la-check-circle"></i></p>
+                            <div class="step-perfil" [class.active]="numeroPaso === 3">
+                                <p (click)="numeroPaso = 3"><i class="la la-star"></i></p>
+                                <span>Excluyentes</span>
+                            </div>
+                            <div class="step-perfil" [class.active]="numeroPaso === 4">
+                                <p (click)="numeroPaso = 4"><i class="la la-check-circle"></i></p>
                                 <span>¡Listo!</span>
                             </div>
                         </div>
@@ -162,32 +166,24 @@
                             <div class="col-lg-3">
                                 <span class="pf-title">Edad Mínima</span>
                                 <div class="pf-field">
-                                    <input type="number" name="edadMinima"
-                                        [(ngModel)]="propuesta.preferencias.edadMinima" placeholder="" min="18" />
+                                    <input type="number" name="edadMin"
+                                        [(ngModel)]="propuesta.edadMin" placeholder="" min="18" />
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <span class="pf-title">Edad Máxima</span>
                                 <div class="pf-field">
-                                    <input type="number" placeholder="" [(ngModel)]="propuesta.preferencias.edadMaxima"
-                                        name="edadMaxima" min="18" />
+                                    <input type="number" placeholder="" [(ngModel)]="propuesta.edadMax"
+                                        name="edadMax" min="18" />
                                 </div>
                             </div>
                             <div class="col-lg-6">
-                                <span class="pf-title">Lugar de Residencia</span>
-                                <div class="pf-field">
-                                    <ng-multiselect-dropdown [placeholder]="'Seleccione Lugar'" [data]="lugares"
-                                        [(ngModel)]="propuesta.preferencias.lugarResidencia" name="lugarResidencia"
-                                        [settings]="dropdownSettings" (onSelect)="onItemSelect($event)"
-                                        (onSelectAll)="onSelectAll($event)">
-                                    </ng-multiselect-dropdown>
-                                </div>
                             </div>
                             <div class="col-lg-6">
                                 <p class="remember-label">
                                     <input type="checkbox" name="disponibilidadReubicacion"
                                         id="disponibilidadReubicacion"
-                                        [(ngModel)]="propuesta.preferencias.disponibilidadReubicacion"><label
+                                        [(ngModel)]="propuesta.disponibilidadReubicacion"><label
                                         for="disponibilidadReubicacion">Disponibilidad de reubicación</label>
                                 </p>
                             </div>
@@ -196,7 +192,7 @@
                                 <div class="pf-field">
                                     <div class="pf-field">
                                         <input type="text" placeholder=""
-                                            [(ngModel)]="propuesta.preferencias.habilidadesPersonales"
+                                            [(ngModel)]="propuesta.habilidadesPersonales"
                                             name="habilidadesPersonales" />
                                     </div>
                                 </div>
@@ -205,7 +201,7 @@
                                 <span class="pf-title" style="margin-top: 0px;">Cantidad Materias Aprobadas</span>
                                 <div class="pf-field">
                                     <input type="number" placeholder=""
-                                        [(ngModel)]="propuesta.preferencias.cantidadMateriasAprobadas"
+                                        [(ngModel)]="propuesta.cantidadMatApr"
                                         name="cantidadMateriasAprobadas" />
                                 </div>
                             </div>
@@ -213,7 +209,7 @@
                                 <span class="pf-title" style="margin-top: 0px;">% Carrera Completada</span>
                                 <div class="pf-field">
                                     <input type="number" placeholder="" min="0" max="100"
-                                        [(ngModel)]="propuesta.preferencias.porcentajeCarreraCompletada"
+                                        [(ngModel)]="propuesta.porcentajeMatApr"
                                         name="porcentajeCarreraCompletada" />
                                 </div>
                             </div>
@@ -221,14 +217,14 @@
                                 <span class="pf-title" style="margin-top: 0px;">Promedio Mínimo</span>
                                 <div class="pf-field">
                                     <input type="number" placeholder="" min="0" max="10"
-                                        [(ngModel)]="propuesta.preferencias.promedioMinimo" name="promedioMinimo" />
+                                        [(ngModel)]="propuesta.promedio" name="promedioMinimo" />
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <span class="pf-title" style="margin-top: 0px;">Año de Carrera</span>
                                 <div class="pf-field">
                                     <input type="number" placeholder="" min="0" max="10"
-                                        [(ngModel)]="propuesta.preferencias.anoCarrera" name="anoCarrera" />
+                                        [(ngModel)]="propuesta.anioCursada" name="anoCarrera" />
                                 </div>
                             </div>
                             <div class="col-lg-12">
@@ -238,12 +234,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row" *ngFor="let p of propuesta.preferencias?.experienciaLaboral; let i = index;">
+                        <div class="row" *ngFor="let p of propuesta.puestos; let i = index;">
                             <div class="col-lg-6" *ngIf="numeroPaso === 2">
                                 <p *ngIf="i === 0">Puesto</p>
                                 <div class="dropdown-field">
-                                    <ng-multiselect-dropdown [placeholder]="'Seleccione un Puesto'" [data]="puestos"
-                                        [(ngModel)]="p.puesto" name="puestos-{{i}}" [settings]="dropdownSettingsSingle"
+                                    <ng-multiselect-dropdown [placeholder]="'Seleccione un Puesto'" [data]="puestosLaborales"
+                                        [(ngModel)]="p.puesto" name="puestos-{{i}}" [settings]="dropdownSettingsPuesto"
                                         (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
                                     </ng-multiselect-dropdown>
                                 </div>
@@ -264,13 +260,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row" *ngFor="let c of propuesta.preferencias?.conocimientos; let i = index;">
+                        <div class="row" *ngFor="let c of propuesta.conocimientos; let i = index;">
                             <div class="col-lg-6" *ngIf="numeroPaso === 2">
                                 <p *ngIf="i === 0">Conocimiento</p>
                                 <div class="dropdown-field">
                                     <ng-multiselect-dropdown [placeholder]="'Seleccione un Conocimiento'"
                                         [data]="conocimientos" [(ngModel)]="c.conocimiento" name="conocimiento-{{i}}"
-                                        [settings]="dropdownSettingsSingle" (onSelect)="onItemSelect($event)"
+                                        [settings]="dropdownSettingsPuesto" (onSelect)="onItemSelect($event)"
                                         (onSelectAll)="onSelectAll($event)">
                                     </ng-multiselect-dropdown>
                                 </div>
@@ -278,7 +274,7 @@
                             <div class="col-lg-6" *ngIf="numeroPaso === 2">
                                 <p *ngIf="i === 0">Años de experiencia</p>
                                 <div class="pf-field">
-                                    <input type="number" placeholder="" min="0" max="99" [(ngModel)]="c.anosExperiencia"
+                                    <input type="number" placeholder="" min="0" max="99" [(ngModel)]="c.aniosExperiencia"
                                         name="anosExperiencia-conocimiento-{{i}}" />
                                 </div>
                             </div>
@@ -291,22 +287,149 @@
                                 <div class="pf-field">
                                     <ng-multiselect-dropdown
                                         [placeholder]="'Seleccione Conocimientos obtenidos fuera de la experiencia laboral'"
-                                        [data]="conocimientosExtra"
-                                        [(ngModel)]="propuesta.preferencias.conocimientosExtra"
-                                        name="conocimientosExtra" [settings]="dropdownSettings"
+                                        [data]="conocimientos"
+                                        [(ngModel)]="propuesta.conocimientosExtra"
+                                        name="conocimientosExtra" [settings]="dropdownSettingsConocMulti"
                                         (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
                                     </ng-multiselect-dropdown>
+                                    <a style="font-size: 12px;" (click)="mostrarWellConocimiento = !mostrarWellConocimiento;"><i
+                                        class="la la-plus-circle"></i> Agregar nuevo Conocimiento</a>
+                                </div>
+                                <div class="pf-field" *ngIf="mostrarWellConocimiento"
+                                    style="background-color:lightgrey; padding-top: 20px; border: 2px solid grey;">
+                                    <input type="text" placeholder="Nombre del Conocimiento" [(ngModel)]="newConocimiento" name="newConocimientoStr" />
+                                    <button (click)="guardarNewConocimiento()" class="boton-submit pull-right"><strong>Guardar
+                                            Conocimiento</strong></button>
                                 </div>
                             </div>
                         </div>
+                        <div class="row" *ngIf="numeroPaso === 3">
+                            <div class="manage-jobs-sec">
+								<br />
+								<h2 style="padding-left: 27px;">Determine excluyentes</h2>
+						 		<table>
+						 			<thead>
+						 				<tr>
+											<td style="color: purple;"><h4>Requisito</h4></td>
+											<td style="color: purple;"><h4>Valor</h4></td>
+						 					<td style="color: purple;"><h4>¿Es Excluyente?</h4></td>
+						 				</tr>
+						 			</thead>
+									<tbody>
+										<tr *ngIf="propuesta.edadMin !== undefined && propuesta.edadMin !== '' && propuesta.edadMin !== null">
+											<td>
+												<div class="table-list-title">
+													<h3>Edad Mínima</h3>
+												</div>
+											</td>
+											<td>
+												<div class="table-list-title">
+													<h3>{{ propuesta.edadMin }} años</h3>
+												</div>
+											</td>
+											<td>
+												<p class="remember-label" style="padding-left: 80px;">
+													<input type="checkbox" name="cb" id="cb1" [(ngModel)]="propuesta.excluyenteEdadMin"><label for="cb1"></label>
+												</p>
+											</td>
+                                        </tr>
+                                        <tr *ngIf="propuesta.edadMax !== undefined && propuesta.edadMax !== '' && propuesta.edadMax !== null">
+											<td>
+												<div class="table-list-title">
+													<h3>Edad Máxima</h3>
+												</div>
+											</td>
+											<td>
+												<div class="table-list-title">
+													<h3>{{ propuesta.edadMax }} años</h3>
+												</div>
+											</td>
+											<td>
+												<p class="remember-label" style="padding-left: 80px;">
+													<input type="checkbox" name="cb2" id="cb2" [(ngModel)]="propuesta.excluyenteEdadMax"><label for="cb2"></label>
+												</p>
+											</td>
+                                        </tr>
+                                        <tr *ngIf="propuesta.porcentajeMatApr !== undefined && propuesta.porcentajeMatApr !== '' && propuesta.porcentajeMatApr !== null">
+											<td>
+												<div class="table-list-title">
+													<h3>% Carrera Completada</h3>
+												</div>
+											</td>
+											<td>
+												<div class="table-list-title">
+													<h3>{{ propuesta.porcentajeMatApr }}%</h3>
+												</div>
+											</td>
+											<td>
+												<p class="remember-label" style="padding-left: 80px;">
+													<input type="checkbox" name="cb3" id="cb3" [(ngModel)]="propuesta.excluyentePorc"><label for="cb3"></label>
+												</p>
+											</td>
+                                        </tr>
+                                        <tr *ngIf="propuesta.cantidadMatApr !== undefined && propuesta.cantidadMatApr !== '' && propuesta.cantidadMatApr !== null">
+											<td>
+												<div class="table-list-title">
+													<h3>Cantidad Materias Aprobadas</h3>
+												</div>
+											</td>
+											<td>
+												<div class="table-list-title">
+													<h3>{{ propuesta.cantidadMatApr }}</h3>
+												</div>
+											</td>
+											<td>
+												<p class="remember-label" style="padding-left: 80px;">
+													<input type="checkbox" name="cb4" id="cb4" [(ngModel)]="propuesta.excluyenteMatApr"><label for="cb4"></label>
+												</p>
+											</td>
+                                        </tr>
+                                        <tr *ngIf="propuesta.promedio !== undefined && propuesta.promedio !== '' && propuesta.promedio !== null">
+											<td>
+												<div class="table-list-title">
+													<h3>Promedio Mínimo</h3>
+												</div>
+											</td>
+											<td>
+												<div class="table-list-title">
+													<h3>{{ propuesta.promedio }}</h3>
+												</div>
+											</td>
+											<td>
+												<p class="remember-label" style="padding-left: 80px;">
+													<input type="checkbox" name="cb5" id="cb5" [(ngModel)]="propuesta.excluyentePromedio"><label for="cb5"></label>
+												</p>
+											</td>
+                                        </tr>
+                                        <tr *ngIf="propuesta.anioCursada !== undefined && propuesta.anioCursada !== '' && propuesta.anioCursada !== null">
+											<td>
+												<div class="table-list-title">
+													<h3>Año de Carrera</h3>
+												</div>
+											</td>
+											<td>
+												<div class="table-list-title">
+													<h3>{{ propuesta.anioCursada }}</h3>
+												</div>
+											</td>
+											<td>
+												<p class="remember-label" style="padding-left: 80px;">
+													<input type="checkbox" name="cb6" id="cb6" [(ngModel)]="propuesta.excluyenteAnioCursada"><label for="cb6"></label>
+												</p>
+											</td>
+										</tr>
+									</tbody>
+						 		</table>
+					 		</div>
+                        </div>
                         <div class="row" style="padding-top:30px;">
                             <div class="col-lg-12">
-                                <button class="boton-submit" (click)="numeroPaso = 2"
-                                    *ngIf="numeroPaso === 1">Siguiente</button>
-                                <button type="submit" class="boton-submit" *ngIf="numeroPaso === 2">Crear
+                                <button class="boton-submit" (click)="numeroPaso = numeroPaso + 1"
+                                    *ngIf="numeroPaso !== 4">Siguiente</button>
+                                <button type="submit" class="boton-submit" *ngIf="numeroPaso === 4">Crear
                                     Propuesta</button>
-                                <button class="boton-submit pull-left" (click)="numeroPaso = 1"
-                                    *ngIf="numeroPaso === 2">Atrás</button>
+                                <button class="boton-submit pull-left" (click)="numeroPaso = numeroPaso - 1"
+                                    *ngIf="numeroPaso !== 1">Atrás</button>
                             </div>
                         </div>
                     </form>
