@@ -27,12 +27,16 @@ export class AlumnoComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private http: HttpClient,
-    private appComponent: AppComponent) { }
+    private appComponent: AppComponent) { 
+      this.alumno = new Alumno();
+    }
 
   ngOnInit() {
-    var id = this.route.snapshot.params['id'];
-    if (id !== 'new') {
-      // this.alumno = this.alumnoService.getById(id);
+    var usuario = JSON.parse(localStorage.getItem('usuario'));
+    if (usuario !== undefined && usuario !== null && usuario !== '') {
+      this.http.get<Alumno>('https://localhost:44374/alumno/get-by-id?idAlumno=' + usuario).subscribe(x => {
+        this.alumno = x;
+      });
     } else {
       this.alumno = new Alumno();
     }
@@ -52,7 +56,16 @@ export class AlumnoComponent implements OnInit {
       .subscribe((x: Alumno) => {
         alert('Alumno Creado!');
         localStorage.setItem('usuario', JSON.stringify(x.id));
+        localStorage.setItem('usuarioNombre', JSON.stringify(x.nombres + ' ' + x.apellidos));
         this.appComponent.iniciarUsuario(x);
+      }, error => {
+        alert('Ya existe un usuario con ese nombre!');
       });
+  }
+
+  isDisabled(): boolean {
+    return this.alumno.nombres !== null && this.alumno.nombres !== '' && this.alumno.nombres !== undefined &&
+    this.alumno.apellidos !== null && this.alumno.apellidos !== '' && this.alumno.apellidos !== undefined &&
+    this.alumno.nombreUsuario !== null && this.alumno.nombreUsuario !== '' && this.alumno.nombreUsuario !== undefined;
   }
 }

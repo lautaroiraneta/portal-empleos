@@ -27,7 +27,7 @@
                                                                         font-size: 16px;
                                                                         text-decoration: underline;
                                                                         line-height: 30px;"
-                                                                        [routerLink]="['/alumno', 'new']">Solicitar Usuario de Alumno</a>
+                                                                        [routerLink]="['/alumno']">Solicitar Usuario de Alumno</a>
                             </div>
                             <button type="submit" (click)="ingresar()">Ingresar</button>
                             <a href="#" title="" style="color: #fb236a;
@@ -35,7 +35,8 @@
                                                                     float: right;
                                                                     font-size: 12px;
                                                                     text-decoration: underline;
-                                                                    line-height: 30px;">Olvidé mi contraseña</a>
+                                                                    line-height: 30px;"
+                                                                    (click)="desloguearse()">Olvidé mi contraseña</a>
                         </form>
                         <!-- <div class="extra-login">
                             <span>Or</span>

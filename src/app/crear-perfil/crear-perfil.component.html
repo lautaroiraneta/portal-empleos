@@ -59,7 +59,7 @@
                                             [(ngModel)]="perfil.emails[i].valor" />
                                     </div>
                                 </div>
-                                <div style="padding-top:10px;" *ngIf="perfil.emails.length !== 1">
+                                <div style="padding-top:10px;" *ngIf="perfil.emails?.length !== 1">
                                     <a (click)="eliminarEmail(perfil.emails[i].id)"><i class="la la-trash"
                                             style="font-size: 25px;"></i></a>
                                 </div>
@@ -78,7 +78,7 @@
                                             [(ngModel)]="perfil.telefonos[i].valor" />
                                     </div>
                                 </div>
-                                <div style="padding-top:10px;" *ngIf="perfil.telefonos.length !== 1">
+                                <div style="padding-top:10px;" *ngIf="perfil.telefonos?.length !== 1">
                                     <a (click)="eliminarTelefono(perfil.telefonos[i].id)"><i class="la la-trash"
                                             style="font-size: 25px;"></i></a>
                                 </div>
@@ -107,7 +107,7 @@
                                     </ng-multiselect-dropdown>
                                 </div>
                             </div>
-                            <div class="col-lg-6" *ngIf="perfil.provinciaResidencia?.length > 0 && perfil.provinciaResidencia[0].id === '2'">
+                            <div class="col-lg-6">
                                 <span class="pf-title" style="margin-top: 15px;" >Zona</span>
                                 <div class="pf-field">
                                     <ng-multiselect-dropdown [placeholder]="'Seleccione una zona'"
@@ -117,7 +117,7 @@
                                     </ng-multiselect-dropdown>
                                 </div>
                             </div>
-                            <div class="col-lg-6" *ngIf="perfil.zona?.length > 0">
+                            <div class="col-lg-6">
                                 <span class="pf-title" style="margin-top: 15px;">Ciudad</span>
                                 <div class="pf-field">
                                     <ng-multiselect-dropdown [placeholder]="'Seleccione una ciudad'"
@@ -127,7 +127,7 @@
                                     </ng-multiselect-dropdown>
                                 </div>
                             </div>
-                            <div class="col-lg-6" *ngIf="perfil.ciudad?.length > 0">
+                            <div class="col-lg-6">
                                 <span class="pf-title" style="margin-top: 15px;">Localidad</span>
                                 <div class="pf-field">
                                     <ng-multiselect-dropdown [placeholder]="'Seleccione una localidad'" [data]="localidades" [(ngModel)]="perfil.localidad"
@@ -174,7 +174,9 @@
                             <div class="col-lg-6">
                                 <span class="pf-title" style="margin-top: 15px;">Documento de Identidad</span>
                                 <div class="pf-field">
-                                    <input type="text" placeholder="" [(ngModel)]="perfil.documento"
+                                    <input type="text" 
+                                        placeholder="" 
+                                        [(ngModel)]="perfil.documento"
                                         name="numeroDocumento" />
                                 </div>
                             </div>
@@ -307,7 +309,7 @@
                         <div class="row" *ngSwitchCase="3">
                             <div class="manage-jobs-sec">
                                 <br>
-                                <table *ngIf="perfil.experienciaLaboral.length > 0">
+                                <table *ngIf="perfil.experienciaLaboral?.length > 0">
                                     <thead>
                                         <tr>
                                             <th style="color: purple;">
@@ -339,12 +341,12 @@
                                             </td>
                                             <td>
                                                 <div class="table-list-title">
-                                                    <h3>{{ el.fechaDesde.singleDate.date?.month }}/{{ el.fechaDesde.singleDate.date?.year }}</h3>
+                                                    <h3>{{ el.fechaDesde?.singleDate.date?.month }}/{{ el.fechaDesde?.singleDate.date?.year }}</h3>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="table-list-title">
-                                                    <h3 *ngIf="!el.actualmenteTrabajando">{{ el.fechaHasta.singleDate.date?.month }}/{{ el.fechaHasta.singleDate.date?.year }}</h3>
+                                                    <h3 *ngIf="!el.actualmenteTrabajando">{{ el.fechaHasta?.singleDate.date?.month }}/{{ el.fechaHasta?.singleDate.date?.year }}</h3>
                                                     <h3 *ngIf="el.actualmenteTrabajando">Presente</h3>
                                                 </div>
                                             </td>
@@ -374,7 +376,7 @@
                                         <li class="la la-plus-circle" style="display: inline-block;"></li> Agregar
                                         Experiencia Educativa
                                     </a></h2>
-                                <table *ngIf="perfil.experienciaEducativa.length > 0">
+                                <table *ngIf="perfil.experienciaEducativa?.length > 0">
                                     <thead>
                                         <tr>
                                             <td style="color: purple;">
@@ -435,7 +437,7 @@
                         </div>
                         <div class="row" *ngSwitchCase="5">
                             <div class="manage-jobs-sec">
-                                <table *ngIf="perfil.idioma.length > 0">
+                                <table *ngIf="perfil.idioma?.length > 0">
                                     <thead>
                                         <tr>
                                             <td style="color: purple;">

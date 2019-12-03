@@ -32,4 +32,9 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  desloguearse() {
+    localStorage.setItem('usuario', null);
+    this.appComponent.iniciarUsuario(null);
+  }
+
 }

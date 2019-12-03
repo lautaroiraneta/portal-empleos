@@ -10,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 
 export class Perfil {
+  id: string;
   nombre: string;
   apellido: string;
   emails: IdValor[] = [];
@@ -55,7 +56,7 @@ export class Conocimiento {
 
 export class ExperienciaLaboral {
   empresa: string;
-  puesto: Puesto[];
+  puestoLaboral: Puesto[];
   fechaDesde: IMyDateModel = { isRange: false, singleDate: { jsDate: new Date() } };;
   fechaDesdeDT: Date;
   fechaHasta: IMyDateModel = { isRange: false, singleDate: { jsDate: new Date() } };;
@@ -115,7 +116,7 @@ export class CrearPerfilComponent implements OnInit {
     monthLabels: { 1: 'Ene', 2: 'Feb', 3: 'Mar', 4: 'Abr', 5: 'May', 6: 'Jun', 7: 'Jul', 8: 'Ago', 9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dic' }
     // other options are here...
   };
- 
+
   paises: IdValor[];
   zonas: IdValor[];
   ciudades: IdValor[];
@@ -136,9 +137,9 @@ export class CrearPerfilComponent implements OnInit {
   idioma: Idioma;
 
   tiposDocumento = [
-    { id: '1', nombre: 'DNI'}
+    { id: '1', nombre: 'DNI' }
   ];
-  
+
   dropdownSettingsSingle: IDropdownSettings = {
     singleSelection: true,
     closeDropDownOnSelection: true,
@@ -172,7 +173,7 @@ export class CrearPerfilComponent implements OnInit {
   closeResult: string;
 
   experienciaLaboral: ExperienciaLaboral;
-  
+
   experienciasEducativasTipos = [
     { id: 'pri', valor: 'Primario' },
     { id: 'sec', valor: 'Secundario' },
@@ -188,10 +189,10 @@ export class CrearPerfilComponent implements OnInit {
   experienciaEducativa: ExperienciaEducativa;
 
   estadosCivil = [{ id: '1', valor: 'Soltero' },
-    { id: '2', valor: 'En Pareja' },
-    { id: '3', valor: 'Casado' },
-    { id: '4', valor: 'Divorciado' },
-    { id: '5', valor: 'Viudo' }];
+  { id: '2', valor: 'En Pareja' },
+  { id: '3', valor: 'Casado' },
+  { id: '4', valor: 'Divorciado' },
+  { id: '5', valor: 'Viudo' }];
 
   constructor(
     private helperService: HelperService,
@@ -199,13 +200,38 @@ export class CrearPerfilComponent implements OnInit {
     private modalService: NgbModal,
     private http: HttpClient,
     private route: ActivatedRoute
-  ) { }
+  ) {
+    this.perfil = new Perfil();
+  }
 
   ngOnInit() {
     var usuario = JSON.parse(localStorage.getItem('usuario'));
     console.log(usuario);
-    if (usuario === undefined) {
-      // this.alumno = this.alumnoService.getById(id);
+    if (usuario !== undefined && usuario !== null && usuario !== '') {
+      this.http.get<Perfil>('https://localhost:44374/Perfil/perfil/get-by-alumno-id?alumnoId=' + usuario).subscribe(x => {
+        if (x !== undefined && x !== null) {
+          this.perfil = x;
+          this.perfil.fechaNacimiento = { isRange: false, singleDate: { jsDate: new Date(this.perfil.fechaNacimientoDT) } };
+          if (this.perfil.emails === null) {
+            this.perfil.emails = [];
+            this.perfil.emails.push({ id: 'new', valor: '' });
+          }
+          if (this.perfil.telefonos === null) {
+            this.perfil.telefonos = [];
+            this.perfil.telefonos.push({ id: 'new', valor: '' });
+          }
+        }
+        else {
+          this.perfil = new Perfil();
+          this.perfil.emails.push({ id: 'new', valor: '' });
+          this.perfil.telefonos.push({ id: 'new', valor: '' });
+          this.perfil.experienciaLaboral = [];
+          this.perfil.experienciaEducativa = [];
+          this.perfil.idioma = [];
+          this.perfil.alumno = usuario;
+          this.perfil.fechaNacimiento = { isRange: false, singleDate: { jsDate: new Date() } };
+        }
+      });
     } else {
       this.perfil = new Perfil();
       this.perfil.emails.push({ id: 'new', valor: '' });
@@ -214,6 +240,7 @@ export class CrearPerfilComponent implements OnInit {
       this.perfil.experienciaEducativa = [];
       this.perfil.idioma = [];
       this.perfil.alumno = usuario;
+      this.perfil.fechaNacimiento = { isRange: false, singleDate: { jsDate: new Date() } };
     }
 
     this.dataService.getPaises().subscribe(x => {
@@ -235,8 +262,6 @@ export class CrearPerfilComponent implements OnInit {
     this.dataService.getConocimientos().subscribe(x => {
       this.conocimientos = x;
     });
-
-    this.perfil.fechaNacimiento = { isRange: false, singleDate: { jsDate: new Date() } };
   }
 
   agregarEmail() {
@@ -305,7 +330,7 @@ export class CrearPerfilComponent implements OnInit {
   saveExperienciaLaboral() {
     this.experienciaLaboral.fechaDesdeDT = this.experienciaLaboral.fechaDesde.singleDate.date ?
       new Date(this.experienciaLaboral.fechaDesde.singleDate.date.year, this.experienciaLaboral.fechaDesde.singleDate.date.month - 1, this.experienciaLaboral.fechaDesde.singleDate.date.day) : new Date();
-      this.experienciaLaboral.fechaHastaDT = this.experienciaLaboral.fechaHasta.singleDate.date ?
+    this.experienciaLaboral.fechaHastaDT = this.experienciaLaboral.fechaHasta.singleDate.date ?
       new Date(this.experienciaLaboral.fechaHasta.singleDate.date.year, this.experienciaLaboral.fechaHasta.singleDate.date.month - 1, this.experienciaLaboral.fechaDesde.singleDate.date.day) : new Date();
     this.perfil.experienciaLaboral.push(this.experienciaLaboral);
     this.modalService.dismissAll();
@@ -314,7 +339,7 @@ export class CrearPerfilComponent implements OnInit {
   saveExperienciaEducativa() {
     this.experienciaEducativa.fechaDesdeDT = this.experienciaEducativa.fechaDesde.singleDate.date ?
       new Date(this.experienciaEducativa.fechaDesde.singleDate.date.year, this.experienciaEducativa.fechaDesde.singleDate.date.month - 1, this.experienciaEducativa.fechaDesde.singleDate.date.day) : new Date();
-      this.experienciaEducativa.fechaHastaDT = this.experienciaEducativa.fechaHasta.singleDate.date ?
+    this.experienciaEducativa.fechaHastaDT = this.experienciaEducativa.fechaHasta.singleDate.date ?
       new Date(this.experienciaEducativa.fechaHasta.singleDate.date.year, this.experienciaEducativa.fechaHasta.singleDate.date.month - 1, this.experienciaEducativa.fechaDesde.singleDate.date.day) : new Date();
     this.perfil.experienciaEducativa.push(this.experienciaEducativa);
     console.log(this.perfil);
@@ -327,14 +352,14 @@ export class CrearPerfilComponent implements OnInit {
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
       return 'by clicking on a backdrop';
     } else {
-      return  `with: ${reason}`;
+      return `with: ${reason}`;
     }
   }
 
   onItemSelect(item: any) {
     console.log(item);
   }
-  
+
   onSelectAll(items: any) {
     console.log(items);
   }

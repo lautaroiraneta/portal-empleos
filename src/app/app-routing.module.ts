@@ -45,7 +45,7 @@ const routes: Routes = [
   { path: 'advertencia-list', component: AdvertenciaListComponent },
   { path: 'agregar-conocimientos-a-mi-perfil', component: AgregarConocimientosComponent },
   { path: 'alertas-list', component: AlertasListComponent },
-  { path: 'alumno/:id', component: AlumnoComponent },
+  { path: 'alumno', component: AlumnoComponent },
   { path: 'alumno-list', component: AlumnoListComponent },
   { path: 'aprobacion-usuario', component: AprobacionUsuarioComponent },
   { path: 'carrera', component: CarreraComponent },

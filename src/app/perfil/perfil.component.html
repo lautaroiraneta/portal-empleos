@@ -5,21 +5,21 @@
                 <div class="col-lg-12">
                     <div class="cand-single-user">
                         <div class="share-bar circle">
-                            <a href="#" title="" class="share-fb"><i class="la la-facebook"></i></a>
-                            <a href="#" title="" class="share-twitter"><i class="la la-twitter"></i></a>
-                            <a href="#" title="" class="share-google"><i class="la la-instagram"></i></a>
+                            <a href="https://www.facebook.com/{{perfil.redesSociales.usuarioFacebook}}" title="" class="share-fb"><i class="la la-facebook"></i></a>
+                            <a href="https://www.twitter.com/{{perfil.redesSociales.usuarioTwitter}}" title="" class="share-twitter"><i class="la la-twitter"></i></a>
+                            <a href="https://www.instagram.com/{{perfil.redesSociales.usuarioInstagram}}" title="" class="share-google"><i class="la la-instagram"></i></a>
                             <a href="#" title="" class="share-fb"><i class="la la-linkedin"></i></a>
                         </div>
                         <div class="can-detail-s">
                             <div class="cst"><img
                                     src="https://scontent.faep7-1.fna.fbcdn.net/v/t1.0-1/c0.0.160.160a/p160x160/53392913_10217412438410264_1299546104634802176_n.jpg?_nc_cat=101&_nc_oc=AQnq8WyKzdlSniQnvJ0i5UZzYr5P8cxHNpiR0t7JpGmMgL0nbYTPykGBFP74zzlqjTQ&_nc_ht=scontent.faep7-1.fna&oh=b9120705606ef084094061f63c1b0261&oe=5E126BBC"
                                     alt="" /></div>
-                            <h3>{{ perfil.nombres }} {{ perfil.apellidos }}</h3>
-                            <span><i> {{ obtenerEmpleoActual().puesto }} </i> en
-                                {{ obtenerEmpleoActual().empresa.nombre }}</span>
-                            <p><i class="la la-envelope"></i>{{ perfil.emails[0].email }}</p>
-                            <p><i class="la la-phone"></i>{{ perfil.telefonos[0].telefono }}</p>
-                            <p><i class="la la-map-marker"></i>Wilde, Buenos Aires</p>
+                            <h3>{{ perfil.nombre }} {{ perfil.apellido }}</h3>
+                            <span><i> {{ obtenerPuestoActual() }} </i> en
+                                <i>{{ obtenerEmpresaActual() }}</i></span>
+                            <p><i class="la la-envelope"></i>{{ obtenerEmail() }}</p>
+                            <p><i class="la la-phone"></i>{{ obtenerTelefono() }}</p>
+                            <p><i class="la la-map-marker"></i>{{ obtenerUbicacion() }}</p>
                         </div>
                         <div class="download-cv">
                             <a href="#" title="">Descargar Perfil <i class="la la-download"></i></a>
@@ -38,7 +38,7 @@
                             <div class="col-lg-8 column">
                                 <div class="cand-details" id="about">
                                     <h2>Descripción</h2>
-                                    <p>{{perfil.descripcion}}</p>
+                                    <p>{{ perfil.descripcion }}</p>
                                     <h2>Objetivo Laboral</h2>
                                     <p>{{ perfil.objetivoLaboral }}</p>
                                     <div class="edu-history-sec" id="education">
@@ -46,8 +46,8 @@
                                         <div class="edu-history" *ngFor="let ee of perfil.experienciaEducativa">
                                             <i class="la la-graduation-cap"></i>
                                             <div class="edu-hisinfo">
-                                                <h3>{{ ee.tipo }}</h3>
-                                                <i>{{ ee.fechaInicio }} - {{ ee.fechaFin }}</i>
+                                                <h3>{{ ee.tipoEstudio[0].valor }}</h3>
+                                                <i>{{ getAnio(ee.fechaDesdeDT) }} - {{ getAnio(ee.fechaHastaDT) }}</i>
                                                 <span>{{ ee.institucion }}</span>
                                                 <p>{{ ee.titulo }}</p>
                                             </div>
@@ -58,20 +58,20 @@
                                         <div class="edu-history style2" *ngFor="let el of perfil.experienciaLaboral">
                                             <i></i>
                                             <div class="edu-hisinfo">
-                                                <h3>{{ el.puesto }} <span>{{ el.empresa.nombre }}</span></h3>
-                                                <i>{{ el.fechaDesde }} - {{ el.fechaHasta }}</i>
-                                                <p>{{ el.comentarios }}</p>
+                                                <h3>{{ getPuesto(el) }} <span>{{ el.empresa }}</span></h3>
+                                                <i>{{ getAnio(el.fechaDesdeDT)}} - {{ getAnio(el.fechaHastaDT) }}</i>
+                                                <p>{{ el.descripcion }}</p>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="edu-history-sec" id="idiomas">
                                         <h2>Idiomas</h2>
-                                        <div class="edu-history" *ngFor="let i of perfil.idiomas">
+                                        <div class="edu-history" *ngFor="let i of perfil.idioma">
                                             <i class="la la-book"></i>
                                             <div class="edu-hisinfo">
-                                                <h3>{{ i.idioma }}</h3>
-                                                <span><strong>Nivel Escrito: </strong>{{ i.nivelEscrito.nombre }}</span>
-                                                <span><strong>Nivel Oral: </strong>{{ i.nivelOral.nombre }}</span>
+                                                <h3>{{ i.nombreIdioma[0].valor }}</h3>
+                                                <span><strong>Nivel Escrito: </strong>{{ i.nivelEscrito[0].valor }}</span>
+                                                <span><strong>Nivel Oral: </strong>{{ i.nivelOral[0].valor }}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -81,13 +81,13 @@
                                 <div class="job-overview">
                                     <ul>
                                         <li><i class="la la-globe"></i>
-                                            <h3>Pais de Residencia</h3><span>{{ perfil.paisResidencia[0].nombre }}</span>
+                                            <h3>Pais de Residencia</h3><span>{{ perfil.paisResidencia[0].valor }}</span>
                                         </li>
                                         <li><i class="la la-users"></i>
-                                            <h3>Estado Civil</h3><span>{{ perfil.estadoCivil[0].nombre }}</span>
+                                            <h3>Estado Civil</h3><span>{{ perfil.estadoCivil[0].valor }}</span>
                                         </li>
                                         <li><i class="la la-birthday-cake"></i>
-                                            <h3>Nacimiento</h3><span>1 de Julio de 1991 (28 años)</span>
+                                            <h3>Nacimiento</h3><span>{{ getDia(perfil.fechaNacimientoDT) }} de {{ getMes(perfil.fechaNacimientoDT) }} de {{ getAnioNacimiento(perfil.fechaNacimientoDT) }} ({{ getEdad(perfil.fechaNacimientoDT) }} años)</span>
                                         </li>
                                     </ul>
                                 </div>
