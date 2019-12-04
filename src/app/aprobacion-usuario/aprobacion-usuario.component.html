@@ -20,24 +20,24 @@
                                font-family: Open Sans;
                                font-size: 16px;
                                text-decoration: underline;
-                               line-height: 30px;">{{ u.nombre }}</h3>
+                               line-height: 30px;">{{ u.nombreUsuario}} ({{ u.nombre }} {{ u.apellido }})</h3>
                        </div>
                    </td>
                    <td>
                        <div class="table-list-title">
-                           <h3>{{ u.tipo }}</h3>
+                           <h3>{{ getTipo(u.tipoUsuario) }}</h3>
                        </div>
                    </td>
                    <td>
                        <div class="table-list-title">
-                           <h3>{{ u.fechaIngreso }}</h3>
+                           <h3>{{ getFechaIngreso(u.alta) }}</h3>
                        </div>
                    </td>
                    <td>
                        <ul class="action_job">
-                           <li><span>Validar</span><a href="#" title=""><i class="la la-thumbs-up"
-                                       style="font-size: 36px; color: green;"></i></a></li>
-                           <li><span>Invalidar</span><a href="#" title=""><i class="la la-thumbs-down"
+                           <li *ngIf="!u.aprobado"><span>Aprobar Usuario</span><a title="" (click)="setAprobado(u, true)"><i class="la la-thumbs-up"
+                                       style="font-size: 36px; color: green;" ></i></a></li>
+                           <li *ngIf="u.aprobado"><span>Desaprobar Usuario</span><a title="" (click)="setAprobado(u, false)"><i class="la la-thumbs-down"
                                        style="font-size: 36px; color: red;"></i></a></li>
                        </ul>
                    </td>

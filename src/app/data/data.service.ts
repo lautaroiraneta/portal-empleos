@@ -4,6 +4,7 @@ import { Carrera } from '../carrera/carrera.component';
 import { HttpClient } from '@angular/common/http';
 import { IdValor, Empresa } from '../empresa/empresa.component';
 import { Puesto, Conocimiento, Perfil } from '../crear-perfil/crear-perfil.component';
+import { Usuario } from '../aprobacion-usuario/aprobacion-usuario.component';
 
 @Injectable({
   providedIn: 'root'
@@ -70,5 +71,9 @@ export class DataService {
 
   getTutores(): Subscribable<IdValor[]> {
     return this.http.get<IdValor[]>('https://localhost:44374/Tutor');
+  }
+
+  getUsuarios(): Subscribable<Usuario[]> {
+    return this.http.get<Usuario[]>('https://localhost:44374/Usuario');
   }
 }

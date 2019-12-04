@@ -1,4 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { DataService } from '../data/data.service';
+
+export class Usuario {
+  id: string;
+  nombreUsuario: string;
+  password: string;
+  tipoUsuario: string;
+  alumnoId: string;
+  empresaId: string;
+  alta: Date;
+  aprobado: boolean;
+  nombre: string;
+  apellido: string;
+}
 
 @Component({
   selector: 'app-aprobacion-usuario',
@@ -6,26 +21,41 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./aprobacion-usuario.component.css']
 })
 export class AprobacionUsuarioComponent implements OnInit {
-  usuarios = [{
-    nombre: 'Celeste Newman',
-    tipo: 'Alumno',
-    fechaIngreso: '13/02/2019',
-    aprobado: null
-  }, {
-    nombre: 'xNova',
-    tipo: 'Empresa',
-    fechaIngreso: '15/02/2019',
-    aprobado: null
-  }, {
-    nombre: 'Wilson Ramos',
-    tipo: 'Alumno',
-    fechaIngreso: '19/02/2019',
-    aprobado: null
-  }]
+  usuarios: Usuario[];
 
-  constructor() { }
+  constructor(private http: HttpClient, private dataService: DataService) { }
 
   ngOnInit() {
+    this.dataService.getUsuarios().subscribe(x => {
+      this.usuarios = x;
+    });
   }
 
+  getTipo(tipo: string) {
+    switch (tipo) {
+      case 'e':
+        return 'Empresa';
+      case 'a':
+        return 'Alumno';
+      case 'u':
+        return 'Universidad';
+      default:
+        return '';
+    }
+  }
+
+  getFechaIngreso(fecha: string) {
+    var aux = new Date(fecha);
+    return aux.getDay() + '/' + (aux.getMonth() + 1).toString() + '/' + aux.getFullYear();
+  }
+
+  setAprobado(usuario: Usuario, aprobado: boolean) {
+    let data = new Usuario();
+    data.id = usuario.id;
+    data.aprobado = aprobado;
+
+    this.http.post('https://localhost:44374/Usuario/set-aprobado', data).subscribe(x => {
+      usuario.aprobado = aprobado;
+    });
+  }
 }
