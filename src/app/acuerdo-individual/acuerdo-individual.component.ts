@@ -1,6 +1,40 @@
 import { Component, OnInit } from '@angular/core';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { NgForm } from '@angular/forms';
+import { IdValor } from '../empresa/empresa.component';
+import { DataService } from '../data/data.service';
+import { HttpClient } from '@angular/common/http';
+
+export class Acuerdo {
+  ingresoAlumnos: string;
+  alumno: string;
+  empresa: string;
+  nombre: string;
+  docenteGuia: IdValor[];
+  tutor: IdValor[];
+  duracion: number;
+  tareas: IdValor[] = [];
+  textoPlan: string;
+  textoAcuerdo: string;
+  calendario: Calendario = new Calendario();
+}
+
+export class Calendario {
+  horarioIngLunes: string = '12:00 AM';
+  horarioIngMartes: string = '12:00 AM';
+  horarioIngMiercoles: string = '12:00 AM';
+  horarioIngJueves: string = '12:00 AM';
+  horarioIngViernes: string = '12:00 AM';
+  horarioIngSabado: string = '12:00 AM';
+  horarioIngDomingo: string = '12:00 AM';
+  horarioSalLunes: string = '12:00 AM';
+  horarioSalMartes: string = '12:00 AM';
+  horarioSalMiercoles: string = '12:00 AM';
+  horarioSalJueves: string = '12:00 AM';
+  horarioSalViernes: string = '12:00 AM';
+  horarioSalSabado: string = '12:00 AM';
+  horarioSalDomingo: string = '12:00 AM';
+}
 
 @Component({
   selector: 'app-acuerdo-individual',
@@ -8,68 +42,53 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./acuerdo-individual.component.css']
 })
 export class AcuerdoIndividualComponent implements OnInit {
-  acuerdo = {
-    alumno: {
-      nombre: 'Juan Jiménez'
-    },
-    empresa: {
-      nombre: 'YPF'
-    },
-    nombre: 'Acuerdo 1',
-    docenteGuia: [
-      { id: '2', nombre: 'Jeff McNeil' }
-    ],
-    tutor: [
-      { id: '1', nombre: 'Brandon Nimmo' }
-    ],
-    duracion: '6',
-    horarios: {
-      lunes: { entrada: '12:45 AM', salida: '11:45 AM'}, 
-      martes: { entrada: '02:40 AM', salida: '11:00 PM'}, 
-      miercoles: { entrada: '08:00 AM', salida: '06:00 PM'}, 
-      jueves: { entrada: '10:00 AM', salida: '04:00 PM'}, 
-      viernes: { entrada: '10:30 AM', salida: '04:30 PM'}, 
-      sabado: { entrada: '10:45 AM', salida: '04:45 PM'}, 
-      domingo: { entrada: '11:00 AM', salida: '05:00 PM'}, 
-    },
-    tareas: [
-      { valor: 'Tarea 1' },
-      { valor: 'Tarea 2' }
-    ]
-  };
+  docentesGuia: IdValor[];
+  tutores: IdValor[];
 
-  docentes = [
-    { id: '1', nombre: 'Amed Rosario' },
-    { id: '2', nombre: 'Jeff McNeil' },
-    { id: '3', nombre: 'Robinson Canó' },
-    { id: '4', nombre: 'Michael Conforto' }
-  ];
-
-  tutores = [
-    { id: '1', nombre: 'Brandon Nimmo' },
-    { id: '2', nombre: 'Wilson Ramos' },
-    { id: '3', nombre: 'Noah Syndergaard' },
-    { id: '4', nombre: 'Steven Matz' }
-  ]
+  acuerdo: Acuerdo;
 
   dropdownSettingsSingle: IDropdownSettings = {
     singleSelection: true,
     closeDropDownOnSelection: true,
     idField: 'id',
-    textField: 'nombre',
+    textField: 'valor',
     enableCheckAll: false,
     itemsShowLimit: 3,
     allowSearchFilter: true
   };
 
-  constructor() { }
+  constructor(private dataService: DataService, private http: HttpClient) { 
+    this.acuerdo = new Acuerdo();
+  }
 
   ngOnInit() {
+    this.dataService.getDocentesGuia().subscribe(x => {
+      this.docentesGuia = x;
+    });
+
+    this.dataService.getTutores().subscribe(x => {
+      this.tutores = x;
+    });
+    
+    this.acuerdo = new Acuerdo();
+    this.acuerdo.tareas.push({ id: '', valor: '' });
   }
 
   onSubmit(form: NgForm) {
-    console.log('form ' + JSON.stringify(form.form.value));
-    console.log('acuerdo: ' + JSON.stringify(this.acuerdo));
+    let data = new Acuerdo();
+    data.alumno = this.acuerdo.alumno;
+    data.calendario = this.acuerdo.calendario;
+    data.docenteGuia = this.acuerdo.docenteGuia;
+    data.duracion = this.acuerdo.duracion;
+    data.empresa = this.acuerdo.empresa;
+    data.ingresoAlumnos = this.acuerdo.ingresoAlumnos;
+    data.nombre = this.acuerdo.nombre;
+    data.tareas = this.acuerdo.tareas;
+    data.tutor = this.acuerdo.tutor;
+
+    this.http.post('https://localhost:44374/Acuerdo', data).subscribe(x => {
+      alert('Acuerdo creado!');
+    });
   }
 
   onItemSelect(item: any) {
@@ -81,6 +100,6 @@ export class AcuerdoIndividualComponent implements OnInit {
   }
 
   agregarTarea() {
-    this.acuerdo.tareas.push( { valor: '' });
+    this.acuerdo.tareas.push( { id: '', valor: '' });
   }
 }

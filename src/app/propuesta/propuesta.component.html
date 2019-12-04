@@ -130,8 +130,8 @@
                                 </div>
                             </div>
                             <div class="col-lg-6">
-                                <span class="pf-title" style="margin-top: 0px;">Turno</span>
-                                <div class="pf-field">
+                                <span class="pf-title" style="margin-top: 0px;" *ngIf="!esTipoDeEmpleoFullTime()">Turno</span>
+                                <div class="pf-field" *ngIf="!esTipoDeEmpleoFullTime()">
                                     <ng-multiselect-dropdown [placeholder]="'Seleccione un Turno'" [data]="turnos"
                                         [(ngModel)]="propuesta.turno" name="turno" [settings]="dropdownSettingsSingle"
                                         (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">

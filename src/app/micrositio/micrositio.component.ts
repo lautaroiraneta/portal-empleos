@@ -18,7 +18,9 @@ export class Micrositio {
 export class MicrositioComponent implements OnInit {
   micrositio: Micrositio;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+    this.micrositio = new Micrositio();
+  }
 
   ngOnInit() {
     this.micrositio = new Micrositio();

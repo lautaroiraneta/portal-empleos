@@ -199,10 +199,10 @@ export class PropuestaComponent implements OnInit {
       data.edadMax = this.propuesta.edadMax;
       data.disponibilidadReubicacion = this.propuesta.disponibilidadReubicacion;
       data.habilidadesPersonales = this.propuesta.habilidadesPersonales;
-      data.cantidadMatApr = this.propuesta.cantidadMatApr;
-      data.promedio = this.propuesta.promedio;
-      data.porcentajeMatApr = this.propuesta.porcentajeMatApr;
-      data.anioCursada = this.propuesta.anioCursada;
+      data.cantidadMatApr = this.propuesta.cantidadMatApr === null ? 0 : this.propuesta.cantidadMatApr;
+      data.promedio = this.propuesta.promedio === null ? 0 : this.propuesta.promedio;
+      data.porcentajeMatApr = this.propuesta.porcentajeMatApr === null ? 0 : this.propuesta.porcentajeMatApr;
+      data.anioCursada = this.propuesta.anioCursada === null ? 0 : this.propuesta.anioCursada;
       data.puestos = this.propuesta.puestos;
       data.conocimientos = this.propuesta.conocimientos;
       data.conocimientosExtra = this.propuesta.conocimientosExtra;
@@ -261,5 +261,12 @@ export class PropuestaComponent implements OnInit {
     this.dataService.getLocalidades(item.id).subscribe(x => {
       this.localidades = x;
     });
+  }
+
+  esTipoDeEmpleoFullTime(): boolean {
+    if (this.propuesta.tipoEmpleo !== null && this.propuesta.tipoEmpleo !== undefined && this.propuesta.tipoEmpleo.length > 0) {
+      return this.propuesta.tipoEmpleo[0].valor === 'Full-Time';
+    }
+    return false;
   }
 }

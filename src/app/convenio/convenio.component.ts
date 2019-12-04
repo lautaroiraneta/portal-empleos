@@ -1,7 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import { IAngularMyDpOptions } from 'angular-mydatepicker';
+import { IAngularMyDpOptions, IMyDateModel } from 'angular-mydatepicker';
 import { NgForm } from '@angular/forms';
+import { IdValor } from '../empresa/empresa.component';
+import { DataService } from '../data/data.service';
+import { HttpClient } from '@angular/common/http';
+
+export class Convenio {
+  nombre: string;
+  facultad: IdValor[];
+  generarUniversidad: boolean;
+  duracionMinima: number;
+  duracionMaxima: number;
+  plazoRenovacion: number;
+  cantidadMaxHoras: number;
+  inicioVigencia: IMyDateModel;
+  inicioVigenciaDT: Date;
+  finVigencia: IMyDateModel;
+  finVigenciaDT: Date;
+  renovacionAutomatica: boolean;
+  plazoExtension: number;
+  cantMaxPasantes: number;
+}
 
 @Component({
   selector: 'app-convenio',
@@ -9,23 +29,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./convenio.component.css']
 })
 export class ConvenioComponent implements OnInit {
-  convenio = {
-    empresa: 'Empresa ABC',
-    nombre: 'nombre Convenio',
-    facultad: [
-      { id: '2', nombre: 'Facultad de Ciencias Económicas' }
-    ],
-    generarParaUniversidad: true,
-    duracionMinima: 6,
-    duracionMaxima: 8,
-    plazoRenovacion: 4,
-    cantidadHoras: 160,
-    inicioVigencia: { isRange: false, singleDate: { jsDate: new Date(2018, 3, 20) } },
-    finVigencia: { isRange: false, singleDate: { jsDate: new Date(2018, 7, 2) } },
-    renovacionAutomatica: true,
-    plazoExtension: 41,
-    cantidadPasantes: 20
-  };
+  convenio: Convenio;
 
   myDpOptions: IAngularMyDpOptions = {
     dateRange: false,
@@ -35,29 +39,56 @@ export class ConvenioComponent implements OnInit {
     // other options are here...
   };
 
-  facultades = [
-    { id: '1', nombre: 'Facultad de Ingeniería' },
-    { id: '2', nombre: 'Facultad de Ciencias Económicas' },
-    { id: '3', nombre: 'Facultad de Informática' }
-  ]
+  facultades: IdValor[];
 
   dropdownSettingsSingle: IDropdownSettings = {
     singleSelection: true,
     closeDropDownOnSelection: true,
     idField: 'id',
-    textField: 'nombre',
+    textField: 'valor',
     enableCheckAll: false,
     itemsShowLimit: 3,
     allowSearchFilter: true
   };
 
-  constructor() { }
+  constructor(private dataService: DataService, private http: HttpClient) { }
 
   ngOnInit() {
+    this.dataService.getFacultades().subscribe(x => {
+      this.facultades = x;
+    });
+
+    this.convenio = new Convenio();
   }
 
   onSubmit(form: NgForm) {
     console.log('form ' + JSON.stringify(form.form.value));
     console.log('convenio: ' + JSON.stringify(this.convenio));
+
+    let data = new Convenio();
+    data.cantMaxPasantes = this.convenio.cantMaxPasantes;
+    data.cantidadMaxHoras = this.convenio.cantidadMaxHoras;
+    data.duracionMaxima = this.convenio.duracionMaxima;
+    data.duracionMinima = this.convenio.duracionMinima;
+    data.facultad = this.convenio.facultad;
+    data.finVigencia = this.convenio.finVigencia;
+    data.finVigenciaDT = this.convenio.finVigencia.singleDate.date ?
+      new Date(this.convenio.finVigencia.singleDate.date.year, this.convenio.finVigencia.singleDate.date.month - 1, this.convenio.finVigencia.singleDate.date.day) : new Date();
+    data.generarUniversidad = this.convenio.generarUniversidad;
+    data.inicioVigencia = this.convenio.inicioVigencia;
+    data.inicioVigenciaDT = this.convenio.inicioVigencia.singleDate.date ?
+      new Date(this.convenio.inicioVigencia.singleDate.date.year, this.convenio.inicioVigencia.singleDate.date.month - 1, this.convenio.inicioVigencia.singleDate.date.day) : new Date();
+    data.nombre = this.convenio.nombre;
+    data.plazoExtension = this.convenio.plazoExtension;
+    data.plazoRenovacion = this.convenio.plazoRenovacion;
+    data.renovacionAutomatica = this.convenio.renovacionAutomatica;
+
+    this.http.post('https://localhost:44374/Convenio', data).subscribe(x => {
+      alert('Convenio Creado!');
+    });
+  }
+
+  facultadTieneValor(): boolean {
+    return this.convenio.facultad !== undefined && this.convenio.facultad !== null && this.convenio.facultad.length > 0;
   }
 }
