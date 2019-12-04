@@ -38,6 +38,8 @@ import { TareaViewComponent } from './tarea-view/tarea-view.component';
 import { AdvertenciaListComponent } from './advertencia-list/advertencia-list.component';
 import { ConocimientoListComponent } from './conocimiento-list/conocimiento-list.component';
 import { LoginComponent } from './login/login.component';
+import { EtapaComponent } from './etapa/etapa.component';
+import { EtapaSeleccionAlumnoListComponent } from './etapa-seleccion-alumno-list/etapa-seleccion-alumno-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -56,10 +58,12 @@ const routes: Routes = [
   { path: 'crear-perfil', component: CrearPerfilComponent },
   { path: 'empresa/:id', component: EmpresaComponent },
   { path: 'empresa-list', component: EmpresaListComponent },
+  { path: 'etapa/:id', component: EtapaComponent},
   { path: 'etapa-definicion-convenio', component: EtapaDefinicionConvenioComponent },
   { path: 'etapa-pasantia-curso', component: EtapaPasantiaCursoComponent },
   { path: 'etapa-cierre-pasantia-list', component: EtapaCierrePasantiaListComponent },
   { path: 'etapa-ingreso-alumno-list', component: EtapaIngresoAlumnoListComponent },
+  { path: 'etapa-seleccion-alumno-list', component: EtapaSeleccionAlumnoListComponent },
   { path: 'equipo', component: EquipoComponent },
   { path: 'equipo-list', component: EquipoListComponent },
   { path: 'gestion-usuario', component: GestionUsuarioComponent },

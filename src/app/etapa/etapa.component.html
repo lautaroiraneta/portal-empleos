@@ -1,0 +1,119 @@
+<div class="block no-padding">
+    <div class="container">
+         <div class="row no-gape">
+             <aside class="col-lg-3 column border-right">
+                 <div class="widget">
+                    <div class="search_widget_job" style="margin-top: 0px;">
+                        <div class="btn-extars">
+                            <a href="#" title="" class="post-job-btn" style="margin-bottom: 20px; font-size: 29px;">Definición de Convenio</a>
+                        </div>
+                        <div class="btn-extars">
+                            <a href="#" title="" class="post-job-btn" style="margin-bottom: 20px; font-size: 22px; background-color: #67bb67;">{{ etapa?.estado?.valor }}</a>
+                        </div>
+                        <div class="btn-extars">
+                            <a href="#" title="" class="post-job-btn" style="margin-bottom: 20px; background-color:#e4f7d7; border-color: #7bd0b5; color: black;" *ngIf="mostrarBotonFinalizar(etapa.estado)">Finalizar</a>
+                        </div>
+                        <div class="btn-extars" style="padding-right: 25px;">
+                            <a href="#" title="" class="post-job-btn" style="margin-bottom: 20px; background-color:#e4f7d7; border-color: #7bd0b5; color: black;" *ngIf="mostrarBotonIniciar(etapa.estado)">Iniciar</a>
+                        </div>
+                        <div class="btn-extars" style="padding-right: 25px;">
+                            <a href="#" title="" class="post-job-btn" style="margin-bottom: 20px; background-color:#e4f7d7; border-color: #7bd0b5; color: black;" *ngIf="mostrarBotonDesestimar(etapa.estado)">Desestimar</a>
+                        </div>
+                        <div class="btn-extars">
+                            <p style="color: red;"><strong>Información propia de la etapa:</strong></p>
+                        </div>
+                    </div>
+                 </div>
+             </aside>
+             <div class="col-lg-9 column">
+                 <div class="modrn-joblist">
+                     <div class="filterbar">
+                        <div class="row">
+                            <h3 class="emlthis" style="color: green; font-size: 20px; margin-top: 15px; background-color: #e5efe5"><a title=""><i class="la la-user"></i> <strong>{{ etapa?.administradorUniversidad?.valor }}</strong></a></h3>
+                        </div>
+                        <div class="row" style="padding-top: 10px;">
+                            <h3 class="emlthis" style="color: blue; font-size: 20px; background-color: #e7f1f9;"><a title=""><i class="la la-user"></i> <strong>{{ etapa?.administradorEmpresa?.valor }}</strong></a></h3>
+                        </div>
+
+                        <div class="row" style="padding-bottom: 50px;">
+                        </div>
+
+                        <div class="row">
+                            <div class="widget col-md-3">
+                                <div class="search_widget_job" style="margin-top: 0px;">
+                                    <div class="field_w_search">
+                                        <input type="text" placeholder="Nombre de tarea" style="padding-bottom: 20px;" />
+                                        <i class="la la-search"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="widget border col-md-3" style="margin-right: 12px;">
+                                <h1 class="sb-title closed" (click)="isCollapsedResponsable = !isCollapsedResponsable">Responsable</h1>
+                                <div class="specialism_widget" [ngbCollapse]="isCollapsedResponsable">
+                                    <div class="field_w_search">
+                                        <input type="text" placeholder="Buscar Responsable" />
+                                    </div>
+                                    <div class="simple-checkbox">
+                                        <p><input type="checkbox" name="smplechk" id="1"><label for="1">10k - 20k</label></p>
+                                        <p><input type="checkbox" name="smplechk" id="2"><label for="2">20k - 30k</label></p>
+                                        <p><input type="checkbox" name="smplechk" id="3"><label for="3">30k - 40k</label></p>
+                                        <p><input type="checkbox" name="smplechk" id="4"><label for="4">40k - 50k</label></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="widget border col-md-3" style="margin-right: 12px;">
+                                <h1 class="sb-title closed" (click)="isCollapsedEstado = !isCollapsedEstado">Estado</h1>
+                                <div class="specialism_widget" [ngbCollapse]="isCollapsedEstado">
+                                    <div class="field_w_search">
+                                        <input type="text" placeholder="Buscar Estado" />
+                                    </div>
+                                    <div class="simple-checkbox">
+                                        <p><input type="checkbox" name="smplechk" id="1"><label for="1">10k - 20k</label></p>
+                                        <p><input type="checkbox" name="smplechk" id="2"><label for="2">20k - 30k</label></p>
+                                        <p><input type="checkbox" name="smplechk" id="3"><label for="3">30k - 40k</label></p>
+                                        <p><input type="checkbox" name="smplechk" id="4"><label for="4">40k - 50k</label></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12" style="padding-top: 20px;">
+                                <p class="remember-label" style="padding-right: 20px;">
+                                    <input type="checkbox" name="cb" id="cb12"><label for="cb12" style="font-size: 17px;">Solo mis tareas     </label>
+                                </p>
+                                <p class="remember-label" style="padding-right: 20px;">
+                                    <input type="checkbox" name="cb" id="cb13"><label for="cb13" style="font-size: 17px;">Tiene predecesoras sin finalizar</label>
+                                </p>
+                            </div>
+                        </div>
+
+                         <div class="sortby-sec" style="padding-top: 50px;">
+                             <span>Ordenar por</span>
+                             <select data-placeholder="Most Recent" class="chosen">
+                                <option>Más reciente</option>
+                                <option>Most Recent</option>
+                                <option>Most Recent</option>
+                                <option>Most Recent</option>
+                            </select>
+                         </div>
+                     </div>
+                 </div><!-- MOdern Job LIst -->
+                 <div class="job-list-modern">
+                     <div class="job-listings-sec">
+                        <div class="job-listing wtabs" style="background-color: #f7fbff" *ngFor="let t of etapa.tareas">
+                            <div class="job-title-sec" style="margin-left: 20px;">
+                                <!-- <div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div> -->
+                                <h3><a href="#" title="" style="font-size: 24px;"><strong>{{ t.nombre }}</strong></a></h3>
+                                <span style="font-size: 18px;">{{ t.responsable }}</span>
+                                <div class="job-lctn" style="color: black;"><i class="la la-calendar"></i>{{ t.fechaFin }}</div><br>
+                                <div class="job-lctn" style="color: black;"><i class="la la-calendar"></i>{{ t.diaModif }}</div><br>
+                                <i style="font-size: 17px; color: orange;" *ngIf="t.predecesoras"><i class="la la-warning"></i> {{ t.predecesoras }}</i><br>
+                            </div>
+                            <div class="job-style-bx">
+                                <span class="job-is ft" style="width: 200px; height: 50px; color: black; background-color: #e4f7d7; border-color: #7bd0b5; font-size: 20px;">{{ t.estado }}</span>
+                            </div>
+                        </div>								
+                    </div>
+                 </div>
+             </div>
+         </div>
+    </div>
+</div>

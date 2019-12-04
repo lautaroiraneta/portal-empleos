@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { IdValor, Empresa } from '../empresa/empresa.component';
 import { Puesto, Conocimiento, Perfil } from '../crear-perfil/crear-perfil.component';
 import { Usuario } from '../aprobacion-usuario/aprobacion-usuario.component';
+import { EtapaSeleccionAlumno } from '../etapa-seleccion-alumno-list/etapa-seleccion-alumno-list.component';
 
 @Injectable({
   providedIn: 'root'
@@ -75,5 +76,9 @@ export class DataService {
 
   getUsuarios(): Subscribable<Usuario[]> {
     return this.http.get<Usuario[]>('https://localhost:44374/Usuario');
+  }
+
+  getEtapasSeleccionAlumno(): Subscribable<EtapaSeleccionAlumno[]> {
+    return this.http.get<EtapaSeleccionAlumno[]>('https://localhost:44374/EtapaSeleccionAlumno');
   }
 }

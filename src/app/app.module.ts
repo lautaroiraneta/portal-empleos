@@ -51,6 +51,8 @@ import { AdvertenciaListComponent } from './advertencia-list/advertencia-list.co
 import { ConocimientoListComponent } from './conocimiento-list/conocimiento-list.component';
 import { ConfirmacionComponent } from './confirmacion/confirmacion.component';
 import { LoginComponent } from './login/login.component';
+import { EtapaComponent } from './etapa/etapa.component';
+import { EtapaSeleccionAlumnoListComponent } from './etapa-seleccion-alumno-list/etapa-seleccion-alumno-list.component';
 
 @NgModule({
   imports: [
@@ -105,7 +107,9 @@ import { LoginComponent } from './login/login.component';
     AdvertenciaListComponent,
     ConocimientoListComponent,
     ConfirmacionComponent,
-    LoginComponent
+    LoginComponent,
+    EtapaComponent,
+    EtapaSeleccionAlumnoListComponent
   ],
   bootstrap: [ AppComponent ]
 })

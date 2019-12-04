@@ -41,6 +41,9 @@
                 <thead>
                     <tr>
                         <td style="color: purple;">
+                            <h4>Nombre</h4>
+                        </td>
+                        <td style="color: purple;">
                             <h4>Fecha de Inicio</h4>
                         </td>
                         <td style="color: purple;">
@@ -55,25 +58,30 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let c of items">
+                    <tr *ngFor="let c of convenios">
                         <td>
                             <div class="table-list-title">
-                                <h3>{{ c.fecha }}</h3>
+                                <h3>{{ c.nombreEtapa }}</h3>
                             </div>
                         </td>
                         <td>
                             <div class="table-list-title">
-                                <h3><a href="#" title="" style="color: red; font-size: 22px;">{{ c.empresa.nombre }}</a></h3>
+                                <h3>{{ c.fecIni }}</h3>
                             </div>
                         </td>
                         <td>
                             <div class="table-list-title">
-                                <h3>{{ c.estadoEtapa.nombre }}</h3>
+                                <h3><a href="#" title="" style="color: red; font-size: 22px;">{{ c.empresa.valor }}</a></h3>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="table-list-title">
+                                <h3>{{ c.estado }}</h3>
                             </div>
                         </td>
                         <td>
                             <ul class="action_job">
-                                <li><span>Ir a Etapa</span><a href="#" title=""
+                                <li><span>Ir a Etapa</span><a [routerLink]="['/etapa', c.id]" title=""
                                         style="font-size: 20px; color: green;"><i class="la la-chevron-circle-right"
                                             style="font-size: 20px; color: green;"></i> Ir a Etapa</a>
                                 </li>

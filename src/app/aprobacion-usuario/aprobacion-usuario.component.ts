@@ -27,7 +27,7 @@ export class AprobacionUsuarioComponent implements OnInit {
 
   ngOnInit() {
     this.dataService.getUsuarios().subscribe(x => {
-      this.usuarios = x;
+      this.usuarios = x.filter(y => y.aprobado === false);
     });
   }
 
