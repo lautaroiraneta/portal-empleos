@@ -53,6 +53,7 @@ import { ConfirmacionComponent } from './confirmacion/confirmacion.component';
 import { LoginComponent } from './login/login.component';
 import { EtapaComponent } from './etapa/etapa.component';
 import { EtapaSeleccionAlumnoListComponent } from './etapa-seleccion-alumno-list/etapa-seleccion-alumno-list.component';
+import { NgxTwitterTimelineModule } from 'ngx-twitter-timeline';
 
 @NgModule({
   imports: [
@@ -66,7 +67,8 @@ import { EtapaSeleccionAlumnoListComponent } from './etapa-seleccion-alumno-list
     NgMultiSelectDropDownModule.forRoot(),
     AngularMyDatePickerModule,
     NgbModule,
-    NgxMaterialTimepickerModule
+    NgxMaterialTimepickerModule,
+    NgxTwitterTimelineModule
   ],
   declarations: [
     AppComponent,

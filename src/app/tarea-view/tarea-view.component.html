@@ -29,18 +29,16 @@
                                     <li *ngFor="let s of tarea.subtareas"><a style="color: blue;">{{ s.nombre }} - Estado: {{ s.estado }}</a></li> -->
                                 </div>
                                 <div class="recent-jobs">
-                                    <h3>Archivos Adjuntos (0)</h3>
+                                    <h3>Archivos Adjuntos ({{getArchivosAdjuntosNumber(tarea.archivos)}})</h3>
                                     <div class="job-list-modern">
+                                        <input #file type="file" (change)="upload(file.files)" />
                                         <div class="job-listings-sec no-border">
                                             <div class="job-listing wtabs">
-                                                <div class="job-title-sec" *ngFor="let aa of tarea.archivosAdjuntos">
-                                                    <div class="c-logo"> <a><img style="max-width: 50%;"
-                                                                src="https://lh3.googleusercontent.com/oUukRV8x9WR5J68u9pAxzbDoesBqT3lvdsEip-c0RnsNnO9f-qcqmddWzl6AFuYDMbA"
-                                                                alt="" /> </a></div>
+                                                <div class="job-title-sec" *ngFor="let aa of tarea.archivos">
                                                     <h3><a [href]="aa.link" title=""
-                                                            style="padding-left: 20px;">{{ aa.nombre }}</a></h3>
-                                                    <div class="job-lctn" style="padding-left: 20px;">
-                                                        {{ aa.descripcion }}</div>
+                                                            style="padding-left: 20px;">{{ aa.archivo }}</a></h3>
+                                                    <!-- <div class="job-lctn" style="padding-left: 20px;">
+                                                        {{ aa.descripcion }}</div> -->
                                                 </div>
                                             </div>
                                         </div>

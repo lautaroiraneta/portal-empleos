@@ -42,7 +42,8 @@
                             <div class="widget col-md-3">
                                 <div class="search_widget_job" style="margin-top: 0px;">
                                     <div class="field_w_search">
-                                        <input type="text" placeholder="Nombre de tarea" style="padding-bottom: 20px;" />
+                                        <input type="text" placeholder="Nombre de tarea" style="padding-bottom: 20px;" [(ngModel)]="filtroNombre"
+                                            name="filtroNombre" (keyup)="actualizarItems()" />
                                         <i class="la la-search"></i>
                                     </div>
                                 </div>
@@ -75,14 +76,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-12" style="padding-top: 20px;">
+                            <!-- <div class="col-md-12" style="padding-top: 20px;">
                                 <p class="remember-label" style="padding-right: 20px;">
                                     <input type="checkbox" name="cb" id="cb12"><label for="cb12" style="font-size: 17px;">Solo mis tareas     </label>
                                 </p>
                                 <p class="remember-label" style="padding-right: 20px;">
                                     <input type="checkbox" name="cb" id="cb13"><label for="cb13" style="font-size: 17px;">Tiene predecesoras sin finalizar</label>
                                 </p>
-                            </div>
+                            </div> -->
                         </div>
 
                          <div class="sortby-sec" style="padding-top: 50px;">
@@ -98,7 +99,7 @@
                  </div><!-- MOdern Job LIst -->
                  <div class="job-list-modern">
                      <div class="job-listings-sec">
-                        <div class="job-listing wtabs" style="background-color: #f7fbff" *ngFor="let t of etapa.tareas">
+                        <div class="job-listing wtabs" style="background-color: #f7fbff" *ngFor="let t of items">
                             <div class="job-title-sec" style="margin-left: 20px;">
                                 <!-- <div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div> -->
                                 <h3><a [routerLink]="['/tarea-view', t.id]" title="" style="font-size: 24px;"><strong>{{ t.nombre }}</strong></a></h3>

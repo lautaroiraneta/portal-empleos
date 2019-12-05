@@ -3,10 +3,23 @@ import { IdValor } from '../empresa/empresa.component';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 
+export class Tarea {
+  id: string;
+  nombre: string;
+  responsable: string;
+  estado: string;
+  fechaFin: string;
+  diaModif: string;
+  predecesoras: string;
+  alta: string;
+  diasModifInt: number;
+}
+
 export class Etapa {
   administradorUniversidad: IdValor;
   administradorEmpresa: IdValor;
   estado: IdValor;
+  tareas: Tarea[];
 }
 
 @Component({
@@ -18,6 +31,8 @@ export class EtapaComponent implements OnInit {
   etapa: Etapa;
   isCollapsedResponsable: boolean = true;
   isCollapsedEstado: boolean = true;
+  filtroNombre: string = '';
+  items: Tarea[];
 
   constructor(private http: HttpClient, private route: ActivatedRoute) { 
     this.etapa = new Etapa();
@@ -28,6 +43,7 @@ export class EtapaComponent implements OnInit {
 
     this.http.get('https://localhost:44374/Etapa/get-data?etapaDefinicionId=' + id ).subscribe((x: Etapa) => {
       this.etapa = x;
+      this.items = this.etapa.tareas;
       console.log(this.etapa);
     });
   }
@@ -54,5 +70,13 @@ export class EtapaComponent implements OnInit {
     } else {
       return false;
     }    
+  }
+
+  actualizarItems() {
+    this.items = this.etapa.tareas.filter(x => {
+      return (
+        x.nombre.toLowerCase().includes(this.filtroNombre.toLowerCase()) && (this.filtroNombre !== '' || this.filtroNombre !== undefined)
+      )
+    });
   }
 }
