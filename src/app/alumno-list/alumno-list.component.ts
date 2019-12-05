@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Perfil } from '../crear-perfil/crear-perfil.component';
 import { DataService } from '../data/data.service';
+
+export class PerfilView {
+  id: string;
+  nombre: string;
+  ubicacion: string;
+  carrera: string;
+}
 
 @Component({
   selector: 'app-alumno-list',
@@ -19,7 +24,7 @@ export class AlumnoListComponent implements OnInit {
 
   items: any = null;
 
-  alumnos: Perfil[];
+  alumnos: PerfilView[];
 
   constructor(private dataService: DataService) { }
 

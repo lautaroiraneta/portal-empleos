@@ -1,122 +1,125 @@
 <div class="col-lg-12 column">
-        <div class="padding-left">
-            <div class="manage-jobs-sec">
-                <br />
-                <h2 style="padding-left: 27px;">Listado de Etapas de Selección de Alumnos</h2>
-                <form #form="ngForm">
-                    <div class="row">
-                        <div class="col-lg-3">
-                            <span class="pf-title">Empresa</span>
-                            <div class="pf-field">
-                                <ng-multiselect-dropdown [placeholder]="'Seleccione Empresa'" [data]="empresas"
-                                    [settings]="dropdownSettingsSingle" (onSelect)="actualizarItemsEmpresa($event)"
-                                    (onDeSelect)="actualizarItemsEmpresa(null)">
-                                </ng-multiselect-dropdown>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <span class="pf-title">Estado de la Etapa</span>
-                            <div class="pf-field">
-                                <ng-multiselect-dropdown [placeholder]="'Seleccione Estado'" [data]="estados"
-                                    [settings]="dropdownSettingsSingle" (onSelect)="actualizarItemsEstado($event)"
-                                    (onDeSelect)="actualizarItemsEstado(null)">
-                                </ng-multiselect-dropdown>
-                            </div>
-                        </div>
-                        <div class="col-lg-2">
-                            <span class="pf-title">Fecha desde (inicio)</span>
-                            <div class="pf-field">
-                                <input type="text" placeholder="" class="form-control datepicker" />
-                                <i class="la la-calendar"></i>
-                            </div>
-                        </div>
-                        <div class="col-lg-2">
-                            <span class="pf-title">Fecha hasta (inicio)</span>
-                            <div class="pf-field">
-                                <input type="text" placeholder="" class="form-control datepicker" />
-                                <i class="la la-calendar"></i>
-                            </div>
+    <div class="padding-left">
+        <div class="manage-jobs-sec">
+            <br />
+            <h2 style="padding-left: 27px;">Listado de Etapas de Selección de Alumnos</h2>
+            <form #form="ngForm">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <span class="pf-title">Empresa</span>
+                        <div class="pf-field">
+                            <ng-multiselect-dropdown [placeholder]="'Seleccione Empresa'" [data]="empresas"
+                                [settings]="dropdownSettingsSingle" (onSelect)="actualizarItemsEmpresa($event)"
+                                (onDeSelect)="actualizarItemsEmpresa(null)">
+                            </ng-multiselect-dropdown>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-3">
-                            <span class="pf-title" style="margin-top: 0px;">Alumno</span>
-                            <div class="pf-field">
-                                <input type="text" placeholder="" class="form-control" (keyup)="actualizarItems()" [(ngModel)]="filtroNombre" name="filtroNombre" />
-                                <i class="la la-search"></i>
-                            </div>
+                    <div class="col-lg-3">
+                        <span class="pf-title">Estado de la Etapa</span>
+                        <div class="pf-field">
+                            <ng-multiselect-dropdown [placeholder]="'Seleccione Estado'" [data]="estados"
+                                [settings]="dropdownSettingsSingle" (onSelect)="actualizarItemsEstado($event)"
+                                (onDeSelect)="actualizarItemsEstado(null)">
+                            </ng-multiselect-dropdown>
                         </div>
                     </div>
-                </form>
-                <table>
-                    <thead>
-                        <tr>
-                            <td style="color: purple;">
-                                <h4>Alumno</h4>
-                            </td>
-                            <td style="color: purple;">
-                                <h4>Carrera</h4>
-                            </td>
-                            <td style="color: purple;">
-                                <h4>Empresa</h4>
-                            </td>
-                            <td style="color: purple; padding-left: 10px;">
-                                <h4>Propuesta</h4>
-                            </td>
-                            <td style="color: purple;">
-                                <h4>Fecha Postulación</h4>
-                            </td>
-                            <td style="color: purple;">
-                                <h4>Estado Etapa</h4>
-                            </td>
-                            <td style="color: purple;">
-                                <h4>Acciones</h4>
-                            </td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let e of etapas">
-                            <td>
-                                <div class="table-list-title">
-                                    <h3><a href="#" title="" style="color: red; font-size: 22px;">{{ e.alumno }}</a></h3>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="table-list-title">
-                                    <h3>{{ e.carrera }}</h3>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="table-list-title">
-                                    <h3><a href="#" title="" style="color: red; font-size: 22px;">{{ e.empresa.valor }}</a></h3>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="table-list-title">
-                                    <h3><a href="#" title="" style="color: red; font-size: 22px;">{{ e.propuesta.valor }}</a></h3>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="table-list-title">
-                                    <h3>{{ e.fechaPostulacion }}</h3>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="table-list-title">
-                                    <h3>{{ e.estadoEtapa }}</h3>
-                                </div>
-                            </td>
-                            <td>
-                                <ul class="action_job">
-                                    <li><span>Ir a Etapa</span><a href="#" title=""
-                                            style="font-size: 20px; color: green;"><i class="la la-chevron-circle-right"
-                                                style="font-size: 20px; color: green;"></i> Ir a Etapa</a>
-                                    </li>
-                                </ul>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                    <div class="col-lg-2">
+                        <span class="pf-title">Fecha desde (inicio)</span>
+                        <div class="pf-field">
+                            <input type="text" placeholder="" class="form-control datepicker" />
+                            <i class="la la-calendar"></i>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <span class="pf-title">Fecha hasta (inicio)</span>
+                        <div class="pf-field">
+                            <input type="text" placeholder="" class="form-control datepicker" />
+                            <i class="la la-calendar"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <span class="pf-title" style="margin-top: 0px;">Alumno</span>
+                        <div class="pf-field">
+                            <input type="text" placeholder="" class="form-control" (keyup)="actualizarItems()"
+                                [(ngModel)]="filtroNombre" name="filtroNombre" />
+                            <i class="la la-search"></i>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <table>
+                <thead>
+                    <tr>
+                        <td style="color: purple;">
+                            <h4>Alumno</h4>
+                        </td>
+                        <td style="color: purple;">
+                            <h4>Carrera</h4>
+                        </td>
+                        <td style="color: purple;">
+                            <h4>Empresa</h4>
+                        </td>
+                        <td style="color: purple; padding-left: 10px;">
+                            <h4>Propuesta</h4>
+                        </td>
+                        <td style="color: purple;">
+                            <h4>Fecha Postulación</h4>
+                        </td>
+                        <td style="color: purple;">
+                            <h4>Estado Etapa</h4>
+                        </td>
+                        <td style="color: purple;">
+                            <h4>Acciones</h4>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let e of etapas">
+                        <td>
+                            <div class="table-list-title">
+                                <h3><a href="#" title="" style="color: red; font-size: 22px;">{{ e.alumno }}</a></h3>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="table-list-title">
+                                <h3>{{ e.carrera }}</h3>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="table-list-title">
+                                <h3><a href="#" title="" style="color: red; font-size: 22px;">{{ e.empresa.valor }}</a>
+                                </h3>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="table-list-title">
+                                <h3><a href="#" title=""
+                                        style="color: red; font-size: 22px;">{{ e.propuesta.valor }}</a></h3>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="table-list-title">
+                                <h3>{{ e.fechaPostulacion }}</h3>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="table-list-title">
+                                <h3>{{ e.estadoEtapa }}</h3>
+                            </div>
+                        </td>
+                        <td>
+                            <ul class="action_job">
+                                <li><span>Ir a Etapa</span><a href="#" title=""
+                                        style="font-size: 20px; color: green;"><i class="la la-chevron-circle-right"
+                                            style="font-size: 20px; color: green;"></i> Ir a Etapa</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
+</div>

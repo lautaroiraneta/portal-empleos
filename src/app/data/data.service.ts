@@ -6,6 +6,7 @@ import { IdValor, Empresa } from '../empresa/empresa.component';
 import { Puesto, Conocimiento, Perfil } from '../crear-perfil/crear-perfil.component';
 import { Usuario } from '../aprobacion-usuario/aprobacion-usuario.component';
 import { EtapaSeleccionAlumno } from '../etapa-seleccion-alumno-list/etapa-seleccion-alumno-list.component';
+import { PerfilView } from '../alumno-list/alumno-list.component';
 
 @Injectable({
   providedIn: 'root'
@@ -42,8 +43,8 @@ export class DataService {
     return this.http.get<IdValor[]>('https://localhost:44374/Carrera');
   }
 
-  getPerfiles(): Subscribable<Perfil[]> {
-    return this.http.get<Perfil[]>('https://localhost:44374/Perfil')
+  getPerfiles(): Subscribable<PerfilView[]> {
+    return this.http.get<PerfilView[]>('https://localhost:44374/Perfil')
   }
 
   getEmpresas(): Subscribable<IdValor[]> {
