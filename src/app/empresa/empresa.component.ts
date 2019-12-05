@@ -110,4 +110,11 @@ export class EmpresaComponent implements OnInit {
     });
     
   }
+
+  isDisabled(): boolean {
+    return this.empresa.contactoNombreUsuario !== null && this.empresa.contactoNombreUsuario !== '' && this.empresa.contactoNombreUsuario !== undefined &&
+    this.empresa.contactoNombreUsuario !== null && this.empresa.contactoNombreUsuario !== '' && this.empresa.contactoNombreUsuario !== undefined &&
+    this.empresa.contactoApellido !== null && this.empresa.contactoApellido !== '' && this.empresa.contactoApellido !== undefined &&
+    this.empresa.nombre !== null && this.empresa.nombre !== '' && this.empresa.nombre !== undefined;
+  }
 }
