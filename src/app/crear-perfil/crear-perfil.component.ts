@@ -52,6 +52,7 @@ export class Conocimiento {
   id: string;
   nombre: string;
   estado: string;
+  excluyente: boolean;
 }
 
 export class ExperienciaLaboral {
@@ -205,10 +206,11 @@ export class CrearPerfilComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.perfil = new Perfil();
     var usuario = JSON.parse(localStorage.getItem('usuario'));
     console.log(usuario);
-    if (usuario !== undefined && usuario !== null && usuario !== '') {
-      this.http.get<Perfil>('https://localhost:44374/Perfil/perfil/get-by-alumno-id?alumnoId=' + usuario).subscribe(x => {
+    if (usuario !== undefined && usuario !== null && usuario.alumnoId !== null && usuario.alumnoId !== undefined) {
+      this.http.get<Perfil>('https://localhost:44374/Perfil/perfil/get-by-alumno-id?alumnoId=' + usuario.alumnoId).subscribe(x => {
         if (x !== undefined && x !== null) {
           this.perfil = x;
           this.perfil.fechaNacimiento = { isRange: false, singleDate: { jsDate: new Date(this.perfil.fechaNacimientoDT) } };
@@ -222,7 +224,7 @@ export class CrearPerfilComponent implements OnInit {
           }
         }
         else {
-          this.perfil = new Perfil();
+          
           this.perfil.emails.push({ id: 'new', valor: '' });
           this.perfil.telefonos.push({ id: 'new', valor: '' });
           this.perfil.experienciaLaboral = [];
@@ -233,7 +235,6 @@ export class CrearPerfilComponent implements OnInit {
         }
       });
     } else {
-      this.perfil = new Perfil();
       this.perfil.emails.push({ id: 'new', valor: '' });
       this.perfil.telefonos.push({ id: 'new', valor: '' });
       this.perfil.experienciaLaboral = [];

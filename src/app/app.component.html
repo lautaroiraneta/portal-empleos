@@ -7,19 +7,19 @@
 					<a href="index.html" title=""><img src="http://placehold.it/178x40" alt="" /></a>
 				</div><!-- Logo -->
 				<div class="my-profiles-sec">
-					<span *ngIf="usuario !== undefined"><img src="http://placehold.it/50x50" alt="" /> {{ usuario }} <i class="la la-bars"></i></span>
+					<span><img src="http://placehold.it/50x50" alt="" /> {{ usuario?.nombre }} {{ usuario?.apellido }} <i class="la la-bars"></i></span>
 				</div>
 				<nav>
 					<ul>
 						<li class="menu-item-has-children">
 							<a href="#" title="">Páginas 1 </a>
 							<ul>
-								<li *ngIf="usuario !== undefined"><a [routerLink]="['/crear-perfil']">Crear Perfil</a></li>
-								<li><a [routerLink]="['/alumno']" title="">Alta Alumno</a></li>
+								<li *ngIf="usuario?.tipoUsuario === 'a'"><a [routerLink]="['/crear-perfil']">Crear Perfil</a></li>
+								<li *ngIf="usuario?.tipoUsuario === 'a'"><a [routerLink]="['/alumno']" title="">Alta Alumno</a></li>
 								<li><a [routerLink]="['/alumno-list']" title="">Listado de Alumnos</a></li>
-								<li><a [routerLink]="['/carrera']" title="">Crear Carrera</a></li>
-								<li><a [routerLink]="['/empresa', 'new']" title="">Crear Empresa</a></li>
-								<li><a [routerLink]="['/noticia']" title="">Agregar Noticia</a></li>	
+								<li *ngIf="usuario?.tipoUsuario === 'u'"><a [routerLink]="['/carrera']" title="">Crear Carrera</a></li>
+								<li *ngIf="usuario?.tipoUsuario === 'e'"><a [routerLink]="['/empresa', 'new']" title="">Crear Empresa</a></li>
+								<li *ngIf="usuario?.tipoUsuario === 'e'"><a [routerLink]="['/noticia']" title="">Agregar Noticia</a></li>	
 								<li><a [routerLink]="['etapa-seleccion-alumno-list']" title="">Listado de Etapas de Seleccion de Alumno</a></li>
 							</ul>
 						</li>
@@ -29,16 +29,16 @@
 								<li><a [routerLink]="['/subtarea']" title="">Agregar Subtarea a Tarea</a></li>
 								<li><a [routerLink]="['/tarea']" title="">Agregar Tarea</a></li>
 								<li><a [routerLink]="['/tarea-defecto']" title="">Agregar Tarea a Flujo por Defecto</a></li>
-								<li><a [routerLink]="['/agregar-conocimientos-a-mi-perfil']">Agregar Conocimientos a mi Perfil</a></li>
+								<li *ngIf="usuario?.tipoUsuario === 'a'"><a [routerLink]="['/agregar-conocimientos-a-mi-perfil']">Agregar Conocimientos a mi Perfil</a></li>
 								<li><a [routerLink]="['/equipo-list']" title="">Gestión de Equipos</a></li>
-								<li><a [routerLink]="['/micrositio']" title="">Alta de Micrositio</a></li>
+								<li *ngIf="usuario?.tipoUsuario === 'e'"><a [routerLink]="['/micrositio']" title="">Alta de Micrositio</a></li>
 							</ul>
 						</li>
 						<li class="menu-item-has-children">
 							<a href="#" title="">Paginas 3</a>
 							<ul>
-								<li><a [routerLink]="['/preferencias']" title="">Preferencias</a></li>
-								<li><a [routerLink]="['/alertas-list']" title="">Alertas</a></li>
+								<li *ngIf="usuario?.tipoUsuario === 'a'"><a [routerLink]="['/preferencias']" title="">Preferencias</a></li>
+								<li *ngIf="usuario?.tipoUsuario === 'a'"><a [routerLink]="['/alertas-list']" title="">Alertas</a></li>
 								<li><a [routerLink]="['/control-conocimientos-puestos']" title="">Control de Conocimientos y Puestos de Trabajo</a></li>
 								<li><a [routerLink]="['/acuerdo-individual']" title="">Crear Acuerdo Individual</a></li>
 								<li><a [routerLink]="['/convenio']">Crear Convenio</a></li>
@@ -49,23 +49,23 @@
 							<a href="#" title="">Paginas 4</a>
 							<ul>
 								<li><a [routerLink]="['/etapa-pasantia-curso']">Crear Etapa de Pasantía en Curso</a></li>
-								<li><a [routerLink]="['/propuesta']" title="">Propuesta</a></li>
+								<li *ngIf="usuario?.tipoUsuario === 'e'"><a [routerLink]="['/propuesta']" title="">Crear Propuesta</a></li>
 								<li><a [routerLink]="['/etapa-cierre-pasantia-list']" title="">Listado de Etapas de Cierre de Pasantía</a></li>
 								<li><a [routerLink]="['/etapa-ingreso-alumno-list']" title="">Listado de Etapas de Ingreso de Alumnos</a></li>
 								<li><a [routerLink]="['/empresa-list']" title="">Listado de Empresas</a></li>
-								<li><a [routerLink]="['/preferencias-list']">Listado de Preferencias</a></li>
+								<li *ngIf="usuario?.tipoUsuario === 'a'"><a [routerLink]="['/preferencias-list']">Listado de Preferencias</a></li>
 							</ul>
 						</li>
 						<li class="menu-item-has-children ">
 							<a href="#" title="">Paginas 5</a>
 							<ul>
-								<li><a [routerLink]="['/preferencias-list']">Listado de Preferencias</a></li>
+								<li *ngIf="usuario?.tipoUsuario === 'a'"><a [routerLink]="['/preferencias-list']">Listado de Preferencias</a></li>
 								<li><a [routerLink]="['/propuesta-list']">Listado de Propuestas</a></li>
-								<li><a [routerLink]="['/perfil']">Mi Perfil</a></li>
-								<li><a [routerLink]="['/micrositio-empresa']">Micrositio Empresa</a></li>
-								<li><a [routerLink]="['/propuesta-view']">Propuesta Vista</a></li>
+								<li *ngIf="usuario?.tipoUsuario === 'a'"><a [routerLink]="['/perfil']">Mi Perfil</a></li>
+								<li *ngIf="usuario?.tipoUsuario === 'e'"><a [routerLink]="['/micrositio-empresa']">Micrositio Empresa</a></li>
+								<li *ngIf="usuario?.tipoUsuario === 'e'"><a [routerLink]="['/propuesta-view']">Propuesta Vista</a></li>
 								<li><a [routerLink]="['/tarea-defecto-list']">Tareas de Flujo por Defecto</a></li>
-								<li><a [routerLink]="['/aprobacion-usuario']">Aprobación de Usuarios</a></li>
+								<li *ngIf="usuario?.tipoUsuario === 'u'"><a [routerLink]="['/aprobacion-usuario']">Aprobación de Usuarios</a></li>
 							</ul>
 						</li>
 						<li class="menu-item-has-children ">
@@ -92,8 +92,7 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="inner-header">
-							<h3 *ngIf="usuario !== null">¡Bienvenido {{usuario}}!</h3>
-							<h3 *ngIf="usuario === null">¡Bienvenido!</h3>
+							<h3 style="margin-bottom: 20px;">¡Bienvenido al Portal de Empleos!</h3>
 						</div>
 					</div>
 				</div>

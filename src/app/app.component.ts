@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Alumno } from './alumno/alumno.component';
+import { Usuario } from './aprobacion-usuario/aprobacion-usuario.component';
 
 @Component({
   selector: 'app-root',
@@ -8,22 +8,16 @@ import { Alumno } from './alumno/alumno.component';
 })
 export class AppComponent implements OnInit {
   title = 'portal-empleos';
-  usuario: Alumno;
   usuarioNombre: string;
+  usuario: Usuario;
 
   ngOnInit(): void {
-    var asd = JSON.parse(localStorage.getItem('usuario'));
-    console.log(asd);
+    this.usuario = JSON.parse(localStorage.getItem('usuario'));
   }
 
-  iniciarUsuario(alumno: Alumno) {
-    if (alumno === null){
-      this.usuario = null;
-      this.usuarioNombre = null;
-    } else {
-      this.usuario = alumno;
-      this.usuarioNombre = alumno.nombres + ' ' + alumno.apellidos;
-    }   
+  iniciarUsuario() {
+    this.usuario = JSON.parse(localStorage.getItem('usuario'));
+    console.log(this.usuario);
   }
 
   getUsuario() {

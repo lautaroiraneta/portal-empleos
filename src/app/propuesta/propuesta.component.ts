@@ -7,8 +7,10 @@ import { Puesto, Conocimiento } from '../crear-perfil/crear-perfil.component';
 import { DataService } from '../data/data.service';
 import { HttpClient } from '@angular/common/http';
 import { IdValor } from '../empresa/empresa.component';
+import { Usuario } from '../aprobacion-usuario/aprobacion-usuario.component';
 
 export class Propuesta {
+  empresa: string;
   titulo: string;
   puestosCarac: Puesto[];
   carreras: IdValor[];
@@ -36,7 +38,7 @@ export class Propuesta {
   porcentajeMatApr: number;
   puestos: ExpLaboral[] = [];
   conocimientos: Conoc[] = [];
-  conocimientosExtra: Conocimiento[];
+  conocimientosExtra: Conocimiento[] = [];
   
   excluyenteEdadMin: boolean;
   excluyenteEdadMax: boolean;
@@ -49,11 +51,13 @@ export class Propuesta {
 export class ExpLaboral {
   puesto: IdValor[];
   aniosExperiencia: number;
+  excluyente: boolean;
 }
 
 export class Conoc {
   conocimiento: Conocimiento[];
   aniosExperiencia: number;
+  excluyente: boolean;
 }
 
 @Component({
@@ -71,6 +75,16 @@ export class PropuestaComponent implements OnInit {
 
   dropdownSettingsPuesto: IDropdownSettings = {
     singleSelection: true,
+    idField: 'id',
+    textField: 'nombre',
+    enableCheckAll: false,
+    itemsShowLimit: 6,
+    allowSearchFilter: true,
+    closeDropDownOnSelection: true
+  };
+
+  dropdownSettingsPuestoA: IDropdownSettings = {
+    singleSelection: false,
     idField: 'id',
     textField: 'nombre',
     enableCheckAll: false,
@@ -121,11 +135,14 @@ export class PropuestaComponent implements OnInit {
   numeroPaso: number;
   conocimientos: Conocimiento[];
   conocimientosExtra: any;
+  usuario: Usuario;
 
   constructor(private helperService: HelperService, private dataService: DataService, private http: HttpClient) { }
 
   ngOnInit() {
+    this.usuario = JSON.parse(localStorage.getItem('usuario'));
     this.propuesta = new Propuesta();
+    this.propuesta.empresa = this.usuario.empresaId;
     this.propuesta.fechaFinalizacion = { isRange: false, singleDate: { jsDate: new Date() } };
     this.propuesta.conocimientos.push(new Conoc());
     this.propuesta.puestos.push(new ExpLaboral());
@@ -161,6 +178,7 @@ export class PropuestaComponent implements OnInit {
   }
 
   onItemSelect(item: any) {
+    console.log(this.propuesta);
     console.log(item);
   }
 
@@ -179,6 +197,7 @@ export class PropuestaComponent implements OnInit {
   onSubmit(form: NgForm) {
     if (this.numeroPaso === 4) {
       let data = new Propuesta();
+      data.empresa = this.propuesta.empresa;
       data.titulo = this.propuesta.titulo;
       data.puestosCarac = this.propuesta.puestosCarac;
       data.carreras = this.propuesta.carreras;

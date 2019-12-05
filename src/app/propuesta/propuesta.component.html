@@ -37,7 +37,7 @@
                                 <div class="pf-field">
                                     <ng-multiselect-dropdown [placeholder]="'Seleccione Puestos'"
                                         [data]="puestosLaborales" [(ngModel)]="propuesta.puestosCarac" name="puestos"
-                                        [settings]="dropdownSettingsPuesto" (onSelect)="onItemSelect($event)"
+                                        [settings]="dropdownSettingsPuestoA" (onSelect)="onItemSelect($event)"
                                         (onSelectAll)="onSelectAll($event)">
                                     </ng-multiselect-dropdown>
                                     <a (click)="mostrarWell = !mostrarWell;" style="font-size: 12px;"><i
@@ -247,7 +247,7 @@
                             <div class="col-lg-6" *ngIf="numeroPaso === 2">
                                 <p *ngIf="i === 0">Años de experiencia</p>
                                 <div class="pf-field">
-                                    <input type="number" placeholder="" min="0" max="99" [(ngModel)]="p.anosExperiencia"
+                                    <input type="number" placeholder="" min="0" max="99" [(ngModel)]="p.aniosExperiencia"
                                         name="anosExperiencia-{{i}}" />
                                 </div>
                             </div>
@@ -417,7 +417,60 @@
 													<input type="checkbox" name="cb6" id="cb6" [(ngModel)]="propuesta.excluyenteAnioCursada"><label for="cb6"></label>
 												</p>
 											</td>
-										</tr>
+                                        </tr>
+                                        <tr *ngFor="let p of propuesta.puestos; let i = index;">
+                                            <td>
+												<div class="table-list-title">
+													<h3>Puesto</h3>
+												</div>
+											</td>
+                                            <td>
+                                                <div class="table-list-title">
+													<h3>{{ p.puesto[0].nombre }} ({{p.aniosExperiencia}} años)</h3>
+												</div>
+                                            </td>
+                                            <td>
+												<p class="remember-label" style="padding-left: 80px;">
+													<input type="checkbox" name="cb6-{{i}}" id="cb6-{{i}}" [(ngModel)]="p.excluyente"><label for="cb6-{{i}}"></label>
+												</p>
+											</td>
+                                        </tr>
+                                        <tr *ngFor="let c of propuesta.conocimientos; let i = index;">
+                                            <td>
+                                                <div class="table-list-title">
+                                                    <h3>Conocimiento</h3>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="table-list-title">
+                                                    <h3>{{ c.conocimiento[0].nombre }} ({{c.aniosExperiencia}} años)</h3>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <p class="remember-label" style="padding-left: 80px;">
+                                                    <input type="checkbox" name="cb7-{{i}}" id="cb7-{{i}}" [(ngModel)]="c.excluyente"><label
+                                                        for="cb7-{{i}}"></label>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr *ngFor="let c of propuesta.conocimientosExtra; let i = index;">
+                                            <td>
+                                                <div class="table-list-title">
+                                                    <h3>Conocimiento</h3>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="table-list-title">
+                                                    <h3>{{ c.nombre }}</h3>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <p class="remember-label" style="padding-left: 80px;">
+                                                    <input type="checkbox" name="cb8-{{i}}" id="cb8-{{i}}" [(ngModel)]="c.excluyente"><label
+                                                        for="cb8-{{i}}"></label>
+                                                </p>
+                                            </td>
+                                        </tr>
 									</tbody>
 						 		</table>
 					 		</div>

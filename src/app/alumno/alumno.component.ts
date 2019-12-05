@@ -33,8 +33,8 @@ export class AlumnoComponent implements OnInit {
 
   ngOnInit() {
     var usuario = JSON.parse(localStorage.getItem('usuario'));
-    if (usuario !== undefined && usuario !== null && usuario !== '') {
-      this.http.get<Alumno>('https://localhost:44374/alumno/get-by-id?idAlumno=' + usuario).subscribe(x => {
+    if (usuario !== undefined && usuario !== null && usuario.alumnoId !== null && usuario.alumnoId !== undefined) {
+      this.http.get<Alumno>('https://localhost:44374/alumno/get-by-id?idAlumno=' + usuario.alumnoId).subscribe(x => {
         this.alumno = x;
       });
     } else {
@@ -57,7 +57,7 @@ export class AlumnoComponent implements OnInit {
         alert('Alumno Creado!');
         localStorage.setItem('usuario', JSON.stringify(x.id));
         localStorage.setItem('usuarioNombre', JSON.stringify(x.nombres + ' ' + x.apellidos));
-        this.appComponent.iniciarUsuario(x);
+        this.appComponent.iniciarUsuario();
       }, error => {
         alert('Ya existe un usuario con ese nombre!');
       });
