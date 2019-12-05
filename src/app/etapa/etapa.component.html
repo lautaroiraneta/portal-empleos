@@ -101,7 +101,7 @@
                         <div class="job-listing wtabs" style="background-color: #f7fbff" *ngFor="let t of etapa.tareas">
                             <div class="job-title-sec" style="margin-left: 20px;">
                                 <!-- <div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div> -->
-                                <h3><a href="#" title="" style="font-size: 24px;"><strong>{{ t.nombre }}</strong></a></h3>
+                                <h3><a [routerLink]="['/tarea-view', t.id]" title="" style="font-size: 24px;"><strong>{{ t.nombre }}</strong></a></h3>
                                 <span style="font-size: 18px;">{{ t.responsable }}</span>
                                 <div class="job-lctn" style="color: black;"><i class="la la-calendar"></i>{{ t.fechaFin }}</div><br>
                                 <div class="job-lctn" style="color: black;"><i class="la la-calendar"></i>{{ t.diaModif }}</div><br>

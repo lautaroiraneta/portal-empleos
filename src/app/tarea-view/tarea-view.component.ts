@@ -1,4 +1,33 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { IdValor } from '../empresa/empresa.component';
+
+export class TareaView {
+  id: string;
+  nombre: string;
+  descripcion: string;
+  estado: string;
+  responsable: string;
+  fechaFin: string;
+  comentarios: Comentario[];
+  archivos: TareaViewArchivo[];
+  tareasQueHabilita: IdValor[];
+  tareasPredecesoras: IdValor[];
+}
+
+export class Comentario {
+  id: string;
+  contenido: string;
+  usuario: string;
+  fecha: string;
+}
+
+export class TareaViewArchivo {
+  id: string;
+  archivo: string;
+  usuario: string;
+}
 
 @Component({
   selector: 'app-tarea-view',
@@ -6,37 +35,40 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tarea-view.component.css']
 })
 export class TareaViewComponent implements OnInit {
-  tarea = {
-    nombre: 'Redacción del Convenio',
-    descripcion: 'Se debe generar un convenio entre la empresa Google y la Universidad.',
-    subtareas: [
-      { id: 'a', nombre: 'Subtarea A', estado: 'Iniciada' },
-      { id: 'b', nombre: 'Subtarea B', estado: 'Finalizada' },
-      { id: 'c', nombre: 'Subtarea C', estado: 'Iniciada' }
-    ],
-    estado: 'Finalizada',
-    responsable: 'Juan Gómez',
-    fechaFinalizacion: '24/08/2019',
-    tareasHabilita: [
-      { id: 'fcu', nombre: 'Firma de Convenio (Universidad)' },
-      { id: 'fce', nombre: 'Firma de Convenio (Empresa)' }
-    ],
-    tareasPredecesoras: [
-      { id: 'rdd', nombre: 'Revisión de Documento' }
-    ],
-    alertas: 'Cada 3 días',
-    archivosAdjuntos: [
-      { id: '1', nombre: 'archivo adjunto.pdf', descripcion: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', link: 'http://www.google.com.ar' }
-    ],
-    comentarios: [
-      { id: '1', nombre: 'Lucía López', mensaje: 'Si, estamos haciéndolo, estará listo en dos días.', fecha: '24/07/2019 15:43', foto: 'https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500 ' },
-      { id: '2', nombre: 'Brian Vargas', mensaje: 'Hola @Lucía López, pudiste revisar la documentación?', fecha: '23/07/2019 12:51', foto: 'https://gentleprocedurescliniceastgta.ca/wp-content/uploads/2016/11/man2.jpg' }
-    ]
-  };
+  tarea: TareaView;
 
-  constructor() { }
+  constructor(private route: ActivatedRoute, private http: HttpClient) {
+    this.tarea = new TareaView();
+  }
 
   ngOnInit() {
+    var id = this.route.snapshot.params['id'];
+
+    this.http.get('https://localhost:44374/TareaView?tareaId=' + id).subscribe((x: TareaView) => {
+      this.tarea = x;
+    });
+  }
+
+  getComentariosNumber(comentarios: Comentario[]): number {
+    if (comentarios !== null && comentarios !== undefined && comentarios.length > 0) {
+      return comentarios.length;
+    } else {
+      return 0;
+    }
+  }
+
+  getArchivosAdjuntosNumber(archivos: TareaViewArchivo[]): number {
+    if (archivos !== null && archivos !== undefined && archivos.length > 0) {
+      return archivos.length;
+    } else {
+      return 0;
+    }
+  }
+
+  abrirTarea(id: string) {
+    this.http.get('https://localhost:44374/TareaView?tareaId=' + id).subscribe((x: TareaView) => {
+      this.tarea = x;
+    });
   }
 
 }
