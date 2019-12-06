@@ -5,6 +5,7 @@ import { NgForm } from '@angular/forms';
 import { IdValor } from '../empresa/empresa.component';
 import { DataService } from '../data/data.service';
 import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
 
 export class Convenio {
   nombre: string;
@@ -21,6 +22,7 @@ export class Convenio {
   renovacionAutomatica: boolean;
   plazoExtension: number;
   cantMaxPasantes: number;
+  etapaId: string;
 }
 
 @Component({
@@ -50,12 +52,18 @@ export class ConvenioComponent implements OnInit {
     itemsShowLimit: 3,
     allowSearchFilter: true
   };
+  empresa: string;
 
-  constructor(private dataService: DataService, private http: HttpClient) { }
+  constructor(private dataService: DataService, private http: HttpClient, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.dataService.getFacultades().subscribe(x => {
       this.facultades = x;
+    });
+
+    this.http.get('https://localhost:44374/Empresa').subscribe((x: IdValor[]) => {
+      this.empresa = x.filter(y => y.id === this.route.snapshot.params['empresa'])[0].valor;
+      console.log(this.empresa);
     });
 
     this.convenio = new Convenio();
@@ -82,9 +90,13 @@ export class ConvenioComponent implements OnInit {
     data.plazoExtension = this.convenio.plazoExtension;
     data.plazoRenovacion = this.convenio.plazoRenovacion;
     data.renovacionAutomatica = this.convenio.renovacionAutomatica;
+    data.etapaId = this.route.snapshot.params['etapa'];
 
     this.http.post('https://localhost:44374/Convenio', data).subscribe(x => {
       alert('Convenio Creado!');
+      this.http.get('https://localhost:44374/Etapa/finalizar-etapa?etapaDefinicionId=' + data.etapaId).subscribe(x => {
+        this.router.navigate(['/etapa/' + data.etapaId ]);
+      });
     });
   }
 

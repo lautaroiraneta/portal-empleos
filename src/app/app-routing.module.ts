@@ -53,7 +53,7 @@ const routes: Routes = [
   { path: 'carrera', component: CarreraComponent },
   { path: 'conocimiento-list', component: ConocimientoListComponent },
   { path: 'control-conocimientos-puestos', component: ControlConocimientosPuestosComponent },
-  { path: 'convenio', component: ConvenioComponent },
+  { path: 'convenio/:etapa/:empresa', component: ConvenioComponent },
   { path: 'convenio-list', component: ConvenioListComponent },
   { path: 'crear-perfil', component: CrearPerfilComponent },
   { path: 'empresa/:id', component: EmpresaComponent },

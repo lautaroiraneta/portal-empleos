@@ -1,26 +1,41 @@
 <div class="block no-padding">
-    <div class="container">
+    <!-- <div class="container"> -->
          <div class="row no-gape">
              <aside class="col-lg-3 column border-right">
                  <div class="widget">
                     <div class="search_widget_job" style="margin-top: 0px;">
-                        <div class="btn-extars">
-                            <a href="#" title="" class="post-job-btn" style="margin-bottom: 20px; font-size: 29px;">Definición de Convenio</a>
+                        <div class="col-lg-12">
+                            <a href="#" title="" class="post-job-btn" style="margin-bottom: 20px; font-size: 29px;">Definición de Convenio: {{ etapa.nombreEtapa }}</a>
                         </div>
-                        <div class="btn-extars">
+                        <div class="col-lg-12">
                             <a href="#" title="" class="post-job-btn" style="margin-bottom: 20px; font-size: 22px; background-color: #67bb67;">{{ etapa?.estado?.valor }}</a>
                         </div>
-                        <div class="btn-extars">
+                        <!-- <div class="col-lg-12">
                             <a href="#" title="" class="post-job-btn" style="margin-bottom: 20px; background-color:#e4f7d7; border-color: #7bd0b5; color: black;" *ngIf="mostrarBotonFinalizar(etapa.estado)">Finalizar</a>
                         </div>
-                        <div class="btn-extars" style="padding-right: 25px;">
+                        <div style="padding-right: 25px;">
                             <a href="#" title="" class="post-job-btn" style="margin-bottom: 20px; background-color:#e4f7d7; border-color: #7bd0b5; color: black;" *ngIf="mostrarBotonIniciar(etapa.estado)">Iniciar</a>
                         </div>
-                        <div class="btn-extars" style="padding-right: 25px;">
+                        <div style="padding-right: 25px;">
                             <a href="#" title="" class="post-job-btn" style="margin-bottom: 20px; background-color:#e4f7d7; border-color: #7bd0b5; color: black;" *ngIf="mostrarBotonDesestimar(etapa.estado)">Desestimar</a>
+                        </div> -->
+                        <div class="btn-extars" style="float: left!important; margin-left: 25px;" *ngIf="mostrarBotonIniciar(etapa.estado)">
+                            <p style="font-size: 24px; color: #2a9236;"><a (click)="iniciar()"><strong> Iniciar Etapa </strong> <i class="la la-thumbs-up"></i></a></p>
                         </div>
-                        <div class="btn-extars">
-                            <p style="color: red;"><strong>Información propia de la etapa:</strong></p>
+                        <div class="btn-extars" style="float: left!important; margin-left: 25px;" *ngIf="mostrarBotonDesestimar(etapa.estado)">
+                            <p style="font-size: 24px; color: #ea4141;"><a (click)="desestimar()"><strong> Desestimar </strong> <i class="la la-thumbs-down"></i></a></p>
+                        </div>
+                        <div class="btn-extars" style="float: left!important; margin-left: 25px;" *ngIf="mostrarBotonFinalizar(etapa.estado)">
+                            <p style="font-size: 24px; color: #2a9236;"><a (click)="finalizar()"><strong> Finalizar </strong> <i class="la la-thumbs-up"></i></a></p>
+                        </div>
+                        <div class="btn-extars" style="float: left!important; margin-left: 25px; margin-top: 50px;">
+                            <p style="font-size: 24px;"><strong><i class="la la-suitcase"></i> Empresa: </strong> <a [routerLink]="['empresa', etapa.empresa.id]">{{ etapa.empresa.valor }}</a></p>
+                        </div>
+                        <div class="btn-extars" style="float: left!important; margin-left: 25px;" *ngIf="etapa?.convenio?.id">
+                            <p style="font-size: 24px;" ><strong>Convenio: </strong> <a [routerLink]="['convenio', '1']">{{ etapa.convenio?.valor }}</a></p>
+                        </div>
+                        <div class="btn-extars" style="float: left!important; margin-left: 25px;" *ngIf="etapa?.convenio?.id">
+                            <p style="font-size: 24px;" ><strong>Archivo del Convenio: </strong> <a [routerLink]="['convenio', '1']">{{ etapa.archivo }}</a></p>
                         </div>
                     </div>
                  </div>
@@ -51,28 +66,22 @@
                             <div class="widget border col-md-3" style="margin-right: 12px;">
                                 <h1 class="sb-title closed" (click)="isCollapsedResponsable = !isCollapsedResponsable">Responsable</h1>
                                 <div class="specialism_widget" [ngbCollapse]="isCollapsedResponsable">
-                                    <div class="field_w_search">
-                                        <input type="text" placeholder="Buscar Responsable" />
-                                    </div>
-                                    <div class="simple-checkbox">
-                                        <p><input type="checkbox" name="smplechk" id="1"><label for="1">10k - 20k</label></p>
-                                        <p><input type="checkbox" name="smplechk" id="2"><label for="2">20k - 30k</label></p>
-                                        <p><input type="checkbox" name="smplechk" id="3"><label for="3">30k - 40k</label></p>
-                                        <p><input type="checkbox" name="smplechk" id="4"><label for="4">40k - 50k</label></p>
+                                    <div class="simple-checkbox" style="margin-top: 20px;">
+                                        <p *ngFor="let r of responsables; let i = index;">
+                                            <input type="checkbox" name="check-{{i}}" id="check-{{i}}" [(ngModel)]="r.seleccionado" (change)="actualizarItemsResp(r)">
+                                            <label for="check-{{i}}">{{ r.valor }}</label>
+                                        </p>
                                     </div>
                                 </div>
                             </div>
                             <div class="widget border col-md-3" style="margin-right: 12px;">
                                 <h1 class="sb-title closed" (click)="isCollapsedEstado = !isCollapsedEstado">Estado</h1>
                                 <div class="specialism_widget" [ngbCollapse]="isCollapsedEstado">
-                                    <div class="field_w_search">
-                                        <input type="text" placeholder="Buscar Estado" />
-                                    </div>
-                                    <div class="simple-checkbox">
-                                        <p><input type="checkbox" name="smplechk" id="1"><label for="1">10k - 20k</label></p>
-                                        <p><input type="checkbox" name="smplechk" id="2"><label for="2">20k - 30k</label></p>
-                                        <p><input type="checkbox" name="smplechk" id="3"><label for="3">30k - 40k</label></p>
-                                        <p><input type="checkbox" name="smplechk" id="4"><label for="4">40k - 50k</label></p>
+                                    <div class="simple-checkbox" style="margin-top: 20px;">
+                                        <p *ngFor="let r of estados; let i = index;">
+                                            <input type="checkbox" name="checkx-{{i}}" id="checkx-{{i}}" [(ngModel)]="r.seleccionado" (change)="actualizarItemsEst(r)">
+                                            <label for="checkx-{{i}}">{{ r.valor }}</label>
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -88,11 +97,11 @@
 
                          <div class="sortby-sec" style="padding-top: 50px;">
                              <span>Ordenar por</span>
-                             <select data-placeholder="Most Recent" class="chosen">
-                                <option>Más reciente</option>
-                                <option>Most Recent</option>
-                                <option>Most Recent</option>
-                                <option>Most Recent</option>
+                             <select data-placeholder="Most Recent" class="chosen" [(ngModel)]="ordenarPor" (change)="onOrdenarPor()">
+                                <option [value]="ordenarPor">Ultima Modificación</option>
+                                <option [value]="ordenarPor">Responsable</option>
+                                <option [value]="ordenarPor">Fecha de creación</option>
+                                <option [value]="ordenarPor">Fecha de Finalizacion</option>
                             </select>
                          </div>
                      </div>
@@ -109,12 +118,12 @@
                                 <i style="font-size: 17px; color: orange;" *ngIf="t.predecesoras"><i class="la la-warning"></i> {{ t.predecesoras }}</i><br>
                             </div>
                             <div class="job-style-bx">
-                                <span class="job-is ft" style="width: 200px; height: 50px; color: black; background-color: #e4f7d7; border-color: #7bd0b5; font-size: 20px;">{{ t.estado }}</span>
+                                <span class="job-is ft" style="width: 250px; height: 50px; color: black; background-color: #e4f7d7; border-color: #7bd0b5; font-size: 20px;">{{ t.estado }}</span>
                             </div>
                         </div>								
                     </div>
                  </div>
              </div>
          </div>
-    </div>
+    <!-- </div> -->
 </div>
