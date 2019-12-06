@@ -1,6 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { HelperService } from '../helper.service';
+import { IdValor } from '../empresa/empresa.component';
+import { DataService } from '../data/data.service';
+import { DatePipe } from '@angular/common';
+
+export class PropuestaView {
+  id: string;
+  titulo: string;
+  empresa: IdValor;
+  fechaPosteo: Date;
+  diasDif: number;
+  provincia: string;
+  zona: string;
+  ciudad: string;
+  localidad: string;
+  tipoEmpleo: string;
+  turnoEmpleo: string;
+  carreras: IdValor[];
+}
 
 @Component({
   selector: 'app-propuesta-list',
@@ -8,124 +26,132 @@ import { HelperService } from '../helper.service';
   styleUrls: ['./propuesta-list.component.css']
 })
 export class PropuestaListComponent implements OnInit {
-  propuestas = [{
-    nombre: 'Web Designer / Developer',
-    empresa: {
-      id: 'google',
-      nombre: 'Google'
-    },
-    imagen: 'https://scontent.faep9-2.fna.fbcdn.net/v/t1.0-9/17155403_1271946119565446_4572866393621171497_n.png?_nc_cat=1&_nc_oc=AQmvHiT9fcBpoilHAY0i4kz_bcNtzEVfK5CFoYvwZuK-iwP-1AAK5t7l3K1QAgYg-fg&_nc_ht=scontent.faep9-2.fna&oh=6e718eacfc67ac110879aaedb0fc281d&oe=5DD6E116',
-    ubicacion: 'Palermo, Buenos Aires',
-    porcentajeCoincidencia: 95,
-    tipoTrabajo: {
-      id: 'ft',
-      nombre: 'Full-Time'
-    },
-    fechaPublicacion: 'hace 1 mes',
-    carreras: [{
-      id: '1',
-      nombre: 'Ingeniería en Informática'
-    }, {
-      id: '2',
-      nombre: 'Licenciatura en Informática'
-    }]
-  }, {
-    nombre: 'C Developer (Senior) C .Net',
-    empresa: {
-      id: 'thomsonreuters',
-      nombre: 'Thomson Reuters'
-    },
-    imagen: 'https://media.licdn.com/dms/image/C4E0BAQH1yjTtvby_-A/company-logo_400_400/0?e=1574294400&v=beta&t=o5UnEWfqlM1NyRGDcwnjH0UgvRB11OyEUphahttaBsk',
-    ubicacion: 'Microcentro, Buenos Aires',
-    porcentajeCoincidencia: 90,
-    tipoTrabajo: {
-      id: 'pt',
-      nombre: 'Part-Time'
-    },
-    fechaPublicacion: 'hace 13 días',
-    carreras: [{
-      id: '1',
-      nombre: 'Ingeniería en Informática'
-    }]
-  }, {
-    nombre: 'Regional Sales Manager South',
-    empresa: {
-      id: 'ypf',
-      nombre: 'YPF'
-    },
-    imagen: 'https://media.licdn.com/dms/image/C4E0BAQGhSg_HuQHxHw/company-logo_400_400/0?e=1574294400&v=beta&t=jKk8TQAKN1SR_fi26oGyTvb-UsCU0EDIt0CxW1SrWK0',
-    ubicacion: 'Balcarce, Buenos Aires',
-    porcentajeCoincidencia: 58,
-    tipoTrabajo: {
-      id: 'ft',
-      nombre: 'Full-Time'
-    },
-    fechaPublicacion: 'hace 5 días',
-    carreras: [{
-      id: '6',
-      nombre: 'Licenciado en Economía'
-    }, {
-      id: '7',
-      nombre: 'Analista Económico'
-    }]
-  }];
+  propuestas: PropuestaView[];
 
-  items: any;
+  items: PropuestaView[];
   filtroTitulo: string = '';
+  filtroUbicacion: string = '';
   isCollapsedCarrera: boolean = true;
-  carreras: any = [];
-  carrerasFiltro: any = [];
+  isCollapsedEmpresa: boolean = true;
+  isCollapsedFechaPosteo: boolean = true;
+  isCollapsedTipoTrabajo: boolean = true;
+  isCollapsedTurno: boolean = true;
+  isCollapsedPuesto: boolean = true;
+  isCollapsedCoincidencia: boolean = true;
+  carreras: IdValor[] = [];
+  carrerasFiltro: IdValor[] = [];
   dropdownSettings: IDropdownSettings;
+  empresasFiltro: any = [];
+  empresasFiltroSeleccionados: any = [];
+  filtroFecha: number;
+  carrerasFiltroId: string[];
 
-  constructor(private helperService: HelperService) { }
+  constructor(private helperService: HelperService, private dataService: DataService, private datePipe: DatePipe) { }
 
   ngOnInit() {
     this.items = this.propuestas;
-    this.obtenerCarreras();
     this.dropdownSettings = this.helperService.dropdownSettings;
     this.dropdownSettings.itemsShowLimit = 0;
+    this.dropdownSettings.textField = 'valor';
+
+    this.dataService.getPropuestas().subscribe(x => {
+      this.propuestas = x;
+      this.items = this.propuestas;
+
+      var empAux = this.propuestas.map(item => item.empresa.valor)
+        .filter((value, index, self) => self.indexOf(value) === index);
+
+      for (let i = 0; i < empAux.length; ++i) {
+        this.empresasFiltro.push({ seleccionado: false, valor: empAux[i] });
+      }
+    });
+    
+    this.dataService.getCarreras().subscribe(x => {
+      this.carreras = x;
+    })
   }
 
   actualizarItems() {
-    this.items = this.propuestas.filter(x => {
+    var items = this.propuestas.filter(x => {
       return (
-        (this.filtroTitulo !== '' || this.filtroTitulo !== undefined) && x.nombre.toLowerCase().includes(this.filtroTitulo.toLowerCase())
+        (this.filtroTitulo !== '' || this.filtroTitulo !== undefined) && x.titulo.toLowerCase().includes(this.filtroTitulo.toLowerCase())
       )
     });
-  }
 
-  obtenerCarreras() {
-    let carrerasAux = [];
-
-    this.propuestas.forEach(x => {
-      x.carreras.forEach(y => {
-        carrerasAux.push(y);
+    if (this.filtroUbicacion !== '' || this.filtroUbicacion !== undefined) {
+      items = items.filter(x => {
+        return (
+          x.ciudad.toLowerCase().includes(this.filtroUbicacion.toLowerCase()) || x.localidad.toLowerCase().includes(this.filtroUbicacion.toLowerCase()) || x.provincia.toLowerCase().includes(this.filtroUbicacion.toLowerCase())
+        )
       });
-    });
+    }    
 
-    this.carreras = carrerasAux.reduce((unique, o) => {
-      if (!unique.some(obj => obj.id === o.id && obj.nombre === o.nombre)) {
-        unique.push(o);
-      }
-      return unique;
-    }, []);
+    if (this.empresasFiltroSeleccionados.length > 0) {
+      items = items.filter(x => {
+        return this.empresasFiltroSeleccionados.includes(x.empresa.valor);
+      });
+    }
 
-    console.log(this.carreras);
+    if (this.filtroFecha > 0) {
+      items = items.filter(x => {
+        return x.diasDif <= this.filtroFecha
+      });
+    }
+
+    if (this.carrerasFiltroId.length > 0) {
+      items = items.filter(x => {
+        return x.carreras !== null && x.carreras.filter(y => this.carrerasFiltroId.includes(y.id)).length > 0;
+      });
+    }
+
+    this.items = items;
   }
 
-  eliminarCarreraFiltro(carrera: any) {
-    this.carrerasFiltro = this.carrerasFiltro.filter(x => x.id !== carrera.id);
+  getUbicacion(p: PropuestaView): string {
+    var ubi: string[] = [];
+    if (p.localidad !== undefined && p.localidad !== null && p.localidad !== '') {
+      ubi.push(p.localidad);
+    }
+    if (p.ciudad !== undefined && p.ciudad !== null && p.ciudad !== '') {
+      ubi.push(p.ciudad);
+    }
+    if (p.zona !== undefined && p.zona !== null && p.zona !== '') {
+      ubi.push(p.zona);
+    }
+    if (p.provincia !== undefined && p.provincia !== null && p.provincia !== '') {
+      ubi.push(p.provincia);
+    }
+    if (ubi.length > 0) {
+      return ubi.join(', ');   
+    } else {
+      return null;
+    }
   }
 
+  getFecha(d: Date): string {
+    return this.datePipe.transform(d, 'dd/MM/yyyy');
+  }
+
+  actualizarItemsEmp(e: any) {
+    if (e.seleccionado) {
+      this.empresasFiltroSeleccionados.push(e.valor);
+      this.actualizarItems();
+    } else {
+      this.empresasFiltroSeleccionados = this.empresasFiltroSeleccionados.filter(x => x !== e.valor);
+      this.actualizarItems();
+    }
+  }
+
+  obtenerNumeroTipoTrabajo(tipo: string): number {
+    if (this.propuestas !== null && this.propuestas !== undefined) {
+      return this.propuestas.filter(x => x.tipoEmpleo === tipo).length;
+    } else {
+      return 0;
+    }
+  }
+  
   actualizarItemsCarrera() {
-    this.items.forEach(x => {
-      x.carreras.forEach(y => {
-        this.carrerasFiltro.forEach(z => {
-          if (y.id === z.id) {
-            
-          } 
-        });
-      });
-    });
+    this.carrerasFiltroId = this.carrerasFiltro.map(x => x.id);
+    this.actualizarItems();
   }
 }

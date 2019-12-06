@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { Observable, Subscribable } from 'rxjs';
 import { Carrera } from '../carrera/carrera.component';
 import { HttpClient } from '@angular/common/http';
-import { IdValor, Empresa } from '../empresa/empresa.component';
-import { Puesto, Conocimiento, Perfil } from '../crear-perfil/crear-perfil.component';
+import { IdValor } from '../empresa/empresa.component';
+import { Puesto, Conocimiento } from '../crear-perfil/crear-perfil.component';
 import { Usuario } from '../aprobacion-usuario/aprobacion-usuario.component';
 import { EtapaSeleccionAlumno } from '../etapa-seleccion-alumno-list/etapa-seleccion-alumno-list.component';
 import { PerfilView } from '../alumno-list/alumno-list.component';
+import { PropuestaView } from '../propuesta-list/propuesta-list.component';
 
 @Injectable({
   providedIn: 'root'
@@ -81,5 +82,9 @@ export class DataService {
 
   getEtapasSeleccionAlumno(): Subscribable<EtapaSeleccionAlumno[]> {
     return this.http.get<EtapaSeleccionAlumno[]>('https://localhost:44374/EtapaSeleccionAlumno');
+  }
+
+  getPropuestas(): Subscribable<PropuestaView[]> {
+    return this.http.get<PropuestaView[]>('https://localhost:44374/Propuesta');
   }
 }

@@ -76,7 +76,7 @@ const routes: Routes = [
   { path: 'preferencias-list', component: PreferenciasListComponent },
   { path: 'propuesta', component: PropuestaComponent },
   { path: 'propuesta-list', component: PropuestaListComponent },
-  { path: 'propuesta-view', component: PropuestaViewComponent },
+  { path: 'propuesta-view/:id', component: PropuestaViewComponent },
   { path: 'subtarea', component: SubtareaComponent },
   { path: 'tarea', component: TareaComponent },
   { path: 'tarea-defecto', component: TareaDefectoComponent },

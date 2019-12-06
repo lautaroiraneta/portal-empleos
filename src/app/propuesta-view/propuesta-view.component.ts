@@ -1,4 +1,38 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { IdValor } from '../empresa/empresa.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Usuario } from '../aprobacion-usuario/aprobacion-usuario.component';
+
+export class Postulacion {
+  alumnoId: string;
+  propuestaId: string;
+  empresaId: string;
+}
+
+export class PropuestaVista {
+  id: string;
+  empresa: IdValor;
+  titulo: string;
+  provincia: string;
+  zona: string;
+  ciudad: string;
+  localidad: string;
+  tipoEmpleo: string;
+  turnoEmpleo: string;
+  fechaAlta: string;
+  sueldoBruto: string;
+  beneficios: string;
+  descripcion: string;
+  edadMin: string;
+  edadMax: string;
+  reubicarse: string;
+  habilidadesPersonales: string;
+  porcentajeMatApr: string;
+  promedio: string;
+  anioCursada: string;
+}
 
 @Component({
   selector: 'app-propuesta-view',
@@ -6,38 +40,63 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./propuesta-view.component.css']
 })
 export class PropuestaViewComponent implements OnInit {
-  propuesta = {
-    empresa: 'Google',
-    ubicacion: 'Palermo, Buenos Aires',
-    tipo: 'Full-Time',
-    fechaCreado: 'Julio 29, 2019',
-    descripcion: 'Company is a 2016 Iowa City-born start-up that develops consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc tortor eu nibh. Nullam mollis. Ut justo. Suspendisse potenti.Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus. Praesent elementum hendrerit tortor. Sed semper lorem at felis. Vestibulum volutpat, lacus a ultrices sagittis, mi neque euismod dui, eu pulvinar nunc sapien',
-    requisitos: [
-      'Ability to write code – HTML & CSS (SCSS flavor of SASS preferred when writing CSS)',
-      'Proficient in Photoshop, Illustrator, bonus points for familiarity with Sketch (Sketch is our preferred concepting)',
-      'Cross-browser and platform testing as standard practice',
-      'Experience using Invision a plus',
-      'Experience in video production a plus or, at a minimum, a willingness to learn'
-    ],
-    educacion: [
-      'Advanced degree or equivalent experience in graphic and web design',
-      '3 or more years of professional design experience',
-      'Direct response email experience',
-      'Ecommerce website design experience',
-      'Familiarity with mobile and web apps preferred'
-    ],
-    area: 'Desarrollo',
-    carreras: ['Ingeniería en Informática', 'Licenciatura en Informática'],
-    sueldo: '$60.000 - $70.000',
-    beneficios: ['Home Office', 'Descuento en Gimnasio', 'Snacks en la Oficina'],
-    edadMinima: 18,
-    edadMaxima: 25,
-    cantMateriasAprobadas: 30
-  };
+  propuesta: PropuestaVista;
 
-  constructor() { }
+  constructor(private route: ActivatedRoute, private http: HttpClient, private modalService: NgbModal) { }
 
   ngOnInit() {
+    console.log(this.route.snapshot.params['id']);
+    this.http.get('https://localhost:44374/Propuesta/get-by-id?propuestaId=' + this.route.snapshot.params['id']).subscribe((x: PropuestaVista) => {
+      this.propuesta = x;
+    });
+    console.log(this.propuesta);
   }
 
+  getUbicacion(): string {
+    var ubi: string[] = [];
+    if (this.propuesta !== undefined && this.propuesta !== null) {
+      if (this.propuesta.localidad !== undefined && this.propuesta.localidad !== null && this.propuesta.localidad !== '') {
+        ubi.push(this.propuesta.localidad);
+      }
+      if (this.propuesta.ciudad !== undefined && this.propuesta.ciudad !== null && this.propuesta.ciudad !== '') {
+        ubi.push(this.propuesta.ciudad);
+      }
+      if (this.propuesta.zona !== undefined && this.propuesta.zona !== null && this.propuesta.zona !== '') {
+        ubi.push(this.propuesta.zona);
+      }
+      if (this.propuesta.provincia !== undefined && this.propuesta.provincia !== null && this.propuesta.provincia !== '') {
+        ubi.push(this.propuesta.provincia);
+      }
+      if (ubi.length > 0) {
+        return ubi.join(', ');
+      } else {
+        return null;
+      }
+    } else {
+      return null;
+    }
+  }
+
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      console.log('modal cerrado');
+    });
+  }
+
+  postularme() {
+    var usuario: Usuario = JSON.parse(localStorage.getItem('usuario'));
+    let data = new Postulacion();
+    if (!usuario.alumnoId) {
+      alert('No hay un alumno logueado.');
+    }
+    data.alumnoId = usuario.alumnoId;
+    data.propuestaId = this.route.snapshot.params['id'];
+    data.empresaId = this.propuesta.empresa.id;
+
+    this.http.post('https://localhost:44374/EtapaSeleccionAlumno/postulacion', data).subscribe(x => {
+      alert('Postulado!');
+      this.modalService.dismissAll();
+    });
+
+  }
 }

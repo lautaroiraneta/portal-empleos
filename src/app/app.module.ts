@@ -54,6 +54,7 @@ import { LoginComponent } from './login/login.component';
 import { EtapaComponent } from './etapa/etapa.component';
 import { EtapaSeleccionAlumnoListComponent } from './etapa-seleccion-alumno-list/etapa-seleccion-alumno-list.component';
 import { NgxTwitterTimelineModule } from 'ngx-twitter-timeline';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   imports: [
@@ -113,6 +114,7 @@ import { NgxTwitterTimelineModule } from 'ngx-twitter-timeline';
     EtapaComponent,
     EtapaSeleccionAlumnoListComponent
   ],
+  providers: [DatePipe],
   bootstrap: [ AppComponent ]
 })
 

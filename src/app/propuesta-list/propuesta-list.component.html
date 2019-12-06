@@ -13,63 +13,54 @@
                     <h3 class="sb-title closed" (click)="isCollapsedCarrera = !isCollapsedCarrera">Carrera</h3>
                     <div class="specialism_widget" [ngbCollapse]="isCollapsedCarrera">
                         <ng-multiselect-dropdown [placeholder]="'Seleccione Carreras'" [data]="carreras"
-                            [settings]="dropdownSettings" [(ngModel)]="carrerasFiltro" name="carrerasFiltro" (change)="actualizarItemsCarrera()">
+                            [settings]="dropdownSettings" [(ngModel)]="carrerasFiltro" name="carrerasFiltro" (onSelect)="actualizarItemsCarrera()" (onDeSelect)="actualizarItemsCarrera()">
                         </ng-multiselect-dropdown>
-                        <div style="display: flex; flex-direction: column;">
-                            <span *ngIf="carrerasFiltro.length > 0"><strong>Carreras Seleccionadas:</strong></span>
-                            <span *ngFor="let cf of carrerasFiltro">{{ cf.nombre }} <a><i class="la la-times" (click)="eliminarCarreraFiltro(cf)"></i></a></span>
-                        </div>
                     </div>
                 </div>
                 <div class="widget border">
-                    <h3 class="sb-title closed">Empresa</h3>
-                    <div class="specialism_widget">
-                        <div class="field_w_search">
+                    <h3 class="sb-title closed" (click)="isCollapsedEmpresa = !isCollapsedEmpresa">Empresa</h3>
+                    <div class="specialism_widget" [ngbCollapse]="isCollapsedEmpresa">
+                        <!-- <div class="field_w_search">
                             <input type="text" placeholder="Buscar Empresa" />
-                        </div>
-                        <div class="posted_widget">
-                            <input type="radio" name="choose" id="wwqe"><label for="wwqe">Google</label><br />
-                            <input type="radio" name="choose" id="erewr"><label for="erewr">Thomson
-                                Reuters</label><br />
-                            <input type="radio" name="choose" id="qwe"><label for="qwe">MercadoLibre</label><br />
-                            <input type="radio" name="choose" id="wqe"><label for="wqe">YPF</label><br />
-                            <input type="radio" name="choose" id="qweqw"><label class="nm"
-                                for="qweqw">xNova</label><br />
+                        </div> -->
+                        <div class="simple-checkbox" style="margin-top: 20px;">
+                            <p *ngFor="let e of empresasFiltro; let i = index;">
+                                <input type="checkbox" name="checke-{{i}}" id="checke-{{i}}" [(ngModel)]="e.seleccionado"
+                                    (change)="actualizarItemsEmp(e)">
+                                <label for="checke-{{i}}">{{ e.valor }}</label>
+                            </p>
                         </div>
                     </div>
                 </div>
                 <br>
                 <div class="search_widget_job" style="padding-top: 13px;">
                     <div class="field_w_search">
-                        <input type="text" placeholder="Ubicación" />
+                        <input type="text" placeholder="Ubicación" [(ngModel)]="filtroUbicacion" name="filtroUbicacion" (keyup)="actualizarItems()" />
                         <i class="la la-map-marker"></i>
                     </div>
                 </div>
                 <br>
                 <div class="widget border">
-                    <h3 class="sb-title closed">Fecha de posteo</h3>
-                    <div class="posted_widget">
-                        <input type="radio" name="choose" id="wwqe"><label for="wwqe">Últimas 24 horas</label><br />
-                        <input type="radio" name="choose" id="erewr"><label for="erewr">Últimos 7 días</label><br />
-                        <input type="radio" name="choose" id="qwe"><label for="qwe">Últimos 14 días</label><br />
-                        <input type="radio" name="choose" id="wqe"><label for="wqe">Últimos 30 días</label><br />
-                        <input type="radio" name="choose" id="qweqw"><label class="nm" for="qweqw">Todos</label><br />
+                    <h3 class="sb-title closed" (click)="isCollapsedFechaPosteo = !isCollapsedFechaPosteo">Fecha de posteo</h3>
+                    <div class="posted_widget" [ngbCollapse]="isCollapsedFechaPosteo">
+                        <input type="radio" name="choose" id="wwqe" [(ngModel)]="filtroFecha" value="1" (change)="actualizarItems()"><label for="wwqe">Últimas 24 horas</label><br />
+                        <input type="radio" name="choose" id="erewr" [(ngModel)]="filtroFecha" value="7" (change)="actualizarItems()"><label for="erewr">Últimos 7 días</label><br />
+                        <input type="radio" name="choose" id="qwe" [(ngModel)]="filtroFecha" value="14" (change)="actualizarItems()"><label for="qwe">Últimos 14 días</label><br />
+                        <input type="radio" name="choose" id="wqe" [(ngModel)]="filtroFecha" value="30" (change)="actualizarItems()"><label for="wqe">Últimos 30 días</label><br />
+                        <input type="radio" name="choose" id="qweqw" [(ngModel)]="filtroFecha" value="100" (change)="actualizarItems()"><label class="nm" for="qweqw">Todos</label><br />
                     </div>
                 </div>
                 <div class="widget border">
-                    <h3 class="sb-title closed">Tipo de Trabajo</h3>
-                    <div class="type_widget">
-                        <p class="ftchek"><input type="checkbox" name="choosetype" id="dsf"><label for="dsf">Full Time
-                                (8)</label></p>
-                        <p class="ptchek"><input type="checkbox" name="choosetype" id="sadd"><label for="sadd">Part Time
-                                (5)</label></p>
-                        <p class="ischek"><input type="checkbox" name="choosetype" id="sdd"><label for="sdd">Pasantía
-                                (8)</label></p>
+                    <h3 class="sb-title closed" (click)="isCollapsedTipoTrabajo = !isCollapsedTipoTrabajo">Tipo de Trabajo</h3>
+                    <div class="type_widget" [ngbCollapse]="isCollapsedTipoTrabajo">
+                        <p class="ftchek"><input type="checkbox" name="choosetype" id="dsf"><label for="dsf">Full-Time ({{ obtenerNumeroTipoTrabajo('Full-Time') }})</label></p>
+                        <p class="ptchek"><input type="checkbox" name="choosetype" id="sadd"><label for="sadd">Part-Time ({{ obtenerNumeroTipoTrabajo('Part-Time') }})</label></p>
+                        <p class="ischek"><input type="checkbox" name="choosetype" id="sdd"><label for="sdd">Pasantía ({{ obtenerNumeroTipoTrabajo('Pasantía') }})</label></p>
                     </div>
                 </div>
                 <div class="widget border">
-                    <h3 class="sb-title closed">Turno</h3>
-                    <div class="type_widget">
+                    <h3 class="sb-title closed" (click)="isCollapsedTurno = !isCollapsedTurno">Turno</h3>
+                    <div class="type_widget" [ngbCollapse]="isCollapsedTurno">
                         <p class="ftchek"><input type="checkbox" name="choosetype" id="dsff"><label
                                 for="dsff">Mañana</label></p>
                         <p class="ptchek"><input type="checkbox" name="choosetype" id="saddf"><label
@@ -79,8 +70,8 @@
                     </div>
                 </div>
                 <div class="widget border">
-                    <h3 class="sb-title closed">Puestos</h3>
-                    <div class="specialism_widget">
+                    <h3 class="sb-title closed" (click)="isCollapsedPuesto = !isCollapsedPuesto">Puestos</h3>
+                    <div class="specialism_widget" [ngbCollapse]="isCollapsedPuesto">
                         <div class="field_w_search">
                             <input type="text" placeholder="Buscar Puestos" />
                         </div><!-- Search Widget -->
@@ -98,8 +89,8 @@
                     </div>
                 </div>
                 <div class="widget border">
-                    <h3 class="sb-title closed">Coincidencia</h3>
-                    <div class="specialism_widget">
+                    <h3 class="sb-title closed" (click)="isCollapsedCoincidencia = !isCollapsedCoincidencia">Coincidencia</h3>
+                    <div class="specialism_widget" [ngbCollapse]="isCollapsedCoincidencia">
                         <div class="field_w_search">
                             <input type="text" placeholder="Búsqueda por Título" />
                             <i class="la la-search"></i>
@@ -120,7 +111,7 @@
                     <div class="filterbar">
                         <span class="emlthis add-alerta"><a><i class="la la-bell-o"></i> Crear Alerta con los Filtros
                                 Seleccionados</a></span>
-                        <div class="sortby-sec">
+                        <!-- <div class="sortby-sec">
                             <span>Ordenar por</span>
                             <select data-placeholder="Más reciente" class="chosen">
                                 <option>Más reciente</option>
@@ -134,28 +125,29 @@
                                 <option>50 Per Page</option>
                                 <option>60 Per Page</option>
                             </select>
-                        </div>
-                        <h5>{{ items.length }} Propuestas de Trabajo</h5>
+                        </div> -->
+                        <h5>{{ items?.length }} Propuestas de Trabajo</h5>
                     </div>
                 </div><!-- MOdern Job LIst -->
                 <div class="job-list-modern">
                     <div class="job-listings-sec no-border">
                         <div class="job-listing wtabs" *ngFor="let p of items">
                             <div class="job-title-sec">
-                                <div class="c-logo"> <img [src]="p.imagen" alt="" /> </div>
-                                <h3><a title="">{{ p.nombre }}</a></h3>
-                                <span>{{ p.empresa.nombre }}</span>
-                                <div class="job-lctn"><i class="la la-map-marker"></i>{{ p.ubicacion }}</div><br>
-                                <div class="job-lctn" style="color:rgb(10, 90, 10);">{{ p.porcentajeCoincidencia }}% de
+                                <div class="c-logo"> <img src="https://s3-us-west-2.amazonaws.com/devcodepro/media/blog/la-fundacion-de-google.png" alt="" /> </div>
+                                <h3><a title="" [routerLink]="['/propuesta-view', p.id]">{{ p.titulo }}</a></h3>
+                                <span><i class="la la-suitcase"></i> {{ p.empresa.valor }}</span>
+                                <div class="job-lctn"><i class="la la-map-marker" *ngIf="getUbicacion(p) !== null"></i>{{ getUbicacion(p) }}</div><br>
+                                <div class="job-lctn" style="color:rgb(10, 90, 10);">100% de
                                     coincidencia</div>
                             </div>
                             <div class="job-style-bx">
-                                <span class="job-is ft">{{ p.tipoTrabajo.nombre }}</span>
-                                <i>{{ p.fechaPublicacion }}</i>
+                                <span class="job-is ft">{{ p.tipoEmpleo }}</span>
+                                <i *ngIf="p.diasDif === 1">{{ getFecha(p.fechaPosteo) }} (hace {{ p.diasDif }} dia)</i>
+                                <i *ngIf="p.diasDif !== 1">{{ getFecha(p.fechaPosteo) }} (hace {{ p.diasDif }} dias)</i>
                             </div>
                         </div>
                     </div>
-                    <div class="pagination">
+                    <!-- <div class="pagination">
                         <ul>
                             <li class="prev"><a href=""><i class="la la-long-arrow-left"></i> Prev</a></li>
                             <li><a href="">1</a></li>
@@ -165,7 +157,7 @@
                             <li><a href="">14</a></li>
                             <li class="next"><a href="">Next <i class="la la-long-arrow-right"></i></a></li>
                         </ul>
-                    </div><!-- Pagination -->
+                    </div> -->
                 </div>
             </div>
         </div>
