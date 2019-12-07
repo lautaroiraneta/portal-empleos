@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { AppComponent } from '../app.component';
@@ -13,6 +13,7 @@ export class Alumno {
   tipoDocumento: string;
   numeroDocumento: string;
   nombreUsuario: string;
+  password: string;
 }
 
 @Component({
@@ -25,7 +26,7 @@ export class AlumnoComponent implements OnInit {
   alumno: Alumno;
 
   constructor(
-    private route: ActivatedRoute,
+    private router: Router,
     private http: HttpClient,
     private appComponent: AppComponent) { 
       this.alumno = new Alumno();
@@ -43,7 +44,7 @@ export class AlumnoComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    const data = new Alumno();
+    let data = new Alumno();
     data.apellidos = this.alumno.apellidos;
     data.email = this.alumno.email;
     data.libretaUniversitaria = this.alumno.libretaUniversitaria;
@@ -51,13 +52,12 @@ export class AlumnoComponent implements OnInit {
     data.nombres = this.alumno.nombres;
     data.numeroDocumento = this.alumno.numeroDocumento;
     data.tipoDocumento = this.alumno.tipoDocumento;
+    data.password = this.alumno.password;
 
     this.http.post('https://localhost:44374/Alumno', data)
       .subscribe((x: Alumno) => {
-        alert('Alumno Creado!');
-        localStorage.setItem('usuario', JSON.stringify(x.id));
-        localStorage.setItem('usuarioNombre', JSON.stringify(x.nombres + ' ' + x.apellidos));
-        this.appComponent.iniciarUsuario();
+        alert('Alumno Creado! Espere la aprobación de la Universidad para poder ingresar.');
+        this.router.navigate(['login']);
       }, error => {
         alert('Ya existe un usuario con ese nombre!');
       });

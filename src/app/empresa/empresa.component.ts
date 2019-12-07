@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HelperService } from '../helper.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { AppComponent } from '../app.component';
 
 export class Empresa {
   id: string;
@@ -18,6 +19,7 @@ export class Empresa {
   contactoEmail: string;
   contactoCargo: string;
   contactoNombreUsuario: string;
+  password: string;
   alta: string;
   baja: string;
 }
@@ -34,31 +36,8 @@ export class IdValor {
 })
 export class EmpresaComponent implements OnInit {
   empresa: Empresa = new Empresa();
-  // empresa: Empresa = {
-  //   id: null,
-  //   nombre: 'Nombre',
-  //   sitioWeb: 'www.asd.com.ar',
-  //   cuit: '20-35941589-4',
-  //   domicilio: 'Las Flores 1600 Torre 26 9°C, Wilde, Buenos Aires',
-  //   emails: [{
-  //     id: '1',
-  //     email: 'lautaroiraneta@gmail.com'
-  //   }],
-  //   telefonos: [{
-  //     id: '1',
-  //     telefono: '123123'
-  //   }],
-  //   contactoNombre: 'Lucas',
-  //   contactoApellido: 'Vatano',
-  //   contactoTelefono: '4124124',
-  //   contactoEmail: 'kvatano@gmail.com',
-  //   contactoCargo: 'Project Leader',
-  //   contactoNombreUsuario: 'lvatano',
-  //   alta: null,
-  //   baja: null    
-  // }
   
-  constructor(private helperService: HelperService, private route: ActivatedRoute, private http: HttpClient) { }
+  constructor(private helperService: HelperService, private route: ActivatedRoute, private http: HttpClient, private router: Router, private appComponent: AppComponent) { }
 
   ngOnInit() { 
     var id = this.route.snapshot.params['id'];
@@ -104,11 +83,14 @@ export class EmpresaComponent implements OnInit {
     data.nombre = this.empresa.nombre;
     data.sitioWeb = this.empresa.sitioWeb;
     data.telefonos = this.empresa.telefonos;
+    data.password = this.empresa.password;
 
     this.http.post('https://localhost:44374/Empresa', data).subscribe(x => {
-      alert('Empresa creada!');
-    });
-    
+      alert('Empresa creada! Espere la aprobación de la Universidad para poder ingresar.');
+      this.router.navigate(['login']);
+    }, error => {
+      alert('Ya existe un usuario con ese nombre!');
+    });    
   }
 
   isDisabled(): boolean {

@@ -9,7 +9,7 @@ export class Usuario {
   tipoUsuario: string;
   alumnoId: string;
   empresaId: string;
-  alta: Date;
+  alta: string;
   aprobado: boolean;
   nombre: string;
   apellido: string;
