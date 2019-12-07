@@ -35,8 +35,8 @@
                                         <div class="job-listings-sec no-border">
                                             <div class="job-listing wtabs">
                                                 <div class="job-title-sec" *ngFor="let aa of tarea.archivos">
-                                                    <h3><a [href]="aa.link" title=""
-                                                            style="padding-left: 20px;">{{ aa.archivo }}</a></h3>
+                                                    <h3><a title=""
+                                                            style="padding-left: 20px;" (click)="downloadFile()" >{{ aa.archivo }}</a></h3>
                                                     <!-- <div class="job-lctn" style="padding-left: 20px;">
                                                         {{ aa.descripcion }}</div> -->
                                                 </div>
@@ -50,9 +50,9 @@
                                         <div class="job-listings-sec no-border">
                                             <div class="job-listing wtabs" *ngFor="let c of tarea.comentarios">
                                                 <div class="job-title-sec">
-                                                    <div class="c-logo"> <img [src]="c.foto" alt="" /> </div>
+                                                    <!-- <div class="c-logo"> <img [src]="c.foto" alt="" /> </div> -->
                                                     <h3><a href="#" title=""
-                                                            style="padding-left: 20px;">{{ c.nombre }}</a></h3>
+                                                            style="padding-left: 20px;">{{ c.usuario }}</a></h3>
                                                     <div class="job-lctn" style="padding-left: 20px;">{{ c.contenido }}
                                                     </div>
                                                 </div>
@@ -71,15 +71,18 @@
                                     <ul>
                                         <li style="float:left;">
                                             <div class="pull-left">
-                                                <h3 style="font-size: 20px;"><strong>Estado</strong></h3><i
-                                                    class="la la-caret-right" style="padding-top: 10px;"></i><span
+                                                <h3 style="font-size: 20px;"><strong>Estado</strong></h3><i class="la la-caret-right"
+                                                    style="padding-top: 10px;"></i><span
                                                     style="display:inline; font-size: 20px; color: green;"><strong>{{ tarea.estado }}</strong></span>
+                                                    <span style="color: green" *ngIf="mostrarBotonIniciar()"><a (click)="iniciarTarea()">Iniciar</a></span>
+                                                    <span style="color: green" *ngIf="mostrarBotonFinalizar()"><a (click)="finalizarTarea()">Finalizar</a></span>
+                                                    <span style="color: red" *ngIf="mostrarBotonCancelar()"><a (click)="cancelarTarea()">Cancelar</a></span>
                                             </div>
                                         </li>
                                         <li>
                                             <h3>Responsable</h3><i
-                                                class="la la-user"></i><span>{{ tarea.responsable }}</span>
-                                        </li>
+                                                class="la la-user"></i><span>{{ tarea.responsable.valor }}</span>
+                                            <span style="font-size: 11px;"><a (click)="open(content)"> (Cambiar responsable)</a></span>
                                         <li>
                                             <h3>Fecha de Finalización</h3><i
                                                 class="la la-calendar"></i><span>{{ tarea.fechaFin }}</span>
@@ -101,8 +104,8 @@
                                 <div class="quick-form-job">
                                     <h3>Agregar Comentario</h3>
                                     <form>
-                                        <textarea placeholder="Ingrese un comentario"></textarea>
-                                        <button class="submit">Enviar</button>
+                                        <textarea placeholder="Ingrese un comentario" [(ngModel)]="comentario" name="comentario"></textarea>
+                                        <button (click)="cargarComentario()">Enviar</button>
                                     </form>
                                 </div>
                             </div>
@@ -113,3 +116,24 @@
         </div>
     </div>
 </div>
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h3>Cambiar Responsable</h3>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="pf-field">
+                <ng-multiselect-dropdown [placeholder]="'Seleccione un Usuario Responsable'" [data]="usuariosResp"
+                    [(ngModel)]="nuevoUsuario" name="nuevoUsuario"
+                    [settings]="dropdownSettingsSingle" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                </ng-multiselect-dropdown>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark pull-left" (click)="cambiarResponsable()">Aceptar</button>
+    </div>
+</ng-template>

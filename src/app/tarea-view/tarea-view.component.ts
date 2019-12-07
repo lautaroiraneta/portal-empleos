@@ -2,13 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient, HttpRequest, HttpEventType } from '@angular/common/http';
 import { IdValor } from '../empresa/empresa.component';
+import { Usuario } from '../aprobacion-usuario/aprobacion-usuario.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DataService } from '../data/data.service';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 export class TareaView {
   id: string;
   nombre: string;
   descripcion: string;
   estado: string;
-  responsable: string;
+  responsable: IdValor;
   fechaFin: string;
   comentarios: Comentario[];
   archivos: TareaViewArchivo[];
@@ -21,6 +25,7 @@ export class Comentario {
   contenido: string;
   usuario: string;
   fecha: string;
+  tarea: string;
 }
 
 export class TareaViewArchivo {
@@ -36,14 +41,31 @@ export class TareaViewArchivo {
 })
 export class TareaViewComponent implements OnInit {
   tarea: TareaView;
+  nuevoUsuario: IdValor[] = [];
+  usuariosResp: IdValor[];
+  comentario: string;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {
+  dropdownSettingsSingle: IDropdownSettings = {
+    singleSelection: true,
+    closeDropDownOnSelection: true,
+    idField: 'id',
+    textField: 'valor',
+    enableCheckAll: false,
+    itemsShowLimit: 3,
+    allowSearchFilter: true
+  };
+
+  constructor(private route: ActivatedRoute, private http: HttpClient, private modalService: NgbModal, private dataService: DataService) {
     this.tarea = new TareaView();
   }
 
   ngOnInit() {
-    var id = this.route.snapshot.params['id'];
+    this.initTarea();
+    
+  }
 
+  initTarea() {
+    var id = this.route.snapshot.params['id'];
     this.http.get('https://localhost:44374/TareaView?tareaId=' + id).subscribe((x: TareaView) => {
       this.tarea = x;
     });
@@ -91,6 +113,106 @@ export class TareaViewComponent implements OnInit {
 
     this.http.request(uploadReq).subscribe(event => {
       alert('Archivo Cargado!');
+    });
+  }
+
+  iniciarTarea() {
+    this.http.get('https://localhost:44374/Tarea/mostrar-conf?tareaId=' + this.tarea.id).subscribe((y: IdValor) => {
+      if (y !== undefined && y !== null && y.valor === 'mostrar_conf') {
+        var r = confirm('Existen predecesoras sin terminar, desea continuar?');
+        if (r === true) {
+          this.http.get('https://localhost:44374/Tarea/iniciar-tarea?tareaId=' + this.tarea.id).subscribe((x: string) => {
+            alert('Tarea iniciada.');
+            this.initTarea();
+          });
+        }
+      } else {
+        this.http.get('https://localhost:44374/Tarea/iniciar-tarea?tareaId=' + this.tarea.id).subscribe((x: string) => {
+          alert('Tarea iniciada.');
+          this.initTarea();
+        });
+      }
+    });
+  }
+
+  cancelarTarea() {
+    this.http.get('https://localhost:44374/Tarea/cancelar-tarea?tareaId=' + this.tarea.id).subscribe(x => {
+      alert('Tarea cancelada.');
+      this.initTarea();
+    });
+  }
+
+  finalizarTarea() {
+    this.http.get('https://localhost:44374/Tarea/finalizar-tarea?tareaId=' + this.tarea.id).subscribe(x => {
+      alert('Tarea finalizada.');
+      this.initTarea();
+    });
+  }
+
+  mostrarBotonIniciar(): boolean {
+    var usuario: Usuario = JSON.parse(localStorage.getItem('usuario'));
+    return (this.tarea.estado === 'No iniciada' || this.tarea.estado === 'Lista para iniciar') && (this.tarea.responsable.valor.includes(usuario.nombre) && this.tarea.responsable.valor.includes(usuario.apellido));
+  }
+
+  mostrarBotonCancelar(): boolean {
+    var usuario: Usuario = JSON.parse(localStorage.getItem('usuario'));
+    return (this.tarea.estado !== 'Cancelada' && this.tarea.estado !== 'Finalizada') && (this.tarea.responsable.valor.includes(usuario.nombre) && this.tarea.responsable.valor.includes(usuario.apellido));
+  }
+
+  mostrarBotonFinalizar(): boolean {
+    var usuario: Usuario = JSON.parse(localStorage.getItem('usuario'));
+    return (this.tarea.estado === 'En progreso') && (this.tarea.responsable.valor.includes(usuario.nombre) && this.tarea.responsable.valor.includes(usuario.apellido));
+  }
+
+  open(content) {
+    var usuario: Usuario = JSON.parse(localStorage.getItem('usuario'));
+    this.dataService.getUsuariosResp(usuario.id, this.route.snapshot.params['tipo'], this.route.snapshot.params['idetapa']).subscribe(x => {
+      this.usuariosResp = x;
+    });
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      console.log('modal cerrado');
+    });
+  }
+
+  cambiarResponsable() {
+    if (this.nuevoUsuario.length > 0) {
+      let data = new IdValor();
+      data.id = this.tarea.id;
+      data.valor = this.nuevoUsuario[0].id
+      console.log(this.nuevoUsuario);
+      this.http.post('https://localhost:44374/Tarea/cambiar-responsable?tipo=' + this.route.snapshot.params['tipo'], data).subscribe(x => {
+        alert('Responsable cambiado.');
+        this.nuevoUsuario = [];
+        this.modalService.dismissAll();
+        this.initTarea();
+      });
+    }   
+  }
+
+  onItemSelect(item: any) {
+    console.log(item);
+  }
+  
+  onSelectAll(items: any) {
+    console.log(items);
+  }
+
+
+  cargarComentario() {
+    var usuario: Usuario = JSON.parse(localStorage.getItem('usuario'));
+    let data = new Comentario();
+    data.usuario = usuario.id;
+    data.contenido = this.comentario;
+    data.tarea = this.route.snapshot.params['id'];
+    this.http.post('https://localhost:44374/Comentario', data).subscribe(x => {
+      alert('Comentario agregado.');
+      this.initTarea();
+    });
+  }
+
+  downloadFile(){
+    this.http.get('https://localhost:44374/TareaView/download').subscribe(x => {
+      alert('ho');
     });
   }
 }

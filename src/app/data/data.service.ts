@@ -87,4 +87,8 @@ export class DataService {
   getPropuestas(): Subscribable<PropuestaView[]> {
     return this.http.get<PropuestaView[]>('https://localhost:44374/Propuesta');
   }
+
+  getUsuariosResp(usuarioId: string, tipoEtapa: string, etapaId: string): Subscribable<IdValor[]> {
+    return this.http.get<IdValor[]>('https://localhost:44374/Usuario/usuarios-resp?usuarioId=' + usuarioId + '&tipoEtapa=' + tipoEtapa + '&etapaId=' + etapaId);
+  }
 }

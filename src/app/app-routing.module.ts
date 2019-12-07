@@ -81,7 +81,7 @@ const routes: Routes = [
   { path: 'tarea', component: TareaComponent },
   { path: 'tarea-defecto', component: TareaDefectoComponent },
   { path: 'tarea-defecto-list', component: TareaDefectoListComponent },
-  { path: 'tarea-view/:id', component: TareaViewComponent }
+  { path: 'tarea-view/:idetapa/:tipo/:id', component: TareaViewComponent }
 
 
   // { path: '**', component: PageNotFoundComponent }
