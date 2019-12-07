@@ -95,7 +95,7 @@ export class ConvenioComponent implements OnInit {
     this.http.post('https://localhost:44374/Convenio', data).subscribe(x => {
       alert('Convenio Creado!');
       this.http.get('https://localhost:44374/Etapa/finalizar-etapa?etapaDefinicionId=' + data.etapaId).subscribe(x => {
-        this.router.navigate(['/etapa/' + data.etapaId ]);
+        this.router.navigate(['/etapa/' + data.etapaId + '/definicion' ]);
       });
     });
   }

@@ -3,6 +3,7 @@ import { IdValor } from '../empresa/empresa.component';
 import { DataService } from '../data/data.service';
 
 export class EtapaSeleccionAlumno {
+  id: string;
   alumno: string;
   carrera: string;
   empresa: IdValor;

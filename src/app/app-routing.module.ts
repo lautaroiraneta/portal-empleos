@@ -58,7 +58,7 @@ const routes: Routes = [
   { path: 'crear-perfil', component: CrearPerfilComponent },
   { path: 'empresa/:id', component: EmpresaComponent },
   { path: 'empresa-list', component: EmpresaListComponent },
-  { path: 'etapa/:id', component: EtapaComponent},
+  { path: 'etapa/:id/:tipo', component: EtapaComponent},
   { path: 'etapa-definicion-convenio', component: EtapaDefinicionConvenioComponent },
   { path: 'etapa-pasantia-curso', component: EtapaPasantiaCursoComponent },
   { path: 'etapa-cierre-pasantia-list', component: EtapaCierrePasantiaListComponent },

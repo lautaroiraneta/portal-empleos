@@ -1,91 +1,130 @@
 <div class="block no-padding">
     <!-- <div class="container"> -->
-         <div class="row no-gape">
-             <aside class="col-lg-3 column border-right">
-                 <div class="widget">
-                    <div class="search_widget_job" style="margin-top: 0px;">
-                        <div class="col-lg-12">
-                            <a href="#" title="" class="post-job-btn" style="margin-bottom: 20px; font-size: 29px;">Definición de Convenio: {{ etapa.nombreEtapa }}</a>
-                        </div>
-                        <div class="col-lg-12">
-                            <a href="#" title="" class="post-job-btn" style="margin-bottom: 20px; font-size: 22px; background-color: #67bb67;">{{ etapa?.estado?.valor }}</a>
-                        </div>
-                        <!-- <div class="col-lg-12">
-                            <a href="#" title="" class="post-job-btn" style="margin-bottom: 20px; background-color:#e4f7d7; border-color: #7bd0b5; color: black;" *ngIf="mostrarBotonFinalizar(etapa.estado)">Finalizar</a>
-                        </div>
-                        <div style="padding-right: 25px;">
-                            <a href="#" title="" class="post-job-btn" style="margin-bottom: 20px; background-color:#e4f7d7; border-color: #7bd0b5; color: black;" *ngIf="mostrarBotonIniciar(etapa.estado)">Iniciar</a>
-                        </div>
-                        <div style="padding-right: 25px;">
-                            <a href="#" title="" class="post-job-btn" style="margin-bottom: 20px; background-color:#e4f7d7; border-color: #7bd0b5; color: black;" *ngIf="mostrarBotonDesestimar(etapa.estado)">Desestimar</a>
-                        </div> -->
-                        <div class="btn-extars" style="float: left!important; margin-left: 25px;" *ngIf="mostrarBotonIniciar(etapa.estado)">
-                            <p style="font-size: 24px; color: #2a9236;"><a (click)="iniciar()"><strong> Iniciar Etapa </strong> <i class="la la-thumbs-up"></i></a></p>
-                        </div>
-                        <div class="btn-extars" style="float: left!important; margin-left: 25px;" *ngIf="mostrarBotonDesestimar(etapa.estado)">
-                            <p style="font-size: 24px; color: #ea4141;"><a (click)="desestimar()"><strong> Desestimar </strong> <i class="la la-thumbs-down"></i></a></p>
-                        </div>
-                        <div class="btn-extars" style="float: left!important; margin-left: 25px;" *ngIf="mostrarBotonFinalizar(etapa.estado)">
-                            <p style="font-size: 24px; color: #2a9236;"><a (click)="finalizar()"><strong> Finalizar </strong> <i class="la la-thumbs-up"></i></a></p>
-                        </div>
-                        <div class="btn-extars" style="float: left!important; margin-left: 25px; margin-top: 50px;">
-                            <p style="font-size: 24px;"><strong><i class="la la-suitcase"></i> Empresa: </strong> <a [routerLink]="['empresa', etapa.empresa.id]">{{ etapa.empresa.valor }}</a></p>
-                        </div>
-                        <div class="btn-extars" style="float: left!important; margin-left: 25px;" *ngIf="etapa?.convenio?.id">
-                            <p style="font-size: 24px;" ><strong>Convenio: </strong> <a [routerLink]="['convenio', '1']">{{ etapa.convenio?.valor }}</a></p>
-                        </div>
-                        <div class="btn-extars" style="float: left!important; margin-left: 25px;" *ngIf="etapa?.convenio?.id">
-                            <p style="font-size: 24px;" ><strong>Archivo del Convenio: </strong> <a [routerLink]="['convenio', '1']">{{ etapa.archivo }}</a></p>
-                        </div>
+    <div class="row no-gape">
+        <aside class="col-lg-3 column border-right">
+            <div class="widget">
+                <div class="search_widget_job" style="margin-top: 0px;">
+                    <div class="col-lg-12">
+                        <a href="#" title="" class="post-job-btn" style="margin-bottom: 20px; font-size: 29px;"
+                            *ngIf="tipo === 'definicion'">Definición de Convenio: {{ etapa.nombreEtapa }}</a>
+                        <a href="#" title="" class="post-job-btn" style="margin-bottom: 20px; font-size: 29px;"
+                            *ngIf="tipo === 'seleccion'">Selección de Alumno</a>
                     </div>
-                 </div>
-             </aside>
-             <div class="col-lg-9 column">
-                 <div class="modrn-joblist">
-                     <div class="filterbar">
-                        <div class="row">
-                            <h3 class="emlthis" style="color: green; font-size: 20px; margin-top: 15px; background-color: #e5efe5"><a title=""><i class="la la-user"></i> <strong>{{ etapa?.administradorUniversidad?.valor }}</strong></a></h3>
-                        </div>
-                        <div class="row" style="padding-top: 10px;">
-                            <h3 class="emlthis" style="color: blue; font-size: 20px; background-color: #e7f1f9;"><a title=""><i class="la la-user"></i> <strong>{{ etapa?.administradorEmpresa?.valor }}</strong></a></h3>
-                        </div>
+                    <div class="col-lg-12">
+                        <a href="#" title="" class="post-job-btn"
+                            style="margin-bottom: 20px; font-size: 22px; background-color: #67bb67;">{{ etapa?.estado?.valor }}</a>
+                    </div>
+                    <div class="btn-extars" style="float: left!important; margin-left: 25px;"
+                        *ngIf="mostrarBotonIniciar(etapa.estado)">
+                        <p style="font-size: 24px; color: #2a9236;" *ngIf="tipo === 'definicion'"><a
+                                (click)="iniciarDefinicion()"><strong> Iniciar Etapa </strong> <i
+                                    class="la la-thumbs-up"></i></a></p>
+                        <p style="font-size: 24px; color: #2a9236;" *ngIf="tipo === 'seleccion'"><a
+                                (click)="iniciarSeleccion()"><strong> Iniciar Tareas </strong> <i
+                                    class="la la-thumbs-up"></i></a></p>
 
-                        <div class="row" style="padding-bottom: 50px;">
-                        </div>
+                    </div>
+                    <div class="btn-extars" style="float: left!important; margin-left: 25px;"
+                        *ngIf="mostrarBotonDesestimar(etapa.estado)">
+                        <p style="font-size: 24px; color: #ea4141;" *ngIf="tipo === 'definicion'"><a
+                                (click)="desestimarDefinicion()"><strong> Desestimar </strong> <i
+                                    class="la la-thumbs-down"></i></a></p>
+                        <p style="font-size: 24px; color: #ea4141;" *ngIf="tipo === 'seleccion'"><a
+                                (click)="open(content)"><strong> Cancelar postulación </strong> <i
+                                    class="la la-thumbs-down"></i></a></p>
 
-                        <div class="row">
-                            <div class="widget col-md-3">
-                                <div class="search_widget_job" style="margin-top: 0px;">
-                                    <div class="field_w_search">
-                                        <input type="text" placeholder="Nombre de tarea" style="padding-bottom: 20px;" [(ngModel)]="filtroNombre"
-                                            name="filtroNombre" (keyup)="actualizarItems()" />
-                                        <i class="la la-search"></i>
-                                    </div>
+                    </div>
+                    <div class="btn-extars" style="float: left!important; margin-left: 25px;"
+                        *ngIf="mostrarBotonFinalizar(etapa.estado)">
+                        <p style="font-size: 24px; color: #2a9236;"><a (click)="finalizar()"><strong> Finalizar
+                                </strong> <i class="la la-thumbs-up"></i></a></p>
+                    </div>
+                    <div class="btn-extars" style="float: left!important; margin-left: 25px; margin-top: 50px;">
+                        <p style="font-size: 24px;"><strong><i class="la la-suitcase"></i> Empresa: </strong> <a
+                                [routerLink]="['empresa', etapa.empresa.id]">{{ etapa.empresa.valor }}</a></p>
+                    </div>
+                    <div class="btn-extars" style="float: left!important; margin-left: 25px; margin-top: 20px;"
+                        *ngIf="etapa?.alumno !== undefined && etapa?.alumno !== null && etapa?.alumno !== ''">
+                        <p style="font-size: 24px;"><strong><i class="la la-user"></i> Alumno: </strong> <a
+                                [routerLink]="['alumno', etapa.empresa.id]">{{ etapa.alumno }}</a></p>
+                    </div>
+                    <div class="btn-extars" style="float: left!important; margin-left: 25px; margin-top: 20px;"
+                        *ngIf="etapa?.tituloPropuesta !== undefined && etapa?.tituloPropuesta !== null && etapa?.tituloPropuesta !== ''">
+                        <p style="font-size: 24px;"><strong> Titulo de la Propuesta: </strong>
+                            {{ etapa.tituloPropuesta }}</p>
+                    </div>
+                    <div class="btn-extars" style="float: left!important; margin-left: 25px; margin-top: 20px;"
+                        *ngIf="etapa?.razonRechazo !== undefined && etapa?.razonRechazo !== null && etapa?.razonRechazo !== ''">
+                        <p style="font-size: 24px;"><strong> Razón del Rechazo: </strong>
+                            {{ etapa.razonRechazo }}</p>
+                    </div>
+                    <div class="btn-extars" style="float: left!important; margin-left: 25px;"
+                        *ngIf="etapa?.convenio?.id">
+                        <p style="font-size: 24px;"><strong>Convenio: </strong> <a
+                                [routerLink]="['convenio', '1']">{{ etapa.convenio?.valor }}</a></p>
+                    </div>
+                    <div class="btn-extars" style="float: left!important; margin-left: 25px;"
+                        *ngIf="etapa?.convenio?.id">
+                        <p style="font-size: 24px;"><strong>Archivo del Convenio: </strong> <a
+                                [routerLink]="['convenio', '1']">{{ etapa.archivo }}</a></p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <div class="col-lg-9 column">
+            <div class="modrn-joblist">
+                <div class="filterbar">
+                    <div class="row">
+                        <h3 class="emlthis"
+                            style="color: green; font-size: 20px; margin-top: 15px; background-color: #e5efe5"><a
+                                title=""><i class="la la-user"></i>
+                                <strong>{{ etapa?.administradorUniversidad?.valor }}</strong></a></h3>
+                    </div>
+                    <div class="row" style="padding-top: 10px;">
+                        <h3 class="emlthis" style="color: blue; font-size: 20px; background-color: #e7f1f9;"><a
+                                title=""><i class="la la-user"></i>
+                                <strong>{{ etapa?.administradorEmpresa?.valor }}</strong></a></h3>
+                    </div>
+
+                    <div class="row" style="padding-bottom: 50px;">
+                    </div>
+
+                    <div class="row">
+                        <div class="widget col-md-3">
+                            <div class="search_widget_job" style="margin-top: 0px;">
+                                <div class="field_w_search">
+                                    <input type="text" placeholder="Nombre de tarea" style="padding-bottom: 20px;"
+                                        [(ngModel)]="filtroNombre" name="filtroNombre" (keyup)="actualizarItems()" />
+                                    <i class="la la-search"></i>
                                 </div>
                             </div>
-                            <div class="widget border col-md-3" style="margin-right: 12px;">
-                                <h1 class="sb-title closed" (click)="isCollapsedResponsable = !isCollapsedResponsable">Responsable</h1>
-                                <div class="specialism_widget" [ngbCollapse]="isCollapsedResponsable">
-                                    <div class="simple-checkbox" style="margin-top: 20px;">
-                                        <p *ngFor="let r of responsables; let i = index;">
-                                            <input type="checkbox" name="check-{{i}}" id="check-{{i}}" [(ngModel)]="r.seleccionado" (change)="actualizarItemsResp(r)">
-                                            <label for="check-{{i}}">{{ r.valor }}</label>
-                                        </p>
-                                    </div>
+                        </div>
+                        <div class="widget border col-md-3" style="margin-right: 12px;">
+                            <h1 class="sb-title closed" (click)="isCollapsedResponsable = !isCollapsedResponsable">
+                                Responsable</h1>
+                            <div class="specialism_widget" [ngbCollapse]="isCollapsedResponsable">
+                                <div class="simple-checkbox" style="margin-top: 20px;">
+                                    <p *ngFor="let r of responsables; let i = index;">
+                                        <input type="checkbox" name="check-{{i}}" id="check-{{i}}"
+                                            [(ngModel)]="r.seleccionado" (change)="actualizarItemsResp(r)">
+                                        <label for="check-{{i}}">{{ r.valor }}</label>
+                                    </p>
                                 </div>
                             </div>
-                            <div class="widget border col-md-3" style="margin-right: 12px;">
-                                <h1 class="sb-title closed" (click)="isCollapsedEstado = !isCollapsedEstado">Estado</h1>
-                                <div class="specialism_widget" [ngbCollapse]="isCollapsedEstado">
-                                    <div class="simple-checkbox" style="margin-top: 20px;">
-                                        <p *ngFor="let r of estados; let i = index;">
-                                            <input type="checkbox" name="checkx-{{i}}" id="checkx-{{i}}" [(ngModel)]="r.seleccionado" (change)="actualizarItemsEst(r)">
-                                            <label for="checkx-{{i}}">{{ r.valor }}</label>
-                                        </p>
-                                    </div>
+                        </div>
+                        <div class="widget border col-md-3" style="margin-right: 12px;">
+                            <h1 class="sb-title closed" (click)="isCollapsedEstado = !isCollapsedEstado">Estado</h1>
+                            <div class="specialism_widget" [ngbCollapse]="isCollapsedEstado">
+                                <div class="simple-checkbox" style="margin-top: 20px;">
+                                    <p *ngFor="let r of estados; let i = index;">
+                                        <input type="checkbox" name="checkx-{{i}}" id="checkx-{{i}}"
+                                            [(ngModel)]="r.seleccionado" (change)="actualizarItemsEst(r)">
+                                        <label for="checkx-{{i}}">{{ r.valor }}</label>
+                                    </p>
                                 </div>
                             </div>
-                            <!-- <div class="col-md-12" style="padding-top: 20px;">
+                        </div>
+                        <!-- <div class="col-md-12" style="padding-top: 20px;">
                                 <p class="remember-label" style="padding-right: 20px;">
                                     <input type="checkbox" name="cb" id="cb12"><label for="cb12" style="font-size: 17px;">Solo mis tareas     </label>
                                 </p>
@@ -93,37 +132,62 @@
                                     <input type="checkbox" name="cb" id="cb13"><label for="cb13" style="font-size: 17px;">Tiene predecesoras sin finalizar</label>
                                 </p>
                             </div> -->
-                        </div>
-
-                         <div class="sortby-sec" style="padding-top: 50px;">
-                             <span>Ordenar por</span>
-                             <select data-placeholder="Most Recent" class="chosen" [(ngModel)]="ordenarPor" (change)="onOrdenarPor()">
-                                <option [value]="ordenarPor">Ultima Modificación</option>
-                                <option [value]="ordenarPor">Responsable</option>
-                                <option [value]="ordenarPor">Fecha de creación</option>
-                                <option [value]="ordenarPor">Fecha de Finalizacion</option>
-                            </select>
-                         </div>
-                     </div>
-                 </div><!-- MOdern Job LIst -->
-                 <div class="job-list-modern">
-                     <div class="job-listings-sec">
-                        <div class="job-listing wtabs" style="background-color: #f7fbff" *ngFor="let t of items">
-                            <div class="job-title-sec" style="margin-left: 20px;">
-                                <!-- <div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div> -->
-                                <h3><a [routerLink]="['/tarea-view', t.id]" title="" style="font-size: 24px;"><strong>{{ t.nombre }}</strong></a></h3>
-                                <span style="font-size: 18px;">{{ t.responsable }}</span>
-                                <div class="job-lctn" style="color: black;"><i class="la la-calendar"></i>{{ t.fechaFin }}</div><br>
-                                <div class="job-lctn" style="color: black;"><i class="la la-calendar"></i>{{ t.diaModif }}</div><br>
-                                <i style="font-size: 17px; color: orange;" *ngIf="t.predecesoras"><i class="la la-warning"></i> {{ t.predecesoras }}</i><br>
-                            </div>
-                            <div class="job-style-bx">
-                                <span class="job-is ft" style="width: 250px; height: 50px; color: black; background-color: #e4f7d7; border-color: #7bd0b5; font-size: 20px;">{{ t.estado }}</span>
-                            </div>
-                        </div>								
                     </div>
-                 </div>
-             </div>
-         </div>
+
+                    <div class="sortby-sec" style="padding-top: 50px;">
+                        <span>Ordenar por</span>
+                        <select data-placeholder="Most Recent" class="chosen" [(ngModel)]="ordenarPor"
+                            (change)="onOrdenarPor()">
+                            <option [value]="ordenarPor">Ultima Modificación</option>
+                            <option [value]="ordenarPor">Responsable</option>
+                            <option [value]="ordenarPor">Fecha de creación</option>
+                            <option [value]="ordenarPor">Fecha de Finalizacion</option>
+                        </select>
+                    </div>
+                </div>
+            </div><!-- MOdern Job LIst -->
+            <div class="job-list-modern">
+                <div class="job-listings-sec">
+                    <div class="job-listing wtabs" style="background-color: #f7fbff" *ngFor="let t of items">
+                        <div class="job-title-sec" style="margin-left: 20px;">
+                            <!-- <div class="c-logo"> <img src="http://placehold.it/98x51" alt="" /> </div> -->
+                            <h3><a [routerLink]="['/tarea-view', t.id]" title=""
+                                    style="font-size: 24px;"><strong>{{ t.nombre }}</strong></a></h3>
+                            <span style="font-size: 18px;">{{ t.responsable }}</span>
+                            <div class="job-lctn" style="color: black;"><i class="la la-calendar"></i>{{ t.fechaFin }}
+                            </div><br>
+                            <div class="job-lctn" style="color: black;"
+                                *ngIf="t.diaModif !== null && t.diaModif !== undefined && t.diaModif !== ''"><i
+                                    class="la la-calendar"></i>{{ t.diaModif }}</div><br>
+                            <i style="font-size: 17px; color: orange;" *ngIf="t.predecesoras"><i
+                                    class="la la-warning"></i> {{ t.predecesoras }}</i><br>
+                        </div>
+                        <div class="job-style-bx">
+                            <span class="job-is ft"
+                                style="width: 250px; height: 50px; color: black; background-color: #e4f7d7; border-color: #7bd0b5; font-size: 20px;">{{ t.estado }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- </div> -->
 </div>
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h3>Razón de Cancelación</h3>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="pf-field">
+                <textarea placeholder="Ingrese una razón de cancelación (opcional)" [(ngModel)]="razon" name="razon"></textarea>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark pull-left" (click)="desestimarSeleccion()">Aceptar</button>
+    </div>
+</ng-template>
