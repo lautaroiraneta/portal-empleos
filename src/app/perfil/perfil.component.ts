@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Perfil, ExperienciaLaboral } from '../crear-perfil/crear-perfil.component';
 import { HttpClient } from '@angular/common/http';
 import { IMyDateModel } from 'angular-mydatepicker';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-perfil',
@@ -11,27 +12,43 @@ import { IMyDateModel } from 'angular-mydatepicker';
 export class PerfilComponent implements OnInit {
    perfil : Perfil;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private route: ActivatedRoute) {
     this.perfil = new Perfil();
    }
 
   ngOnInit() {
-    var usuario = JSON.parse(localStorage.getItem('usuario'));
-    console.log(usuario);
-    if (usuario !== undefined && usuario !== null && usuario !== '') {
-      this.http.get<Perfil>('https://localhost:44374/Perfil/perfil/get-by-alumno-id?alumnoId=' + usuario).subscribe(x => {
-        this.perfil = x;
-        this.perfil.fechaNacimiento = { isRange: false, singleDate: { jsDate: new Date(this.perfil.fechaNacimientoDT) } };
-        if (this.perfil.emails === null) {
-          this.perfil.emails = [];
-          this.perfil.emails.push({ id: 'new', valor: '' });
-        }
-        if (this.perfil.telefonos === null) {
-          this.perfil.telefonos = [];
-          this.perfil.telefonos.push({ id: 'new', valor: '' });
-        }
-      });
-    }
+    var id = this.route.snapshot.params['id'];
+    if (id === 'new') {
+      var usuario = JSON.parse(localStorage.getItem('usuario'));
+      console.log(usuario);
+      if (usuario.alumnoId !== undefined && usuario.alumnoId !== null && usuario.alumnoId !== '') {
+        this.http.get<Perfil>('https://localhost:44374/Perfil/perfil/get-by-alumno-id?alumnoId=' + usuario.alumnoId).subscribe(x => {
+          this.perfil = x;
+          this.perfil.fechaNacimiento = { isRange: false, singleDate: { jsDate: new Date(this.perfil.fechaNacimientoDT) } };
+          if (this.perfil.emails === null) {
+            this.perfil.emails = [];
+            this.perfil.emails.push({ id: 'new', valor: '' });
+          }
+          if (this.perfil.telefonos === null) {
+            this.perfil.telefonos = [];
+            this.perfil.telefonos.push({ id: 'new', valor: '' });
+          }
+        });
+      }
+    } else {
+      this.http.get<Perfil>('https://localhost:44374/Perfil/perfil/get-by-alumno-id?alumnoId=' + id).subscribe(x => {
+          this.perfil = x;
+          this.perfil.fechaNacimiento = { isRange: false, singleDate: { jsDate: new Date(this.perfil.fechaNacimientoDT) } };
+          if (this.perfil.emails === null) {
+            this.perfil.emails = [];
+            this.perfil.emails.push({ id: 'new', valor: '' });
+          }
+          if (this.perfil.telefonos === null) {
+            this.perfil.telefonos = [];
+            this.perfil.telefonos.push({ id: 'new', valor: '' });
+          }
+        });
+    }    
   }
 
   obtenerPuestoActual() {

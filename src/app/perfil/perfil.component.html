@@ -8,7 +8,7 @@
                             <a href="https://www.facebook.com/{{perfil.redesSociales.usuarioFacebook}}" title="" class="share-fb"><i class="la la-facebook"></i></a>
                             <a href="https://www.twitter.com/{{perfil.redesSociales.usuarioTwitter}}" title="" class="share-twitter"><i class="la la-twitter"></i></a>
                             <a href="https://www.instagram.com/{{perfil.redesSociales.usuarioInstagram}}" title="" class="share-google"><i class="la la-instagram"></i></a>
-                            <a href="#" title="" class="share-fb"><i class="la la-linkedin"></i></a>
+                            <a href="https://www.linkedin.com/company/{{perfil.redesSociales.usuarioLinkedIn}}" title="" class="share-fb"><i class="la la-linkedin"></i></a>
                         </div>
                         <div class="can-detail-s">
                             <div class="cst"><img
@@ -73,6 +73,14 @@
                                                 <span><strong>Nivel Escrito: </strong>{{ i.nivelEscrito[0].valor }}</span>
                                                 <span><strong>Nivel Oral: </strong>{{ i.nivelOral[0].valor }}</span>
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="edu-history-sec" id="idiomas">
+                                        <h2 style="margin-top: 100px;">Redes Sociales</h2>
+                                        <div class="col-lg-4">
+                                            <ngx-twitter-timeline [data]="{sourceType: 'url', url: 'https://twitter.com/__lauta'}"
+                                                [opts]="{tweetLimit: 3, height: 200}">
+                                            </ngx-twitter-timeline>
                                         </div>
                                     </div>
                                 </div>

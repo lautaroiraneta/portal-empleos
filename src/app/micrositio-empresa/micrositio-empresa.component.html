@@ -7,16 +7,15 @@
                         <div class="row">
                             <div class="col-lg-10">
                                 <div class="job-single-head3 emplye">
-                                    <!-- <div class="job-thumb"> <img [src]="empresa.logo" alt="" /></div> -->
+                                    <div class="job-thumb"> <img src="https://pbs.twimg.com/profile_images/1018874315880697857/vpn4VNwX_400x400.jpg" alt="" /></div>
                                     <div class="job-single-info3">
-                                        <h3>{{ nombreEmpresa }}</h3>
-                                        <span><a>{{ micrositio?.sitioWeb }}</a></span>
+                                        <h3>{{ empresa?.nombre }}</h3>
+                                        <span><a [href]="micrositio?.sitioWeb">{{ micrositio?.sitioWeb }}</a></span>
                                         <div class="share-bar">
-                                            <a href="#" title="" class="share-fb"><i class="la la-facebook"></i></a><a
-                                                href="#" title="" class="share-twitter"><i
-                                                    class="la la-twitter"></i></a><a href="#" title=""
-                                                class="share-google"><i class="la la-instagram"></i></a><a href="#"
-                                                title="" class="share-fb"><i class="la la-linkedin"></i></a>
+                                            <a href="https://www.facebook.com/{{micrositio.redesSociales.usuarioFacebook}}" title="" class="share-fb"><i class="la la-facebook"></i></a>
+                                            <a href="https://www.twitter.com/{{micrositio.redesSociales.usuarioTwitter}}" title="" class="share-twitter"><i class="la la-twitter"></i></a>
+                                            <a href="https://www.instagram.com/{{micrositio.redesSociales.usuarioInstagram}}" title="" class="share-google"><i class="la la-instagram"></i></a>
+                                            <a href="https://www.linkedin.com/company/{{micrositio.redesSociales.usuarioLinkedIn}}" title="" class="share-fb"><i class="la la-linkedin"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -35,23 +34,28 @@
                         <div class="row">
                             <div class="col-lg-12 column">
                                 <div class="job-details">
-                                    <h3>Sobre {{ nombreEmpresa }}</h3>
-                                    <p>{{ micrositio?.descripcion }}
+                                    <h2>Sobre <span style="color: purple"><strong>{{ empresa?.nombre }}</strong></span></h2>
+                                    <h3>{{ micrositio?.descripcion }}</h3>
                                 </div>
                                 <div class="job-details">
                                     <div class="row">
-                                        <div class="col-lg-4">
-                                            <ngx-twitter-timeline [data]="{sourceType: 'url', url: 'https://twitter.com/twitterdev'}"
-                                                [opts]="{tweetLimit: 3, height: 400}">
+                                        <h3 style="font-size: 26px;margin-top: 50px; margin-bottom:40px;">Redes Sociales</h3>
+                                        <div class="col-lg-6" *ngIf="micrositio?.redesSociales?.mostrarFeedTwitter">
+                                            <ngx-twitter-timeline
+                                                [data]="{sourceType: 'url', url: 'https://twitter.com/fravegaonline'}"
+                                                [opts]="{tweetLimit: 2, height: 400}">
                                             </ngx-twitter-timeline>
                                         </div>
-                                        <div class="col-md-6">
-                                            <h3>Últimos Posts de Facebook</h3>
-                                            <iframe
-                                                src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fgoogleargentina&tabs=timeline&width=340&height=500&small_header=true&adapt_container_width=false&hide_cover=true&show_facepile=false&appId"
-                                                width="500" height="300" style="border:none;overflow:hidden"
-                                                scrolling="no" frameborder="0" allowTransparency="true"
-                                                allow="encrypted-media"></iframe>
+                                        <div class="col-lg-6" >
+                                            <div class="fb-page" data-href="https://www.facebook.com/fravegaonline"
+                                                data-tabs="timeline" data-width="" data-height=""
+                                                data-small-header="false" data-adapt-container-width="true"
+                                                data-hide-cover="false" data-show-facepile="true">
+                                                <blockquote cite="https://www.facebook.com/fravegaonline"
+                                                    class="fb-xfbml-parse-ignore"><a
+                                                        href="https://www.facebook.com/fravegaonline">Frávega</a>
+                                                </blockquote>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

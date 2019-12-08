@@ -41,12 +41,12 @@
                     </div>
                     <div class="btn-extars" style="float: left!important; margin-left: 25px; margin-top: 50px;">
                         <p style="font-size: 24px;"><strong><i class="la la-suitcase"></i> Empresa: </strong> <a
-                                [routerLink]="['empresa', etapa.empresa.id]">{{ etapa.empresa.valor }}</a></p>
+                                [routerLink]="['/micrositio-empresa', etapa.empresa.id]">{{ etapa.empresa.valor }}</a></p>
                     </div>
                     <div class="btn-extars" style="float: left!important; margin-left: 25px; margin-top: 20px;"
-                        *ngIf="etapa?.alumno !== undefined && etapa?.alumno !== null && etapa?.alumno !== ''">
+                        *ngIf="etapa?.alumno !== undefined && etapa?.alumno !== null">
                         <p style="font-size: 24px;"><strong><i class="la la-user"></i> Alumno: </strong> <a
-                                [routerLink]="['alumno', etapa.empresa.id]">{{ etapa.alumno }}</a></p>
+                                [routerLink]="['/perfil', etapa.alumno.id]">{{ etapa?.alumno?.valor }}</a></p>
                     </div>
                     <div class="btn-extars" style="float: left!important; margin-left: 25px; margin-top: 20px;"
                         *ngIf="etapa?.tituloPropuesta !== undefined && etapa?.tituloPropuesta !== null && etapa?.tituloPropuesta !== ''">
@@ -61,7 +61,7 @@
                     <div class="btn-extars" style="float: left!important; margin-left: 25px;"
                         *ngIf="etapa?.convenio?.id">
                         <p style="font-size: 24px;"><strong>Convenio: </strong> <a
-                                [routerLink]="['convenio', '1']">{{ etapa.convenio?.valor }}</a></p>
+                                (click)="obtenerDatos(etapa.etapaDefinicionConvenio, 'definicion')">{{ etapa.convenio?.valor }}</a></p>
                     </div>
                     <div class="btn-extars" style="float: left!important; margin-left: 25px;"
                         *ngIf="etapa?.convenio?.id">

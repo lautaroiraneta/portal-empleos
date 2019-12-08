@@ -3,6 +3,7 @@ import { HelperService } from '../helper.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { IdValor } from '../empresa/empresa.component';
 import { HttpClient } from '@angular/common/http';
+import { Usuario } from '../aprobacion-usuario/aprobacion-usuario.component';
 
 export class ConvenioView {
   id: string;
@@ -39,11 +40,17 @@ export class ConvenioListComponent implements OnInit {
   constructor(private helperService: HelperService, private http: HttpClient) { }
 
   ngOnInit() {
+    var usuario: Usuario = JSON.parse(localStorage.getItem('usuario'));
     this.items = this.convenios;
     this.dropdownSettingsSingle = this.helperService.dropdownSettingsSingle;
 
     this.http.get('https://localhost:44374/Convenio').subscribe((x: ConvenioView[]) => {
       this.convenios = x;
+      if (usuario.empresaId !== undefined && usuario.empresaId !== null && usuario.empresaId !== '') {
+        this.convenios = x.filter(y => {
+          return y.empresa.id === usuario.empresaId;
+        });
+      }     
       console.log(this.convenios);
     });
   }

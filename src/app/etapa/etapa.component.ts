@@ -53,13 +53,14 @@ export class EtapaComponent implements OnInit {
 
   ngOnInit() {
     var id = this.route.snapshot.params['id'];
+    this.tipo = this.route.snapshot.params['tipo'];
 
-    this.obtenerDatos(id);
+    this.obtenerDatos(id, this.tipo);
   }
 
-  obtenerDatos(id: string) {
-    this.tipo = this.route.snapshot.params['tipo'];
-    if (this.tipo === 'definicion') {
+  obtenerDatos(id: string, tipo: string) {
+    this.tipo = tipo;
+    if (tipo === 'definicion') {
       this.http.get('https://localhost:44374/Etapa/get-data?etapaDefinicionId=' + id).subscribe((x: Etapa) => {
         this.etapa = x;
         this.etapa.id = id;
@@ -78,7 +79,7 @@ export class EtapaComponent implements OnInit {
         }
         console.log(this.etapa);
       });
-    } else if (this.tipo === 'seleccion') {
+    } else if (tipo === 'seleccion') {
       this.http.get('https://localhost:44374/Etapa/get-data-seleccion-alumno?etapaSeleccionId=' + id).subscribe((x: Etapa) => {
         this.etapa = x;
         this.etapa.id = id;
@@ -184,14 +185,14 @@ export class EtapaComponent implements OnInit {
   iniciarDefinicion() {
     this.http.get('https://localhost:44374/Etapa/iniciar-etapa?etapaDefinicionId=' + this.etapa.id).subscribe(x => {
       alert('Etapa iniciada');
-      this.obtenerDatos(this.etapa.id);
+      this.obtenerDatos(this.etapa.id, this.tipo);
     });
   }
 
   iniciarSeleccion() {
     this.http.get('https://localhost:44374/Etapa/iniciar-seleccion?etapaId=' + this.etapa.id).subscribe(x => {
       alert('Etapa iniciada');
-      this.obtenerDatos(this.etapa.id);
+      this.obtenerDatos(this.etapa.id, this.tipo);
     });
   }
 
@@ -200,7 +201,7 @@ export class EtapaComponent implements OnInit {
     if (r === true) {
       this.http.get('https://localhost:44374/Etapa/desestimar-etapa?etapaDefinicionId=' + this.etapa.id).subscribe(x => {
         alert('Etapa desestimada');
-        this.obtenerDatos(this.etapa.id);
+        this.obtenerDatos(this.etapa.id, this.tipo);
       });
     }
   }
@@ -213,7 +214,7 @@ export class EtapaComponent implements OnInit {
     this.http.post('https://localhost:44374/Etapa/desestimar-seleccion', data).subscribe(x => {
       alert('Etapa desestimada');
       this.modalService.dismissAll();
-      this.obtenerDatos(this.etapa.id);
+      this.obtenerDatos(this.etapa.id, this.tipo);
     });
   }
 
@@ -227,7 +228,7 @@ export class EtapaComponent implements OnInit {
         } else if (this.tipo === 'seleccion') {
           this.http.get('https://localhost:44374/Etapa/finalizar-seleccion?etapaId=' + this.etapa.id).subscribe(x => {
             alert('Etapa Finalizada!');
-            this.obtenerDatos(this.etapa.id);
+            this.obtenerDatos(this.etapa.id, this.tipo);
           });
         }
       }
@@ -239,7 +240,7 @@ export class EtapaComponent implements OnInit {
         } else if (this.tipo === 'seleccion'){
           this.http.get('https://localhost:44374/Etapa/finalizar-seleccion?etapaId=' + this.etapa.id).subscribe(x => {
             alert('Etapa Finalizada!');
-            this.obtenerDatos(this.etapa.id);
+            this.obtenerDatos(this.etapa.id, this.tipo);
           });
         }
       }

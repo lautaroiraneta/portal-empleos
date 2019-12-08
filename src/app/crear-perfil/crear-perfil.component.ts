@@ -8,6 +8,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { IdValor } from '../empresa/empresa.component';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
+import { Usuario } from '../aprobacion-usuario/aprobacion-usuario.component';
 
 export class Perfil {
   id: string;
@@ -207,7 +208,7 @@ export class CrearPerfilComponent implements OnInit {
 
   ngOnInit() {
     this.perfil = new Perfil();
-    var usuario = JSON.parse(localStorage.getItem('usuario'));
+    var usuario: Usuario = JSON.parse(localStorage.getItem('usuario'));
     console.log(usuario);
     if (usuario !== undefined && usuario !== null && usuario.alumnoId !== null && usuario.alumnoId !== undefined) {
       this.http.get<Perfil>('https://localhost:44374/Perfil/perfil/get-by-alumno-id?alumnoId=' + usuario.alumnoId).subscribe(x => {
@@ -222,15 +223,13 @@ export class CrearPerfilComponent implements OnInit {
             this.perfil.telefonos = [];
             this.perfil.telefonos.push({ id: 'new', valor: '' });
           }
-        }
-        else {
-          
+        } else {
           this.perfil.emails.push({ id: 'new', valor: '' });
           this.perfil.telefonos.push({ id: 'new', valor: '' });
           this.perfil.experienciaLaboral = [];
           this.perfil.experienciaEducativa = [];
           this.perfil.idioma = [];
-          this.perfil.alumno = usuario;
+          this.perfil.alumno = usuario.alumnoId;
           this.perfil.fechaNacimiento = { isRange: false, singleDate: { jsDate: new Date() } };
         }
       });
@@ -240,7 +239,7 @@ export class CrearPerfilComponent implements OnInit {
       this.perfil.experienciaLaboral = [];
       this.perfil.experienciaEducativa = [];
       this.perfil.idioma = [];
-      this.perfil.alumno = usuario;
+      this.perfil.alumno = usuario.alumnoId;
       this.perfil.fechaNacimiento = { isRange: false, singleDate: { jsDate: new Date() } };
     }
 

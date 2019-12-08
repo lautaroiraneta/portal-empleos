@@ -42,7 +42,7 @@
 								<li *ngIf="usuario?.tipoUsuario === 'u'"><a [routerLink]="['/control-conocimientos-puestos']" title="">Control de Conocimientos y Puestos de Trabajo</a></li>
 								<!-- <li><a [routerLink]="['/acuerdo-individual']" title="">Crear Acuerdo Individual</a></li> -->
 								<!-- <li><a [routerLink]="['/convenio']">Crear Convenio</a></li> -->
-								<li><a [routerLink]="['/convenio-list']">Listado de Etapas de Definicio de Convenio</a></li>
+								<li><a [routerLink]="['/convenio-list']">Listado de Etapas de Definición de Convenio</a></li>
 							</ul>
 						</li>
 						<li class="menu-item-has-children">
@@ -62,7 +62,7 @@
 								<!-- <li *ngIf="usuario?.tipoUsuario === 'a'"><a [routerLink]="['/preferencias-list']">Listado de Preferencias</a></li> -->
 								<li *ngIf="usuario?.tipoUsuario !== 'e'"><a [routerLink]="['/propuesta-list']">Listado de Propuestas</a></li>
 								<li *ngIf="usuario?.tipoUsuario === 'a'"><a [routerLink]="['/perfil']">Mi Perfil</a></li>
-								<li *ngIf="usuario?.tipoUsuario === 'e'"><a [routerLink]="['/micrositio-empresa']">Micrositio Empresa</a></li>
+								<li *ngIf="usuario?.tipoUsuario === 'e'"><a [routerLink]="['/micrositio-empresa','new']">Micrositio Empresa</a></li>
 								<!-- <li *ngIf="usuario?.tipoUsuario === 'e'"><a [routerLink]="['/propuesta-view']">Propuesta Vista</a></li> -->
 								<li *ngIf="usuario?.tipoUsuario !== 'a'"><a [routerLink]="['/tarea-defecto-list']">Tareas de Flujo por Defecto</a></li>
 								<li *ngIf="usuario?.tipoUsuario === 'u'"><a [routerLink]="['/aprobacion-usuario']">Aprobación de Usuarios</a></li>
@@ -91,7 +91,7 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="inner-header">
-							<h3 style="margin-bottom: 20px;">¡Bienvenido al Portal de Empleos!</h3>
+							<h3 style="margin-bottom: 78px;">¡Bienvenido al Portal de Empleos!</h3>
 						</div>
 					</div>
 				</div>

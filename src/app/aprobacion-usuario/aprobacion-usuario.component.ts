@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DataService } from '../data/data.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 export class Usuario {
   id: string;
@@ -22,8 +23,9 @@ export class Usuario {
 })
 export class AprobacionUsuarioComponent implements OnInit {
   usuarios: Usuario[];
+  uSel: any;
 
-  constructor(private http: HttpClient, private dataService: DataService) { }
+  constructor(private http: HttpClient, private dataService: DataService, private modalService: NgbModal) { }
 
   ngOnInit() {
     this.dataService.getUsuarios().subscribe(x => {
@@ -44,11 +46,6 @@ export class AprobacionUsuarioComponent implements OnInit {
     }
   }
 
-  getFechaIngreso(fecha: string) {
-    var aux = new Date(fecha);
-    return aux.getDay() + '/' + (aux.getMonth() + 1).toString() + '/' + aux.getFullYear();
-  }
-
   setAprobado(usuario: Usuario, aprobado: boolean) {
     let data = new Usuario();
     data.id = usuario.id;
@@ -57,5 +54,39 @@ export class AprobacionUsuarioComponent implements OnInit {
     this.http.post('https://localhost:44374/Usuario/set-aprobado', data).subscribe(x => {
       usuario.aprobado = aprobado;
     });
+  }
+
+  getTipoUsuario(tipo: string) {
+    switch (tipo) {
+      case 'e':
+        return 'Empresa';
+      case 'u':
+        return 'Universidad';
+      case 'a':
+        return 'Alumno';
+    }
+  }
+
+  open(content, id: string) {
+    this.uSel = this.usuarios.filter(x => x.id === id)[0];
+    if (this.uSel.empresaId !== undefined && this.uSel.empresaId !== null && this.uSel.empresaId !== ''){
+      this.http.get('https://localhost:44374/Empresa/get-by-id?empresaId=' + this.uSel.empresaId).subscribe(y => {
+        this.uSel.empresa = y;
+        console.log(this.uSel);
+      });
+    }
+    if (this.uSel.alumnoId !== undefined && this.uSel.alumnoId !== null && this.uSel.alumnoId !== ''){
+      this.http.get('https://localhost:44374/alumno/get-by-id?idAlumno=' + this.uSel.alumnoId).subscribe(y => {
+        this.uSel.alumno = y;
+        console.log(this.uSel);
+      });
+    }
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      console.log('modal cerrado');
+    });
+  }
+
+  cerrarModal() {
+    this.modalService.dismissAll();
   }
 }

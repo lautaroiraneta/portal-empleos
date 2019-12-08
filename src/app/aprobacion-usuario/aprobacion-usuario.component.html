@@ -20,7 +20,7 @@
                                font-family: Open Sans;
                                font-size: 16px;
                                text-decoration: underline;
-                               line-height: 30px;">{{ u.nombreUsuario}} ({{ u.nombre }} {{ u.apellido }})</h3>
+                               line-height: 30px;"><a (click)="open(content, u.id)">{{ u.nombreUsuario}} ({{ u.nombre }} {{ u.apellido }})</a></h3>
                        </div>
                    </td>
                    <td>
@@ -46,3 +46,37 @@
         </table>
     </div>
 </div>
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h3>Usuario: {{ uSel?.nombreUsuario }}</h3>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>Nombre de Usuario: <strong>{{ uSel?.nombreUsuario }}</strong></p>
+        <p>Tipo de Usuario: <strong>{{ getTipoUsuario(uSel?.tipoUsuario) }}</strong></p>
+        <div *ngIf="uSel?.empresa !== undefined && uSel?.empresa !== null">
+            <p>Nombre de Empresa: <strong>{{ uSel?.empresa?.nombre }}</strong></p>
+            <p>CUIT: <strong>{{ uSel?.empresa?.cuit }}</strong></p>
+            <p>Sitio Web: <strong>{{ uSel?.empresa?.sitioWeb }}</strong></p>
+            <p>Domicilio: <strong>{{ uSel?.empresa?.domicilio }}</strong></p>
+            <p>Contacto Nombre: <strong>{{ uSel?.empresa?.contactoNombre }}</strong></p>
+            <p>Contacto Apellido: <strong>{{ uSel?.empresa?.contactoApellido }}</strong></p>
+            <p>Contacto Teléfono: <strong>{{ uSel?.empresa?.contactoTelefono }}</strong></p>
+            <p>Contacto Email: <strong>{{ uSel?.empresa?.contactoEmail }}</strong></p>
+            <p>Contacto Cargo: <strong>{{ uSel?.empresa?.contactoCargo }}</strong> </p>
+        </div>
+        <div *ngIf="uSel?.alumno !== undefined && uSel?.alumno !== null">
+            <p>Nombre: <strong>{{ uSel?.alumno?.nombres }}</strong></p>
+            <p>Apellido: <strong>{{ uSel?.alumno?.apellidos }}</strong></p>
+            <p>Libreta Universitaria: <strong>{{ uSel?.alumno?.libretaUniversitaria }}</strong></p>
+            <p>Email: <strong>{{ uSel?.alumno?.email }}</strong></p>
+            <p>Tipo Documento: <strong>{{ uSel?.alumno?.tipoDocumento }}</strong></p>
+            <p>Número Documento: <strong>{{ uSel?.alumno?.numeroDocumento }}</strong></p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="cerrarModal()">Aceptar</button>
+    </div>
+</ng-template>

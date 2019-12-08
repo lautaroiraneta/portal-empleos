@@ -236,6 +236,10 @@ export class PropuestaComponent implements OnInit {
 
       this.http.post('https://localhost:44374/Propuesta', data).subscribe(x => {
         alert('Propuesta Creada!');
+      }, (error: any) => {
+        if (error.error.includes('habilitada')) {
+          alert('Su empresa no está habilitada para hacer pasantías. Póngase en contacto con la Universidad.');
+        }
       });
     }
   }
