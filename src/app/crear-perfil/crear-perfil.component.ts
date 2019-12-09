@@ -445,4 +445,8 @@ export class CrearPerfilComponent implements OnInit {
       });
     }
   }
+
+  upload(){
+    alert('Foto cargada.')
+  }
 }

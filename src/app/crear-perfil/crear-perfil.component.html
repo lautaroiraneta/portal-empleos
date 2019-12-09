@@ -183,13 +183,13 @@
                         </div>
                         <div class="row" *ngSwitchCase="2">
                             <div class="col-lg-12">
-                                <span class="pf-title">Foto de Perfil</span>
+                                <span class="pf-title">Foto de Perfil <a style="font-size: 25px;" data-toggle="tooltip" data-placement="top" title="Utilizar una foto formal y no tomada en situaciones inoportunas, cuidando la pose, peinado y la vestimenta"><i class="la la-info-circle"></i></a></span>
                                 <div class="upload-portfolio">
                                     <div class="uploadbox">
                                         <label for="file-upload" class="custom-file-upload">
                                             <i class="la la-cloud-upload"></i> <span>Subir Imagen</span>
                                         </label>
-                                        <input id="file-upload" type="file" style="display: none;" />
+                                        <input id="file-upload" type="file" style="display: none;" (change)="upload()" />
                                     </div>
                                 </div>
                             </div>
@@ -261,7 +261,7 @@
                                 </p>
                             </div>
                             <div class="col-lg-12">
-                                <span class="pf-title" style="margin-top: 0px;">Objetivo Laboral</span>
+                                <span class="pf-title" style="margin-top: 0px;">Objetivo Laboral <a style="font-size: 25px;" data-toggle="tooltip" data-placement="top" title="No copiar el objetivo laboral de un conocido o frases de internet. En este apartado es importante mostrar individualidad."><i class="la la-info-circle"></i></a></span>
                                 <div class="pf-field">
                                     <textarea [(ngModel)]="perfil.objetivoLaboral" name="objetivoLaboral"></textarea>
                                 </div>
@@ -366,7 +366,7 @@
                                     </tbody>
                                 </table>
                                 <h2 class="add-exp-laboral" style="padding-left: 27px;"><a (click)="openExperienciaLaboral(content)"><i
-                                            class="la la-plus-circle"></i> Agregar Experiencia Laboral</a></h2>
+                                            class="la la-plus-circle"></i> Agregar Experiencia Laboral </a></h2>
                             </div>
                         </div>
                         <div class="row" *ngSwitchCase="4">
@@ -522,7 +522,7 @@
 
 <ng-template #content let-modal>
     <div class="modal-header">
-        <h3>Agregar Experiencia Laboral</h3>
+        <h3>Agregar Experiencia Laboral <a style="font-size: 25px;" data-toggle="tooltip" data-placement="top" title="Respecto a la experiencia laboral, evitar descripciones repetitivas para puestos semejantes y centrarse en mostrar logros y resultados concretos."><i class="la la-info-circle"></i></a></h3>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>

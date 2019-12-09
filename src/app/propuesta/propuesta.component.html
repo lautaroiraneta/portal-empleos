@@ -419,17 +419,17 @@
 											</td>
                                         </tr>
                                         <tr *ngFor="let p of propuesta.puestos; let i = index;">
-                                            <td>
+                                            <td *ngIf="p.puesto !== null && p.puesto !== undefined && p.puesto?.length > 0">
 												<div class="table-list-title">
 													<h3>Puesto</h3>
 												</div>
 											</td>
-                                            <td>
+                                            <td *ngIf="p.puesto !== null && p.puesto !== undefined && p.puesto?.length > 0">
                                                 <div class="table-list-title">
-													<h3>{{ p.puesto[0].nombre }} ({{p.aniosExperiencia}} años)</h3>
+													<h3>{{ p.puesto[0].nombre }} ({{ p.aniosExperiencia }} años)</h3>
 												</div>
                                             </td>
-                                            <td>
+                                            <td *ngIf="p.puesto !== null && p.puesto !== undefined && p.puesto?.length > 0">
 												<p class="remember-label" style="padding-left: 80px;">
 													<input type="checkbox" name="cb6-{{i}}" id="cb6-{{i}}" [(ngModel)]="p.excluyente"><label for="cb6-{{i}}"></label>
 												</p>

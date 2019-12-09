@@ -4,6 +4,7 @@ import { HelperService } from '../helper.service';
 import { IdValor } from '../empresa/empresa.component';
 import { DataService } from '../data/data.service';
 import { DatePipe } from '@angular/common';
+import { Usuario } from '../aprobacion-usuario/aprobacion-usuario.component';
 
 export class PropuestaView {
   id: string;
@@ -53,10 +54,15 @@ export class PropuestaListComponent implements OnInit {
     this.dropdownSettings = this.helperService.dropdownSettings;
     this.dropdownSettings.itemsShowLimit = 0;
     this.dropdownSettings.textField = 'valor';
+    var usuario: Usuario = JSON.parse(localStorage.getItem('usuario'));
 
     this.dataService.getPropuestas().subscribe(x => {
       this.propuestas = x;
       this.items = this.propuestas;
+
+      if (usuario.empresaId !== undefined && usuario.empresaId !== null && usuario.empresaId !== '') {
+        this.items = this.propuestas.filter(x => x.empresa.id === usuario.empresaId);
+      }
 
       var empAux = this.propuestas.map(item => item.empresa.valor)
         .filter((value, index, self) => self.indexOf(value) === index);
